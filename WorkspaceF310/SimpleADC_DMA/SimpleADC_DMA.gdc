@@ -1,0 +1,80 @@
+FileVersion=1
+MCUPartNo=GD32F310C8T6
+
+[<PeriandPinContent>]
+PINOUT.PERIPHERAL.NODE.ADC.IN2=true
+PINOUT.PERIPHERAL.NODE.RCU.High Speed Crystal Oscillator (HXTAL)=Crystal/Ceramic Resonator
+PINOUT.PERIPHERAL.NODE.RCU.Low Speed Crystal Oscillator (LXTAL)=Crystal/Ceramic Resonator
+PINOUT.PERIPHERAL.NODE.USART0.Mode=Asynchronous
+PINOUT.PERIPHERAL.NODE.SYS.Debug=Serial Wire
+
+PIN.PC14.Signal=OSC32IN
+PIN.PC14.Type=AUTOMATIC
+PIN.PC14.Peri=RCU
+PIN.PC15.Signal=OSC32OUT
+PIN.PC15.Type=AUTOMATIC
+PIN.PC15.Peri=RCU
+PIN.PF0.Signal=OSCIN
+PIN.PF0.Type=AUTOMATIC
+PIN.PF0.Peri=RCU
+PIN.PF1.Signal=OSCOUT
+PIN.PF1.Type=AUTOMATIC
+PIN.PF1.Peri=RCU
+PIN.PA2.Signal=ADC_IN2
+PIN.PA2.Type=AUTOMATIC
+PIN.PA2.Peri=ADC
+PIN.PA9.Signal=USART0_TX
+PIN.PA9.Type=MANUAL_AUTO
+PIN.PA9.Peri=USART0
+PIN.PA10.Signal=USART0_RX
+PIN.PA10.Type=MANUAL_AUTO
+PIN.PA10.Peri=USART0
+PIN.PA13.Signal=SWDIO
+PIN.PA13.Type=AUTOMATIC
+PIN.PA13.Peri=SYS
+PIN.PA14.Signal=SWCLK
+PIN.PA14.Type=AUTOMATIC
+PIN.PA14.Peri=SYS
+
+[<ClockContent>]
+RCU.PLLMF=* 3
+RCU.SCS=SCS_10
+RCU.PLLPRESEL=PLLPRESEL_0
+RCU.PLLSEL=PLLSEL_01
+
+[<PeriConfigContent>]
+GENERALCONGIG.ADC.RoutineSequenceSettings##ContinuousMode=Enable
+GENERALCONGIG.ADC.RoutineSequenceSettings##RoutineSequenceLength=1
+GENERALCONGIG.ADC.RoutineSequenceSettings##RoutineSequenceConversions=Enable
+GENERALCONGIG.ADC.RoutineSequenceSettings##Rank0##SamplingTime=55.5 cycles
+
+[<DMAConfigContent>]
+DMA.ADC.DMA_CH0.DMA Request=ADC
+DMA.ADC.DMA_CH0.Priority=High
+DMA.ADC.DMA_CH0.Channel=DMA_CH0
+DMA.ADC.DMA_CH0.Mode=Circular
+DMA.ADC.DMA_CH0.PeriphDataAlignment=Half Word
+DMA.ADC.DMA_CH0.MemDataAlignment=Half Word
+DMA.ADC.DMA_CH0.Direction=Peripheral To Memory
+DMA.ADC.DMA_CH0.PeriphInc=False
+DMA.ADC.DMA_CH0.MemInc=True
+
+[<GPIOConfigContent>]
+
+[<NVICConfigContent>]
+NVIC.Configuration##PriorityGroup=4 bits for preemption priority 0 bits for sub priority
+NVIC.Non maskable interrupt##Enabled=TRUE
+NVIC.Non maskable interrupt##PreemptionPriority=0
+NVIC.Non maskable interrupt##SubPriority=0
+NVIC.System service call via SWI instruction##Enabled=TRUE
+NVIC.System service call via SWI instruction##PreemptionPriority=0
+NVIC.System service call via SWI instruction##SubPriority=0
+NVIC.Pendable request for system service##Enabled=TRUE
+NVIC.Pendable request for system service##PreemptionPriority=0
+NVIC.Pendable request for system service##SubPriority=0
+NVIC.System tick timer##Enabled=TRUE
+NVIC.System tick timer##PreemptionPriority=0
+NVIC.System tick timer##SubPriority=0
+NVIC.DMA Channel0 global interrupt##Enabled=TRUE
+NVIC.DMA Channel0 global interrupt##PreemptionPriority=0
+NVIC.DMA Channel0 global interrupt##SubPriority=0

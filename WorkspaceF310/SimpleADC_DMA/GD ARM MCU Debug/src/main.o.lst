@@ -1,0 +1,443 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"main.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.comm	adc_value,2,2
+  16              		.section	.rodata
+  17              		.align	2
+  18              	.LC0:
+  19 0000 0D0A202F 		.ascii	"\015\012 //*******************************//\000"
+  19      2F2A2A2A 
+  19      2A2A2A2A 
+  19      2A2A2A2A 
+  19      2A2A2A2A 
+  20 0027 00       		.align	2
+  21              	.LC1:
+  22 0028 0D0A2041 		.ascii	"\015\012 ADC regular channel data = %04X\000"
+  22      44432072 
+  22      6567756C 
+  22      61722063 
+  22      68616E6E 
+  23 004b 00       		.align	2
+  24              	.LC2:
+  25 004c 0D0A202F 		.ascii	"\015\012 //*******************************//\015\000"
+  25      2F2A2A2A 
+  25      2A2A2A2A 
+  25      2A2A2A2A 
+  25      2A2A2A2A 
+  26              		.section	.text.main,"ax",%progbits
+  27              		.align	1
+  28              		.global	main
+  29              		.arch armv7e-m
+  30              		.syntax unified
+  31              		.thumb
+  32              		.thumb_func
+  33              		.fpu softvfp
+  35              	main:
+  36              	.LFB119:
+  37              		.file 1 "../src/main.c"
+   1:../src/main.c **** /*
+   2:../src/main.c ****     \file  main.c
+   3:../src/main.c **** */
+   4:../src/main.c **** /*
+   5:../src/main.c ****     Copyright (c) 2024, GigaDevice Semiconductor Inc.
+   6:../src/main.c **** 
+   7:../src/main.c ****     All rights reserved.
+   8:../src/main.c **** 
+   9:../src/main.c ****     Redistribution and use in source and binary forms, with or without modification,
+  10:../src/main.c **** are permitted provided that the following conditions are met:
+  11:../src/main.c **** 
+  12:../src/main.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  13:../src/main.c ****        list of conditions and the following disclaimer.
+  14:../src/main.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  15:../src/main.c ****        this list of conditions and the following disclaimer in the documentation 
+  16:../src/main.c ****        and/or other materials provided with the distribution.
+  17:../src/main.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  18:../src/main.c ****        may be used to endorse or promote products derived from this software without 
+  19:../src/main.c ****        specific prior written permission.
+  20:../src/main.c **** 
+  21:../src/main.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  22:../src/main.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  23:../src/main.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  24:../src/main.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  25:../src/main.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  26:../src/main.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  27:../src/main.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  28:../src/main.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  29:../src/main.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  30:../src/main.c **** OF SUCH DAMAGE.
+  31:../src/main.c **** */
+  32:../src/main.c **** #include "gd32f3x0_hal.h"
+  33:../src/main.c **** #include "gd32f3x0_hal_init.h"
+  34:../src/main.c **** /* user code [global 0] begin */
+  35:../src/main.c **** uint16_t adc_value;
+  36:../src/main.c **** /* user code [global 0] end */
+  37:../src/main.c **** 
+  38:../src/main.c **** /*!
+  39:../src/main.c ****     \brief      main function
+  40:../src/main.c ****     \param[in]  none
+  41:../src/main.c ****     \param[out] none
+  42:../src/main.c ****     \retval     none
+  43:../src/main.c **** */
+  44:../src/main.c **** int main(void)
+  45:../src/main.c **** {
+  38              		.loc 1 45 1
+  39              		.cfi_startproc
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 1, uses_anonymous_args = 0
+  42 0000 80B5     		push	{r7, lr}
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 7, -8
+  45              		.cfi_offset 14, -4
+  46 0002 00AF     		add	r7, sp, #0
+  47              		.cfi_def_cfa_register 7
+  46:../src/main.c ****     /* user code [local 0] begin */
+  47:../src/main.c **** 
+  48:../src/main.c ****     /* user code [local 0] end */
+  49:../src/main.c **** 
+  50:../src/main.c ****     msd_system_init();
+  48              		.loc 1 50 5
+  49 0004 FFF7FEFF 		bl	msd_system_init
+  51:../src/main.c ****     msd_clock_init();
+  50              		.loc 1 51 5
+  51 0008 FFF7FEFF 		bl	msd_clock_init
+  52:../src/main.c ****     /* user code [local 1] begin */
+  53:../src/main.c **** 
+  54:../src/main.c ****     /* user code [local 1] end */
+  55:../src/main.c ****     msd_gpio_init();
+  52              		.loc 1 55 5
+  53 000c FFF7FEFF 		bl	msd_gpio_init
+  56:../src/main.c ****     msd_dma_init();
+  54              		.loc 1 56 5
+  55 0010 FFF7FEFF 		bl	msd_dma_init
+  57:../src/main.c ****     msd_adc_init();
+  56              		.loc 1 57 5
+  57 0014 FFF7FEFF 		bl	msd_adc_init
+  58:../src/main.c ****     msd_usart0_init();
+  58              		.loc 1 58 5
+  59 0018 FFF7FEFF 		bl	msd_usart0_init
+  59:../src/main.c **** 
+  60:../src/main.c ****     /* user code [local 2] begin */
+  61:../src/main.c **** 
+  62:../src/main.c ****     /* start dma  */
+  63:../src/main.c ****     hal_dma_start(&dma_adc_info,(uint32_t)(&ADC_RDATA),(uint32_t)(&adc_value),1);
+  60              		.loc 1 63 5
+  61 001c 0C4A     		ldr	r2, .L3
+  62 001e 0123     		movs	r3, #1
+  63 0020 0C49     		ldr	r1, .L3+4
+  64 0022 0D48     		ldr	r0, .L3+8
+  65 0024 FFF7FEFF 		bl	hal_dma_start
+  66              	.L2:
+  64:../src/main.c **** 
+  65:../src/main.c ****     /* user code [local 2] end */
+  66:../src/main.c **** 
+  67:../src/main.c ****     while(1){
+  68:../src/main.c ****     /* user code [local 3] begin */
+  69:../src/main.c **** 
+  70:../src/main.c ****     	hal_sys_basetick_delay_ms(1000);
+  67              		.loc 1 70 6 discriminator 1
+  68 0028 4FF47A70 		mov	r0, #1000
+  69 002c FFF7FEFF 		bl	hal_sys_basetick_delay_ms
+  71:../src/main.c ****         printf("\r\n //*******************************//");
+  70              		.loc 1 71 9 discriminator 1
+  71 0030 0A48     		ldr	r0, .L3+12
+  72 0032 FFF7FEFF 		bl	printf
+  72:../src/main.c ****         printf("\r\n ADC regular channel data = %04X", adc_value);
+  73              		.loc 1 72 9 discriminator 1
+  74 0036 064B     		ldr	r3, .L3
+  75 0038 1B88     		ldrh	r3, [r3]
+  76 003a 1946     		mov	r1, r3
+  77 003c 0848     		ldr	r0, .L3+16
+  78 003e FFF7FEFF 		bl	printf
+  73:../src/main.c ****         printf("\r\n //*******************************//\r\n");
+  79              		.loc 1 73 9 discriminator 1
+  80 0042 0848     		ldr	r0, .L3+20
+  81 0044 FFF7FEFF 		bl	puts
+  74:../src/main.c ****         adc_value = 0;
+  82              		.loc 1 74 19 discriminator 1
+  83 0048 014B     		ldr	r3, .L3
+  84 004a 0022     		movs	r2, #0
+  85 004c 1A80     		strh	r2, [r3]	@ movhi
+  70:../src/main.c ****         printf("\r\n //*******************************//");
+  86              		.loc 1 70 6 discriminator 1
+  87 004e EBE7     		b	.L2
+  88              	.L4:
+  89              		.align	2
+  90              	.L3:
+  91 0050 00000000 		.word	adc_value
+  92 0054 4C240140 		.word	1073816652
+  93 0058 00000000 		.word	dma_adc_info
+  94 005c 00000000 		.word	.LC0
+  95 0060 28000000 		.word	.LC1
+  96 0064 4C000000 		.word	.LC2
+  97              		.cfi_endproc
+  98              	.LFE119:
+ 100              		.section	.text.fputc,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	fputc
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.fpu softvfp
+ 108              	fputc:
+ 109              	.LFB120:
+  75:../src/main.c **** 
+  76:../src/main.c ****     /* user code [local 3] end */
+  77:../src/main.c ****     }
+  78:../src/main.c **** }
+  79:../src/main.c **** /* user code [global 1] begin */
+  80:../src/main.c **** /* retarget the C library printf function to the USART */
+  81:../src/main.c **** int fputc(int ch, FILE *f)
+  82:../src/main.c **** {
+ 110              		.loc 1 82 1
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 8
+ 113              		@ frame_needed = 1, uses_anonymous_args = 0
+ 114 0000 80B5     		push	{r7, lr}
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 7, -8
+ 117              		.cfi_offset 14, -4
+ 118 0002 82B0     		sub	sp, sp, #8
+ 119              		.cfi_def_cfa_offset 16
+ 120 0004 00AF     		add	r7, sp, #0
+ 121              		.cfi_def_cfa_register 7
+ 122 0006 7860     		str	r0, [r7, #4]
+ 123 0008 3960     		str	r1, [r7]
+  83:../src/main.c ****     hals_uart_data_transmit(USART0, (uint8_t)ch);
+ 124              		.loc 1 83 37
+ 125 000a 7B68     		ldr	r3, [r7, #4]
+ 126 000c DBB2     		uxtb	r3, r3
+ 127              		.loc 1 83 5
+ 128 000e 9BB2     		uxth	r3, r3
+ 129 0010 1946     		mov	r1, r3
+ 130 0012 0848     		ldr	r0, .L8
+ 131 0014 FFF7FEFF 		bl	hals_uart_data_transmit
+  84:../src/main.c ****     while(RESET == hals_uart_flag_get(USART0, USART_FLAG_TBE));
+ 132              		.loc 1 84 10
+ 133 0018 00BF     		nop
+ 134              	.L6:
+ 135              		.loc 1 84 20 discriminator 1
+ 136 001a 40F20771 		movw	r1, #1799
+ 137 001e 0548     		ldr	r0, .L8
+ 138 0020 FFF7FEFF 		bl	hals_uart_flag_get
+ 139 0024 0346     		mov	r3, r0
+ 140              		.loc 1 84 10 discriminator 1
+ 141 0026 002B     		cmp	r3, #0
+ 142 0028 F7D0     		beq	.L6
+  85:../src/main.c ****     return ch;
+ 143              		.loc 1 85 12
+ 144 002a 7B68     		ldr	r3, [r7, #4]
+  86:../src/main.c **** }
+ 145              		.loc 1 86 1
+ 146 002c 1846     		mov	r0, r3
+ 147 002e 0837     		adds	r7, r7, #8
+ 148              		.cfi_def_cfa_offset 8
+ 149 0030 BD46     		mov	sp, r7
+ 150              		.cfi_def_cfa_register 13
+ 151              		@ sp needed
+ 152 0032 80BD     		pop	{r7, pc}
+ 153              	.L9:
+ 154              		.align	2
+ 155              	.L8:
+ 156 0034 00380140 		.word	1073821696
+ 157              		.cfi_endproc
+ 158              	.LFE120:
+ 160              		.section	.text.__io_putchar,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	__io_putchar
+ 163              		.syntax unified
+ 164              		.thumb
+ 165              		.thumb_func
+ 166              		.fpu softvfp
+ 168              	__io_putchar:
+ 169              	.LFB121:
+  87:../src/main.c **** /* retarget the C library printf function to the USART */
+  88:../src/main.c **** int __io_putchar(int ch)
+  89:../src/main.c **** {
+ 170              		.loc 1 89 1
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 8
+ 173              		@ frame_needed = 1, uses_anonymous_args = 0
+ 174 0000 80B5     		push	{r7, lr}
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 7, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 82B0     		sub	sp, sp, #8
+ 179              		.cfi_def_cfa_offset 16
+ 180 0004 00AF     		add	r7, sp, #0
+ 181              		.cfi_def_cfa_register 7
+ 182 0006 7860     		str	r0, [r7, #4]
+  90:../src/main.c ****    	hals_uart_data_transmit(USART0, (uint8_t) ch );
+ 183              		.loc 1 90 37
+ 184 0008 7B68     		ldr	r3, [r7, #4]
+ 185 000a DBB2     		uxtb	r3, r3
+ 186              		.loc 1 90 5
+ 187 000c 9BB2     		uxth	r3, r3
+ 188 000e 1946     		mov	r1, r3
+ 189 0010 0848     		ldr	r0, .L13
+ 190 0012 FFF7FEFF 		bl	hals_uart_data_transmit
+  91:../src/main.c ****     while(RESET == hals_uart_flag_get(USART0, USART_FLAG_TBE));
+ 191              		.loc 1 91 10
+ 192 0016 00BF     		nop
+ 193              	.L11:
+ 194              		.loc 1 91 20 discriminator 1
+ 195 0018 40F20771 		movw	r1, #1799
+ 196 001c 0548     		ldr	r0, .L13
+ 197 001e FFF7FEFF 		bl	hals_uart_flag_get
+ 198 0022 0346     		mov	r3, r0
+ 199              		.loc 1 91 10 discriminator 1
+ 200 0024 002B     		cmp	r3, #0
+ 201 0026 F7D0     		beq	.L11
+  92:../src/main.c **** 
+  93:../src/main.c ****     return ch;
+ 202              		.loc 1 93 12
+ 203 0028 7B68     		ldr	r3, [r7, #4]
+  94:../src/main.c **** }
+ 204              		.loc 1 94 1
+ 205 002a 1846     		mov	r0, r3
+ 206 002c 0837     		adds	r7, r7, #8
+ 207              		.cfi_def_cfa_offset 8
+ 208 002e BD46     		mov	sp, r7
+ 209              		.cfi_def_cfa_register 13
+ 210              		@ sp needed
+ 211 0030 80BD     		pop	{r7, pc}
+ 212              	.L14:
+ 213 0032 00BF     		.align	2
+ 214              	.L13:
+ 215 0034 00380140 		.word	1073821696
+ 216              		.cfi_endproc
+ 217              	.LFE121:
+ 219              		.text
+ 220              	.Letext0:
+ 221              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 222              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 223              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 224              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 225              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 226              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 227              		.file 8 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 228              		.file 9 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 229              		.file 10 "../firmware/cmsis/inc/core_cm4.h"
+ 230              		.file 11 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 231              		.file 12 "../firmware/cmsis/inc/gd32f3x0.h"
+ 232              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_dma.h"
+ 233              		.file 14 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 234              		.file 15 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+ 235              		.file 16 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_exti.h"
+ 236              		.file 17 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_sys.h"
+ 237              		.file 18 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_adc.h"
+ 238              		.file 19 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_usart_com.h"
+ 239              		.file 20 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_uart.h"
+ 240              		.file 21 "../inc/gd32f3x0_hal_init.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                            *COM*:00000002 adc_value
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:17     .rodata:00000000 $d
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:27     .text.main:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:35     .text.main:00000000 main
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:91     .text.main:00000050 $d
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:101    .text.fputc:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:108    .text.fputc:00000000 fputc
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:156    .text.fputc:00000034 $d
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:161    .text.__io_putchar:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:168    .text.__io_putchar:00000000 __io_putchar
+C:\Users\peter\AppData\Local\Temp\ccFFSDp0.s:215    .text.__io_putchar:00000034 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+msd_system_init
+msd_clock_init
+msd_gpio_init
+msd_dma_init
+msd_adc_init
+msd_usart0_init
+hal_dma_start
+hal_sys_basetick_delay_ms
+printf
+puts
+dma_adc_info
+hals_uart_data_transmit
+hals_uart_flag_get

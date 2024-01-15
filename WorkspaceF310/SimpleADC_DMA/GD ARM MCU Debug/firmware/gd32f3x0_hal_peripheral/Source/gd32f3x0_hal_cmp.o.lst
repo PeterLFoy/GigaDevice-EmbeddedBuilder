@@ -1,0 +1,2235 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_cmp.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.hal_cmp_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	hal_cmp_init
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	hal_cmp_init:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \file    gd32f3x0_hal_cmp.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief   CMP driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     Redistribution and use in source and binary forms, with or without modification,
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** are permitted provided that the following conditions are met:
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****        list of conditions and the following disclaimer.
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****        this list of conditions and the following disclaimer in the documentation
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****        and/or other materials provided with the distribution.
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****        may be used to endorse or promote products derived from this software without
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****        specific prior written permission.
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** OF SUCH DAMAGE.
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #include "gd32f3x0_hal.h"
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      initialize CMP
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  p_init: the pointer to CMP init structure
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   mode:
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   only one parameter can be selected which is shown as below:
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_MODE_HIGHSPEED: high speed and power mode
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_MODE_MIDDLESPEED: middle speed and power mode
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_MODE_LOWSPEED: low speed and power mode
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_MODE_VERYLOWSPEED: very low speed and power mode
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   polarity:
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   only one parameter can be selected which is shown as below:
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_POLARITY_NONINVERTED: CMP output not inverted
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_POLARITY_INVERTED: CMP output inverted
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   hysteresis:
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   only one parameter can be selected which is shown as below:
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_HYSTERESIS_NO: input no hysteresis
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_HYSTERESIS_LOW: input hysteresis level low
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_HYSTERESIS_MIDDLE: input hysteresis level middle
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_HYSTERESIS_HIGH: input hysteresis level high
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   inverting_input:
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   only one parameter can be selected which is shown as below:
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_1_4VREFINT: inverting input 1/4 Vrefint
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_1_2VREFINT: inverting input 1/2 Vrefint
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_3_4VREFINT: inverting input 3/4 Vrefint
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_VREFINT: inverting input Vrefint
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_PA4: inverting input PA4(DAC0_OUT0)
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_PA5: inverting input PA5
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_INVERTING_INPUT_PA0_PA2: inverting input PA0 for CMP0 or PA2 for CMP1
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   noninverting_input:
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                     the argument could be selected from enumeration <hal_cmp_noninverting_input_enu
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   outputsel:
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   only one parameter can be selected which is shown as below:
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_NONE: output none
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER0_BKIN: output TIMER0 break input
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER0_IC0: output TIMER0_CH0 input capture
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER0_OCPRECLR: output TIMER0 OCPRE_CLR input
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER1_IC3: output TIMER1_CH3 input capture
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER1_OCPRECLR: output TIMER1 OCPRE_CLR input
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER2_IC0: output TIMER2_CH0 input capture
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg          CMP_OUTPUT_TIMER2_OCPRECLR: output TIMER2 OCPRE_CLR input
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   exti_type:
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                     the argument could be selected from enumeration <hal_cmp_exti_type_enum>
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_VAL, HAL_ERR_LOCK, details refer to gd32f3x0
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_init(hal_cmp_dev_struct *cmp_dev, uint32_t periph, hal_cmp_init_struct *p_init)
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+  27              		.loc 1 87 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 86B0     		sub	sp, sp, #24
+  36              		.cfi_def_cfa_offset 32
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 F860     		str	r0, [r7, #12]
+  40 0008 B960     		str	r1, [r7, #8]
+  41 000a 7A60     		str	r2, [r7, #4]
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t temp_val;
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if((NULL == cmp_dev) || (NULL == p_init)) {
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer address is invalid");
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_VAL;
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* initialize mutex to unlocked  */
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->mutex = HAL_MUTEX_UNLOCKED;
+  42              		.loc 1 104 20
+  43 000c FB68     		ldr	r3, [r7, #12]
+  44 000e 0022     		movs	r2, #0
+  45 0010 5A72     		strb	r2, [r3, #9]
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* initialize cmp_dev periph */
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->periph = periph;
+  46              		.loc 1 107 21
+  47 0012 FB68     		ldr	r3, [r7, #12]
+  48 0014 BA68     		ldr	r2, [r7, #8]
+  49 0016 1A60     		str	r2, [r3]
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* initialize the CMP */
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(HAL_CMP_STATE_RESET == cmp_dev->state) {
+  50              		.loc 1 110 38
+  51 0018 FB68     		ldr	r3, [r7, #12]
+  52 001a 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+  53              		.loc 1 110 7
+  54 001c 012B     		cmp	r3, #1
+  55 001e 40F09680 		bne	.L2
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* calculate bit shift of CMP0 or CMP1 */
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP0 == cmp_dev->periph) {
+  56              		.loc 1 112 27
+  57 0022 FB68     		ldr	r3, [r7, #12]
+  58 0024 1B68     		ldr	r3, [r3]
+  59              		.loc 1 112 11
+  60 0026 002B     		cmp	r3, #0
+  61 0028 02D1     		bne	.L3
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             bit_shift = 0U;
+  62              		.loc 1 113 23
+  63 002a 0023     		movs	r3, #0
+  64 002c 3B61     		str	r3, [r7, #16]
+  65 002e 01E0     		b	.L4
+  66              	.L3:
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             bit_shift = 16U;
+  67              		.loc 1 115 23
+  68 0030 1023     		movs	r3, #16
+  69 0032 3B61     		str	r3, [r7, #16]
+  70              	.L4:
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* check if CMP locked */
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+  71              		.loc 1 119 12
+  72 0034 484B     		ldr	r3, .L15
+  73 0036 1A68     		ldr	r2, [r3]
+  74              		.loc 1 119 36
+  75 0038 4FF40041 		mov	r1, #32768
+  76 003c 3B69     		ldr	r3, [r7, #16]
+  77 003e 01FA03F3 		lsl	r3, r1, r3
+  78              		.loc 1 119 19
+  79 0042 1340     		ands	r3, r3, r2
+  80              		.loc 1 119 11
+  81 0044 002B     		cmp	r3, #0
+  82 0046 02D0     		beq	.L5
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             return HAL_ERR_LOCK;
+  83              		.loc 1 120 20
+  84 0048 6FF00103 		mvn	r3, #1
+  85 004c 80E0     		b	.L6
+  86              	.L5:
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* clear bits */
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         temp_val = CMP_CS;
+  87              		.loc 1 124 20
+  88 004e 424B     		ldr	r3, .L15
+  89              		.loc 1 124 18
+  90 0050 1B68     		ldr	r3, [r3]
+  91 0052 7B61     		str	r3, [r7, #20]
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         temp_val &= ~((uint32_t)0x0000FFFFU << bit_shift);
+  92              		.loc 1 125 45
+  93 0054 4FF6FF72 		movw	r2, #65535
+  94 0058 3B69     		ldr	r3, [r7, #16]
+  95 005a 02FA03F3 		lsl	r3, r2, r3
+  96              		.loc 1 125 21
+  97 005e DB43     		mvns	r3, r3
+  98              		.loc 1 125 18
+  99 0060 7A69     		ldr	r2, [r7, #20]
+ 100 0062 1340     		ands	r3, r3, r2
+ 101 0064 7B61     		str	r3, [r7, #20]
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* configure the operating mode, output selection, inverting_input and hysteresis */
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         temp_val |= (uint32_t)(p_init->mode | \
+ 102              		.loc 1 128 38
+ 103 0066 7B68     		ldr	r3, [r7, #4]
+ 104 0068 1A68     		ldr	r2, [r3]
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->inverting_input | \
+ 105              		.loc 1 129 38
+ 106 006a 7B68     		ldr	r3, [r7, #4]
+ 107 006c 1B69     		ldr	r3, [r3, #16]
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->inverting_input | \
+ 108              		.loc 1 128 45
+ 109 006e 1A43     		orrs	r2, r2, r3
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->outputsel | \
+ 110              		.loc 1 130 38
+ 111 0070 7B68     		ldr	r3, [r7, #4]
+ 112 0072 DB68     		ldr	r3, [r3, #12]
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->inverting_input | \
+ 113              		.loc 1 129 56
+ 114 0074 1A43     		orrs	r2, r2, r3
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->hysteresis) << bit_shift;
+ 115              		.loc 1 131 38
+ 116 0076 7B68     		ldr	r3, [r7, #4]
+ 117 0078 9B68     		ldr	r3, [r3, #8]
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->outputsel | \
+ 118              		.loc 1 130 50
+ 119 007a 1A43     		orrs	r2, r2, r3
+ 120              		.loc 1 131 52
+ 121 007c 3B69     		ldr	r3, [r7, #16]
+ 122 007e 02FA03F3 		lsl	r3, r2, r3
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                p_init->inverting_input | \
+ 123              		.loc 1 128 18
+ 124 0082 7A69     		ldr	r2, [r7, #20]
+ 125 0084 1343     		orrs	r3, r3, r2
+ 126 0086 7B61     		str	r3, [r7, #20]
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* configure the output polarity */
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP_OUTPUT_POLARITY_INVERTED == p_init->polarity) {
+ 127              		.loc 1 134 50
+ 128 0088 7B68     		ldr	r3, [r7, #4]
+ 129 008a 5B68     		ldr	r3, [r3, #4]
+ 130              		.loc 1 134 11
+ 131 008c B3F5006F 		cmp	r3, #2048
+ 132 0090 08D1     		bne	.L7
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             temp_val |= (uint32_t)CMP_CS_CMP0PL << bit_shift;
+ 133              		.loc 1 135 49
+ 134 0092 4FF40062 		mov	r2, #2048
+ 135 0096 3B69     		ldr	r3, [r7, #16]
+ 136 0098 02FA03F3 		lsl	r3, r2, r3
+ 137              		.loc 1 135 22
+ 138 009c 7A69     		ldr	r2, [r7, #20]
+ 139 009e 1343     		orrs	r3, r3, r2
+ 140 00a0 7B61     		str	r3, [r7, #20]
+ 141 00a2 08E0     		b	.L8
+ 142              	.L7:
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             temp_val &= ~((uint32_t)CMP_CS_CMP0PL << bit_shift);
+ 143              		.loc 1 137 51
+ 144 00a4 4FF40062 		mov	r2, #2048
+ 145 00a8 3B69     		ldr	r3, [r7, #16]
+ 146 00aa 02FA03F3 		lsl	r3, r2, r3
+ 147              		.loc 1 137 25
+ 148 00ae DB43     		mvns	r3, r3
+ 149              		.loc 1 137 22
+ 150 00b0 7A69     		ldr	r2, [r7, #20]
+ 151 00b2 1340     		ands	r3, r3, r2
+ 152 00b4 7B61     		str	r3, [r7, #20]
+ 153              	.L8:
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* configure the noninverting input port */
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP0 == cmp_dev->periph) {
+ 154              		.loc 1 141 27
+ 155 00b6 FB68     		ldr	r3, [r7, #12]
+ 156 00b8 1B68     		ldr	r3, [r3]
+ 157              		.loc 1 141 11
+ 158 00ba 002B     		cmp	r3, #0
+ 159 00bc 11D1     		bne	.L9
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             if(CMP0_IP_PA1 == p_init->noninverting_input) {
+ 160              		.loc 1 142 37
+ 161 00be 7B68     		ldr	r3, [r7, #4]
+ 162 00c0 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 163              		.loc 1 142 15
+ 164 00c2 002B     		cmp	r3, #0
+ 165 00c4 04D1     		bne	.L10
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 /* disable switch close */
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 temp_val &= ~CMP_CS_CMP0SW;
+ 166              		.loc 1 144 26
+ 167 00c6 7B69     		ldr	r3, [r7, #20]
+ 168 00c8 23F00203 		bic	r3, r3, #2
+ 169 00cc 7B61     		str	r3, [r7, #20]
+ 170 00ce 19E0     		b	.L11
+ 171              	.L10:
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             } else if(CMP0_IP_PA4_SWCLOSE == p_init->noninverting_input) {
+ 172              		.loc 1 145 52
+ 173 00d0 7B68     		ldr	r3, [r7, #4]
+ 174 00d2 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 175              		.loc 1 145 22
+ 176 00d4 012B     		cmp	r3, #1
+ 177 00d6 15D1     		bne	.L11
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 /* enable switch close */
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 temp_val |= CMP_CS_CMP0SW;
+ 178              		.loc 1 147 26
+ 179 00d8 7B69     		ldr	r3, [r7, #20]
+ 180 00da 43F00203 		orr	r3, r3, #2
+ 181 00de 7B61     		str	r3, [r7, #20]
+ 182 00e0 10E0     		b	.L11
+ 183              	.L9:
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             } else {
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             }
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             if(CMP1_IP_PA3 == p_init->noninverting_input) {
+ 184              		.loc 1 151 37
+ 185 00e2 7B68     		ldr	r3, [r7, #4]
+ 186 00e4 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 187              		.loc 1 151 15
+ 188 00e6 022B     		cmp	r3, #2
+ 189 00e8 04D1     		bne	.L12
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 /* disable window mode */
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 temp_val &= ~CMP_CS_WNDEN;
+ 190              		.loc 1 153 26
+ 191 00ea 7B69     		ldr	r3, [r7, #20]
+ 192 00ec 23F40003 		bic	r3, r3, #8388608
+ 193 00f0 7B61     		str	r3, [r7, #20]
+ 194 00f2 07E0     		b	.L11
+ 195              	.L12:
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             } else if(CMP1_IP_OF_CMP0 == p_init->noninverting_input) {
+ 196              		.loc 1 154 48
+ 197 00f4 7B68     		ldr	r3, [r7, #4]
+ 198 00f6 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 199              		.loc 1 154 22
+ 200 00f8 032B     		cmp	r3, #3
+ 201 00fa 03D1     		bne	.L11
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 /* enable window mode */
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 temp_val |= CMP_CS_WNDEN;
+ 202              		.loc 1 156 26
+ 203 00fc 7B69     		ldr	r3, [r7, #20]
+ 204 00fe 43F40003 		orr	r3, r3, #8388608
+ 205 0102 7B61     		str	r3, [r7, #20]
+ 206              	.L11:
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             } else {
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             }
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* write register */
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS = temp_val;
+ 207              		.loc 1 162 9
+ 208 0104 144A     		ldr	r2, .L15
+ 209              		.loc 1 162 16
+ 210 0106 7B69     		ldr	r3, [r7, #20]
+ 211 0108 1360     		str	r3, [r2]
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* configure EXTI type: falling, rising or both */
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP0 == cmp_dev->periph) {
+ 212              		.loc 1 165 27
+ 213 010a FB68     		ldr	r3, [r7, #12]
+ 214 010c 1B68     		ldr	r3, [r3]
+ 215              		.loc 1 165 11
+ 216 010e 002B     		cmp	r3, #0
+ 217 0110 0DD1     		bne	.L13
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             hal_exti_internal_init((hal_exti_internal_line_enum)EXTI_CMP_OUTPUT_21, (hal_exti_type_
+ 218              		.loc 1 166 111
+ 219 0112 7B68     		ldr	r3, [r7, #4]
+ 220 0114 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 221              		.loc 1 166 13
+ 222 0116 1946     		mov	r1, r3
+ 223 0118 4FF40010 		mov	r0, #2097152
+ 224 011c FFF7FEFF 		bl	hal_exti_internal_init
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt until calling hal_cmp_start_interrupt */
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN &= ~EXTI_CMP_OUTPUT_21;
+ 225              		.loc 1 168 24
+ 226 0120 0E4B     		ldr	r3, .L15+4
+ 227 0122 1B68     		ldr	r3, [r3]
+ 228 0124 0D4A     		ldr	r2, .L15+4
+ 229 0126 23F40013 		bic	r3, r3, #2097152
+ 230 012a 1360     		str	r3, [r2]
+ 231 012c 0CE0     		b	.L14
+ 232              	.L13:
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             hal_exti_internal_init((hal_exti_internal_line_enum)EXTI_CMP_OUTPUT_22, (hal_exti_type_
+ 233              		.loc 1 170 111
+ 234 012e 7B68     		ldr	r3, [r7, #4]
+ 235 0130 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 236              		.loc 1 170 13
+ 237 0132 1946     		mov	r1, r3
+ 238 0134 4FF48000 		mov	r0, #4194304
+ 239 0138 FFF7FEFF 		bl	hal_exti_internal_init
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt until calling hal_cmp_start_interrupt */
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN &= ~EXTI_CMP_OUTPUT_22;
+ 240              		.loc 1 172 24
+ 241 013c 074B     		ldr	r3, .L15+4
+ 242 013e 1B68     		ldr	r3, [r3]
+ 243 0140 064A     		ldr	r2, .L15+4
+ 244 0142 23F48003 		bic	r3, r3, #4194304
+ 245 0146 1360     		str	r3, [r2]
+ 246              	.L14:
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* change CMP state */
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->state = HAL_CMP_STATE_READY;
+ 247              		.loc 1 176 24
+ 248 0148 FB68     		ldr	r3, [r7, #12]
+ 249 014a 0522     		movs	r2, #5
+ 250 014c 1A72     		strb	r2, [r3, #8]
+ 251              	.L2:
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return HAL_ERR_NONE;
+ 252              		.loc 1 179 12
+ 253 014e 0023     		movs	r3, #0
+ 254              	.L6:
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 255              		.loc 1 180 1
+ 256 0150 1846     		mov	r0, r3
+ 257 0152 1837     		adds	r7, r7, #24
+ 258              		.cfi_def_cfa_offset 8
+ 259 0154 BD46     		mov	sp, r7
+ 260              		.cfi_def_cfa_register 13
+ 261              		@ sp needed
+ 262 0156 80BD     		pop	{r7, pc}
+ 263              	.L16:
+ 264              		.align	2
+ 265              	.L15:
+ 266 0158 1C000140 		.word	1073807388
+ 267 015c 00040140 		.word	1073808384
+ 268              		.cfi_endproc
+ 269              	.LFE119:
+ 271              		.section	.text.hal_cmp_struct_init,"ax",%progbits
+ 272              		.align	1
+ 273              		.global	hal_cmp_struct_init
+ 274              		.syntax unified
+ 275              		.thumb
+ 276              		.thumb_func
+ 277              		.fpu softvfp
+ 279              	hal_cmp_struct_init:
+ 280              	.LFB120:
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      initialize the CMP structure with the default values
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  hal_struct_type: the type of the structure
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  p_struct: the pointer of the structure
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_VAL,
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_struct_init(hal_cmp_struct_type_enum hal_struct_type, void *p_struct)
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 281              		.loc 1 191 1
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 8
+ 284              		@ frame_needed = 1, uses_anonymous_args = 0
+ 285              		@ link register save eliminated.
+ 286 0000 80B4     		push	{r7}
+ 287              		.cfi_def_cfa_offset 4
+ 288              		.cfi_offset 7, -4
+ 289 0002 83B0     		sub	sp, sp, #12
+ 290              		.cfi_def_cfa_offset 16
+ 291 0004 00AF     		add	r7, sp, #0
+ 292              		.cfi_def_cfa_register 7
+ 293 0006 0346     		mov	r3, r0
+ 294 0008 3960     		str	r1, [r7]
+ 295 000a FB71     		strb	r3, [r7, #7]
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == p_struct) {
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer address is invalid");
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     switch(hal_struct_type) {
+ 296              		.loc 1 200 5
+ 297 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 298 000e 002B     		cmp	r3, #0
+ 299 0010 02D0     		beq	.L18
+ 300 0012 012B     		cmp	r3, #1
+ 301 0014 13D0     		beq	.L19
+ 302 0016 1FE0     		b	.L23
+ 303              	.L18:
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     case HAL_CMP_INIT_STRUCT:
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* initialize CMP initialization structure with the default values */
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->noninverting_input = CMP0_IP_PA1;
+ 304              		.loc 1 203 63
+ 305 0018 3B68     		ldr	r3, [r7]
+ 306 001a 0022     		movs	r2, #0
+ 307 001c 1A75     		strb	r2, [r3, #20]
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->inverting_input   = CMP_INVERTING_INPUT_1_4VREFINT;
+ 308              		.loc 1 204 62
+ 309 001e 3B68     		ldr	r3, [r7]
+ 310 0020 0022     		movs	r2, #0
+ 311 0022 1A61     		str	r2, [r3, #16]
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->mode              = CMP_MODE_HIGHSPEED;
+ 312              		.loc 1 205 62
+ 313 0024 3B68     		ldr	r3, [r7]
+ 314 0026 0022     		movs	r2, #0
+ 315 0028 1A60     		str	r2, [r3]
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->hysteresis        = CMP_HYSTERESIS_NO;
+ 316              		.loc 1 206 62
+ 317 002a 3B68     		ldr	r3, [r7]
+ 318 002c 0022     		movs	r2, #0
+ 319 002e 9A60     		str	r2, [r3, #8]
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->outputsel         = CMP_OUTPUT_NONE;
+ 320              		.loc 1 207 62
+ 321 0030 3B68     		ldr	r3, [r7]
+ 322 0032 0022     		movs	r2, #0
+ 323 0034 DA60     		str	r2, [r3, #12]
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_init_struct *)p_struct)->polarity          = CMP_OUTPUT_POLARITY_NONINVERTED;
+ 324              		.loc 1 208 62
+ 325 0036 3B68     		ldr	r3, [r7]
+ 326 0038 0022     		movs	r2, #0
+ 327 003a 5A60     		str	r2, [r3, #4]
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         break;
+ 328              		.loc 1 209 9
+ 329 003c 0FE0     		b	.L21
+ 330              	.L19:
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     case HAL_CMP_DEV_STRUCT:
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* initialize CMP device information structure with the default values */
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_dev_struct *)p_struct)->periph             = CMP0;
+ 331              		.loc 1 213 62
+ 332 003e 3B68     		ldr	r3, [r7]
+ 333 0040 0022     		movs	r2, #0
+ 334 0042 1A60     		str	r2, [r3]
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_dev_struct *)p_struct)->state              = HAL_CMP_STATE_RESET;
+ 335              		.loc 1 214 62
+ 336 0044 3B68     		ldr	r3, [r7]
+ 337 0046 0122     		movs	r2, #1
+ 338 0048 1A72     		strb	r2, [r3, #8]
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_dev_struct *)p_struct)->output_level       = CMP_OUTPUTLEVEL_LOW;
+ 339              		.loc 1 215 62
+ 340 004a 3B68     		ldr	r3, [r7]
+ 341 004c 0022     		movs	r2, #0
+ 342 004e DA60     		str	r2, [r3, #12]
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         ((hal_cmp_dev_struct *)p_struct)->cmp_irq.output_changed_handle = NULL;
+ 343              		.loc 1 216 73
+ 344 0050 3B68     		ldr	r3, [r7]
+ 345 0052 0022     		movs	r2, #0
+ 346 0054 5A60     		str	r2, [r3, #4]
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         break;
+ 347              		.loc 1 217 9
+ 348 0056 02E0     		b	.L21
+ 349              	.L23:
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     default:
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGW("parameter [hal_struct_type] value is undefine");
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_VAL;
+ 350              		.loc 1 220 16
+ 351 0058 6FF00503 		mvn	r3, #5
+ 352 005c 00E0     		b	.L22
+ 353              	.L21:
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return HAL_ERR_NONE;
+ 354              		.loc 1 223 12
+ 355 005e 0023     		movs	r3, #0
+ 356              	.L22:
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 357              		.loc 1 224 1
+ 358 0060 1846     		mov	r0, r3
+ 359 0062 0C37     		adds	r7, r7, #12
+ 360              		.cfi_def_cfa_offset 4
+ 361 0064 BD46     		mov	sp, r7
+ 362              		.cfi_def_cfa_register 13
+ 363              		@ sp needed
+ 364 0066 80BC     		pop	{r7}
+ 365              		.cfi_restore 7
+ 366              		.cfi_def_cfa_offset 0
+ 367 0068 7047     		bx	lr
+ 368              		.cfi_endproc
+ 369              	.LFE120:
+ 371              		.section	.text.hal_cmp_deinit,"ax",%progbits
+ 372              		.align	1
+ 373              		.global	hal_cmp_deinit
+ 374              		.syntax unified
+ 375              		.thumb
+ 376              		.thumb_func
+ 377              		.fpu softvfp
+ 379              	hal_cmp_deinit:
+ 380              	.LFB121:
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      deinitialize CMP
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_VAL, HAL_ERR_LOCK,
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_deinit(hal_cmp_dev_struct *cmp_dev)
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 381              		.loc 1 236 1
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 16
+ 384              		@ frame_needed = 1, uses_anonymous_args = 0
+ 385 0000 80B5     		push	{r7, lr}
+ 386              		.cfi_def_cfa_offset 8
+ 387              		.cfi_offset 7, -8
+ 388              		.cfi_offset 14, -4
+ 389 0002 84B0     		sub	sp, sp, #16
+ 390              		.cfi_def_cfa_offset 24
+ 391 0004 00AF     		add	r7, sp, #0
+ 392              		.cfi_def_cfa_register 7
+ 393 0006 7860     		str	r0, [r7, #4]
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     int32_t tmp_hal_err = HAL_ERR_NONE;
+ 394              		.loc 1 238 13
+ 395 0008 0023     		movs	r3, #0
+ 396 000a BB60     		str	r3, [r7, #8]
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_VAL;
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_BUSY;
+ 397              		.loc 1 252 20
+ 398 000c 7B68     		ldr	r3, [r7, #4]
+ 399 000e 0222     		movs	r2, #2
+ 400 0010 1A72     		strb	r2, [r3, #8]
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* calculate bit shift of CMP0 or CMP1 */
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 401              		.loc 1 255 23
+ 402 0012 7B68     		ldr	r3, [r7, #4]
+ 403 0014 1B68     		ldr	r3, [r3]
+ 404              		.loc 1 255 7
+ 405 0016 002B     		cmp	r3, #0
+ 406 0018 02D1     		bne	.L25
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 0U;
+ 407              		.loc 1 256 19
+ 408 001a 0023     		movs	r3, #0
+ 409 001c FB60     		str	r3, [r7, #12]
+ 410 001e 01E0     		b	.L26
+ 411              	.L25:
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 16U;
+ 412              		.loc 1 258 19
+ 413 0020 1023     		movs	r3, #16
+ 414 0022 FB60     		str	r3, [r7, #12]
+ 415              	.L26:
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* deinitialize the CMP */
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check if CMP locked */
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+ 416              		.loc 1 263 8
+ 417 0024 194B     		ldr	r3, .L32
+ 418 0026 1A68     		ldr	r2, [r3]
+ 419              		.loc 1 263 32
+ 420 0028 4FF40041 		mov	r1, #32768
+ 421 002c FB68     		ldr	r3, [r7, #12]
+ 422 002e 01FA03F3 		lsl	r3, r1, r3
+ 423              		.loc 1 263 15
+ 424 0032 1340     		ands	r3, r3, r2
+ 425              		.loc 1 263 7
+ 426 0034 002B     		cmp	r3, #0
+ 427 0036 06D0     		beq	.L27
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         tmp_hal_err = HAL_ERR_LOCK;
+ 428              		.loc 1 264 21
+ 429 0038 6FF00103 		mvn	r3, #1
+ 430 003c BB60     		str	r3, [r7, #8]
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* change CMP state */
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->state = HAL_CMP_STATE_READY;
+ 431              		.loc 1 266 24
+ 432 003e 7B68     		ldr	r3, [r7, #4]
+ 433 0040 0522     		movs	r2, #5
+ 434 0042 1A72     		strb	r2, [r3, #8]
+ 435 0044 0DE0     		b	.L28
+ 436              	.L27:
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* deinitialize CMP register */
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS &= ~((uint32_t)0x0000FFFFU << bit_shift);
+ 437              		.loc 1 269 16
+ 438 0046 114B     		ldr	r3, .L32
+ 439 0048 1A68     		ldr	r2, [r3]
+ 440              		.loc 1 269 43
+ 441 004a 4FF6FF71 		movw	r1, #65535
+ 442 004e FB68     		ldr	r3, [r7, #12]
+ 443 0050 01FA03F3 		lsl	r3, r1, r3
+ 444              		.loc 1 269 19
+ 445 0054 DB43     		mvns	r3, r3
+ 446              		.loc 1 269 16
+ 447 0056 0D49     		ldr	r1, .L32
+ 448 0058 1340     		ands	r3, r3, r2
+ 449 005a 0B60     		str	r3, [r1]
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* change CMP state */
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->state = HAL_CMP_STATE_RESET;
+ 450              		.loc 1 271 24
+ 451 005c 7B68     		ldr	r3, [r7, #4]
+ 452 005e 0122     		movs	r2, #1
+ 453 0060 1A72     		strb	r2, [r3, #8]
+ 454              	.L28:
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* deinit EXTI type: falling, rising or both */
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 455              		.loc 1 275 23
+ 456 0062 7B68     		ldr	r3, [r7, #4]
+ 457 0064 1B68     		ldr	r3, [r3]
+ 458              		.loc 1 275 7
+ 459 0066 002B     		cmp	r3, #0
+ 460 0068 04D1     		bne	.L29
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         hal_exti_internal_deinit((hal_exti_internal_line_enum)EXTI_CMP_OUTPUT_21);
+ 461              		.loc 1 276 9
+ 462 006a 4FF40010 		mov	r0, #2097152
+ 463 006e FFF7FEFF 		bl	hal_exti_internal_deinit
+ 464 0072 03E0     		b	.L30
+ 465              	.L29:
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         hal_exti_internal_deinit((hal_exti_internal_line_enum)EXTI_CMP_OUTPUT_22);
+ 466              		.loc 1 278 9
+ 467 0074 4FF48000 		mov	r0, #4194304
+ 468 0078 FFF7FEFF 		bl	hal_exti_internal_deinit
+ 469              	.L30:
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* release lock */
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     HAL_UNLOCK(cmp_dev);
+ 470              		.loc 1 282 5
+ 471 007c 7B68     		ldr	r3, [r7, #4]
+ 472 007e 0022     		movs	r2, #0
+ 473 0080 5A72     		strb	r2, [r3, #9]
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return tmp_hal_err;
+ 474              		.loc 1 284 12
+ 475 0082 BB68     		ldr	r3, [r7, #8]
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 476              		.loc 1 285 1
+ 477 0084 1846     		mov	r0, r3
+ 478 0086 1037     		adds	r7, r7, #16
+ 479              		.cfi_def_cfa_offset 8
+ 480 0088 BD46     		mov	sp, r7
+ 481              		.cfi_def_cfa_register 13
+ 482              		@ sp needed
+ 483 008a 80BD     		pop	{r7, pc}
+ 484              	.L33:
+ 485              		.align	2
+ 486              	.L32:
+ 487 008c 1C000140 		.word	1073807388
+ 488              		.cfi_endproc
+ 489              	.LFE121:
+ 491              		.section	.text.hal_cmp_start,"ax",%progbits
+ 492              		.align	1
+ 493              		.global	hal_cmp_start
+ 494              		.syntax unified
+ 495              		.thumb
+ 496              		.thumb_func
+ 497              		.fpu softvfp
+ 499              	hal_cmp_start:
+ 500              	.LFB122:
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      start CMP module function
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_LOCK,
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_start(hal_cmp_dev_struct *cmp_dev)
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 501              		.loc 1 297 1
+ 502              		.cfi_startproc
+ 503              		@ args = 0, pretend = 0, frame = 16
+ 504              		@ frame_needed = 1, uses_anonymous_args = 0
+ 505              		@ link register save eliminated.
+ 506 0000 80B4     		push	{r7}
+ 507              		.cfi_def_cfa_offset 4
+ 508              		.cfi_offset 7, -4
+ 509 0002 85B0     		sub	sp, sp, #20
+ 510              		.cfi_def_cfa_offset 24
+ 511 0004 00AF     		add	r7, sp, #0
+ 512              		.cfi_def_cfa_register 7
+ 513 0006 7860     		str	r0, [r7, #4]
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     int32_t tmp_hal_err = HAL_ERR_NONE;
+ 514              		.loc 1 299 13
+ 515 0008 0023     		movs	r3, #0
+ 516 000a BB60     		str	r3, [r7, #8]
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* process locked */
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     HAL_LOCK(cmp_dev);
+ 517              		.loc 1 313 5
+ 518 000c 7B68     		ldr	r3, [r7, #4]
+ 519 000e 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 520 0010 012B     		cmp	r3, #1
+ 521 0012 02D1     		bne	.L35
+ 522              		.loc 1 313 5 is_stmt 0 discriminator 1
+ 523 0014 6FF00103 		mvn	r3, #1
+ 524 0018 2CE0     		b	.L36
+ 525              	.L35:
+ 526              		.loc 1 313 5 discriminator 2
+ 527 001a 7B68     		ldr	r3, [r7, #4]
+ 528 001c 0122     		movs	r2, #1
+ 529 001e 5A72     		strb	r2, [r3, #9]
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_BUSY;
+ 530              		.loc 1 316 20 is_stmt 1 discriminator 2
+ 531 0020 7B68     		ldr	r3, [r7, #4]
+ 532 0022 0222     		movs	r2, #2
+ 533 0024 1A72     		strb	r2, [r3, #8]
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* calculate bit shift of CMP0 or CMP1 */
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 534              		.loc 1 319 23 discriminator 2
+ 535 0026 7B68     		ldr	r3, [r7, #4]
+ 536 0028 1B68     		ldr	r3, [r3]
+ 537              		.loc 1 319 7 discriminator 2
+ 538 002a 002B     		cmp	r3, #0
+ 539 002c 02D1     		bne	.L37
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 0U;
+ 540              		.loc 1 320 19
+ 541 002e 0023     		movs	r3, #0
+ 542 0030 FB60     		str	r3, [r7, #12]
+ 543 0032 01E0     		b	.L38
+ 544              	.L37:
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 16U;
+ 545              		.loc 1 322 19
+ 546 0034 1023     		movs	r3, #16
+ 547 0036 FB60     		str	r3, [r7, #12]
+ 548              	.L38:
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check if CMP locked */
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+ 549              		.loc 1 326 8
+ 550 0038 114B     		ldr	r3, .L41
+ 551 003a 1A68     		ldr	r2, [r3]
+ 552              		.loc 1 326 32
+ 553 003c 4FF40041 		mov	r1, #32768
+ 554 0040 FB68     		ldr	r3, [r7, #12]
+ 555 0042 01FA03F3 		lsl	r3, r1, r3
+ 556              		.loc 1 326 15
+ 557 0046 1340     		ands	r3, r3, r2
+ 558              		.loc 1 326 7
+ 559 0048 002B     		cmp	r3, #0
+ 560 004a 03D0     		beq	.L39
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         tmp_hal_err = HAL_ERR_LOCK;
+ 561              		.loc 1 327 21
+ 562 004c 6FF00103 		mvn	r3, #1
+ 563 0050 BB60     		str	r3, [r7, #8]
+ 564 0052 08E0     		b	.L40
+ 565              	.L39:
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* enable CMP module */
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS |= CMP_CS_CMP0EN << bit_shift;
+ 566              		.loc 1 330 16
+ 567 0054 0A4B     		ldr	r3, .L41
+ 568 0056 1A68     		ldr	r2, [r3]
+ 569              		.loc 1 330 33
+ 570 0058 0121     		movs	r1, #1
+ 571 005a FB68     		ldr	r3, [r7, #12]
+ 572 005c 01FA03F3 		lsl	r3, r1, r3
+ 573              		.loc 1 330 16
+ 574 0060 0749     		ldr	r1, .L41
+ 575 0062 1343     		orrs	r3, r3, r2
+ 576 0064 0B60     		str	r3, [r1]
+ 577              	.L40:
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_READY;
+ 578              		.loc 1 334 20
+ 579 0066 7B68     		ldr	r3, [r7, #4]
+ 580 0068 0522     		movs	r2, #5
+ 581 006a 1A72     		strb	r2, [r3, #8]
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* process unlocked */
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     HAL_UNLOCK(cmp_dev);
+ 582              		.loc 1 337 5
+ 583 006c 7B68     		ldr	r3, [r7, #4]
+ 584 006e 0022     		movs	r2, #0
+ 585 0070 5A72     		strb	r2, [r3, #9]
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return tmp_hal_err;
+ 586              		.loc 1 339 12
+ 587 0072 BB68     		ldr	r3, [r7, #8]
+ 588              	.L36:
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 589              		.loc 1 340 1
+ 590 0074 1846     		mov	r0, r3
+ 591 0076 1437     		adds	r7, r7, #20
+ 592              		.cfi_def_cfa_offset 4
+ 593 0078 BD46     		mov	sp, r7
+ 594              		.cfi_def_cfa_register 13
+ 595              		@ sp needed
+ 596 007a 80BC     		pop	{r7}
+ 597              		.cfi_restore 7
+ 598              		.cfi_def_cfa_offset 0
+ 599 007c 7047     		bx	lr
+ 600              	.L42:
+ 601 007e 00BF     		.align	2
+ 602              	.L41:
+ 603 0080 1C000140 		.word	1073807388
+ 604              		.cfi_endproc
+ 605              	.LFE122:
+ 607              		.section	.text.hal_cmp_stop,"ax",%progbits
+ 608              		.align	1
+ 609              		.global	hal_cmp_stop
+ 610              		.syntax unified
+ 611              		.thumb
+ 612              		.thumb_func
+ 613              		.fpu softvfp
+ 615              	hal_cmp_stop:
+ 616              	.LFB123:
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      stop cmp module function
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_LOCK,
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_stop(hal_cmp_dev_struct *cmp_dev)
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 617              		.loc 1 352 1
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 16
+ 620              		@ frame_needed = 1, uses_anonymous_args = 0
+ 621              		@ link register save eliminated.
+ 622 0000 80B4     		push	{r7}
+ 623              		.cfi_def_cfa_offset 4
+ 624              		.cfi_offset 7, -4
+ 625 0002 85B0     		sub	sp, sp, #20
+ 626              		.cfi_def_cfa_offset 24
+ 627 0004 00AF     		add	r7, sp, #0
+ 628              		.cfi_def_cfa_register 7
+ 629 0006 7860     		str	r0, [r7, #4]
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     int32_t tmp_hal_err = HAL_ERR_NONE;
+ 630              		.loc 1 354 13
+ 631 0008 0023     		movs	r3, #0
+ 632 000a BB60     		str	r3, [r7, #8]
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 358:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 359:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 360:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 361:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 362:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 363:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 364:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 365:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 366:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* calculate bit shift of CMP0 or CMP1 */
+ 367:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 633              		.loc 1 367 23
+ 634 000c 7B68     		ldr	r3, [r7, #4]
+ 635 000e 1B68     		ldr	r3, [r3]
+ 636              		.loc 1 367 7
+ 637 0010 002B     		cmp	r3, #0
+ 638 0012 02D1     		bne	.L44
+ 368:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 0U;
+ 639              		.loc 1 368 19
+ 640 0014 0023     		movs	r3, #0
+ 641 0016 FB60     		str	r3, [r7, #12]
+ 642 0018 01E0     		b	.L45
+ 643              	.L44:
+ 369:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 370:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 16U;
+ 644              		.loc 1 370 19
+ 645 001a 1023     		movs	r3, #16
+ 646 001c FB60     		str	r3, [r7, #12]
+ 647              	.L45:
+ 371:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 372:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 373:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check if CMP locked */
+ 374:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+ 648              		.loc 1 374 8
+ 649 001e 104B     		ldr	r3, .L49
+ 650 0020 1A68     		ldr	r2, [r3]
+ 651              		.loc 1 374 32
+ 652 0022 4FF40041 		mov	r1, #32768
+ 653 0026 FB68     		ldr	r3, [r7, #12]
+ 654 0028 01FA03F3 		lsl	r3, r1, r3
+ 655              		.loc 1 374 15
+ 656 002c 1340     		ands	r3, r3, r2
+ 657              		.loc 1 374 7
+ 658 002e 002B     		cmp	r3, #0
+ 659 0030 03D0     		beq	.L46
+ 375:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         tmp_hal_err = HAL_ERR_LOCK;
+ 660              		.loc 1 375 21
+ 661 0032 6FF00103 		mvn	r3, #1
+ 662 0036 BB60     		str	r3, [r7, #8]
+ 663 0038 09E0     		b	.L47
+ 664              	.L46:
+ 376:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 377:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP module */
+ 378:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS &= ~(CMP_CS_CMP0EN << bit_shift);
+ 665              		.loc 1 378 16
+ 666 003a 094B     		ldr	r3, .L49
+ 667 003c 1A68     		ldr	r2, [r3]
+ 668              		.loc 1 378 35
+ 669 003e 0121     		movs	r1, #1
+ 670 0040 FB68     		ldr	r3, [r7, #12]
+ 671 0042 01FA03F3 		lsl	r3, r1, r3
+ 672              		.loc 1 378 19
+ 673 0046 DB43     		mvns	r3, r3
+ 674              		.loc 1 378 16
+ 675 0048 0549     		ldr	r1, .L49
+ 676 004a 1340     		ands	r3, r3, r2
+ 677 004c 0B60     		str	r3, [r1]
+ 678              	.L47:
+ 379:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 380:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 381:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 382:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_READY;
+ 679              		.loc 1 382 20
+ 680 004e 7B68     		ldr	r3, [r7, #4]
+ 681 0050 0522     		movs	r2, #5
+ 682 0052 1A72     		strb	r2, [r3, #8]
+ 383:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 384:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return tmp_hal_err;
+ 683              		.loc 1 384 12
+ 684 0054 BB68     		ldr	r3, [r7, #8]
+ 385:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 685              		.loc 1 385 1
+ 686 0056 1846     		mov	r0, r3
+ 687 0058 1437     		adds	r7, r7, #20
+ 688              		.cfi_def_cfa_offset 4
+ 689 005a BD46     		mov	sp, r7
+ 690              		.cfi_def_cfa_register 13
+ 691              		@ sp needed
+ 692 005c 80BC     		pop	{r7}
+ 693              		.cfi_restore 7
+ 694              		.cfi_def_cfa_offset 0
+ 695 005e 7047     		bx	lr
+ 696              	.L50:
+ 697              		.align	2
+ 698              	.L49:
+ 699 0060 1C000140 		.word	1073807388
+ 700              		.cfi_endproc
+ 701              	.LFE123:
+ 703              		.section	.text.hal_cmp_start_interrupt,"ax",%progbits
+ 704              		.align	1
+ 705              		.global	hal_cmp_start_interrupt
+ 706              		.syntax unified
+ 707              		.thumb
+ 708              		.thumb_func
+ 709              		.fpu softvfp
+ 711              	hal_cmp_start_interrupt:
+ 712              	.LFB124:
+ 386:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 387:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 388:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      start CMP module function in interrupt mode
+ 389:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 390:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 391:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 392:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 393:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_LOCK,
+ 394:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 395:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 396:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_start_interrupt(hal_cmp_dev_struct *cmp_dev, hal_cmp_irq_struct *p_irq)
+ 397:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 713              		.loc 1 397 1
+ 714              		.cfi_startproc
+ 715              		@ args = 0, pretend = 0, frame = 16
+ 716              		@ frame_needed = 1, uses_anonymous_args = 0
+ 717 0000 80B5     		push	{r7, lr}
+ 718              		.cfi_def_cfa_offset 8
+ 719              		.cfi_offset 7, -8
+ 720              		.cfi_offset 14, -4
+ 721 0002 84B0     		sub	sp, sp, #16
+ 722              		.cfi_def_cfa_offset 24
+ 723 0004 00AF     		add	r7, sp, #0
+ 724              		.cfi_def_cfa_register 7
+ 725 0006 7860     		str	r0, [r7, #4]
+ 726 0008 3960     		str	r1, [r7]
+ 398:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+ 399:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     int32_t tmp_hal_err = HAL_ERR_NONE;
+ 727              		.loc 1 399 13
+ 728 000a 0023     		movs	r3, #0
+ 729 000c BB60     		str	r3, [r7, #8]
+ 400:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 401:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 402:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 403:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if((NULL == cmp_dev) || (NULL == p_irq)) {
+ 404:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] or pointer [p_irq] address is invalid");
+ 405:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 406:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 407:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 408:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 409:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 410:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 411:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 412:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* process locked */
+ 413:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     HAL_LOCK(cmp_dev);
+ 730              		.loc 1 413 5
+ 731 000e 7B68     		ldr	r3, [r7, #4]
+ 732 0010 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 733 0012 012B     		cmp	r3, #1
+ 734 0014 02D1     		bne	.L52
+ 735              		.loc 1 413 5 is_stmt 0 discriminator 1
+ 736 0016 6FF00103 		mvn	r3, #1
+ 737 001a 49E0     		b	.L53
+ 738              	.L52:
+ 739              		.loc 1 413 5 discriminator 2
+ 740 001c 7B68     		ldr	r3, [r7, #4]
+ 741 001e 0122     		movs	r2, #1
+ 742 0020 5A72     		strb	r2, [r3, #9]
+ 414:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 415:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 416:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_BUSY;
+ 743              		.loc 1 416 20 is_stmt 1 discriminator 2
+ 744 0022 7B68     		ldr	r3, [r7, #4]
+ 745 0024 0222     		movs	r2, #2
+ 746 0026 1A72     		strb	r2, [r3, #8]
+ 417:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 418:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* configure interrupt callback function */
+ 419:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->cmp_irq.output_changed_handle = p_irq->output_changed_handle;
+ 747              		.loc 1 419 51 discriminator 2
+ 748 0028 3B68     		ldr	r3, [r7]
+ 749 002a 1A68     		ldr	r2, [r3]
+ 750              		.loc 1 419 44 discriminator 2
+ 751 002c 7B68     		ldr	r3, [r7, #4]
+ 752 002e 5A60     		str	r2, [r3, #4]
+ 420:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 421:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* start cmp module */
+ 422:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* calculate bit shift of CMP0 or CMP1 */
+ 423:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 753              		.loc 1 423 23 discriminator 2
+ 754 0030 7B68     		ldr	r3, [r7, #4]
+ 755 0032 1B68     		ldr	r3, [r3]
+ 756              		.loc 1 423 7 discriminator 2
+ 757 0034 002B     		cmp	r3, #0
+ 758 0036 02D1     		bne	.L54
+ 424:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 0U;
+ 759              		.loc 1 424 19
+ 760 0038 0023     		movs	r3, #0
+ 761 003a FB60     		str	r3, [r7, #12]
+ 762 003c 01E0     		b	.L55
+ 763              	.L54:
+ 425:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 426:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 16U;
+ 764              		.loc 1 426 19
+ 765 003e 1023     		movs	r3, #16
+ 766 0040 FB60     		str	r3, [r7, #12]
+ 767              	.L55:
+ 427:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 428:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 429:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check if CMP locked */
+ 430:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+ 768              		.loc 1 430 8
+ 769 0042 1D4B     		ldr	r3, .L60
+ 770 0044 1A68     		ldr	r2, [r3]
+ 771              		.loc 1 430 32
+ 772 0046 4FF40041 		mov	r1, #32768
+ 773 004a FB68     		ldr	r3, [r7, #12]
+ 774 004c 01FA03F3 		lsl	r3, r1, r3
+ 775              		.loc 1 430 15
+ 776 0050 1340     		ands	r3, r3, r2
+ 777              		.loc 1 430 7
+ 778 0052 002B     		cmp	r3, #0
+ 779 0054 03D0     		beq	.L56
+ 431:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         tmp_hal_err = HAL_ERR_LOCK;
+ 780              		.loc 1 431 21
+ 781 0056 6FF00103 		mvn	r3, #1
+ 782 005a BB60     		str	r3, [r7, #8]
+ 783 005c 08E0     		b	.L57
+ 784              	.L56:
+ 432:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 433:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* enable CMP module */
+ 434:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS |= CMP_CS_CMP0EN << bit_shift;
+ 785              		.loc 1 434 16
+ 786 005e 164B     		ldr	r3, .L60
+ 787 0060 1A68     		ldr	r2, [r3]
+ 788              		.loc 1 434 33
+ 789 0062 0121     		movs	r1, #1
+ 790 0064 FB68     		ldr	r3, [r7, #12]
+ 791 0066 01FA03F3 		lsl	r3, r1, r3
+ 792              		.loc 1 434 16
+ 793 006a 1349     		ldr	r1, .L60
+ 794 006c 1343     		orrs	r3, r3, r2
+ 795 006e 0B60     		str	r3, [r1]
+ 796              	.L57:
+ 435:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 436:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 437:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* enable CMP EXTI line interrupt */
+ 438:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* configure EXTI trigger type: falling, rising or both edge */
+ 439:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 797              		.loc 1 439 23
+ 798 0070 7B68     		ldr	r3, [r7, #4]
+ 799 0072 1B68     		ldr	r3, [r3]
+ 800              		.loc 1 439 7
+ 801 0074 002B     		cmp	r3, #0
+ 802 0076 0AD1     		bne	.L58
+ 440:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* clear CMP EXTI interrupt flag */
+ 441:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         hals_exti_interrupt_flag_clear(EXTI_CMP_OUTPUT_21);
+ 803              		.loc 1 441 9
+ 804 0078 4FF40010 		mov	r0, #2097152
+ 805 007c FFF7FEFF 		bl	hals_exti_interrupt_flag_clear
+ 442:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         EXTI_INTEN |= EXTI_CMP_OUTPUT_21;
+ 806              		.loc 1 442 20
+ 807 0080 0E4B     		ldr	r3, .L60+4
+ 808 0082 1B68     		ldr	r3, [r3]
+ 809 0084 0D4A     		ldr	r2, .L60+4
+ 810 0086 43F40013 		orr	r3, r3, #2097152
+ 811 008a 1360     		str	r3, [r2]
+ 812 008c 09E0     		b	.L59
+ 813              	.L58:
+ 443:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 444:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* clear CMP EXTI interrupt flag */
+ 445:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         hals_exti_interrupt_flag_clear(EXTI_CMP_OUTPUT_22);
+ 814              		.loc 1 445 9
+ 815 008e 4FF48000 		mov	r0, #4194304
+ 816 0092 FFF7FEFF 		bl	hals_exti_interrupt_flag_clear
+ 446:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         EXTI_INTEN |= EXTI_CMP_OUTPUT_22;
+ 817              		.loc 1 446 20
+ 818 0096 094B     		ldr	r3, .L60+4
+ 819 0098 1B68     		ldr	r3, [r3]
+ 820 009a 084A     		ldr	r2, .L60+4
+ 821 009c 43F48003 		orr	r3, r3, #4194304
+ 822 00a0 1360     		str	r3, [r2]
+ 823              	.L59:
+ 447:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 448:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 449:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* change CMP state */
+ 450:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->state = HAL_CMP_STATE_READY;
+ 824              		.loc 1 450 20
+ 825 00a2 7B68     		ldr	r3, [r7, #4]
+ 826 00a4 0522     		movs	r2, #5
+ 827 00a6 1A72     		strb	r2, [r3, #8]
+ 451:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 452:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* process unlocked */
+ 453:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     HAL_UNLOCK(cmp_dev);
+ 828              		.loc 1 453 5
+ 829 00a8 7B68     		ldr	r3, [r7, #4]
+ 830 00aa 0022     		movs	r2, #0
+ 831 00ac 5A72     		strb	r2, [r3, #9]
+ 454:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 455:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return tmp_hal_err;
+ 832              		.loc 1 455 12
+ 833 00ae BB68     		ldr	r3, [r7, #8]
+ 834              	.L53:
+ 456:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 835              		.loc 1 456 1
+ 836 00b0 1846     		mov	r0, r3
+ 837 00b2 1037     		adds	r7, r7, #16
+ 838              		.cfi_def_cfa_offset 8
+ 839 00b4 BD46     		mov	sp, r7
+ 840              		.cfi_def_cfa_register 13
+ 841              		@ sp needed
+ 842 00b6 80BD     		pop	{r7, pc}
+ 843              	.L61:
+ 844              		.align	2
+ 845              	.L60:
+ 846 00b8 1C000140 		.word	1073807388
+ 847 00bc 00040140 		.word	1073808384
+ 848              		.cfi_endproc
+ 849              	.LFE124:
+ 851              		.section	.text.hal_cmp_stop_interrupt,"ax",%progbits
+ 852              		.align	1
+ 853              		.global	hal_cmp_stop_interrupt
+ 854              		.syntax unified
+ 855              		.thumb
+ 856              		.thumb_func
+ 857              		.fpu softvfp
+ 859              	hal_cmp_stop_interrupt:
+ 860              	.LFB125:
+ 457:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 458:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 459:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      stop CMP module function in interrupt mode
+ 460:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 461:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 462:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 463:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 464:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_LOCK, HAL_ERR_VAL,
+ 465:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 466:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 467:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_stop_interrupt(hal_cmp_dev_struct *cmp_dev)
+ 468:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 861              		.loc 1 468 1
+ 862              		.cfi_startproc
+ 863              		@ args = 0, pretend = 0, frame = 16
+ 864              		@ frame_needed = 1, uses_anonymous_args = 0
+ 865              		@ link register save eliminated.
+ 866 0000 80B4     		push	{r7}
+ 867              		.cfi_def_cfa_offset 4
+ 868              		.cfi_offset 7, -4
+ 869 0002 85B0     		sub	sp, sp, #20
+ 870              		.cfi_def_cfa_offset 24
+ 871 0004 00AF     		add	r7, sp, #0
+ 872              		.cfi_def_cfa_register 7
+ 873 0006 7860     		str	r0, [r7, #4]
+ 469:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     uint32_t bit_shift;
+ 470:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     int32_t tmp_hal_err = HAL_ERR_NONE;
+ 874              		.loc 1 470 13
+ 875 0008 0023     		movs	r3, #0
+ 876 000a BB60     		str	r3, [r7, #8]
+ 471:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 472:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 473:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 474:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 475:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 476:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 477:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 478:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 479:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 480:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_VAL;
+ 481:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 482:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 483:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 484:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* reset interrupt callback function */
+ 485:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->cmp_irq.output_changed_handle = NULL;
+ 877              		.loc 1 485 44
+ 878 000c 7B68     		ldr	r3, [r7, #4]
+ 879 000e 0022     		movs	r2, #0
+ 880 0010 5A60     		str	r2, [r3, #4]
+ 486:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 487:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* stop cmp module */
+ 488:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* calculate bit shift of CMP0 or CMP1 */
+ 489:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 881              		.loc 1 489 23
+ 882 0012 7B68     		ldr	r3, [r7, #4]
+ 883 0014 1B68     		ldr	r3, [r3]
+ 884              		.loc 1 489 7
+ 885 0016 002B     		cmp	r3, #0
+ 886 0018 02D1     		bne	.L63
+ 490:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 0U;
+ 887              		.loc 1 490 19
+ 888 001a 0023     		movs	r3, #0
+ 889 001c FB60     		str	r3, [r7, #12]
+ 890 001e 01E0     		b	.L64
+ 891              	.L63:
+ 491:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 492:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         bit_shift = 16U;
+ 892              		.loc 1 492 19
+ 893 0020 1023     		movs	r3, #16
+ 894 0022 FB60     		str	r3, [r7, #12]
+ 895              	.L64:
+ 493:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 494:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 495:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check if CMP locked */
+ 496:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP_CS & (CMP_CS_CMP0LK << bit_shift)) {
+ 896              		.loc 1 496 8
+ 897 0024 174B     		ldr	r3, .L70
+ 898 0026 1A68     		ldr	r2, [r3]
+ 899              		.loc 1 496 32
+ 900 0028 4FF40041 		mov	r1, #32768
+ 901 002c FB68     		ldr	r3, [r7, #12]
+ 902 002e 01FA03F3 		lsl	r3, r1, r3
+ 903              		.loc 1 496 15
+ 904 0032 1340     		ands	r3, r3, r2
+ 905              		.loc 1 496 7
+ 906 0034 002B     		cmp	r3, #0
+ 907 0036 03D0     		beq	.L65
+ 497:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         tmp_hal_err = HAL_ERR_LOCK;
+ 908              		.loc 1 497 21
+ 909 0038 6FF00103 		mvn	r3, #1
+ 910 003c BB60     		str	r3, [r7, #8]
+ 911 003e 09E0     		b	.L66
+ 912              	.L65:
+ 498:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 499:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP module */
+ 500:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS &= ~(CMP_CS_CMP0EN << bit_shift);
+ 913              		.loc 1 500 16
+ 914 0040 104B     		ldr	r3, .L70
+ 915 0042 1A68     		ldr	r2, [r3]
+ 916              		.loc 1 500 35
+ 917 0044 0121     		movs	r1, #1
+ 918 0046 FB68     		ldr	r3, [r7, #12]
+ 919 0048 01FA03F3 		lsl	r3, r1, r3
+ 920              		.loc 1 500 19
+ 921 004c DB43     		mvns	r3, r3
+ 922              		.loc 1 500 16
+ 923 004e 0D49     		ldr	r1, .L70
+ 924 0050 1340     		ands	r3, r3, r2
+ 925 0052 0B60     		str	r3, [r1]
+ 926              	.L66:
+ 501:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 502:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 503:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* disable CMP EXTI interrupt */
+ 504:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* configure EXTI trigger type: falling, rising or both edge */
+ 505:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 927              		.loc 1 505 23
+ 928 0054 7B68     		ldr	r3, [r7, #4]
+ 929 0056 1B68     		ldr	r3, [r3]
+ 930              		.loc 1 505 7
+ 931 0058 002B     		cmp	r3, #0
+ 932 005a 06D1     		bne	.L67
+ 506:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP EXTI interrupt */
+ 507:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         EXTI_INTEN &= ~EXTI_CMP_OUTPUT_21;
+ 933              		.loc 1 507 20
+ 934 005c 0A4B     		ldr	r3, .L70+4
+ 935 005e 1B68     		ldr	r3, [r3]
+ 936 0060 094A     		ldr	r2, .L70+4
+ 937 0062 23F40013 		bic	r3, r3, #2097152
+ 938 0066 1360     		str	r3, [r2]
+ 939 0068 05E0     		b	.L68
+ 940              	.L67:
+ 508:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 509:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP EXTI interrupt */
+ 510:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         EXTI_INTEN &= ~EXTI_CMP_OUTPUT_22;
+ 941              		.loc 1 510 20
+ 942 006a 074B     		ldr	r3, .L70+4
+ 943 006c 1B68     		ldr	r3, [r3]
+ 944 006e 064A     		ldr	r2, .L70+4
+ 945 0070 23F48003 		bic	r3, r3, #4194304
+ 946 0074 1360     		str	r3, [r2]
+ 947              	.L68:
+ 511:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 512:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 513:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return tmp_hal_err;
+ 948              		.loc 1 513 12
+ 949 0076 BB68     		ldr	r3, [r7, #8]
+ 514:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 950              		.loc 1 514 1
+ 951 0078 1846     		mov	r0, r3
+ 952 007a 1437     		adds	r7, r7, #20
+ 953              		.cfi_def_cfa_offset 4
+ 954 007c BD46     		mov	sp, r7
+ 955              		.cfi_def_cfa_register 13
+ 956              		@ sp needed
+ 957 007e 80BC     		pop	{r7}
+ 958              		.cfi_restore 7
+ 959              		.cfi_def_cfa_offset 0
+ 960 0080 7047     		bx	lr
+ 961              	.L71:
+ 962 0082 00BF     		.align	2
+ 963              	.L70:
+ 964 0084 1C000140 		.word	1073807388
+ 965 0088 00040140 		.word	1073808384
+ 966              		.cfi_endproc
+ 967              	.LFE125:
+ 969              		.section	.text.hal_cmp_irq_handle_set,"ax",%progbits
+ 970              		.align	1
+ 971              		.global	hal_cmp_irq_handle_set
+ 972              		.syntax unified
+ 973              		.thumb
+ 974              		.thumb_func
+ 975              		.fpu softvfp
+ 977              	hal_cmp_irq_handle_set:
+ 978              	.LFB126:
+ 515:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 516:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 517:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      set the CMP external trigger interrupt callback function,
+ 518:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 519:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 520:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 521:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 522:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  p_irq: point to ADC interrupt callback functions structure
+ 523:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg        hal_irq_handle_cb function pointer: the function is user-defined,
+ 524:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                     the corresponding callback mechanism is in use, and enable corresponding interr
+ 525:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****       \arg        NULL: The corresponding callback mechanism is out of use, and
+ 526:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                     disable corresponding interrupt
+ 527:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 528:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     none
+ 529:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 530:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** void hal_cmp_irq_handle_set(hal_cmp_dev_struct *cmp_dev, hal_cmp_irq_struct *p_irq)
+ 531:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 979              		.loc 1 531 1
+ 980              		.cfi_startproc
+ 981              		@ args = 0, pretend = 0, frame = 8
+ 982              		@ frame_needed = 1, uses_anonymous_args = 0
+ 983              		@ link register save eliminated.
+ 984 0000 80B4     		push	{r7}
+ 985              		.cfi_def_cfa_offset 4
+ 986              		.cfi_offset 7, -4
+ 987 0002 83B0     		sub	sp, sp, #12
+ 988              		.cfi_def_cfa_offset 16
+ 989 0004 00AF     		add	r7, sp, #0
+ 990              		.cfi_def_cfa_register 7
+ 991 0006 7860     		str	r0, [r7, #4]
+ 992 0008 3960     		str	r1, [r7]
+ 532:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 533:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 534:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if((NULL == cmp_dev) || (NULL == p_irq)) {
+ 535:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] or pointer [p_irq] address is invalid");
+ 536:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 537:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 538:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 539:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* CMP output changed interrupt handler set */
+ 540:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL != p_irq->output_changed_handle) {
+ 993              		.loc 1 540 21
+ 994 000a 3B68     		ldr	r3, [r7]
+ 995 000c 1B68     		ldr	r3, [r3]
+ 996              		.loc 1 540 7
+ 997 000e 002B     		cmp	r3, #0
+ 998 0010 15D0     		beq	.L73
+ 541:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->cmp_irq.output_changed_handle = p_irq->output_changed_handle;
+ 999              		.loc 1 541 55
+ 1000 0012 3B68     		ldr	r3, [r7]
+ 1001 0014 1A68     		ldr	r2, [r3]
+ 1002              		.loc 1 541 48
+ 1003 0016 7B68     		ldr	r3, [r7, #4]
+ 1004 0018 5A60     		str	r2, [r3, #4]
+ 542:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* enable CMP EXTI interrupt */
+ 543:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP0 == cmp_dev->periph) {
+ 1005              		.loc 1 543 27
+ 1006 001a 7B68     		ldr	r3, [r7, #4]
+ 1007 001c 1B68     		ldr	r3, [r3]
+ 1008              		.loc 1 543 11
+ 1009 001e 002B     		cmp	r3, #0
+ 1010 0020 06D1     		bne	.L74
+ 544:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* enable CMP EXTI interrupt */
+ 545:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN |= EXTI_CMP_OUTPUT_21;
+ 1011              		.loc 1 545 24
+ 1012 0022 134B     		ldr	r3, .L78
+ 1013 0024 1B68     		ldr	r3, [r3]
+ 1014 0026 124A     		ldr	r2, .L78
+ 1015 0028 43F40013 		orr	r3, r3, #2097152
+ 1016 002c 1360     		str	r3, [r2]
+ 546:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 547:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* enable CMP EXTI interrupt */
+ 548:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN |= EXTI_CMP_OUTPUT_22;
+ 549:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 550:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 551:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->cmp_irq.output_changed_handle = NULL;
+ 552:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP EXTI interrupt */
+ 553:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP0 == cmp_dev->periph) {
+ 554:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt */
+ 555:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN &= ~EXTI_CMP_OUTPUT_21;
+ 556:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 557:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt */
+ 558:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             EXTI_INTEN &= ~EXTI_CMP_OUTPUT_22;
+ 559:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 560:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 561:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1017              		.loc 1 561 1
+ 1018 002e 1AE0     		b	.L77
+ 1019              	.L74:
+ 548:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 1020              		.loc 1 548 24
+ 1021 0030 0F4B     		ldr	r3, .L78
+ 1022 0032 1B68     		ldr	r3, [r3]
+ 1023 0034 0E4A     		ldr	r2, .L78
+ 1024 0036 43F48003 		orr	r3, r3, #4194304
+ 1025 003a 1360     		str	r3, [r2]
+ 1026              		.loc 1 561 1
+ 1027 003c 13E0     		b	.L77
+ 1028              	.L73:
+ 551:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* disable CMP EXTI interrupt */
+ 1029              		.loc 1 551 48
+ 1030 003e 7B68     		ldr	r3, [r7, #4]
+ 1031 0040 0022     		movs	r2, #0
+ 1032 0042 5A60     		str	r2, [r3, #4]
+ 553:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt */
+ 1033              		.loc 1 553 27
+ 1034 0044 7B68     		ldr	r3, [r7, #4]
+ 1035 0046 1B68     		ldr	r3, [r3]
+ 553:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             /* disable CMP EXTI interrupt */
+ 1036              		.loc 1 553 11
+ 1037 0048 002B     		cmp	r3, #0
+ 1038 004a 06D1     		bne	.L76
+ 555:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         } else {
+ 1039              		.loc 1 555 24
+ 1040 004c 084B     		ldr	r3, .L78
+ 1041 004e 1B68     		ldr	r3, [r3]
+ 1042 0050 074A     		ldr	r2, .L78
+ 1043 0052 23F40013 		bic	r3, r3, #2097152
+ 1044 0056 1360     		str	r3, [r2]
+ 1045              		.loc 1 561 1
+ 1046 0058 05E0     		b	.L77
+ 1047              	.L76:
+ 558:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 1048              		.loc 1 558 24
+ 1049 005a 054B     		ldr	r3, .L78
+ 1050 005c 1B68     		ldr	r3, [r3]
+ 1051 005e 044A     		ldr	r2, .L78
+ 1052 0060 23F48003 		bic	r3, r3, #4194304
+ 1053 0064 1360     		str	r3, [r2]
+ 1054              	.L77:
+ 1055              		.loc 1 561 1
+ 1056 0066 00BF     		nop
+ 1057 0068 0C37     		adds	r7, r7, #12
+ 1058              		.cfi_def_cfa_offset 4
+ 1059 006a BD46     		mov	sp, r7
+ 1060              		.cfi_def_cfa_register 13
+ 1061              		@ sp needed
+ 1062 006c 80BC     		pop	{r7}
+ 1063              		.cfi_restore 7
+ 1064              		.cfi_def_cfa_offset 0
+ 1065 006e 7047     		bx	lr
+ 1066              	.L79:
+ 1067              		.align	2
+ 1068              	.L78:
+ 1069 0070 00040140 		.word	1073808384
+ 1070              		.cfi_endproc
+ 1071              	.LFE126:
+ 1073              		.section	.text.hal_cmp_irq_handle_all_reset,"ax",%progbits
+ 1074              		.align	1
+ 1075              		.global	hal_cmp_irq_handle_all_reset
+ 1076              		.syntax unified
+ 1077              		.thumb
+ 1078              		.thumb_func
+ 1079              		.fpu softvfp
+ 1081              	hal_cmp_irq_handle_all_reset:
+ 1082              	.LFB127:
+ 562:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 563:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 564:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      reset the CMP external trigger interrupt callback function,
+ 565:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 566:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 567:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 568:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 569:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 570:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     none
+ 571:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 572:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** void hal_cmp_irq_handle_all_reset(hal_cmp_dev_struct *cmp_dev)
+ 573:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 1083              		.loc 1 573 1
+ 1084              		.cfi_startproc
+ 1085              		@ args = 0, pretend = 0, frame = 8
+ 1086              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1087              		@ link register save eliminated.
+ 1088 0000 80B4     		push	{r7}
+ 1089              		.cfi_def_cfa_offset 4
+ 1090              		.cfi_offset 7, -4
+ 1091 0002 83B0     		sub	sp, sp, #12
+ 1092              		.cfi_def_cfa_offset 16
+ 1093 0004 00AF     		add	r7, sp, #0
+ 1094              		.cfi_def_cfa_register 7
+ 1095 0006 7860     		str	r0, [r7, #4]
+ 574:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 575:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 576:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 577:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 578:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 579:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 580:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 581:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* reset interrupt callback function */
+ 582:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     cmp_dev->cmp_irq.output_changed_handle = NULL;
+ 1096              		.loc 1 582 44
+ 1097 0008 7B68     		ldr	r3, [r7, #4]
+ 1098 000a 0022     		movs	r2, #0
+ 1099 000c 5A60     		str	r2, [r3, #4]
+ 583:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1100              		.loc 1 583 1
+ 1101 000e 00BF     		nop
+ 1102 0010 0C37     		adds	r7, r7, #12
+ 1103              		.cfi_def_cfa_offset 4
+ 1104 0012 BD46     		mov	sp, r7
+ 1105              		.cfi_def_cfa_register 13
+ 1106              		@ sp needed
+ 1107 0014 80BC     		pop	{r7}
+ 1108              		.cfi_restore 7
+ 1109              		.cfi_def_cfa_offset 0
+ 1110 0016 7047     		bx	lr
+ 1111              		.cfi_endproc
+ 1112              	.LFE127:
+ 1114              		.section	.text.hal_cmp_irq,"ax",%progbits
+ 1115              		.align	1
+ 1116              		.global	hal_cmp_irq
+ 1117              		.syntax unified
+ 1118              		.thumb
+ 1119              		.thumb_func
+ 1120              		.fpu softvfp
+ 1122              	hal_cmp_irq:
+ 1123              	.LFB128:
+ 584:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 585:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 586:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      CMP interrupt handler content function,
+ 587:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 which is merely used in EXTI_IRQHandler
+ 588:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 589:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 590:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 591:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 592:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     none
+ 593:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 594:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** void hal_cmp_irq(hal_cmp_dev_struct *cmp_dev)
+ 595:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 1124              		.loc 1 595 1
+ 1125              		.cfi_startproc
+ 1126              		@ args = 0, pretend = 0, frame = 16
+ 1127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1128 0000 80B5     		push	{r7, lr}
+ 1129              		.cfi_def_cfa_offset 8
+ 1130              		.cfi_offset 7, -8
+ 1131              		.cfi_offset 14, -4
+ 1132 0002 84B0     		sub	sp, sp, #16
+ 1133              		.cfi_def_cfa_offset 24
+ 1134 0004 00AF     		add	r7, sp, #0
+ 1135              		.cfi_def_cfa_register 7
+ 1136 0006 7860     		str	r0, [r7, #4]
+ 596:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     hal_exti_line_enum linex;
+ 597:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 598:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 599:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 600:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 601:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 602:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 603:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 604:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 605:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 606:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 1137              		.loc 1 606 23
+ 1138 0008 7B68     		ldr	r3, [r7, #4]
+ 1139 000a 1B68     		ldr	r3, [r3]
+ 1140              		.loc 1 606 7
+ 1141 000c 002B     		cmp	r3, #0
+ 1142 000e 03D1     		bne	.L82
+ 607:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         linex = EXTI_CMP_OUTPUT_21;
+ 1143              		.loc 1 607 15
+ 1144 0010 4FF40013 		mov	r3, #2097152
+ 1145 0014 FB60     		str	r3, [r7, #12]
+ 1146 0016 02E0     		b	.L83
+ 1147              	.L82:
+ 608:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 609:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         linex = EXTI_CMP_OUTPUT_22;
+ 1148              		.loc 1 609 15
+ 1149 0018 4FF48003 		mov	r3, #4194304
+ 1150 001c FB60     		str	r3, [r7, #12]
+ 1151              	.L83:
+ 610:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 611:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 612:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check EXTI interrupt flag */
+ 613:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(SET == hals_exti_interrupt_flag_get(linex)) {
+ 1152              		.loc 1 613 15
+ 1153 001e F868     		ldr	r0, [r7, #12]
+ 1154 0020 FFF7FEFF 		bl	hals_exti_interrupt_flag_get
+ 1155 0024 0346     		mov	r3, r0
+ 1156              		.loc 1 613 7
+ 1157 0026 012B     		cmp	r3, #1
+ 1158 0028 0AD1     		bne	.L85
+ 614:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         hals_exti_interrupt_flag_clear(linex);
+ 1159              		.loc 1 614 9
+ 1160 002a F868     		ldr	r0, [r7, #12]
+ 1161 002c FFF7FEFF 		bl	hals_exti_interrupt_flag_clear
+ 615:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 616:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(NULL != cmp_dev->cmp_irq.output_changed_handle) {
+ 1162              		.loc 1 616 36
+ 1163 0030 7B68     		ldr	r3, [r7, #4]
+ 1164 0032 5B68     		ldr	r3, [r3, #4]
+ 1165              		.loc 1 616 11
+ 1166 0034 002B     		cmp	r3, #0
+ 1167 0036 03D0     		beq	.L85
+ 617:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             cmp_dev->cmp_irq.output_changed_handle(cmp_dev);
+ 1168              		.loc 1 617 29
+ 1169 0038 7B68     		ldr	r3, [r7, #4]
+ 1170 003a 5B68     		ldr	r3, [r3, #4]
+ 1171              		.loc 1 617 13
+ 1172 003c 7868     		ldr	r0, [r7, #4]
+ 1173 003e 9847     		blx	r3
+ 1174              	.LVL0:
+ 1175              	.L85:
+ 618:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 619:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 620:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1176              		.loc 1 620 1
+ 1177 0040 00BF     		nop
+ 1178 0042 1037     		adds	r7, r7, #16
+ 1179              		.cfi_def_cfa_offset 8
+ 1180 0044 BD46     		mov	sp, r7
+ 1181              		.cfi_def_cfa_register 13
+ 1182              		@ sp needed
+ 1183 0046 80BD     		pop	{r7, pc}
+ 1184              		.cfi_endproc
+ 1185              	.LFE128:
+ 1187              		.section	.text.hal_cmp_lock,"ax",%progbits
+ 1188              		.align	1
+ 1189              		.global	hal_cmp_lock
+ 1190              		.syntax unified
+ 1191              		.thumb
+ 1192              		.thumb_func
+ 1193              		.fpu softvfp
+ 1195              	hal_cmp_lock:
+ 1196              	.LFB129:
+ 621:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 622:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 623:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      lock the CMP
+ 624:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \note       the register is read only if locked, and only can be unlocked by MCU reset
+ 625:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 626:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 627:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 628:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 629:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     HAL_ERR_NONE, HAL_ERR_ADDRESS, HAL_ERR_ALREADY_DONE, HAL_ERR_VAL
+ 630:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                 details refer to gd32f3x0_hal.h
+ 631:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 632:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** int32_t hal_cmp_lock(hal_cmp_dev_struct *cmp_dev)
+ 633:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 1197              		.loc 1 633 1
+ 1198              		.cfi_startproc
+ 1199              		@ args = 0, pretend = 0, frame = 8
+ 1200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1201              		@ link register save eliminated.
+ 1202 0000 80B4     		push	{r7}
+ 1203              		.cfi_def_cfa_offset 4
+ 1204              		.cfi_offset 7, -4
+ 1205 0002 83B0     		sub	sp, sp, #12
+ 1206              		.cfi_def_cfa_offset 16
+ 1207 0004 00AF     		add	r7, sp, #0
+ 1208              		.cfi_def_cfa_register 7
+ 1209 0006 7860     		str	r0, [r7, #4]
+ 634:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 635:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 636:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 637:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 638:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* return function state */
+ 639:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_ADDRESS;
+ 640:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 641:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 642:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 643:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* return function state */
+ 644:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_ERR_VAL;
+ 645:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 646:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 647:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 1210              		.loc 1 647 23
+ 1211 0008 7B68     		ldr	r3, [r7, #4]
+ 1212 000a 1B68     		ldr	r3, [r3]
+ 1213              		.loc 1 647 7
+ 1214 000c 002B     		cmp	r3, #0
+ 1215 000e 0FD1     		bne	.L87
+ 648:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* check if aready locked */
+ 649:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP_CS & CMP_CS_CMP0LK) {
+ 1216              		.loc 1 649 12
+ 1217 0010 114B     		ldr	r3, .L92
+ 1218 0012 1B68     		ldr	r3, [r3]
+ 1219              		.loc 1 649 19
+ 1220 0014 03F40043 		and	r3, r3, #32768
+ 1221              		.loc 1 649 11
+ 1222 0018 002B     		cmp	r3, #0
+ 1223 001a 02D0     		beq	.L88
+ 650:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             return HAL_ERR_ALREADY_DONE;
+ 1224              		.loc 1 650 20
+ 1225 001c 4FF0FF33 		mov	r3, #-1
+ 1226 0020 14E0     		b	.L89
+ 1227              	.L88:
+ 651:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 652:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 653:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* lock CMP0 */
+ 654:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS |= (uint32_t)CMP_CS_CMP0LK;
+ 1228              		.loc 1 654 16
+ 1229 0022 0D4B     		ldr	r3, .L92
+ 1230 0024 1B68     		ldr	r3, [r3]
+ 1231 0026 0C4A     		ldr	r2, .L92
+ 1232 0028 43F40043 		orr	r3, r3, #32768
+ 1233 002c 1360     		str	r3, [r2]
+ 1234 002e 0CE0     		b	.L90
+ 1235              	.L87:
+ 655:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 656:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* check if aready locked */
+ 657:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         if(CMP_CS & CMP_CS_CMP1LK) {
+ 1236              		.loc 1 657 12
+ 1237 0030 094B     		ldr	r3, .L92
+ 1238 0032 1B68     		ldr	r3, [r3]
+ 1239              		.loc 1 657 11
+ 1240 0034 002B     		cmp	r3, #0
+ 1241 0036 02DA     		bge	.L91
+ 658:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****             return HAL_ERR_ALREADY_DONE;
+ 1242              		.loc 1 658 20
+ 1243 0038 4FF0FF33 		mov	r3, #-1
+ 1244 003c 06E0     		b	.L89
+ 1245              	.L91:
+ 659:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         }
+ 660:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* lock CMP1 */
+ 661:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         CMP_CS |= (uint32_t)CMP_CS_CMP1LK;
+ 1246              		.loc 1 661 16
+ 1247 003e 064B     		ldr	r3, .L92
+ 1248 0040 1B68     		ldr	r3, [r3]
+ 1249 0042 054A     		ldr	r2, .L92
+ 1250 0044 43F00043 		orr	r3, r3, #-2147483648
+ 1251 0048 1360     		str	r3, [r2]
+ 1252              	.L90:
+ 662:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 663:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 664:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return HAL_ERR_NONE;
+ 1253              		.loc 1 664 12
+ 1254 004a 0023     		movs	r3, #0
+ 1255              	.L89:
+ 665:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1256              		.loc 1 665 1
+ 1257 004c 1846     		mov	r0, r3
+ 1258 004e 0C37     		adds	r7, r7, #12
+ 1259              		.cfi_def_cfa_offset 4
+ 1260 0050 BD46     		mov	sp, r7
+ 1261              		.cfi_def_cfa_register 13
+ 1262              		@ sp needed
+ 1263 0052 80BC     		pop	{r7}
+ 1264              		.cfi_restore 7
+ 1265              		.cfi_def_cfa_offset 0
+ 1266 0054 7047     		bx	lr
+ 1267              	.L93:
+ 1268 0056 00BF     		.align	2
+ 1269              	.L92:
+ 1270 0058 1C000140 		.word	1073807388
+ 1271              		.cfi_endproc
+ 1272              	.LFE129:
+ 1274              		.section	.text.hal_cmp_output_level_get,"ax",%progbits
+ 1275              		.align	1
+ 1276              		.global	hal_cmp_output_level_get
+ 1277              		.syntax unified
+ 1278              		.thumb
+ 1279              		.thumb_func
+ 1280              		.fpu softvfp
+ 1282              	hal_cmp_output_level_get:
+ 1283              	.LFB130:
+ 666:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 667:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 668:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      get output level of CMP
+ 669:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 670:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 671:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 672:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 673:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     the output level
+ 674:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 675:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** uint32_t hal_cmp_output_level_get(hal_cmp_dev_struct *cmp_dev)
+ 676:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 1284              		.loc 1 676 1
+ 1285              		.cfi_startproc
+ 1286              		@ args = 0, pretend = 0, frame = 8
+ 1287              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1288              		@ link register save eliminated.
+ 1289 0000 80B4     		push	{r7}
+ 1290              		.cfi_def_cfa_offset 4
+ 1291              		.cfi_offset 7, -4
+ 1292 0002 83B0     		sub	sp, sp, #12
+ 1293              		.cfi_def_cfa_offset 16
+ 1294 0004 00AF     		add	r7, sp, #0
+ 1295              		.cfi_def_cfa_register 7
+ 1296 0006 7860     		str	r0, [r7, #4]
+ 677:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 678:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 679:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 680:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 681:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 682:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(!IS_CMP_PERIPHERAL(cmp_dev->periph)) {
+ 683:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("CMP peripheral is invalid");
+ 684:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 685:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 686:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(CMP0 == cmp_dev->periph) {
+ 1297              		.loc 1 686 23
+ 1298 0008 7B68     		ldr	r3, [r7, #4]
+ 1299 000a 1B68     		ldr	r3, [r3]
+ 1300              		.loc 1 686 7
+ 1301 000c 002B     		cmp	r3, #0
+ 1302 000e 0BD1     		bne	.L95
+ 687:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* get output level of CMP0 */
+ 688:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->output_level = (CMP_CS & CMP_CS_CMP0O) ? CMP_OUTPUTLEVEL_HIGH : CMP_OUTPUTLEVEL_LO
+ 1303              		.loc 1 688 34
+ 1304 0010 0E4B     		ldr	r3, .L102
+ 1305 0012 1B68     		ldr	r3, [r3]
+ 1306              		.loc 1 688 41
+ 1307 0014 03F48043 		and	r3, r3, #16384
+ 1308              		.loc 1 688 80
+ 1309 0018 002B     		cmp	r3, #0
+ 1310 001a 01D0     		beq	.L96
+ 1311              		.loc 1 688 80 is_stmt 0 discriminator 1
+ 1312 001c 0122     		movs	r2, #1
+ 1313 001e 00E0     		b	.L97
+ 1314              	.L96:
+ 1315              		.loc 1 688 80 discriminator 2
+ 1316 0020 0022     		movs	r2, #0
+ 1317              	.L97:
+ 1318              		.loc 1 688 31 is_stmt 1 discriminator 4
+ 1319 0022 7B68     		ldr	r3, [r7, #4]
+ 1320 0024 DA60     		str	r2, [r3, #12]
+ 1321 0026 0AE0     		b	.L98
+ 1322              	.L95:
+ 689:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     } else {
+ 690:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         /* get output level of CMP1 */
+ 691:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         cmp_dev->output_level = (CMP_CS & CMP_CS_CMP1O) ? CMP_OUTPUTLEVEL_HIGH : CMP_OUTPUTLEVEL_LO
+ 1323              		.loc 1 691 34
+ 1324 0028 084B     		ldr	r3, .L102
+ 1325 002a 1B68     		ldr	r3, [r3]
+ 1326              		.loc 1 691 41
+ 1327 002c 03F08043 		and	r3, r3, #1073741824
+ 1328              		.loc 1 691 80
+ 1329 0030 002B     		cmp	r3, #0
+ 1330 0032 01D0     		beq	.L99
+ 1331              		.loc 1 691 80 is_stmt 0 discriminator 1
+ 1332 0034 0122     		movs	r2, #1
+ 1333 0036 00E0     		b	.L100
+ 1334              	.L99:
+ 1335              		.loc 1 691 80 discriminator 2
+ 1336 0038 0022     		movs	r2, #0
+ 1337              	.L100:
+ 1338              		.loc 1 691 31 is_stmt 1 discriminator 4
+ 1339 003a 7B68     		ldr	r3, [r7, #4]
+ 1340 003c DA60     		str	r2, [r3, #12]
+ 1341              	.L98:
+ 692:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 693:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 694:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return cmp_dev->output_level;
+ 1342              		.loc 1 694 19
+ 1343 003e 7B68     		ldr	r3, [r7, #4]
+ 1344 0040 DB68     		ldr	r3, [r3, #12]
+ 695:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1345              		.loc 1 695 1
+ 1346 0042 1846     		mov	r0, r3
+ 1347 0044 0C37     		adds	r7, r7, #12
+ 1348              		.cfi_def_cfa_offset 4
+ 1349 0046 BD46     		mov	sp, r7
+ 1350              		.cfi_def_cfa_register 13
+ 1351              		@ sp needed
+ 1352 0048 80BC     		pop	{r7}
+ 1353              		.cfi_restore 7
+ 1354              		.cfi_def_cfa_offset 0
+ 1355 004a 7047     		bx	lr
+ 1356              	.L103:
+ 1357              		.align	2
+ 1358              	.L102:
+ 1359 004c 1C000140 		.word	1073807388
+ 1360              		.cfi_endproc
+ 1361              	.LFE130:
+ 1363              		.section	.text.hal_cmp_state_get,"ax",%progbits
+ 1364              		.align	1
+ 1365              		.global	hal_cmp_state_get
+ 1366              		.syntax unified
+ 1367              		.thumb
+ 1368              		.thumb_func
+ 1369              		.fpu softvfp
+ 1371              	hal_cmp_state_get:
+ 1372              	.LFB131:
+ 696:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 697:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** /*!
+ 698:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \brief      get the state of CMP device
+ 699:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[in]  cmp_dev: CMP device information structure
+ 700:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 701:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                   the structure parameters altering is automatically configured by core
+ 702:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \param[out] none
+ 703:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     \retval     hal_cmp_state_enum: HAL_CMP_STATE_NONE, HAL_CMP_STATE_RESET, HAL_CMP_STATE_BUSY, HA
+ 704:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****                                     HAL_CMP_STATE_TIMEOUT, HAL_CMP_STATE_ERROR
+ 705:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** */
+ 706:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** hal_cmp_state_enum hal_cmp_state_get(hal_cmp_dev_struct *cmp_dev)
+ 707:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** {
+ 1373              		.loc 1 707 1
+ 1374              		.cfi_startproc
+ 1375              		@ args = 0, pretend = 0, frame = 8
+ 1376              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1377              		@ link register save eliminated.
+ 1378 0000 80B4     		push	{r7}
+ 1379              		.cfi_def_cfa_offset 4
+ 1380              		.cfi_offset 7, -4
+ 1381 0002 83B0     		sub	sp, sp, #12
+ 1382              		.cfi_def_cfa_offset 16
+ 1383 0004 00AF     		add	r7, sp, #0
+ 1384              		.cfi_def_cfa_register 7
+ 1385 0006 7860     		str	r0, [r7, #4]
+ 708:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 709:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     /* check the parameters */
+ 710:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     if(NULL == cmp_dev) {
+ 711:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         HAL_DEBUGE("pointer [cmp_dev] address is invalid");
+ 712:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****         return HAL_CMP_STATE_NONE;
+ 713:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     }
+ 714:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 715:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** 
+ 716:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c ****     return cmp_dev->state;
+ 1386              		.loc 1 716 19
+ 1387 0008 7B68     		ldr	r3, [r7, #4]
+ 1388 000a 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 717:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c **** }
+ 1389              		.loc 1 717 1
+ 1390 000c 1846     		mov	r0, r3
+ 1391 000e 0C37     		adds	r7, r7, #12
+ 1392              		.cfi_def_cfa_offset 4
+ 1393 0010 BD46     		mov	sp, r7
+ 1394              		.cfi_def_cfa_register 13
+ 1395              		@ sp needed
+ 1396 0012 80BC     		pop	{r7}
+ 1397              		.cfi_restore 7
+ 1398              		.cfi_def_cfa_offset 0
+ 1399 0014 7047     		bx	lr
+ 1400              		.cfi_endproc
+ 1401              	.LFE131:
+ 1403              		.text
+ 1404              	.Letext0:
+ 1405              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1406              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1407              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1408              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1409              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1410              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1411              		.file 8 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 1412              		.file 9 "../firmware/cmsis/inc/core_cm4.h"
+ 1413              		.file 10 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 1414              		.file 11 "../firmware/cmsis/inc/gd32f3x0.h"
+ 1415              		.file 12 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 1416              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_exti.h"
+ 1417              		.file 14 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_cmp.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_cmp.c
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:16     .text.hal_cmp_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:24     .text.hal_cmp_init:00000000 hal_cmp_init
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:266    .text.hal_cmp_init:00000158 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:272    .text.hal_cmp_struct_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:279    .text.hal_cmp_struct_init:00000000 hal_cmp_struct_init
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:372    .text.hal_cmp_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:379    .text.hal_cmp_deinit:00000000 hal_cmp_deinit
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:487    .text.hal_cmp_deinit:0000008c $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:492    .text.hal_cmp_start:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:499    .text.hal_cmp_start:00000000 hal_cmp_start
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:603    .text.hal_cmp_start:00000080 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:608    .text.hal_cmp_stop:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:615    .text.hal_cmp_stop:00000000 hal_cmp_stop
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:699    .text.hal_cmp_stop:00000060 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:704    .text.hal_cmp_start_interrupt:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:711    .text.hal_cmp_start_interrupt:00000000 hal_cmp_start_interrupt
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:846    .text.hal_cmp_start_interrupt:000000b8 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:852    .text.hal_cmp_stop_interrupt:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:859    .text.hal_cmp_stop_interrupt:00000000 hal_cmp_stop_interrupt
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:964    .text.hal_cmp_stop_interrupt:00000084 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:970    .text.hal_cmp_irq_handle_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:977    .text.hal_cmp_irq_handle_set:00000000 hal_cmp_irq_handle_set
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1069   .text.hal_cmp_irq_handle_set:00000070 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1074   .text.hal_cmp_irq_handle_all_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1081   .text.hal_cmp_irq_handle_all_reset:00000000 hal_cmp_irq_handle_all_reset
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1115   .text.hal_cmp_irq:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1122   .text.hal_cmp_irq:00000000 hal_cmp_irq
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1188   .text.hal_cmp_lock:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1195   .text.hal_cmp_lock:00000000 hal_cmp_lock
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1270   .text.hal_cmp_lock:00000058 $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1275   .text.hal_cmp_output_level_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1282   .text.hal_cmp_output_level_get:00000000 hal_cmp_output_level_get
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1359   .text.hal_cmp_output_level_get:0000004c $d
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1364   .text.hal_cmp_state_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cci9cIVB.s:1371   .text.hal_cmp_state_get:00000000 hal_cmp_state_get
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_exti_internal_init
+hal_exti_internal_deinit
+hals_exti_interrupt_flag_clear
+hals_exti_interrupt_flag_get

@@ -1,0 +1,1570 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_crc.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.hal_crc_struct_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	hal_crc_struct_init
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	hal_crc_struct_init:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \file    gd32f3x0_hal_crc.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief   CRC driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     Redistribution and use in source and binary forms, with or without modification,
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** are permitted provided that the following conditions are met:
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****        list of conditions and the following disclaimer.
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****        this list of conditions and the following disclaimer in the documentation
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****        and/or other materials provided with the distribution.
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****        may be used to endorse or promote products derived from this software without
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****        specific prior written permission.
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** OF SUCH DAMAGE.
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #include "gd32f3x0_hal.h"
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      initialize the CRC structure with the default values
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  p_struct: point to the structure to be deinitialized
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_NONE, details refer to gd323x0_hal.h
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** int32_t hal_crc_struct_init(hal_crc_struct_type_enum hal_struct_type, void *p_struct)
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+  27              		.loc 1 44 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 83B0     		sub	sp, sp, #12
+  36              		.cfi_def_cfa_offset 16
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 0346     		mov	r3, r0
+  40 0008 3960     		str	r1, [r7]
+  41 000a FB71     		strb	r3, [r7, #7]
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #if (1 == HAL_PARAMETER_CHECK)
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* check p_crc_init address */
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(NULL == p_struct) {
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         HAL_DEBUGE("pointer [p_struct] address is invalid");
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         return HAL_ERR_ADDRESS;
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     switch(hal_struct_type) {
+  42              		.loc 1 52 5
+  43 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  44 000e 002B     		cmp	r3, #0
+  45 0010 02D0     		beq	.L2
+  46 0012 012B     		cmp	r3, #1
+  47 0014 11D0     		beq	.L3
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     case HAL_CRC_INIT_STRUCT:
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->input_data_reverse_mode    = CRC_INPUT_REVERSE_NONE;
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->output_data_reverse        = DISABLE;
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->polynomial_size            = CRC_POLYNOMIAL_SIZE_32BIT;
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->polynomial_value           = CRC_DEFAULT_POLYNOMIAL_VALU
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->init_data_value            = CRC_DEFAULT_INIT_DATA_VALUE
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         break;
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     case HAL_CRC_DEV_STRUCT:
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_dev_struct *)p_struct)->state             = HAL_CRC_STATE_NONE;
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_dev_struct *)p_struct)->mutex             = HAL_MUTEX_UNLOCKED;
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_dev_struct *)p_struct)->priv              = NULL;
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         break;
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     default:
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         HAL_DEBUGW("parameter [hal_struct_type] value is undefine");
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         break;
+  48              		.loc 1 67 9
+  49 0016 1AE0     		b	.L5
+  50              	.L2:
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->output_data_reverse        = DISABLE;
+  51              		.loc 1 54 71
+  52 0018 3B68     		ldr	r3, [r7]
+  53 001a 0022     		movs	r2, #0
+  54 001c 9A60     		str	r2, [r3, #8]
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->polynomial_size            = CRC_POLYNOMIAL_SIZE_32BIT;
+  55              		.loc 1 55 71
+  56 001e 3B68     		ldr	r3, [r7]
+  57 0020 0022     		movs	r2, #0
+  58 0022 DA60     		str	r2, [r3, #12]
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->polynomial_value           = CRC_DEFAULT_POLYNOMIAL_VALU
+  59              		.loc 1 56 71
+  60 0024 3B68     		ldr	r3, [r7]
+  61 0026 0022     		movs	r2, #0
+  62 0028 1A61     		str	r2, [r3, #16]
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_init_struct *)p_struct)->init_data_value            = CRC_DEFAULT_INIT_DATA_VALUE
+  63              		.loc 1 57 71
+  64 002a 3B68     		ldr	r3, [r7]
+  65 002c 0B4A     		ldr	r2, .L7
+  66 002e 1A60     		str	r2, [r3]
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         break;
+  67              		.loc 1 58 71
+  68 0030 3B68     		ldr	r3, [r7]
+  69 0032 4FF0FF32 		mov	r2, #-1
+  70 0036 5A60     		str	r2, [r3, #4]
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     case HAL_CRC_DEV_STRUCT:
+  71              		.loc 1 59 9
+  72 0038 09E0     		b	.L5
+  73              	.L3:
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_dev_struct *)p_struct)->mutex             = HAL_MUTEX_UNLOCKED;
+  74              		.loc 1 61 61
+  75 003a 3B68     		ldr	r3, [r7]
+  76 003c 0022     		movs	r2, #0
+  77 003e 1A70     		strb	r2, [r3]
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         ((hal_crc_dev_struct *)p_struct)->priv              = NULL;
+  78              		.loc 1 62 61
+  79 0040 3B68     		ldr	r3, [r7]
+  80 0042 0022     		movs	r2, #0
+  81 0044 5A70     		strb	r2, [r3, #1]
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         break;
+  82              		.loc 1 63 61
+  83 0046 3B68     		ldr	r3, [r7]
+  84 0048 0022     		movs	r2, #0
+  85 004a 5A60     		str	r2, [r3, #4]
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     default:
+  86              		.loc 1 64 9
+  87 004c 00BF     		nop
+  88              	.L5:
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return HAL_ERR_NONE;
+  89              		.loc 1 69 12
+  90 004e 0023     		movs	r3, #0
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+  91              		.loc 1 70 1
+  92 0050 1846     		mov	r0, r3
+  93 0052 0C37     		adds	r7, r7, #12
+  94              		.cfi_def_cfa_offset 4
+  95 0054 BD46     		mov	sp, r7
+  96              		.cfi_def_cfa_register 13
+  97              		@ sp needed
+  98 0056 80BC     		pop	{r7}
+  99              		.cfi_restore 7
+ 100              		.cfi_def_cfa_offset 0
+ 101 0058 7047     		bx	lr
+ 102              	.L8:
+ 103 005a 00BF     		.align	2
+ 104              	.L7:
+ 105 005c B71DC104 		.word	79764919
+ 106              		.cfi_endproc
+ 107              	.LFE119:
+ 109              		.section	.text.hal_crc_init,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	hal_crc_init
+ 112              		.syntax unified
+ 113              		.thumb
+ 114              		.thumb_func
+ 115              		.fpu softvfp
+ 117              	hal_crc_init:
+ 118              	.LFB120:
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      initialize CRC
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  crc_dev: CRC device information structrue
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure is not necessary to be reconfigured after structure initialization,
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure parameters altering is automatically configured by core
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  p_crc_init: specify input data reverse function
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        output_reverse: ENABLE / DISABLE
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        input_reverse: CRC_INPUT_REVERSE_NONE, CRC_INPUT_REVERSE_BYTE
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                                  CRC_INPUT_REVERSE_HALFWORD, CRC_INPUT_REVERSE_WORD
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        polynomial_size: CRC_POLYNOMIAL_SIZE_32BIT, CRC_POLYNOMIAL_SIZE_16BIT
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                                    CRC_POLYNOMIAL_SIZE_8BIT, CRC_POLYNOMIAL_SIZE_7BIT
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        polynomial: CRC_DEFAULT_POLYNOMIAL_VALUE(if don't care this parameter)
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        initdata: CRC_DEFAULT_INIT_DATA_VALUE(if don't care this parameter)
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** int32_t hal_crc_init(hal_crc_dev_struct *crc_dev, hal_crc_init_struct *p_crc_init)
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 119              		.loc 1 89 1
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 8
+ 122              		@ frame_needed = 1, uses_anonymous_args = 0
+ 123 0000 80B5     		push	{r7, lr}
+ 124              		.cfi_def_cfa_offset 8
+ 125              		.cfi_offset 7, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 82B0     		sub	sp, sp, #8
+ 128              		.cfi_def_cfa_offset 16
+ 129 0004 00AF     		add	r7, sp, #0
+ 130              		.cfi_def_cfa_register 7
+ 131 0006 7860     		str	r0, [r7, #4]
+ 132 0008 3960     		str	r1, [r7]
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #if (1 == HAL_PARAMETER_CHECK)
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* check p_crc_init address */
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(NULL == crc_dev || NULL == p_crc_init) {
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         HAL_DEBUGE("pointer [*p_crc_init] or pointer [*crc_dev] address is invalid");
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         /* return function state */
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         return HAL_ERR_ADDRESS;
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_BUSY;
+ 133              		.loc 1 98 20
+ 134 000a 7B68     		ldr	r3, [r7, #4]
+ 135 000c 0222     		movs	r2, #2
+ 136 000e 1A70     		strb	r2, [r3]
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* reset crc data register */
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     hals_crc_data_register_reset();
+ 137              		.loc 1 100 5
+ 138 0010 FFF7FEFF 		bl	hals_crc_data_register_reset
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_IDATA = p_crc_init->init_data_value;
+ 139              		.loc 1 102 5
+ 140 0014 154A     		ldr	r2, .L13
+ 141              		.loc 1 102 27
+ 142 0016 3B68     		ldr	r3, [r7]
+ 143 0018 5B68     		ldr	r3, [r3, #4]
+ 144              		.loc 1 102 15
+ 145 001a 1360     		str	r3, [r2]
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_POLY = p_crc_init->polynomial_value;
+ 146              		.loc 1 103 5
+ 147 001c 144A     		ldr	r2, .L13+4
+ 148              		.loc 1 103 26
+ 149 001e 3B68     		ldr	r3, [r7]
+ 150 0020 1B68     		ldr	r3, [r3]
+ 151              		.loc 1 103 14
+ 152 0022 1360     		str	r3, [r2]
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* enable the reverse operation of output data */
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(ENABLE == p_crc_init->output_data_reverse) {
+ 153              		.loc 1 106 28
+ 154 0024 3B68     		ldr	r3, [r7]
+ 155 0026 DB68     		ldr	r3, [r3, #12]
+ 156              		.loc 1 106 7
+ 157 0028 012B     		cmp	r3, #1
+ 158 002a 06D1     		bne	.L10
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         CRC_CTL |= (uint32_t)CRC_CTL_REV_O;
+ 159              		.loc 1 107 17
+ 160 002c 114B     		ldr	r3, .L13+8
+ 161 002e 1B68     		ldr	r3, [r3]
+ 162 0030 104A     		ldr	r2, .L13+8
+ 163 0032 43F08003 		orr	r3, r3, #128
+ 164 0036 1360     		str	r3, [r2]
+ 165 0038 05E0     		b	.L11
+ 166              	.L10:
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     } else {
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         CRC_CTL &= (uint32_t)(~ CRC_CTL_REV_O);
+ 167              		.loc 1 109 17
+ 168 003a 0E4B     		ldr	r3, .L13+8
+ 169 003c 1B68     		ldr	r3, [r3]
+ 170 003e 0D4A     		ldr	r2, .L13+8
+ 171 0040 23F08003 		bic	r3, r3, #128
+ 172 0044 1360     		str	r3, [r2]
+ 173              	.L11:
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* configure the CRC input data function */
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     hals_crc_input_data_reverse_config(p_crc_init->input_data_reverse_mode);
+ 174              		.loc 1 113 5
+ 175 0046 3B68     		ldr	r3, [r7]
+ 176 0048 9B68     		ldr	r3, [r3, #8]
+ 177 004a 1846     		mov	r0, r3
+ 178 004c FFF7FEFF 		bl	hals_crc_input_data_reverse_config
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* configure the CRC size of polynomial function */
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     hals_crc_polynomial_size_set(p_crc_init->polynomial_size);
+ 179              		.loc 1 115 5
+ 180 0050 3B68     		ldr	r3, [r7]
+ 181 0052 1B69     		ldr	r3, [r3, #16]
+ 182 0054 1846     		mov	r0, r3
+ 183 0056 FFF7FEFF 		bl	hals_crc_polynomial_size_set
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* change CRC state */
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_READY;
+ 184              		.loc 1 117 20
+ 185 005a 7B68     		ldr	r3, [r7, #4]
+ 186 005c 0522     		movs	r2, #5
+ 187 005e 1A70     		strb	r2, [r3]
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* return function state */
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return HAL_ERR_NONE;
+ 188              		.loc 1 119 12
+ 189 0060 0023     		movs	r3, #0
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 190              		.loc 1 120 1
+ 191 0062 1846     		mov	r0, r3
+ 192 0064 0837     		adds	r7, r7, #8
+ 193              		.cfi_def_cfa_offset 8
+ 194 0066 BD46     		mov	sp, r7
+ 195              		.cfi_def_cfa_register 13
+ 196              		@ sp needed
+ 197 0068 80BD     		pop	{r7, pc}
+ 198              	.L14:
+ 199 006a 00BF     		.align	2
+ 200              	.L13:
+ 201 006c 10300240 		.word	1073885200
+ 202 0070 14300240 		.word	1073885204
+ 203 0074 08300240 		.word	1073885192
+ 204              		.cfi_endproc
+ 205              	.LFE120:
+ 207              		.section	.text.hal_crc_deinit,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	hal_crc_deinit
+ 210              		.syntax unified
+ 211              		.thumb
+ 212              		.thumb_func
+ 213              		.fpu softvfp
+ 215              	hal_crc_deinit:
+ 216              	.LFB121:
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      deinitialize CRC
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  crc_dev: CRC device information structrue
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure is not necessary to be reconfigured after structure initialization,
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure parameters altering is automatically configured by core
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** int32_t hal_crc_deinit(hal_crc_dev_struct *crc_dev)
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 217              		.loc 1 133 1
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 8
+ 220              		@ frame_needed = 1, uses_anonymous_args = 0
+ 221              		@ link register save eliminated.
+ 222 0000 80B4     		push	{r7}
+ 223              		.cfi_def_cfa_offset 4
+ 224              		.cfi_offset 7, -4
+ 225 0002 83B0     		sub	sp, sp, #12
+ 226              		.cfi_def_cfa_offset 16
+ 227 0004 00AF     		add	r7, sp, #0
+ 228              		.cfi_def_cfa_register 7
+ 229 0006 7860     		str	r0, [r7, #4]
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* check p_crc_init address */
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(NULL == crc_dev) {
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         HAL_DEBUGE("pointer [*crc_dev] address is invalid");
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         return HAL_ERR_ADDRESS;
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* check CRV state */
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(HAL_CRC_STATE_BUSY == crc_dev->state) {
+ 230              		.loc 1 142 37
+ 231 0008 7B68     		ldr	r3, [r7, #4]
+ 232 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 233              		.loc 1 142 7
+ 234 000c 022B     		cmp	r3, #2
+ 235 000e 02D1     		bne	.L16
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         return HAL_ERR_BUSY;
+ 236              		.loc 1 143 16
+ 237 0010 6FF00203 		mvn	r3, #2
+ 238 0014 1AE0     		b	.L17
+ 239              	.L16:
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_BUSY;
+ 240              		.loc 1 146 20
+ 241 0016 7B68     		ldr	r3, [r7, #4]
+ 242 0018 0222     		movs	r2, #2
+ 243 001a 1A70     		strb	r2, [r3]
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_IDATA = (uint32_t)0xFFFFFFFFU;
+ 244              		.loc 1 148 5
+ 245 001c 0E4B     		ldr	r3, .L18
+ 246              		.loc 1 148 15
+ 247 001e 4FF0FF32 		mov	r2, #-1
+ 248 0022 1A60     		str	r2, [r3]
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_DATA  = (uint32_t)0xFFFFFFFFU;
+ 249              		.loc 1 149 5
+ 250 0024 0D4B     		ldr	r3, .L18+4
+ 251              		.loc 1 149 15
+ 252 0026 4FF0FF32 		mov	r2, #-1
+ 253 002a 1A60     		str	r2, [r3]
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_FDATA = (uint32_t)0x00000000U;
+ 254              		.loc 1 150 5
+ 255 002c 0C4B     		ldr	r3, .L18+8
+ 256              		.loc 1 150 15
+ 257 002e 0022     		movs	r2, #0
+ 258 0030 1A60     		str	r2, [r3]
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_POLY  = (uint32_t)0x04C11DB7U;
+ 259              		.loc 1 151 5
+ 260 0032 0C4B     		ldr	r3, .L18+12
+ 261              		.loc 1 151 15
+ 262 0034 0C4A     		ldr	r2, .L18+16
+ 263 0036 1A60     		str	r2, [r3]
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL   = (uint32_t)CRC_CTL_RST;
+ 264              		.loc 1 152 5
+ 265 0038 0C4B     		ldr	r3, .L18+20
+ 266              		.loc 1 152 15
+ 267 003a 0122     		movs	r2, #1
+ 268 003c 1A60     		str	r2, [r3]
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_RESET;
+ 269              		.loc 1 155 20
+ 270 003e 7B68     		ldr	r3, [r7, #4]
+ 271 0040 0122     		movs	r2, #1
+ 272 0042 1A70     		strb	r2, [r3]
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* unlock CRC */
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     HAL_UNLOCK(crc_dev);
+ 273              		.loc 1 158 5
+ 274 0044 7B68     		ldr	r3, [r7, #4]
+ 275 0046 0022     		movs	r2, #0
+ 276 0048 5A70     		strb	r2, [r3, #1]
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return HAL_ERR_NONE;
+ 277              		.loc 1 160 12
+ 278 004a 0023     		movs	r3, #0
+ 279              	.L17:
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 280              		.loc 1 161 1
+ 281 004c 1846     		mov	r0, r3
+ 282 004e 0C37     		adds	r7, r7, #12
+ 283              		.cfi_def_cfa_offset 4
+ 284 0050 BD46     		mov	sp, r7
+ 285              		.cfi_def_cfa_register 13
+ 286              		@ sp needed
+ 287 0052 80BC     		pop	{r7}
+ 288              		.cfi_restore 7
+ 289              		.cfi_def_cfa_offset 0
+ 290 0054 7047     		bx	lr
+ 291              	.L19:
+ 292 0056 00BF     		.align	2
+ 293              	.L18:
+ 294 0058 10300240 		.word	1073885200
+ 295 005c 00300240 		.word	1073885184
+ 296 0060 04300240 		.word	1073885188
+ 297 0064 14300240 		.word	1073885204
+ 298 0068 B71DC104 		.word	79764919
+ 299 006c 08300240 		.word	1073885192
+ 300              		.cfi_endproc
+ 301              	.LFE121:
+ 303              		.section	.text.hal_crc_single_data_calculate,"ax",%progbits
+ 304              		.align	1
+ 305              		.global	hal_crc_single_data_calculate
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.fpu softvfp
+ 311              	hal_crc_single_data_calculate:
+ 312              	.LFB122:
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      CRC calculate single data
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  crc_dev: CRC device information structrue
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure is not necessary to be reconfigured after structure initialization,
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure parameters altering is automatically configured by core
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  sdata: specify input data data
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  data_format: input data format
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                 only one parameter can be selected which is shown as below:
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_WORD: input data in word format
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_HALFWORD: input data in half-word format
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_BYTE: input data in byte format
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     CRC calculate value
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** uint32_t hal_crc_single_data_calculate(hal_crc_dev_struct *crc_dev, uint32_t sdata, uint8_t data_fo
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 313              		.loc 1 178 1
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 16
+ 316              		@ frame_needed = 1, uses_anonymous_args = 0
+ 317              		@ link register save eliminated.
+ 318 0000 80B4     		push	{r7}
+ 319              		.cfi_def_cfa_offset 4
+ 320              		.cfi_offset 7, -4
+ 321 0002 85B0     		sub	sp, sp, #20
+ 322              		.cfi_def_cfa_offset 24
+ 323 0004 00AF     		add	r7, sp, #0
+ 324              		.cfi_def_cfa_register 7
+ 325 0006 F860     		str	r0, [r7, #12]
+ 326 0008 B960     		str	r1, [r7, #8]
+ 327 000a 1346     		mov	r3, r2
+ 328 000c FB71     		strb	r3, [r7, #7]
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_BUSY;
+ 329              		.loc 1 180 20
+ 330 000e FB68     		ldr	r3, [r7, #12]
+ 331 0010 0222     		movs	r2, #2
+ 332 0012 1A70     		strb	r2, [r3]
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(INPUT_FORMAT_WORD == data_format) {
+ 333              		.loc 1 182 7
+ 334 0014 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 335 0016 002B     		cmp	r3, #0
+ 336 0018 03D1     		bne	.L21
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         REG32(CRC) = sdata;
+ 337              		.loc 1 183 9
+ 338 001a 0D4A     		ldr	r2, .L25
+ 339              		.loc 1 183 20
+ 340 001c BB68     		ldr	r3, [r7, #8]
+ 341 001e 1360     		str	r3, [r2]
+ 342 0020 0BE0     		b	.L22
+ 343              	.L21:
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     } else if(INPUT_FORMAT_HALFWORD == data_format) {
+ 344              		.loc 1 184 14
+ 345 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 346 0024 012B     		cmp	r3, #1
+ 347 0026 04D1     		bne	.L23
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         REG16(CRC) = (uint16_t)sdata;
+ 348              		.loc 1 185 9
+ 349 0028 094B     		ldr	r3, .L25
+ 350              		.loc 1 185 22
+ 351 002a BA68     		ldr	r2, [r7, #8]
+ 352 002c 92B2     		uxth	r2, r2
+ 353              		.loc 1 185 20
+ 354 002e 1A80     		strh	r2, [r3]	@ movhi
+ 355 0030 03E0     		b	.L22
+ 356              	.L23:
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     } else {
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         REG8(CRC) = (uint8_t)sdata;
+ 357              		.loc 1 187 9
+ 358 0032 074B     		ldr	r3, .L25
+ 359              		.loc 1 187 21
+ 360 0034 BA68     		ldr	r2, [r7, #8]
+ 361 0036 D2B2     		uxtb	r2, r2
+ 362              		.loc 1 187 19
+ 363 0038 1A70     		strb	r2, [r3]
+ 364              	.L22:
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_READY;
+ 365              		.loc 1 190 20
+ 366 003a FB68     		ldr	r3, [r7, #12]
+ 367 003c 0522     		movs	r2, #5
+ 368 003e 1A70     		strb	r2, [r3]
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return(CRC_DATA);
+ 369              		.loc 1 191 12
+ 370 0040 034B     		ldr	r3, .L25
+ 371 0042 1B68     		ldr	r3, [r3]
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 372              		.loc 1 192 1
+ 373 0044 1846     		mov	r0, r3
+ 374 0046 1437     		adds	r7, r7, #20
+ 375              		.cfi_def_cfa_offset 4
+ 376 0048 BD46     		mov	sp, r7
+ 377              		.cfi_def_cfa_register 13
+ 378              		@ sp needed
+ 379 004a 80BC     		pop	{r7}
+ 380              		.cfi_restore 7
+ 381              		.cfi_def_cfa_offset 0
+ 382 004c 7047     		bx	lr
+ 383              	.L26:
+ 384 004e 00BF     		.align	2
+ 385              	.L25:
+ 386 0050 00300240 		.word	1073885184
+ 387              		.cfi_endproc
+ 388              	.LFE122:
+ 390              		.section	.text.hal_crc_block_data_calculate,"ax",%progbits
+ 391              		.align	1
+ 392              		.global	hal_crc_block_data_calculate
+ 393              		.syntax unified
+ 394              		.thumb
+ 395              		.thumb_func
+ 396              		.fpu softvfp
+ 398              	hal_crc_block_data_calculate:
+ 399              	.LFB123:
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      CRC calculate a data array
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  crc_dev: CRC device information structrue
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure is not necessary to be reconfigured after structure initialization,
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                   the structure parameters altering is automatically configured by core
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  array: pointer to the input data array
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  size: size of the array
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  data_format: input data format
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                 only one parameter can be selected which is shown as below:
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_WORD: input data in word format
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_HALFWORD: input data in half-word format
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        INPUT_FORMAT_BYTE: input data in byte format
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     CRC calculate value
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** uint32_t hal_crc_block_data_calculate(hal_crc_dev_struct *crc_dev, void *array, uint32_t size, uint
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 400              		.loc 1 210 1
+ 401              		.cfi_startproc
+ 402              		@ args = 0, pretend = 0, frame = 32
+ 403              		@ frame_needed = 1, uses_anonymous_args = 0
+ 404              		@ link register save eliminated.
+ 405 0000 80B4     		push	{r7}
+ 406              		.cfi_def_cfa_offset 4
+ 407              		.cfi_offset 7, -4
+ 408 0002 89B0     		sub	sp, sp, #36
+ 409              		.cfi_def_cfa_offset 40
+ 410 0004 00AF     		add	r7, sp, #0
+ 411              		.cfi_def_cfa_register 7
+ 412 0006 F860     		str	r0, [r7, #12]
+ 413 0008 B960     		str	r1, [r7, #8]
+ 414 000a 7A60     		str	r2, [r7, #4]
+ 415 000c FB70     		strb	r3, [r7, #3]
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint8_t *data8;
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint16_t *data16;
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint32_t *data32;
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint32_t index;
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_BUSY;
+ 416              		.loc 1 217 20
+ 417 000e FB68     		ldr	r3, [r7, #12]
+ 418 0010 0222     		movs	r2, #2
+ 419 0012 1A70     		strb	r2, [r3]
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     if(INPUT_FORMAT_WORD == data_format) {
+ 420              		.loc 1 219 7
+ 421 0014 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 422 0016 002B     		cmp	r3, #0
+ 423 0018 13D1     		bne	.L28
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         data32 = (uint32_t *)array;
+ 424              		.loc 1 220 16
+ 425 001a BB68     		ldr	r3, [r7, #8]
+ 426 001c 3B61     		str	r3, [r7, #16]
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 427              		.loc 1 221 19
+ 428 001e 0023     		movs	r3, #0
+ 429 0020 FB61     		str	r3, [r7, #28]
+ 430              		.loc 1 221 9
+ 431 0022 09E0     		b	.L29
+ 432              	.L30:
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****             REG32(CRC) = data32[index];
+ 433              		.loc 1 222 32 discriminator 3
+ 434 0024 FB69     		ldr	r3, [r7, #28]
+ 435 0026 9B00     		lsls	r3, r3, #2
+ 436 0028 3A69     		ldr	r2, [r7, #16]
+ 437 002a 1344     		add	r3, r3, r2
+ 438              		.loc 1 222 13 discriminator 3
+ 439 002c 1E4A     		ldr	r2, .L38
+ 440              		.loc 1 222 32 discriminator 3
+ 441 002e 1B68     		ldr	r3, [r3]
+ 442              		.loc 1 222 24 discriminator 3
+ 443 0030 1360     		str	r3, [r2]
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 444              		.loc 1 221 44 discriminator 3
+ 445 0032 FB69     		ldr	r3, [r7, #28]
+ 446 0034 0133     		adds	r3, r3, #1
+ 447 0036 FB61     		str	r3, [r7, #28]
+ 448              	.L29:
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 449              		.loc 1 221 9 discriminator 1
+ 450 0038 FA69     		ldr	r2, [r7, #28]
+ 451 003a 7B68     		ldr	r3, [r7, #4]
+ 452 003c 9A42     		cmp	r2, r3
+ 453 003e F1D3     		bcc	.L30
+ 454 0040 28E0     		b	.L31
+ 455              	.L28:
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         }
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     } else if(INPUT_FORMAT_HALFWORD == data_format) {
+ 456              		.loc 1 224 14
+ 457 0042 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 458 0044 012B     		cmp	r3, #1
+ 459 0046 13D1     		bne	.L32
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         data16 = (uint16_t *)array;
+ 460              		.loc 1 225 16
+ 461 0048 BB68     		ldr	r3, [r7, #8]
+ 462 004a 7B61     		str	r3, [r7, #20]
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 463              		.loc 1 226 19
+ 464 004c 0023     		movs	r3, #0
+ 465 004e FB61     		str	r3, [r7, #28]
+ 466              		.loc 1 226 9
+ 467 0050 09E0     		b	.L33
+ 468              	.L34:
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****             REG16(CRC) = data16[index];
+ 469              		.loc 1 227 32 discriminator 3
+ 470 0052 FB69     		ldr	r3, [r7, #28]
+ 471 0054 5B00     		lsls	r3, r3, #1
+ 472 0056 7A69     		ldr	r2, [r7, #20]
+ 473 0058 1344     		add	r3, r3, r2
+ 474              		.loc 1 227 13 discriminator 3
+ 475 005a 134A     		ldr	r2, .L38
+ 476              		.loc 1 227 32 discriminator 3
+ 477 005c 1B88     		ldrh	r3, [r3]
+ 478              		.loc 1 227 24 discriminator 3
+ 479 005e 1380     		strh	r3, [r2]	@ movhi
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 480              		.loc 1 226 44 discriminator 3
+ 481 0060 FB69     		ldr	r3, [r7, #28]
+ 482 0062 0133     		adds	r3, r3, #1
+ 483 0064 FB61     		str	r3, [r7, #28]
+ 484              	.L33:
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 485              		.loc 1 226 9 discriminator 1
+ 486 0066 FA69     		ldr	r2, [r7, #28]
+ 487 0068 7B68     		ldr	r3, [r7, #4]
+ 488 006a 9A42     		cmp	r2, r3
+ 489 006c F1D3     		bcc	.L34
+ 490 006e 11E0     		b	.L31
+ 491              	.L32:
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         }
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     } else {
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         data8 = (uint8_t *)array;
+ 492              		.loc 1 230 15
+ 493 0070 BB68     		ldr	r3, [r7, #8]
+ 494 0072 BB61     		str	r3, [r7, #24]
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 495              		.loc 1 231 19
+ 496 0074 0023     		movs	r3, #0
+ 497 0076 FB61     		str	r3, [r7, #28]
+ 498              		.loc 1 231 9
+ 499 0078 08E0     		b	.L35
+ 500              	.L36:
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****             REG8(CRC) =  data8[index];
+ 501              		.loc 1 232 31 discriminator 3
+ 502 007a BA69     		ldr	r2, [r7, #24]
+ 503 007c FB69     		ldr	r3, [r7, #28]
+ 504 007e 1344     		add	r3, r3, r2
+ 505              		.loc 1 232 13 discriminator 3
+ 506 0080 094A     		ldr	r2, .L38
+ 507              		.loc 1 232 31 discriminator 3
+ 508 0082 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 509              		.loc 1 232 23 discriminator 3
+ 510 0084 1370     		strb	r3, [r2]
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 511              		.loc 1 231 44 discriminator 3
+ 512 0086 FB69     		ldr	r3, [r7, #28]
+ 513 0088 0133     		adds	r3, r3, #1
+ 514 008a FB61     		str	r3, [r7, #28]
+ 515              	.L35:
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         for(index = 0U; index < size; index++) {
+ 516              		.loc 1 231 9 discriminator 1
+ 517 008c FA69     		ldr	r2, [r7, #28]
+ 518 008e 7B68     		ldr	r3, [r7, #4]
+ 519 0090 9A42     		cmp	r2, r3
+ 520 0092 F2D3     		bcc	.L36
+ 521              	.L31:
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****         }
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     }
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     /* Set CRC state */
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     crc_dev->state = HAL_CRC_STATE_READY;
+ 522              		.loc 1 236 20
+ 523 0094 FB68     		ldr	r3, [r7, #12]
+ 524 0096 0522     		movs	r2, #5
+ 525 0098 1A70     		strb	r2, [r3]
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return (CRC_DATA);
+ 526              		.loc 1 238 13
+ 527 009a 034B     		ldr	r3, .L38
+ 528 009c 1B68     		ldr	r3, [r3]
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 529              		.loc 1 239 1
+ 530 009e 1846     		mov	r0, r3
+ 531 00a0 2437     		adds	r7, r7, #36
+ 532              		.cfi_def_cfa_offset 4
+ 533 00a2 BD46     		mov	sp, r7
+ 534              		.cfi_def_cfa_register 13
+ 535              		@ sp needed
+ 536 00a4 80BC     		pop	{r7}
+ 537              		.cfi_restore 7
+ 538              		.cfi_def_cfa_offset 0
+ 539 00a6 7047     		bx	lr
+ 540              	.L39:
+ 541              		.align	2
+ 542              	.L38:
+ 543 00a8 00300240 		.word	1073885184
+ 544              		.cfi_endproc
+ 545              	.LFE123:
+ 547              		.section	.text.hals_crc_reverse_output_data_enable,"ax",%progbits
+ 548              		.align	1
+ 549              		.global	hals_crc_reverse_output_data_enable
+ 550              		.syntax unified
+ 551              		.thumb
+ 552              		.thumb_func
+ 553              		.fpu softvfp
+ 555              	hals_crc_reverse_output_data_enable:
+ 556              	.LFB124:
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      enable the reverse operation of output data
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_reverse_output_data_enable(void)
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 557              		.loc 1 248 1
+ 558              		.cfi_startproc
+ 559              		@ args = 0, pretend = 0, frame = 0
+ 560              		@ frame_needed = 1, uses_anonymous_args = 0
+ 561              		@ link register save eliminated.
+ 562 0000 80B4     		push	{r7}
+ 563              		.cfi_def_cfa_offset 4
+ 564              		.cfi_offset 7, -4
+ 565 0002 00AF     		add	r7, sp, #0
+ 566              		.cfi_def_cfa_register 7
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL &= (uint32_t)(~ CRC_CTL_REV_O);
+ 567              		.loc 1 249 13
+ 568 0004 074B     		ldr	r3, .L41
+ 569 0006 1B68     		ldr	r3, [r3]
+ 570 0008 064A     		ldr	r2, .L41
+ 571 000a 23F08003 		bic	r3, r3, #128
+ 572 000e 1360     		str	r3, [r2]
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL |= (uint32_t)CRC_CTL_REV_O;
+ 573              		.loc 1 250 13
+ 574 0010 044B     		ldr	r3, .L41
+ 575 0012 1B68     		ldr	r3, [r3]
+ 576 0014 034A     		ldr	r2, .L41
+ 577 0016 43F08003 		orr	r3, r3, #128
+ 578 001a 1360     		str	r3, [r2]
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 579              		.loc 1 251 1
+ 580 001c 00BF     		nop
+ 581 001e BD46     		mov	sp, r7
+ 582              		.cfi_def_cfa_register 13
+ 583              		@ sp needed
+ 584 0020 80BC     		pop	{r7}
+ 585              		.cfi_restore 7
+ 586              		.cfi_def_cfa_offset 0
+ 587 0022 7047     		bx	lr
+ 588              	.L42:
+ 589              		.align	2
+ 590              	.L41:
+ 591 0024 08300240 		.word	1073885192
+ 592              		.cfi_endproc
+ 593              	.LFE124:
+ 595              		.section	.text.hals_crc_reverse_output_data_disable,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	hals_crc_reverse_output_data_disable
+ 598              		.syntax unified
+ 599              		.thumb
+ 600              		.thumb_func
+ 601              		.fpu softvfp
+ 603              	hals_crc_reverse_output_data_disable:
+ 604              	.LFB125:
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      disable the reverse operation of output data
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_reverse_output_data_disable(void)
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 605              		.loc 1 260 1
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 0
+ 608              		@ frame_needed = 1, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 610 0000 80B4     		push	{r7}
+ 611              		.cfi_def_cfa_offset 4
+ 612              		.cfi_offset 7, -4
+ 613 0002 00AF     		add	r7, sp, #0
+ 614              		.cfi_def_cfa_register 7
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL &= (uint32_t)(~ CRC_CTL_REV_O);
+ 615              		.loc 1 261 13
+ 616 0004 044B     		ldr	r3, .L44
+ 617 0006 1B68     		ldr	r3, [r3]
+ 618 0008 034A     		ldr	r2, .L44
+ 619 000a 23F08003 		bic	r3, r3, #128
+ 620 000e 1360     		str	r3, [r2]
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 621              		.loc 1 262 1
+ 622 0010 00BF     		nop
+ 623 0012 BD46     		mov	sp, r7
+ 624              		.cfi_def_cfa_register 13
+ 625              		@ sp needed
+ 626 0014 80BC     		pop	{r7}
+ 627              		.cfi_restore 7
+ 628              		.cfi_def_cfa_offset 0
+ 629 0016 7047     		bx	lr
+ 630              	.L45:
+ 631              		.align	2
+ 632              	.L44:
+ 633 0018 08300240 		.word	1073885192
+ 634              		.cfi_endproc
+ 635              	.LFE125:
+ 637              		.section	.text.hals_crc_data_register_reset,"ax",%progbits
+ 638              		.align	1
+ 639              		.global	hals_crc_data_register_reset
+ 640              		.syntax unified
+ 641              		.thumb
+ 642              		.thumb_func
+ 643              		.fpu softvfp
+ 645              	hals_crc_data_register_reset:
+ 646              	.LFB126:
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      reset data register to the value of initializaiton data register
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_data_register_reset(void)
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 647              		.loc 1 271 1
+ 648              		.cfi_startproc
+ 649              		@ args = 0, pretend = 0, frame = 0
+ 650              		@ frame_needed = 1, uses_anonymous_args = 0
+ 651              		@ link register save eliminated.
+ 652 0000 80B4     		push	{r7}
+ 653              		.cfi_def_cfa_offset 4
+ 654              		.cfi_offset 7, -4
+ 655 0002 00AF     		add	r7, sp, #0
+ 656              		.cfi_def_cfa_register 7
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL |= (uint32_t)CRC_CTL_RST;
+ 657              		.loc 1 272 13
+ 658 0004 044B     		ldr	r3, .L47
+ 659 0006 1B68     		ldr	r3, [r3]
+ 660 0008 034A     		ldr	r2, .L47
+ 661 000a 43F00103 		orr	r3, r3, #1
+ 662 000e 1360     		str	r3, [r2]
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 663              		.loc 1 273 1
+ 664 0010 00BF     		nop
+ 665 0012 BD46     		mov	sp, r7
+ 666              		.cfi_def_cfa_register 13
+ 667              		@ sp needed
+ 668 0014 80BC     		pop	{r7}
+ 669              		.cfi_restore 7
+ 670              		.cfi_def_cfa_offset 0
+ 671 0016 7047     		bx	lr
+ 672              	.L48:
+ 673              		.align	2
+ 674              	.L47:
+ 675 0018 08300240 		.word	1073885192
+ 676              		.cfi_endproc
+ 677              	.LFE126:
+ 679              		.section	.text.hals_crc_data_register_read,"ax",%progbits
+ 680              		.align	1
+ 681              		.global	hals_crc_data_register_read
+ 682              		.syntax unified
+ 683              		.thumb
+ 684              		.thumb_func
+ 685              		.fpu softvfp
+ 687              	hals_crc_data_register_read:
+ 688              	.LFB127:
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      read the data register
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     32-bit value of the data register
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** uint32_t hals_crc_data_register_read(void)
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 689              		.loc 1 282 1
+ 690              		.cfi_startproc
+ 691              		@ args = 0, pretend = 0, frame = 8
+ 692              		@ frame_needed = 1, uses_anonymous_args = 0
+ 693              		@ link register save eliminated.
+ 694 0000 80B4     		push	{r7}
+ 695              		.cfi_def_cfa_offset 4
+ 696              		.cfi_offset 7, -4
+ 697 0002 83B0     		sub	sp, sp, #12
+ 698              		.cfi_def_cfa_offset 16
+ 699 0004 00AF     		add	r7, sp, #0
+ 700              		.cfi_def_cfa_register 7
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint32_t data;
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     data = CRC_DATA;
+ 701              		.loc 1 284 12
+ 702 0006 044B     		ldr	r3, .L51
+ 703              		.loc 1 284 10
+ 704 0008 1B68     		ldr	r3, [r3]
+ 705 000a 7B60     		str	r3, [r7, #4]
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return (data);
+ 706              		.loc 1 285 12
+ 707 000c 7B68     		ldr	r3, [r7, #4]
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 708              		.loc 1 286 1
+ 709 000e 1846     		mov	r0, r3
+ 710 0010 0C37     		adds	r7, r7, #12
+ 711              		.cfi_def_cfa_offset 4
+ 712 0012 BD46     		mov	sp, r7
+ 713              		.cfi_def_cfa_register 13
+ 714              		@ sp needed
+ 715 0014 80BC     		pop	{r7}
+ 716              		.cfi_restore 7
+ 717              		.cfi_def_cfa_offset 0
+ 718 0016 7047     		bx	lr
+ 719              	.L52:
+ 720              		.align	2
+ 721              	.L51:
+ 722 0018 00300240 		.word	1073885184
+ 723              		.cfi_endproc
+ 724              	.LFE127:
+ 726              		.section	.text.hals_crc_free_data_read,"ax",%progbits
+ 727              		.align	1
+ 728              		.global	hals_crc_free_data_read
+ 729              		.syntax unified
+ 730              		.thumb
+ 731              		.thumb_func
+ 732              		.fpu softvfp
+ 734              	hals_crc_free_data_read:
+ 735              	.LFB128:
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      read the free data register
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     8-bit value of the free data register
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** uint8_t hals_crc_free_data_read(void)
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 736              		.loc 1 295 1
+ 737              		.cfi_startproc
+ 738              		@ args = 0, pretend = 0, frame = 8
+ 739              		@ frame_needed = 1, uses_anonymous_args = 0
+ 740              		@ link register save eliminated.
+ 741 0000 80B4     		push	{r7}
+ 742              		.cfi_def_cfa_offset 4
+ 743              		.cfi_offset 7, -4
+ 744 0002 83B0     		sub	sp, sp, #12
+ 745              		.cfi_def_cfa_offset 16
+ 746 0004 00AF     		add	r7, sp, #0
+ 747              		.cfi_def_cfa_register 7
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     uint8_t fdata;
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     fdata = (uint8_t)CRC_FDATA;
+ 748              		.loc 1 297 22
+ 749 0006 044B     		ldr	r3, .L55
+ 750 0008 1B68     		ldr	r3, [r3]
+ 751              		.loc 1 297 11
+ 752 000a FB71     		strb	r3, [r7, #7]
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     return (fdata);
+ 753              		.loc 1 298 12
+ 754 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 755              		.loc 1 299 1
+ 756 000e 1846     		mov	r0, r3
+ 757 0010 0C37     		adds	r7, r7, #12
+ 758              		.cfi_def_cfa_offset 4
+ 759 0012 BD46     		mov	sp, r7
+ 760              		.cfi_def_cfa_register 13
+ 761              		@ sp needed
+ 762 0014 80BC     		pop	{r7}
+ 763              		.cfi_restore 7
+ 764              		.cfi_def_cfa_offset 0
+ 765 0016 7047     		bx	lr
+ 766              	.L56:
+ 767              		.align	2
+ 768              	.L55:
+ 769 0018 04300240 		.word	1073885188
+ 770              		.cfi_endproc
+ 771              	.LFE128:
+ 773              		.section	.text.hals_crc_free_data_write,"ax",%progbits
+ 774              		.align	1
+ 775              		.global	hals_crc_free_data_write
+ 776              		.syntax unified
+ 777              		.thumb
+ 778              		.thumb_func
+ 779              		.fpu softvfp
+ 781              	hals_crc_free_data_write:
+ 782              	.LFB129:
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      write the free data register
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  data: specify 8-bit data
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_free_data_write(uint8_t data)
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 783              		.loc 1 308 1
+ 784              		.cfi_startproc
+ 785              		@ args = 0, pretend = 0, frame = 8
+ 786              		@ frame_needed = 1, uses_anonymous_args = 0
+ 787              		@ link register save eliminated.
+ 788 0000 80B4     		push	{r7}
+ 789              		.cfi_def_cfa_offset 4
+ 790              		.cfi_offset 7, -4
+ 791 0002 83B0     		sub	sp, sp, #12
+ 792              		.cfi_def_cfa_offset 16
+ 793 0004 00AF     		add	r7, sp, #0
+ 794              		.cfi_def_cfa_register 7
+ 795 0006 0346     		mov	r3, r0
+ 796 0008 FB71     		strb	r3, [r7, #7]
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_FDATA = (uint32_t)data;
+ 797              		.loc 1 309 5
+ 798 000a 044A     		ldr	r2, .L58
+ 799              		.loc 1 309 17
+ 800 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 801              		.loc 1 309 15
+ 802 000e 1360     		str	r3, [r2]
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 803              		.loc 1 310 1
+ 804 0010 00BF     		nop
+ 805 0012 0C37     		adds	r7, r7, #12
+ 806              		.cfi_def_cfa_offset 4
+ 807 0014 BD46     		mov	sp, r7
+ 808              		.cfi_def_cfa_register 13
+ 809              		@ sp needed
+ 810 0016 80BC     		pop	{r7}
+ 811              		.cfi_restore 7
+ 812              		.cfi_def_cfa_offset 0
+ 813 0018 7047     		bx	lr
+ 814              	.L59:
+ 815 001a 00BF     		.align	2
+ 816              	.L58:
+ 817 001c 04300240 		.word	1073885188
+ 818              		.cfi_endproc
+ 819              	.LFE129:
+ 821              		.section	.text.hals_crc_init_data_register_write,"ax",%progbits
+ 822              		.align	1
+ 823              		.global	hals_crc_init_data_register_write
+ 824              		.syntax unified
+ 825              		.thumb
+ 826              		.thumb_func
+ 827              		.fpu softvfp
+ 829              	hals_crc_init_data_register_write:
+ 830              	.LFB130:
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      write the initializaiton data register
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  init_data:specify 32-bit data
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_init_data_register_write(uint32_t init_data)
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 831              		.loc 1 319 1
+ 832              		.cfi_startproc
+ 833              		@ args = 0, pretend = 0, frame = 8
+ 834              		@ frame_needed = 1, uses_anonymous_args = 0
+ 835              		@ link register save eliminated.
+ 836 0000 80B4     		push	{r7}
+ 837              		.cfi_def_cfa_offset 4
+ 838              		.cfi_offset 7, -4
+ 839 0002 83B0     		sub	sp, sp, #12
+ 840              		.cfi_def_cfa_offset 16
+ 841 0004 00AF     		add	r7, sp, #0
+ 842              		.cfi_def_cfa_register 7
+ 843 0006 7860     		str	r0, [r7, #4]
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_IDATA = (uint32_t)init_data;
+ 844              		.loc 1 320 5
+ 845 0008 034A     		ldr	r2, .L61
+ 846              		.loc 1 320 15
+ 847 000a 7B68     		ldr	r3, [r7, #4]
+ 848 000c 1360     		str	r3, [r2]
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 849              		.loc 1 321 1
+ 850 000e 00BF     		nop
+ 851 0010 0C37     		adds	r7, r7, #12
+ 852              		.cfi_def_cfa_offset 4
+ 853 0012 BD46     		mov	sp, r7
+ 854              		.cfi_def_cfa_register 13
+ 855              		@ sp needed
+ 856 0014 80BC     		pop	{r7}
+ 857              		.cfi_restore 7
+ 858              		.cfi_def_cfa_offset 0
+ 859 0016 7047     		bx	lr
+ 860              	.L62:
+ 861              		.align	2
+ 862              	.L61:
+ 863 0018 10300240 		.word	1073885200
+ 864              		.cfi_endproc
+ 865              	.LFE130:
+ 867              		.section	.text.hals_crc_input_data_reverse_config,"ax",%progbits
+ 868              		.align	1
+ 869              		.global	hals_crc_input_data_reverse_config
+ 870              		.syntax unified
+ 871              		.thumb
+ 872              		.thumb_func
+ 873              		.fpu softvfp
+ 875              	hals_crc_input_data_reverse_config:
+ 876              	.LFB131:
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      configure the CRC input data function
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  data_reverse: specify input data reverse function
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                 only one parameter can be selected which is shown as below:
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_INPUT_DATA_NOT: input data is not reversed
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_INPUT_DATA_BYTE: input data is reversed on 8 bits
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_INPUT_DATA_HALFWORD: input data is reversed on 16 bits
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_INPUT_DATA_WORD: input data is reversed on 32 bits
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_input_data_reverse_config(uint32_t data_reverse)
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 877              		.loc 1 335 1
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 8
+ 880              		@ frame_needed = 1, uses_anonymous_args = 0
+ 881              		@ link register save eliminated.
+ 882 0000 80B4     		push	{r7}
+ 883              		.cfi_def_cfa_offset 4
+ 884              		.cfi_offset 7, -4
+ 885 0002 83B0     		sub	sp, sp, #12
+ 886              		.cfi_def_cfa_offset 16
+ 887 0004 00AF     		add	r7, sp, #0
+ 888              		.cfi_def_cfa_register 7
+ 889 0006 7860     		str	r0, [r7, #4]
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL &= (uint32_t)(~CRC_CTL_REV_I);
+ 890              		.loc 1 336 13
+ 891 0008 084B     		ldr	r3, .L64
+ 892 000a 1B68     		ldr	r3, [r3]
+ 893 000c 074A     		ldr	r2, .L64
+ 894 000e 23F06003 		bic	r3, r3, #96
+ 895 0012 1360     		str	r3, [r2]
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL |= (uint32_t)data_reverse;
+ 896              		.loc 1 337 13
+ 897 0014 054B     		ldr	r3, .L64
+ 898 0016 1A68     		ldr	r2, [r3]
+ 899 0018 0449     		ldr	r1, .L64
+ 900 001a 7B68     		ldr	r3, [r7, #4]
+ 901 001c 1343     		orrs	r3, r3, r2
+ 902 001e 0B60     		str	r3, [r1]
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 903              		.loc 1 338 1
+ 904 0020 00BF     		nop
+ 905 0022 0C37     		adds	r7, r7, #12
+ 906              		.cfi_def_cfa_offset 4
+ 907 0024 BD46     		mov	sp, r7
+ 908              		.cfi_def_cfa_register 13
+ 909              		@ sp needed
+ 910 0026 80BC     		pop	{r7}
+ 911              		.cfi_restore 7
+ 912              		.cfi_def_cfa_offset 0
+ 913 0028 7047     		bx	lr
+ 914              	.L65:
+ 915 002a 00BF     		.align	2
+ 916              	.L64:
+ 917 002c 08300240 		.word	1073885192
+ 918              		.cfi_endproc
+ 919              	.LFE131:
+ 921              		.section	.text.hals_crc_polynomial_size_set,"ax",%progbits
+ 922              		.align	1
+ 923              		.global	hals_crc_polynomial_size_set
+ 924              		.syntax unified
+ 925              		.thumb
+ 926              		.thumb_func
+ 927              		.fpu softvfp
+ 929              	hals_crc_polynomial_size_set:
+ 930              	.LFB132:
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      configure the CRC size of polynomial function
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  poly_size: size of polynomial
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****                 only one parameter can be selected which is shown as below:
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_CTL_PS_32: 32-bit polynomial for CRC calculation
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_CTL_PS_16: 16-bit polynomial for CRC calculation
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_CTL_PS_8: 8-bit polynomial for CRC calculation
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****       \arg        CRC_CTL_PS_7: 7-bit polynomial for CRC calculation
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_polynomial_size_set(uint32_t poly_size)
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 931              		.loc 1 352 1
+ 932              		.cfi_startproc
+ 933              		@ args = 0, pretend = 0, frame = 8
+ 934              		@ frame_needed = 1, uses_anonymous_args = 0
+ 935              		@ link register save eliminated.
+ 936 0000 80B4     		push	{r7}
+ 937              		.cfi_def_cfa_offset 4
+ 938              		.cfi_offset 7, -4
+ 939 0002 83B0     		sub	sp, sp, #12
+ 940              		.cfi_def_cfa_offset 16
+ 941 0004 00AF     		add	r7, sp, #0
+ 942              		.cfi_def_cfa_register 7
+ 943 0006 7860     		str	r0, [r7, #4]
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL &= (uint32_t)(~(CRC_CTL_PS));
+ 944              		.loc 1 353 13
+ 945 0008 084B     		ldr	r3, .L67
+ 946 000a 1B68     		ldr	r3, [r3]
+ 947 000c 074A     		ldr	r2, .L67
+ 948 000e 23F01803 		bic	r3, r3, #24
+ 949 0012 1360     		str	r3, [r2]
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL |= (uint32_t)poly_size;
+ 950              		.loc 1 354 13
+ 951 0014 054B     		ldr	r3, .L67
+ 952 0016 1A68     		ldr	r2, [r3]
+ 953 0018 0449     		ldr	r1, .L67
+ 954 001a 7B68     		ldr	r3, [r7, #4]
+ 955 001c 1343     		orrs	r3, r3, r2
+ 956 001e 0B60     		str	r3, [r1]
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 957              		.loc 1 355 1
+ 958 0020 00BF     		nop
+ 959 0022 0C37     		adds	r7, r7, #12
+ 960              		.cfi_def_cfa_offset 4
+ 961 0024 BD46     		mov	sp, r7
+ 962              		.cfi_def_cfa_register 13
+ 963              		@ sp needed
+ 964 0026 80BC     		pop	{r7}
+ 965              		.cfi_restore 7
+ 966              		.cfi_def_cfa_offset 0
+ 967 0028 7047     		bx	lr
+ 968              	.L68:
+ 969 002a 00BF     		.align	2
+ 970              	.L67:
+ 971 002c 08300240 		.word	1073885192
+ 972              		.cfi_endproc
+ 973              	.LFE132:
+ 975              		.section	.text.hals_crc_polynomial_set,"ax",%progbits
+ 976              		.align	1
+ 977              		.global	hals_crc_polynomial_set
+ 978              		.syntax unified
+ 979              		.thumb
+ 980              		.thumb_func
+ 981              		.fpu softvfp
+ 983              	hals_crc_polynomial_set:
+ 984              	.LFB133:
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 358:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      configure the CRC polynomial value function
+ 359:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  poly: configurable polynomial value
+ 360:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 361:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 362:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 363:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_polynomial_set(uint32_t poly)
+ 364:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 985              		.loc 1 364 1
+ 986              		.cfi_startproc
+ 987              		@ args = 0, pretend = 0, frame = 8
+ 988              		@ frame_needed = 1, uses_anonymous_args = 0
+ 989              		@ link register save eliminated.
+ 990 0000 80B4     		push	{r7}
+ 991              		.cfi_def_cfa_offset 4
+ 992              		.cfi_offset 7, -4
+ 993 0002 83B0     		sub	sp, sp, #12
+ 994              		.cfi_def_cfa_offset 16
+ 995 0004 00AF     		add	r7, sp, #0
+ 996              		.cfi_def_cfa_register 7
+ 997 0006 7860     		str	r0, [r7, #4]
+ 365:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_POLY &= (uint32_t)(~CRC_POLY_POLY);
+ 998              		.loc 1 365 14
+ 999 0008 064B     		ldr	r3, .L70
+ 1000 000a 1B68     		ldr	r3, [r3]
+ 1001 000c 054B     		ldr	r3, .L70
+ 1002 000e 0022     		movs	r2, #0
+ 1003 0010 1A60     		str	r2, [r3]
+ 366:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_POLY = poly;
+ 1004              		.loc 1 366 5
+ 1005 0012 044A     		ldr	r2, .L70
+ 1006              		.loc 1 366 14
+ 1007 0014 7B68     		ldr	r3, [r7, #4]
+ 1008 0016 1360     		str	r3, [r2]
+ 367:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 1009              		.loc 1 367 1
+ 1010 0018 00BF     		nop
+ 1011 001a 0C37     		adds	r7, r7, #12
+ 1012              		.cfi_def_cfa_offset 4
+ 1013 001c BD46     		mov	sp, r7
+ 1014              		.cfi_def_cfa_register 13
+ 1015              		@ sp needed
+ 1016 001e 80BC     		pop	{r7}
+ 1017              		.cfi_restore 7
+ 1018              		.cfi_def_cfa_offset 0
+ 1019 0020 7047     		bx	lr
+ 1020              	.L71:
+ 1021 0022 00BF     		.align	2
+ 1022              	.L70:
+ 1023 0024 14300240 		.word	1073885204
+ 1024              		.cfi_endproc
+ 1025              	.LFE133:
+ 1027              		.section	.text.hals_crc_calculate_reset,"ax",%progbits
+ 1028              		.align	1
+ 1029              		.global	hals_crc_calculate_reset
+ 1030              		.syntax unified
+ 1031              		.thumb
+ 1032              		.thumb_func
+ 1033              		.fpu softvfp
+ 1035              	hals_crc_calculate_reset:
+ 1036              	.LFB134:
+ 368:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** 
+ 369:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** /*!
+ 370:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \brief      reset data register to the value of initializaiton data register
+ 371:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[in]  none
+ 372:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \param[out] none
+ 373:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     \retval     none
+ 374:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** */
+ 375:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** void hals_crc_calculate_reset(void)
+ 376:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** {
+ 1037              		.loc 1 376 1
+ 1038              		.cfi_startproc
+ 1039              		@ args = 0, pretend = 0, frame = 0
+ 1040              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1041              		@ link register save eliminated.
+ 1042 0000 80B4     		push	{r7}
+ 1043              		.cfi_def_cfa_offset 4
+ 1044              		.cfi_offset 7, -4
+ 1045 0002 00AF     		add	r7, sp, #0
+ 1046              		.cfi_def_cfa_register 7
+ 377:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c ****     CRC_CTL |= (uint32_t)CRC_CTL_RST;
+ 1047              		.loc 1 377 13
+ 1048 0004 044B     		ldr	r3, .L73
+ 1049 0006 1B68     		ldr	r3, [r3]
+ 1050 0008 034A     		ldr	r2, .L73
+ 1051 000a 43F00103 		orr	r3, r3, #1
+ 1052 000e 1360     		str	r3, [r2]
+ 378:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c **** }
+ 1053              		.loc 1 378 1
+ 1054 0010 00BF     		nop
+ 1055 0012 BD46     		mov	sp, r7
+ 1056              		.cfi_def_cfa_register 13
+ 1057              		@ sp needed
+ 1058 0014 80BC     		pop	{r7}
+ 1059              		.cfi_restore 7
+ 1060              		.cfi_def_cfa_offset 0
+ 1061 0016 7047     		bx	lr
+ 1062              	.L74:
+ 1063              		.align	2
+ 1064              	.L73:
+ 1065 0018 08300240 		.word	1073885192
+ 1066              		.cfi_endproc
+ 1067              	.LFE134:
+ 1069              		.text
+ 1070              	.Letext0:
+ 1071              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1072              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1073              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1074              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1075              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1076              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1077              		.file 8 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 1078              		.file 9 "../firmware/cmsis/inc/core_cm4.h"
+ 1079              		.file 10 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 1080              		.file 11 "../firmware/cmsis/inc/gd32f3x0.h"
+ 1081              		.file 12 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 1082              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_crc.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_crc.c
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:16     .text.hal_crc_struct_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:24     .text.hal_crc_struct_init:00000000 hal_crc_struct_init
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:105    .text.hal_crc_struct_init:0000005c $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:110    .text.hal_crc_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:117    .text.hal_crc_init:00000000 hal_crc_init
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:645    .text.hals_crc_data_register_reset:00000000 hals_crc_data_register_reset
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:875    .text.hals_crc_input_data_reverse_config:00000000 hals_crc_input_data_reverse_config
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:929    .text.hals_crc_polynomial_size_set:00000000 hals_crc_polynomial_size_set
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:201    .text.hal_crc_init:0000006c $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:208    .text.hal_crc_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:215    .text.hal_crc_deinit:00000000 hal_crc_deinit
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:294    .text.hal_crc_deinit:00000058 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:304    .text.hal_crc_single_data_calculate:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:311    .text.hal_crc_single_data_calculate:00000000 hal_crc_single_data_calculate
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:386    .text.hal_crc_single_data_calculate:00000050 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:391    .text.hal_crc_block_data_calculate:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:398    .text.hal_crc_block_data_calculate:00000000 hal_crc_block_data_calculate
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:543    .text.hal_crc_block_data_calculate:000000a8 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:548    .text.hals_crc_reverse_output_data_enable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:555    .text.hals_crc_reverse_output_data_enable:00000000 hals_crc_reverse_output_data_enable
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:591    .text.hals_crc_reverse_output_data_enable:00000024 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:596    .text.hals_crc_reverse_output_data_disable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:603    .text.hals_crc_reverse_output_data_disable:00000000 hals_crc_reverse_output_data_disable
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:633    .text.hals_crc_reverse_output_data_disable:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:638    .text.hals_crc_data_register_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:675    .text.hals_crc_data_register_reset:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:680    .text.hals_crc_data_register_read:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:687    .text.hals_crc_data_register_read:00000000 hals_crc_data_register_read
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:722    .text.hals_crc_data_register_read:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:727    .text.hals_crc_free_data_read:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:734    .text.hals_crc_free_data_read:00000000 hals_crc_free_data_read
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:769    .text.hals_crc_free_data_read:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:774    .text.hals_crc_free_data_write:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:781    .text.hals_crc_free_data_write:00000000 hals_crc_free_data_write
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:817    .text.hals_crc_free_data_write:0000001c $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:822    .text.hals_crc_init_data_register_write:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:829    .text.hals_crc_init_data_register_write:00000000 hals_crc_init_data_register_write
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:863    .text.hals_crc_init_data_register_write:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:868    .text.hals_crc_input_data_reverse_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:917    .text.hals_crc_input_data_reverse_config:0000002c $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:922    .text.hals_crc_polynomial_size_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:971    .text.hals_crc_polynomial_size_set:0000002c $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:976    .text.hals_crc_polynomial_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:983    .text.hals_crc_polynomial_set:00000000 hals_crc_polynomial_set
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:1023   .text.hals_crc_polynomial_set:00000024 $d
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:1028   .text.hals_crc_calculate_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:1035   .text.hals_crc_calculate_reset:00000000 hals_crc_calculate_reset
+C:\Users\peter\AppData\Local\Temp\ccC1zFMR.s:1065   .text.hals_crc_calculate_reset:00000018 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+NO UNDEFINED SYMBOLS

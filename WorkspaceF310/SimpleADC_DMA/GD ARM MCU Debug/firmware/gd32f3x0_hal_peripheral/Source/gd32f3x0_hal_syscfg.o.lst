@@ -1,0 +1,1483 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_syscfg.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.hals_syscfg_deinit,"ax",%progbits
+  16              		.align	1
+  17              		.global	hals_syscfg_deinit
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	hals_syscfg_deinit:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \file    gd32f3x0_hal_syscfg.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief   SYSCFG driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     All rights reserved.
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     Redistribution and use in source and binary forms, with or without modification,
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** are permitted provided that the following conditions are met:
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****        list of conditions and the following disclaimer.
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****        this list of conditions and the following disclaimer in the documentation
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****        and/or other materials provided with the distribution.
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****        may be used to endorse or promote products derived from this software without
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****        specific prior written permission.
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** OF SUCH DAMAGE.
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #include "gd32f3x0_hal.h"
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTI_PORT_OFFSET                             ((uint32_t)10U)                             /*
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTI_PIN_OFFSET                              ((uint32_t)1U)                              /*
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define _GPIO_PIN_VALUE_MASK                         ((uint32_t)0xFFFF0000U)                     /*
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define _GPIOD_PIN_VALUE_MASK                        ((uint32_t)0xFFFFFFFBU)                     /*
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define _GPIOF_PIN_VALUE_MASK                        ((uint32_t)0xFFFFFF0CU)                     /*
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define _SYSCFG_SRAM_PCEF_FLAG                       ((uint32_t)0x00000100U)
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /* EXTI source select definition */
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTISS0                                      ((uint8_t)0x00U)                            /*
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTISS1                                      ((uint8_t)0x01U)                            /*
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTISS2                                      ((uint8_t)0x02U)                            /*
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTISS3                                      ((uint8_t)0x03U)                            /*
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /* EXTI source select mask bits definition */
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTI_SS_MASK                                 BITS(0,3)                                   /*
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /* EXTI source select jumping step definition */
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTI_SS_JSTEP                                ((uint8_t)0x04U)                            /*
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /* EXTI source select moving step definition */
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #define EXTI_SS_MSTEP(pin)                           (EXTI_SS_JSTEP * ((pin) % EXTI_SS_JSTEP))   /*
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /* static function declaration */
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** static void _syscfg_exti_line_config(uint8_t exti_port, uint8_t exti_pin);
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      deinitialize syscfg
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** void hals_syscfg_deinit(void)
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+  27              		.loc 1 73 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     hal_rcu_periph_reset_enable(RCU_CFGCMPRST);
+  37              		.loc 1 74 5
+  38 0004 4FF44070 		mov	r0, #768
+  39 0008 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     hal_rcu_periph_reset_disable(RCU_CFGCMPRST);
+  40              		.loc 1 75 5
+  41 000c 4FF44070 		mov	r0, #768
+  42 0010 FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+  43              		.loc 1 76 1
+  44 0014 00BF     		nop
+  45 0016 80BD     		pop	{r7, pc}
+  46              		.cfi_endproc
+  47              	.LFE119:
+  49              		.section	.text.hals_syscfg_dma_remap_enable,"ax",%progbits
+  50              		.align	1
+  51              		.global	hals_syscfg_dma_remap_enable
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  55              		.fpu softvfp
+  57              	hals_syscfg_dma_remap_enable:
+  58              	.LFB120:
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      enable the DMA channels remapping
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  syscfg_dma_remap: specify the DMA channels to remap
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 one or more parameters can be selected which are shown as below:
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_TIMER16: remap TIMER16 channel0 and UP DMA requests to channel1(
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_TIMER15: remap TIMER15 channel2 and UP DMA requests to channel3(
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_USART0RX: remap USART0 Rx DMA request to channel4(default channe
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_USART0TX: remap USART0 Tx DMA request to channel3(default channe
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_ADC: remap ADC DMA requests from channel0 to channel1
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     int32_t: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** int32_t hals_syscfg_dma_remap_enable(uint32_t syscfg_dma_remap)
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+  59              		.loc 1 91 1
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 8
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0000 80B4     		push	{r7}
+  65              		.cfi_def_cfa_offset 4
+  66              		.cfi_offset 7, -4
+  67 0002 83B0     		sub	sp, sp, #12
+  68              		.cfi_def_cfa_offset 16
+  69 0004 00AF     		add	r7, sp, #0
+  70              		.cfi_def_cfa_register 7
+  71 0006 7860     		str	r0, [r7, #4]
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check syscfg_dma_remap parameter */
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((SYSCFG_DMA_REMAP_TIMER16 != syscfg_dma_remap)  && \
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_TIMER15 != syscfg_dma_remap)  && \
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_USART0RX != syscfg_dma_remap) && \
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_USART0TX != syscfg_dma_remap) && \
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_ADC != syscfg_dma_remap)) {
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         HAL_DEBUGE("parameter [syscfg_dma_remap] value is invalid");
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return HAL_ERR_VAL;
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG0 |= syscfg_dma_remap;
+  72              		.loc 1 104 17
+  73 0008 054B     		ldr	r3, .L4
+  74 000a 1A68     		ldr	r2, [r3]
+  75 000c 0449     		ldr	r1, .L4
+  76 000e 7B68     		ldr	r3, [r7, #4]
+  77 0010 1343     		orrs	r3, r3, r2
+  78 0012 0B60     		str	r3, [r1]
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     return HAL_ERR_NONE;
+  79              		.loc 1 106 12
+  80 0014 0023     		movs	r3, #0
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+  81              		.loc 1 107 1
+  82 0016 1846     		mov	r0, r3
+  83 0018 0C37     		adds	r7, r7, #12
+  84              		.cfi_def_cfa_offset 4
+  85 001a BD46     		mov	sp, r7
+  86              		.cfi_def_cfa_register 13
+  87              		@ sp needed
+  88 001c 80BC     		pop	{r7}
+  89              		.cfi_restore 7
+  90              		.cfi_def_cfa_offset 0
+  91 001e 7047     		bx	lr
+  92              	.L5:
+  93              		.align	2
+  94              	.L4:
+  95 0020 00000140 		.word	1073807360
+  96              		.cfi_endproc
+  97              	.LFE120:
+  99              		.section	.text.hals_syscfg_dma_remap_disable,"ax",%progbits
+ 100              		.align	1
+ 101              		.global	hals_syscfg_dma_remap_disable
+ 102              		.syntax unified
+ 103              		.thumb
+ 104              		.thumb_func
+ 105              		.fpu softvfp
+ 107              	hals_syscfg_dma_remap_disable:
+ 108              	.LFB121:
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      disable the DMA channels remapping
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  syscfg_dma_remap: specify the DMA channels to remap
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 one or more parameters can be selected which are shown as below:
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_TIMER16: remap TIMER16 channel0 and UP DMA requests to channel1(
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_TIMER15: remap TIMER15 channel2 and UP DMA requests to channel3(
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_USART0RX: remap USART0 Rx DMA request to channel4(default channe
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_USART0TX: remap USART0 Tx DMA request to channel3(default channe
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_DMA_REMAP_ADC: remap ADC DMA requests from channel0 to channel1
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     int32_t: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** int32_t hals_syscfg_dma_remap_disable(uint32_t syscfg_dma_remap)
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 109              		.loc 1 122 1
+ 110              		.cfi_startproc
+ 111              		@ args = 0, pretend = 0, frame = 8
+ 112              		@ frame_needed = 1, uses_anonymous_args = 0
+ 113              		@ link register save eliminated.
+ 114 0000 80B4     		push	{r7}
+ 115              		.cfi_def_cfa_offset 4
+ 116              		.cfi_offset 7, -4
+ 117 0002 83B0     		sub	sp, sp, #12
+ 118              		.cfi_def_cfa_offset 16
+ 119 0004 00AF     		add	r7, sp, #0
+ 120              		.cfi_def_cfa_register 7
+ 121 0006 7860     		str	r0, [r7, #4]
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check syscfg_dma_remap parameter */
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((SYSCFG_DMA_REMAP_TIMER16 != syscfg_dma_remap)  &&  \
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_TIMER15 != syscfg_dma_remap)  &&  \
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_USART0RX != syscfg_dma_remap) &&  \
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_USART0TX != syscfg_dma_remap) &&  \
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_DMA_REMAP_ADC != syscfg_dma_remap)) {
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         HAL_DEBUGE("parameter [syscfg_dma_remap] value is invalid");
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return HAL_ERR_VAL;
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG0 &= ~syscfg_dma_remap;
+ 122              		.loc 1 135 17
+ 123 0008 064B     		ldr	r3, .L8
+ 124 000a 1A68     		ldr	r2, [r3]
+ 125              		.loc 1 135 20
+ 126 000c 7B68     		ldr	r3, [r7, #4]
+ 127 000e DB43     		mvns	r3, r3
+ 128              		.loc 1 135 17
+ 129 0010 0449     		ldr	r1, .L8
+ 130 0012 1340     		ands	r3, r3, r2
+ 131 0014 0B60     		str	r3, [r1]
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     return HAL_ERR_NONE;
+ 132              		.loc 1 137 12
+ 133 0016 0023     		movs	r3, #0
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 134              		.loc 1 138 1
+ 135 0018 1846     		mov	r0, r3
+ 136 001a 0C37     		adds	r7, r7, #12
+ 137              		.cfi_def_cfa_offset 4
+ 138 001c BD46     		mov	sp, r7
+ 139              		.cfi_def_cfa_register 13
+ 140              		@ sp needed
+ 141 001e 80BC     		pop	{r7}
+ 142              		.cfi_restore 7
+ 143              		.cfi_def_cfa_offset 0
+ 144 0020 7047     		bx	lr
+ 145              	.L9:
+ 146 0022 00BF     		.align	2
+ 147              	.L8:
+ 148 0024 00000140 		.word	1073807360
+ 149              		.cfi_endproc
+ 150              	.LFE121:
+ 152              		.section	.text.hals_syscfg_high_current_enable,"ax",%progbits
+ 153              		.align	1
+ 154              		.global	hals_syscfg_high_current_enable
+ 155              		.syntax unified
+ 156              		.thumb
+ 157              		.thumb_func
+ 158              		.fpu softvfp
+ 160              	hals_syscfg_high_current_enable:
+ 161              	.LFB122:
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      enable PB9 high current capability
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** void hals_syscfg_high_current_enable(void)
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 162              		.loc 1 147 1
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 1, uses_anonymous_args = 0
+ 166              		@ link register save eliminated.
+ 167 0000 80B4     		push	{r7}
+ 168              		.cfi_def_cfa_offset 4
+ 169              		.cfi_offset 7, -4
+ 170 0002 00AF     		add	r7, sp, #0
+ 171              		.cfi_def_cfa_register 7
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG0 |= SYSCFG_HIGH_CURRENT_ENABLE;
+ 172              		.loc 1 148 17
+ 173 0004 044B     		ldr	r3, .L11
+ 174 0006 1B68     		ldr	r3, [r3]
+ 175 0008 034A     		ldr	r2, .L11
+ 176 000a 43F40023 		orr	r3, r3, #524288
+ 177 000e 1360     		str	r3, [r2]
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 178              		.loc 1 149 1
+ 179 0010 00BF     		nop
+ 180 0012 BD46     		mov	sp, r7
+ 181              		.cfi_def_cfa_register 13
+ 182              		@ sp needed
+ 183 0014 80BC     		pop	{r7}
+ 184              		.cfi_restore 7
+ 185              		.cfi_def_cfa_offset 0
+ 186 0016 7047     		bx	lr
+ 187              	.L12:
+ 188              		.align	2
+ 189              	.L11:
+ 190 0018 00000140 		.word	1073807360
+ 191              		.cfi_endproc
+ 192              	.LFE122:
+ 194              		.section	.text.hals_syscfg_high_current_disable,"ax",%progbits
+ 195              		.align	1
+ 196              		.global	hals_syscfg_high_current_disable
+ 197              		.syntax unified
+ 198              		.thumb
+ 199              		.thumb_func
+ 200              		.fpu softvfp
+ 202              	hals_syscfg_high_current_disable:
+ 203              	.LFB123:
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      disable PB9 high current capability
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** void hals_syscfg_high_current_disable(void)
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 204              		.loc 1 158 1
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 1, uses_anonymous_args = 0
+ 208              		@ link register save eliminated.
+ 209 0000 80B4     		push	{r7}
+ 210              		.cfi_def_cfa_offset 4
+ 211              		.cfi_offset 7, -4
+ 212 0002 00AF     		add	r7, sp, #0
+ 213              		.cfi_def_cfa_register 7
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG0 &= SYSCFG_HIGH_CURRENT_DISABLE;
+ 214              		.loc 1 159 17
+ 215 0004 044B     		ldr	r3, .L14
+ 216 0006 1B68     		ldr	r3, [r3]
+ 217 0008 034A     		ldr	r2, .L14
+ 218 000a 23F40023 		bic	r3, r3, #524288
+ 219 000e 1360     		str	r3, [r2]
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 220              		.loc 1 160 1
+ 221 0010 00BF     		nop
+ 222 0012 BD46     		mov	sp, r7
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0014 80BC     		pop	{r7}
+ 226              		.cfi_restore 7
+ 227              		.cfi_def_cfa_offset 0
+ 228 0016 7047     		bx	lr
+ 229              	.L15:
+ 230              		.align	2
+ 231              	.L14:
+ 232 0018 00000140 		.word	1073807360
+ 233              		.cfi_endproc
+ 234              	.LFE123:
+ 236              		.section	.text.hals_syscfg_exti_config,"ax",%progbits
+ 237              		.align	1
+ 238              		.global	hals_syscfg_exti_config
+ 239              		.syntax unified
+ 240              		.thumb
+ 241              		.thumb_func
+ 242              		.fpu softvfp
+ 244              	hals_syscfg_exti_config:
+ 245              	.LFB124:
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      configure the GPIO pin as EXTI Line
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  pin: GPIO pin
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 only one parameter can be selected which are shown as below:
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        GPIO_PIN_x(x=0..15)
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     int32_t: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** int32_t hals_syscfg_exti_config(uint32_t gpio_periph, uint32_t pin)
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 246              		.loc 1 172 1
+ 247              		.cfi_startproc
+ 248              		@ args = 0, pretend = 0, frame = 24
+ 249              		@ frame_needed = 1, uses_anonymous_args = 0
+ 250 0000 80B5     		push	{r7, lr}
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 7, -8
+ 253              		.cfi_offset 14, -4
+ 254 0002 86B0     		sub	sp, sp, #24
+ 255              		.cfi_def_cfa_offset 32
+ 256 0004 00AF     		add	r7, sp, #0
+ 257              		.cfi_def_cfa_register 7
+ 258 0006 7860     		str	r0, [r7, #4]
+ 259 0008 3960     		str	r1, [r7]
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint32_t exti_port;
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint8_t exti_pin;
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint32_t i;
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check gpio_periph value */
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((GPIOA != gpio_periph) && \
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (GPIOB != gpio_periph) && \
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (GPIOC != gpio_periph) && \
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (GPIOF != gpio_periph)) {
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         HAL_DEBUGE("parameter [gpio_periph] value is invalid");
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return HAL_ERR_VAL;
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check if pin is PA0 ~ PA15/PB0 ~ PB15 /PC0 ~ PC15 or not */
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((GPIOA == gpio_periph) || \
+ 260              		.loc 1 189 7
+ 261 000a 7B68     		ldr	r3, [r7, #4]
+ 262 000c B3F1904F 		cmp	r3, #1207959552
+ 263 0010 07D0     		beq	.L17
+ 264              		.loc 1 189 31 discriminator 1
+ 265 0012 7B68     		ldr	r3, [r7, #4]
+ 266 0014 5E4A     		ldr	r2, .L47
+ 267 0016 9342     		cmp	r3, r2
+ 268 0018 03D0     		beq	.L17
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (GPIOB == gpio_periph) || \
+ 269              		.loc 1 190 36
+ 270 001a 7B68     		ldr	r3, [r7, #4]
+ 271 001c 5D4A     		ldr	r2, .L47+4
+ 272 001e 9342     		cmp	r3, r2
+ 273 0020 26D1     		bne	.L18
+ 274              	.L17:
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (GPIOC == gpio_periph)) {
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         if((0U != (pin & _GPIO_PIN_VALUE_MASK))) {
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             return HAL_ERR_VAL;
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* check if only one GPIO pin is set or not and get EXTI source pin value */
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         for(exti_pin = 0U; exti_pin < 16U; exti_pin++) {
+ 275              		.loc 1 200 22
+ 276 0022 0023     		movs	r3, #0
+ 277 0024 FB75     		strb	r3, [r7, #23]
+ 278              		.loc 1 200 9
+ 279 0026 20E0     		b	.L19
+ 280              	.L25:
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 281              		.loc 1 201 16
+ 282 0028 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 283 002a 3A68     		ldr	r2, [r7]
+ 284 002c 22FA03F3 		lsr	r3, r2, r3
+ 285 0030 03F00103 		and	r3, r3, #1
+ 286              		.loc 1 201 15
+ 287 0034 002B     		cmp	r3, #0
+ 288 0036 15D0     		beq	.L20
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 for(i = (exti_pin + 1); i < 16U; i++) {
+ 289              		.loc 1 202 35
+ 290 0038 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 291 003a 0133     		adds	r3, r3, #1
+ 292              		.loc 1 202 23
+ 293 003c 3B61     		str	r3, [r7, #16]
+ 294              		.loc 1 202 17
+ 295 003e 0DE0     		b	.L21
+ 296              	.L24:
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 297              		.loc 1 203 27
+ 298 0040 3A68     		ldr	r2, [r7]
+ 299 0042 3B69     		ldr	r3, [r7, #16]
+ 300 0044 22FA03F3 		lsr	r3, r2, r3
+ 301 0048 03F00103 		and	r3, r3, #1
+ 302              		.loc 1 203 23
+ 303 004c 002B     		cmp	r3, #0
+ 304 004e 02D0     		beq	.L22
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         HAL_DEBUGE("parameter [pin] value is invalid");
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         return HAL_ERR_VAL;
+ 305              		.loc 1 205 32
+ 306 0050 6FF00503 		mvn	r3, #5
+ 307 0054 98E0     		b	.L23
+ 308              	.L22:
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 309              		.loc 1 202 51 discriminator 2
+ 310 0056 3B69     		ldr	r3, [r7, #16]
+ 311 0058 0133     		adds	r3, r3, #1
+ 312 005a 3B61     		str	r3, [r7, #16]
+ 313              	.L21:
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 314              		.loc 1 202 17 discriminator 1
+ 315 005c 3B69     		ldr	r3, [r7, #16]
+ 316 005e 0F2B     		cmp	r3, #15
+ 317 0060 EED9     		bls	.L24
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     }
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 }
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 break;
+ 318              		.loc 1 208 17
+ 319 0062 05E0     		b	.L18
+ 320              	.L20:
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 321              		.loc 1 200 52 discriminator 2
+ 322 0064 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 323 0066 0133     		adds	r3, r3, #1
+ 324 0068 FB75     		strb	r3, [r7, #23]
+ 325              	.L19:
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 326              		.loc 1 200 9 discriminator 1
+ 327 006a FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 328 006c 0F2B     		cmp	r3, #15
+ 329 006e DBD9     		bls	.L25
+ 330              	.L18:
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             }
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check if pin is PD2 or not */
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((GPIOD == gpio_periph)) {
+ 331              		.loc 1 214 7
+ 332 0070 7B68     		ldr	r3, [r7, #4]
+ 333 0072 494A     		ldr	r2, .L47+8
+ 334 0074 9342     		cmp	r3, r2
+ 335 0076 26D1     		bne	.L26
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         if((0U != (pin & _GPIOD_PIN_VALUE_MASK))) {
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             return HAL_ERR_VAL;
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* check if only one GPIO pin is set or not and get EXTI source pin value */
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         for(exti_pin = 2U; exti_pin < 3U; exti_pin++) {
+ 336              		.loc 1 223 22
+ 337 0078 0223     		movs	r3, #2
+ 338 007a FB75     		strb	r3, [r7, #23]
+ 339              		.loc 1 223 9
+ 340 007c 20E0     		b	.L27
+ 341              	.L32:
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 342              		.loc 1 224 16
+ 343 007e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 344 0080 3A68     		ldr	r2, [r7]
+ 345 0082 22FA03F3 		lsr	r3, r2, r3
+ 346 0086 03F00103 		and	r3, r3, #1
+ 347              		.loc 1 224 15
+ 348 008a 002B     		cmp	r3, #0
+ 349 008c 15D0     		beq	.L28
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 for(i = (exti_pin + 1); i < 16U; i++) {
+ 350              		.loc 1 225 35
+ 351 008e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 352 0090 0133     		adds	r3, r3, #1
+ 353              		.loc 1 225 23
+ 354 0092 3B61     		str	r3, [r7, #16]
+ 355              		.loc 1 225 17
+ 356 0094 0DE0     		b	.L29
+ 357              	.L31:
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 358              		.loc 1 226 27
+ 359 0096 3A68     		ldr	r2, [r7]
+ 360 0098 3B69     		ldr	r3, [r7, #16]
+ 361 009a 22FA03F3 		lsr	r3, r2, r3
+ 362 009e 03F00103 		and	r3, r3, #1
+ 363              		.loc 1 226 23
+ 364 00a2 002B     		cmp	r3, #0
+ 365 00a4 02D0     		beq	.L30
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         HAL_DEBUGE("parameter [pin] value is invalid");
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         return HAL_ERR_VAL;
+ 366              		.loc 1 228 32
+ 367 00a6 6FF00503 		mvn	r3, #5
+ 368 00aa 6DE0     		b	.L23
+ 369              	.L30:
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 370              		.loc 1 225 51 discriminator 2
+ 371 00ac 3B69     		ldr	r3, [r7, #16]
+ 372 00ae 0133     		adds	r3, r3, #1
+ 373 00b0 3B61     		str	r3, [r7, #16]
+ 374              	.L29:
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 375              		.loc 1 225 17 discriminator 1
+ 376 00b2 3B69     		ldr	r3, [r7, #16]
+ 377 00b4 0F2B     		cmp	r3, #15
+ 378 00b6 EED9     		bls	.L31
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     }
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 }
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 break;
+ 379              		.loc 1 231 17
+ 380 00b8 05E0     		b	.L26
+ 381              	.L28:
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 382              		.loc 1 223 51 discriminator 2
+ 383 00ba FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 384 00bc 0133     		adds	r3, r3, #1
+ 385 00be FB75     		strb	r3, [r7, #23]
+ 386              	.L27:
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 387              		.loc 1 223 9 discriminator 1
+ 388 00c0 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 389 00c2 022B     		cmp	r3, #2
+ 390 00c4 DBD9     		bls	.L32
+ 391              	.L26:
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             }
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check if pin is PF0 ~ PF1/PF4 ~ PF7 or not */
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((GPIOF == gpio_periph)) {
+ 392              		.loc 1 237 7
+ 393 00c6 7B68     		ldr	r3, [r7, #4]
+ 394 00c8 344A     		ldr	r2, .L47+12
+ 395 00ca 9342     		cmp	r3, r2
+ 396 00cc 4DD1     		bne	.L33
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         if((0U != (pin & _GPIOF_PIN_VALUE_MASK))) {
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             return HAL_ERR_VAL;
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* check if only one GPIO pin is set or not and get EXTI source pin value */
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         for(exti_pin = 0U; exti_pin < 2U; exti_pin++) {
+ 397              		.loc 1 246 22
+ 398 00ce 0023     		movs	r3, #0
+ 399 00d0 FB75     		strb	r3, [r7, #23]
+ 400              		.loc 1 246 9
+ 401 00d2 20E0     		b	.L34
+ 402              	.L40:
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 403              		.loc 1 247 16
+ 404 00d4 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 405 00d6 3A68     		ldr	r2, [r7]
+ 406 00d8 22FA03F3 		lsr	r3, r2, r3
+ 407 00dc 03F00103 		and	r3, r3, #1
+ 408              		.loc 1 247 15
+ 409 00e0 002B     		cmp	r3, #0
+ 410 00e2 15D0     		beq	.L35
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 for(i = (exti_pin + 1); i < 16U; i++) {
+ 411              		.loc 1 248 35
+ 412 00e4 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 413 00e6 0133     		adds	r3, r3, #1
+ 414              		.loc 1 248 23
+ 415 00e8 3B61     		str	r3, [r7, #16]
+ 416              		.loc 1 248 17
+ 417 00ea 0DE0     		b	.L36
+ 418              	.L38:
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 419              		.loc 1 249 27
+ 420 00ec 3A68     		ldr	r2, [r7]
+ 421 00ee 3B69     		ldr	r3, [r7, #16]
+ 422 00f0 22FA03F3 		lsr	r3, r2, r3
+ 423 00f4 03F00103 		and	r3, r3, #1
+ 424              		.loc 1 249 23
+ 425 00f8 002B     		cmp	r3, #0
+ 426 00fa 02D0     		beq	.L37
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         HAL_DEBUGE("parameter [pin] value is invalid");
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         return HAL_ERR_VAL;
+ 427              		.loc 1 251 32
+ 428 00fc 6FF00503 		mvn	r3, #5
+ 429 0100 42E0     		b	.L23
+ 430              	.L37:
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 431              		.loc 1 248 51 discriminator 2
+ 432 0102 3B69     		ldr	r3, [r7, #16]
+ 433 0104 0133     		adds	r3, r3, #1
+ 434 0106 3B61     		str	r3, [r7, #16]
+ 435              	.L36:
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 436              		.loc 1 248 17 discriminator 1
+ 437 0108 3B69     		ldr	r3, [r7, #16]
+ 438 010a 0F2B     		cmp	r3, #15
+ 439 010c EED9     		bls	.L38
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     }
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 }
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 break;
+ 440              		.loc 1 254 17
+ 441 010e 05E0     		b	.L39
+ 442              	.L35:
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 443              		.loc 1 246 51 discriminator 2
+ 444 0110 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 445 0112 0133     		adds	r3, r3, #1
+ 446 0114 FB75     		strb	r3, [r7, #23]
+ 447              	.L34:
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 448              		.loc 1 246 9 discriminator 1
+ 449 0116 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 450 0118 012B     		cmp	r3, #1
+ 451 011a DBD9     		bls	.L40
+ 452              	.L39:
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             }
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         for(exti_pin = 4U; exti_pin < 8U; exti_pin++) {
+ 453              		.loc 1 258 22
+ 454 011c 0423     		movs	r3, #4
+ 455 011e FB75     		strb	r3, [r7, #23]
+ 456              		.loc 1 258 9
+ 457 0120 20E0     		b	.L41
+ 458              	.L46:
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 459              		.loc 1 259 16
+ 460 0122 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 461 0124 3A68     		ldr	r2, [r7]
+ 462 0126 22FA03F3 		lsr	r3, r2, r3
+ 463 012a 03F00103 		and	r3, r3, #1
+ 464              		.loc 1 259 15
+ 465 012e 002B     		cmp	r3, #0
+ 466 0130 15D0     		beq	.L42
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 for(i = (exti_pin + 1); i < 16U; i++) {
+ 467              		.loc 1 260 35
+ 468 0132 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 469 0134 0133     		adds	r3, r3, #1
+ 470              		.loc 1 260 23
+ 471 0136 3B61     		str	r3, [r7, #16]
+ 472              		.loc 1 260 17
+ 473 0138 0DE0     		b	.L43
+ 474              	.L45:
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 475              		.loc 1 261 27
+ 476 013a 3A68     		ldr	r2, [r7]
+ 477 013c 3B69     		ldr	r3, [r7, #16]
+ 478 013e 22FA03F3 		lsr	r3, r2, r3
+ 479 0142 03F00103 		and	r3, r3, #1
+ 480              		.loc 1 261 23
+ 481 0146 002B     		cmp	r3, #0
+ 482 0148 02D0     		beq	.L44
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         HAL_DEBUGE("parameter [pin] value is invalid");
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                         return HAL_ERR_VAL;
+ 483              		.loc 1 263 32
+ 484 014a 6FF00503 		mvn	r3, #5
+ 485 014e 1BE0     		b	.L23
+ 486              	.L44:
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 487              		.loc 1 260 51 discriminator 2
+ 488 0150 3B69     		ldr	r3, [r7, #16]
+ 489 0152 0133     		adds	r3, r3, #1
+ 490 0154 3B61     		str	r3, [r7, #16]
+ 491              	.L43:
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     if(0U != ((EXTI_PIN_OFFSET << i) & pin)) {
+ 492              		.loc 1 260 17 discriminator 1
+ 493 0156 3B69     		ldr	r3, [r7, #16]
+ 494 0158 0F2B     		cmp	r3, #15
+ 495 015a EED9     		bls	.L45
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                     }
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 }
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 break;
+ 496              		.loc 1 266 17
+ 497 015c 05E0     		b	.L33
+ 498              	.L42:
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 499              		.loc 1 258 51 discriminator 2
+ 500 015e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 501 0160 0133     		adds	r3, r3, #1
+ 502 0162 FB75     		strb	r3, [r7, #23]
+ 503              	.L41:
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             if((EXTI_PIN_OFFSET << exti_pin) & pin) {
+ 504              		.loc 1 258 9 discriminator 1
+ 505 0164 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 506 0166 072B     		cmp	r3, #7
+ 507 0168 DBD9     		bls	.L46
+ 508              	.L33:
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             }
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         }
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* get EXTI GPIO port */
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     exti_port = gpio_periph - GPIO_BASE;
+ 509              		.loc 1 272 15
+ 510 016a 7B68     		ldr	r3, [r7, #4]
+ 511 016c 03F13843 		add	r3, r3, #-1207959552
+ 512 0170 FB60     		str	r3, [r7, #12]
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     exti_port = (exti_port >> EXTI_PORT_OFFSET);
+ 513              		.loc 1 273 15
+ 514 0172 FB68     		ldr	r3, [r7, #12]
+ 515 0174 9B0A     		lsrs	r3, r3, #10
+ 516 0176 FB60     		str	r3, [r7, #12]
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* configure the GPIO pin as EXTI Line */
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     _syscfg_exti_line_config((uint8_t)exti_port, exti_pin);
+ 517              		.loc 1 276 5
+ 518 0178 FB68     		ldr	r3, [r7, #12]
+ 519 017a DBB2     		uxtb	r3, r3
+ 520 017c FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
+ 521 017e 1146     		mov	r1, r2
+ 522 0180 1846     		mov	r0, r3
+ 523 0182 FFF7FEFF 		bl	_syscfg_exti_line_config
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     return HAL_ERR_NONE;
+ 524              		.loc 1 278 12
+ 525 0186 0023     		movs	r3, #0
+ 526              	.L23:
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 527              		.loc 1 279 1
+ 528 0188 1846     		mov	r0, r3
+ 529 018a 1837     		adds	r7, r7, #24
+ 530              		.cfi_def_cfa_offset 8
+ 531 018c BD46     		mov	sp, r7
+ 532              		.cfi_def_cfa_register 13
+ 533              		@ sp needed
+ 534 018e 80BD     		pop	{r7, pc}
+ 535              	.L48:
+ 536              		.align	2
+ 537              	.L47:
+ 538 0190 00040048 		.word	1207960576
+ 539 0194 00080048 		.word	1207961600
+ 540 0198 000C0048 		.word	1207962624
+ 541 019c 00140048 		.word	1207964672
+ 542              		.cfi_endproc
+ 543              	.LFE124:
+ 545              		.section	.text.hals_syscfg_lock_config,"ax",%progbits
+ 546              		.align	1
+ 547              		.global	hals_syscfg_lock_config
+ 548              		.syntax unified
+ 549              		.thumb
+ 550              		.thumb_func
+ 551              		.fpu softvfp
+ 553              	hals_syscfg_lock_config:
+ 554              	.LFB125:
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      connect TIMER0/14/15/16 break input to the selected parameter
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  syscfg_lock: Specify the parameter to be connected
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 only one parameter can be selected which are shown as below:
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_LOCK_LOCKUP: Cortex-M23 lockup output connected to the break input
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_LOCK_SRAM_PARITY_ERROR: SRAM_PARITY check error connected to the break inp
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_LOCK_LVD: LVD interrupt connected to the break input
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     int32_t: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** int32_t hals_syscfg_lock_config(uint32_t syscfg_lock)
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 555              		.loc 1 292 1
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 8
+ 558              		@ frame_needed = 1, uses_anonymous_args = 0
+ 559              		@ link register save eliminated.
+ 560 0000 80B4     		push	{r7}
+ 561              		.cfi_def_cfa_offset 4
+ 562              		.cfi_offset 7, -4
+ 563 0002 83B0     		sub	sp, sp, #12
+ 564              		.cfi_def_cfa_offset 16
+ 565 0004 00AF     		add	r7, sp, #0
+ 566              		.cfi_def_cfa_register 7
+ 567 0006 7860     		str	r0, [r7, #4]
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* check syscfg_lock parameter */
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((SYSCFG_LOCK_LOCKUP != syscfg_lock) && \
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_LOCK_SRAM_PARITY_ERROR != syscfg_lock) && \
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****             (SYSCFG_LOCK_LVD != syscfg_lock)) {
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         HAL_DEBUGE("parameter [syscfg_lock] value is invalid");
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return HAL_ERR_VAL;
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG2 |= syscfg_lock;
+ 568              		.loc 1 303 17
+ 569 0008 054B     		ldr	r3, .L51
+ 570 000a 1A68     		ldr	r2, [r3]
+ 571 000c 0449     		ldr	r1, .L51
+ 572 000e 7B68     		ldr	r3, [r7, #4]
+ 573 0010 1343     		orrs	r3, r3, r2
+ 574 0012 0B60     		str	r3, [r1]
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     return HAL_ERR_NONE;
+ 575              		.loc 1 305 12
+ 576 0014 0023     		movs	r3, #0
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 577              		.loc 1 306 1
+ 578 0016 1846     		mov	r0, r3
+ 579 0018 0C37     		adds	r7, r7, #12
+ 580              		.cfi_def_cfa_offset 4
+ 581 001a BD46     		mov	sp, r7
+ 582              		.cfi_def_cfa_register 13
+ 583              		@ sp needed
+ 584 001c 80BC     		pop	{r7}
+ 585              		.cfi_restore 7
+ 586              		.cfi_def_cfa_offset 0
+ 587 001e 7047     		bx	lr
+ 588              	.L52:
+ 589              		.align	2
+ 590              	.L51:
+ 591 0020 18000140 		.word	1073807384
+ 592              		.cfi_endproc
+ 593              	.LFE125:
+ 595              		.section	.text.hals_syscfg_sram_pcef_flag_get,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	hals_syscfg_sram_pcef_flag_get
+ 598              		.syntax unified
+ 599              		.thumb
+ 600              		.thumb_func
+ 601              		.fpu softvfp
+ 603              	hals_syscfg_sram_pcef_flag_get:
+ 604              	.LFB126:
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      check if the SRAM parity check error flag in SYSCFG_CFG2 is set or not
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     FlagStatus: SET or RESET
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****   */
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** FlagStatus hals_syscfg_sram_pcef_flag_get(void)
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 605              		.loc 1 315 1
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 0
+ 608              		@ frame_needed = 1, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 610 0000 80B4     		push	{r7}
+ 611              		.cfi_def_cfa_offset 4
+ 612              		.cfi_offset 7, -4
+ 613 0002 00AF     		add	r7, sp, #0
+ 614              		.cfi_def_cfa_register 7
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if((SYSCFG_CFG2 & _SYSCFG_SRAM_PCEF_FLAG) != (uint32_t)RESET) {
+ 615              		.loc 1 316 9
+ 616 0004 064B     		ldr	r3, .L56
+ 617 0006 1B68     		ldr	r3, [r3]
+ 618              		.loc 1 316 21
+ 619 0008 03F48073 		and	r3, r3, #256
+ 620              		.loc 1 316 7
+ 621 000c 002B     		cmp	r3, #0
+ 622 000e 01D0     		beq	.L54
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return SET;
+ 623              		.loc 1 317 16
+ 624 0010 0123     		movs	r3, #1
+ 625 0012 00E0     		b	.L55
+ 626              	.L54:
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     } else {
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return RESET;
+ 627              		.loc 1 319 16
+ 628 0014 0023     		movs	r3, #0
+ 629              	.L55:
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 630              		.loc 1 321 1
+ 631 0016 1846     		mov	r0, r3
+ 632 0018 BD46     		mov	sp, r7
+ 633              		.cfi_def_cfa_register 13
+ 634              		@ sp needed
+ 635 001a 80BC     		pop	{r7}
+ 636              		.cfi_restore 7
+ 637              		.cfi_def_cfa_offset 0
+ 638 001c 7047     		bx	lr
+ 639              	.L57:
+ 640 001e 00BF     		.align	2
+ 641              	.L56:
+ 642 0020 18000140 		.word	1073807384
+ 643              		.cfi_endproc
+ 644              	.LFE126:
+ 646              		.section	.text.hals_syscfg_sram_pcef_flag_clear,"ax",%progbits
+ 647              		.align	1
+ 648              		.global	hals_syscfg_sram_pcef_flag_clear
+ 649              		.syntax unified
+ 650              		.thumb
+ 651              		.thumb_func
+ 652              		.fpu softvfp
+ 654              	hals_syscfg_sram_pcef_flag_clear:
+ 655              	.LFB127:
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      clear the SRAM parity check error flag in SYSCFG_CFG2 by writing 1
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** void hals_syscfg_sram_pcef_flag_clear(void)
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 656              		.loc 1 330 1
+ 657              		.cfi_startproc
+ 658              		@ args = 0, pretend = 0, frame = 0
+ 659              		@ frame_needed = 1, uses_anonymous_args = 0
+ 660              		@ link register save eliminated.
+ 661 0000 80B4     		push	{r7}
+ 662              		.cfi_def_cfa_offset 4
+ 663              		.cfi_offset 7, -4
+ 664 0002 00AF     		add	r7, sp, #0
+ 665              		.cfi_def_cfa_register 7
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CFG2 |= (uint32_t)_SYSCFG_SRAM_PCEF_FLAG;
+ 666              		.loc 1 331 17
+ 667 0004 044B     		ldr	r3, .L59
+ 668 0006 1B68     		ldr	r3, [r3]
+ 669 0008 034A     		ldr	r2, .L59
+ 670 000a 43F48073 		orr	r3, r3, #256
+ 671 000e 1360     		str	r3, [r2]
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 672              		.loc 1 332 1
+ 673 0010 00BF     		nop
+ 674 0012 BD46     		mov	sp, r7
+ 675              		.cfi_def_cfa_register 13
+ 676              		@ sp needed
+ 677 0014 80BC     		pop	{r7}
+ 678              		.cfi_restore 7
+ 679              		.cfi_def_cfa_offset 0
+ 680 0016 7047     		bx	lr
+ 681              	.L60:
+ 682              		.align	2
+ 683              	.L59:
+ 684 0018 18000140 		.word	1073807384
+ 685              		.cfi_endproc
+ 686              	.LFE127:
+ 688              		.section	.text.hals_syscfg_compensation_config,"ax",%progbits
+ 689              		.align	1
+ 690              		.global	hals_syscfg_compensation_config
+ 691              		.syntax unified
+ 692              		.thumb
+ 693              		.thumb_func
+ 694              		.fpu softvfp
+ 696              	hals_syscfg_compensation_config:
+ 697              	.LFB128:
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      configure the I/O compensation cell
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  syscfg_compensation: specifies the I/O compensation cell mode
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 only one parameter can be selected which is shown as below:
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_COMPENSATION_ENABLE: I/O compensation cell is enabled
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        SYSCFG_COMPENSATION_DISABLE: I/O compensation cell is disabled
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** void hals_syscfg_compensation_config(uint32_t syscfg_compensation)
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 698              		.loc 1 344 1
+ 699              		.cfi_startproc
+ 700              		@ args = 0, pretend = 0, frame = 16
+ 701              		@ frame_needed = 1, uses_anonymous_args = 0
+ 702              		@ link register save eliminated.
+ 703 0000 80B4     		push	{r7}
+ 704              		.cfi_def_cfa_offset 4
+ 705              		.cfi_offset 7, -4
+ 706 0002 85B0     		sub	sp, sp, #20
+ 707              		.cfi_def_cfa_offset 24
+ 708 0004 00AF     		add	r7, sp, #0
+ 709              		.cfi_def_cfa_register 7
+ 710 0006 7860     		str	r0, [r7, #4]
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint32_t reg;
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     reg = SYSCFG_CPSCTL;
+ 711              		.loc 1 347 11
+ 712 0008 084B     		ldr	r3, .L62
+ 713              		.loc 1 347 9
+ 714 000a 1B68     		ldr	r3, [r3]
+ 715 000c FB60     		str	r3, [r7, #12]
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     /* reset the SYSCFG_CPSCTL_CPS_EN bit and set according to syscfg_compensation */
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     reg &= ~SYSCFG_CPSCTL_CPS_EN;
+ 716              		.loc 1 349 9
+ 717 000e FB68     		ldr	r3, [r7, #12]
+ 718 0010 23F00103 		bic	r3, r3, #1
+ 719 0014 FB60     		str	r3, [r7, #12]
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     SYSCFG_CPSCTL = (reg | syscfg_compensation);
+ 720              		.loc 1 350 5
+ 721 0016 0549     		ldr	r1, .L62
+ 722              		.loc 1 350 26
+ 723 0018 FA68     		ldr	r2, [r7, #12]
+ 724 001a 7B68     		ldr	r3, [r7, #4]
+ 725 001c 1343     		orrs	r3, r3, r2
+ 726              		.loc 1 350 19
+ 727 001e 0B60     		str	r3, [r1]
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 728              		.loc 1 351 1
+ 729 0020 00BF     		nop
+ 730 0022 1437     		adds	r7, r7, #20
+ 731              		.cfi_def_cfa_offset 4
+ 732 0024 BD46     		mov	sp, r7
+ 733              		.cfi_def_cfa_register 13
+ 734              		@ sp needed
+ 735 0026 80BC     		pop	{r7}
+ 736              		.cfi_restore 7
+ 737              		.cfi_def_cfa_offset 0
+ 738 0028 7047     		bx	lr
+ 739              	.L63:
+ 740 002a 00BF     		.align	2
+ 741              	.L62:
+ 742 002c 20000140 		.word	1073807392
+ 743              		.cfi_endproc
+ 744              	.LFE128:
+ 746              		.section	.text.hals_syscfg_cps_rdy_flag_get,"ax",%progbits
+ 747              		.align	1
+ 748              		.global	hals_syscfg_cps_rdy_flag_get
+ 749              		.syntax unified
+ 750              		.thumb
+ 751              		.thumb_func
+ 752              		.fpu softvfp
+ 754              	hals_syscfg_cps_rdy_flag_get:
+ 755              	.LFB129:
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      check if the I/O compensation cell ready flag is set or not
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  none
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     FlagStatus: SET or RESET
+ 358:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****   */
+ 359:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** FlagStatus hals_syscfg_cps_rdy_flag_get(void)
+ 360:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 756              		.loc 1 360 1
+ 757              		.cfi_startproc
+ 758              		@ args = 0, pretend = 0, frame = 0
+ 759              		@ frame_needed = 1, uses_anonymous_args = 0
+ 760              		@ link register save eliminated.
+ 761 0000 80B4     		push	{r7}
+ 762              		.cfi_def_cfa_offset 4
+ 763              		.cfi_offset 7, -4
+ 764 0002 00AF     		add	r7, sp, #0
+ 765              		.cfi_def_cfa_register 7
+ 361:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     if(((uint32_t)RESET) != (SYSCFG_CPSCTL & SYSCFG_CPSCTL_CPS_RDY)) {
+ 766              		.loc 1 361 30
+ 767 0004 064B     		ldr	r3, .L67
+ 768 0006 1B68     		ldr	r3, [r3]
+ 769              		.loc 1 361 44
+ 770 0008 03F48073 		and	r3, r3, #256
+ 771              		.loc 1 361 7
+ 772 000c 002B     		cmp	r3, #0
+ 773 000e 01D0     		beq	.L65
+ 362:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return SET;
+ 774              		.loc 1 362 16
+ 775 0010 0123     		movs	r3, #1
+ 776 0012 00E0     		b	.L66
+ 777              	.L65:
+ 363:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     } else {
+ 364:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         return RESET;
+ 778              		.loc 1 364 16
+ 779 0014 0023     		movs	r3, #0
+ 780              	.L66:
+ 365:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 366:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 781              		.loc 1 366 1
+ 782 0016 1846     		mov	r0, r3
+ 783 0018 BD46     		mov	sp, r7
+ 784              		.cfi_def_cfa_register 13
+ 785              		@ sp needed
+ 786 001a 80BC     		pop	{r7}
+ 787              		.cfi_restore 7
+ 788              		.cfi_def_cfa_offset 0
+ 789 001c 7047     		bx	lr
+ 790              	.L68:
+ 791 001e 00BF     		.align	2
+ 792              	.L67:
+ 793 0020 20000140 		.word	1073807392
+ 794              		.cfi_endproc
+ 795              	.LFE129:
+ 797              		.section	.text._syscfg_exti_line_config,"ax",%progbits
+ 798              		.align	1
+ 799              		.syntax unified
+ 800              		.thumb
+ 801              		.thumb_func
+ 802              		.fpu softvfp
+ 804              	_syscfg_exti_line_config:
+ 805              	.LFB130:
+ 367:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 368:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** /*!
+ 369:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \brief      configure the GPIO pin as EXTI Line
+ 370:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  exti_port: specify the GPIO port used in EXTI
+ 371:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 only one parameter can be selected which is shown as below:
+ 372:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        EXTI_SOURCE_GPIOx(x = A,B,C,D,F): EXTI GPIO port
+ 373:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[in]  exti_pin: specify the EXTI line
+ 374:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****                 only one parameter can be selected which is shown as below:
+ 375:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****       \arg        EXTI_SOURCE_PINx(x = 0..15): EXTI GPIO pin
+ 376:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \param[out] none
+ 377:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     \retval     none
+ 378:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** */
+ 379:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** static void _syscfg_exti_line_config(uint8_t exti_port, uint8_t exti_pin)
+ 380:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** {
+ 806              		.loc 1 380 1
+ 807              		.cfi_startproc
+ 808              		@ args = 0, pretend = 0, frame = 16
+ 809              		@ frame_needed = 1, uses_anonymous_args = 0
+ 810              		@ link register save eliminated.
+ 811 0000 80B4     		push	{r7}
+ 812              		.cfi_def_cfa_offset 4
+ 813              		.cfi_offset 7, -4
+ 814 0002 85B0     		sub	sp, sp, #20
+ 815              		.cfi_def_cfa_offset 24
+ 816 0004 00AF     		add	r7, sp, #0
+ 817              		.cfi_def_cfa_register 7
+ 818 0006 0346     		mov	r3, r0
+ 819 0008 0A46     		mov	r2, r1
+ 820 000a FB71     		strb	r3, [r7, #7]
+ 821 000c 1346     		mov	r3, r2
+ 822 000e BB71     		strb	r3, [r7, #6]
+ 381:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint32_t clear_exti_mask = ~((uint32_t)EXTI_SS_MASK << (EXTI_SS_MSTEP(exti_pin)));
+ 823              		.loc 1 381 61
+ 824 0010 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 825 0012 03F00303 		and	r3, r3, #3
+ 826 0016 9B00     		lsls	r3, r3, #2
+ 827              		.loc 1 381 57
+ 828 0018 0F22     		movs	r2, #15
+ 829 001a 02FA03F3 		lsl	r3, r2, r3
+ 830              		.loc 1 381 14
+ 831 001e DB43     		mvns	r3, r3
+ 832 0020 FB60     		str	r3, [r7, #12]
+ 382:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     uint32_t config_exti_mask = ((uint32_t)exti_port) << (EXTI_SS_MSTEP(exti_pin));
+ 833              		.loc 1 382 34
+ 834 0022 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 835              		.loc 1 382 59
+ 836 0024 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 837 0026 03F00303 		and	r3, r3, #3
+ 838 002a 9B00     		lsls	r3, r3, #2
+ 839              		.loc 1 382 14
+ 840 002c 02FA03F3 		lsl	r3, r2, r3
+ 841 0030 BB60     		str	r3, [r7, #8]
+ 383:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** 
+ 384:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     switch(exti_pin / EXTI_SS_JSTEP) {
+ 842              		.loc 1 384 21
+ 843 0032 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 844 0034 9B08     		lsrs	r3, r3, #2
+ 845 0036 DBB2     		uxtb	r3, r3
+ 846 0038 032B     		cmp	r3, #3
+ 847 003a 3FD8     		bhi	.L77
+ 848 003c 01A2     		adr	r2, .L72
+ 849 003e 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 850 0042 00BF     		.p2align 2
+ 851              	.L72:
+ 852 0044 55000000 		.word	.L75+1
+ 853 0048 6F000000 		.word	.L74+1
+ 854 004c 89000000 		.word	.L73+1
+ 855 0050 A3000000 		.word	.L71+1
+ 856              		.p2align 1
+ 857              	.L75:
+ 385:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     case EXTISS0:
+ 386:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* clear EXTI source line(0..3) */
+ 387:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS0 &= clear_exti_mask;
+ 858              		.loc 1 387 24
+ 859 0054 1C4B     		ldr	r3, .L78
+ 860 0056 1A68     		ldr	r2, [r3]
+ 861 0058 1B49     		ldr	r1, .L78
+ 862 005a FB68     		ldr	r3, [r7, #12]
+ 863 005c 1340     		ands	r3, r3, r2
+ 864 005e 0B60     		str	r3, [r1]
+ 388:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* configure EXTI soure line(0..3) */
+ 389:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS0 |= config_exti_mask;
+ 865              		.loc 1 389 24
+ 866 0060 194B     		ldr	r3, .L78
+ 867 0062 1A68     		ldr	r2, [r3]
+ 868 0064 1849     		ldr	r1, .L78
+ 869 0066 BB68     		ldr	r3, [r7, #8]
+ 870 0068 1343     		orrs	r3, r3, r2
+ 871 006a 0B60     		str	r3, [r1]
+ 390:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         break;
+ 872              		.loc 1 390 9
+ 873 006c 27E0     		b	.L76
+ 874              	.L74:
+ 391:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     case EXTISS1:
+ 392:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* clear EXTI soure line(4..7) */
+ 393:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS1 &= clear_exti_mask;
+ 875              		.loc 1 393 24
+ 876 006e 174B     		ldr	r3, .L78+4
+ 877 0070 1A68     		ldr	r2, [r3]
+ 878 0072 1649     		ldr	r1, .L78+4
+ 879 0074 FB68     		ldr	r3, [r7, #12]
+ 880 0076 1340     		ands	r3, r3, r2
+ 881 0078 0B60     		str	r3, [r1]
+ 394:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* configure EXTI soure line(4..7) */
+ 395:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS1 |= config_exti_mask;
+ 882              		.loc 1 395 24
+ 883 007a 144B     		ldr	r3, .L78+4
+ 884 007c 1A68     		ldr	r2, [r3]
+ 885 007e 1349     		ldr	r1, .L78+4
+ 886 0080 BB68     		ldr	r3, [r7, #8]
+ 887 0082 1343     		orrs	r3, r3, r2
+ 888 0084 0B60     		str	r3, [r1]
+ 396:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         break;
+ 889              		.loc 1 396 9
+ 890 0086 1AE0     		b	.L76
+ 891              	.L73:
+ 397:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     case EXTISS2:
+ 398:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* clear EXTI soure line(8..11) */
+ 399:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS2 &= clear_exti_mask;
+ 892              		.loc 1 399 24
+ 893 0088 114B     		ldr	r3, .L78+8
+ 894 008a 1A68     		ldr	r2, [r3]
+ 895 008c 1049     		ldr	r1, .L78+8
+ 896 008e FB68     		ldr	r3, [r7, #12]
+ 897 0090 1340     		ands	r3, r3, r2
+ 898 0092 0B60     		str	r3, [r1]
+ 400:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* configure EXTI soure line(8..11) */
+ 401:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS2 |= config_exti_mask;
+ 899              		.loc 1 401 24
+ 900 0094 0E4B     		ldr	r3, .L78+8
+ 901 0096 1A68     		ldr	r2, [r3]
+ 902 0098 0D49     		ldr	r1, .L78+8
+ 903 009a BB68     		ldr	r3, [r7, #8]
+ 904 009c 1343     		orrs	r3, r3, r2
+ 905 009e 0B60     		str	r3, [r1]
+ 402:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         break;
+ 906              		.loc 1 402 9
+ 907 00a0 0DE0     		b	.L76
+ 908              	.L71:
+ 403:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     case EXTISS3:
+ 404:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* clear EXTI soure line(12..15) */
+ 405:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS3 &= clear_exti_mask;
+ 909              		.loc 1 405 24
+ 910 00a2 0C4B     		ldr	r3, .L78+12
+ 911 00a4 1A68     		ldr	r2, [r3]
+ 912 00a6 0B49     		ldr	r1, .L78+12
+ 913 00a8 FB68     		ldr	r3, [r7, #12]
+ 914 00aa 1340     		ands	r3, r3, r2
+ 915 00ac 0B60     		str	r3, [r1]
+ 406:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         /* configure EXTI soure line(12..15) */
+ 407:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         SYSCFG_EXTISS3 |= config_exti_mask;
+ 916              		.loc 1 407 24
+ 917 00ae 094B     		ldr	r3, .L78+12
+ 918 00b0 1A68     		ldr	r2, [r3]
+ 919 00b2 0849     		ldr	r1, .L78+12
+ 920 00b4 BB68     		ldr	r3, [r7, #8]
+ 921 00b6 1343     		orrs	r3, r3, r2
+ 922 00b8 0B60     		str	r3, [r1]
+ 408:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         break;
+ 923              		.loc 1 408 9
+ 924 00ba 00E0     		b	.L76
+ 925              	.L77:
+ 409:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     default:
+ 410:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****         break;
+ 926              		.loc 1 410 9
+ 927 00bc 00BF     		nop
+ 928              	.L76:
+ 411:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c ****     }
+ 412:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c **** }
+ 929              		.loc 1 412 1
+ 930 00be 00BF     		nop
+ 931 00c0 1437     		adds	r7, r7, #20
+ 932              		.cfi_def_cfa_offset 4
+ 933 00c2 BD46     		mov	sp, r7
+ 934              		.cfi_def_cfa_register 13
+ 935              		@ sp needed
+ 936 00c4 80BC     		pop	{r7}
+ 937              		.cfi_restore 7
+ 938              		.cfi_def_cfa_offset 0
+ 939 00c6 7047     		bx	lr
+ 940              	.L79:
+ 941              		.align	2
+ 942              	.L78:
+ 943 00c8 08000140 		.word	1073807368
+ 944 00cc 0C000140 		.word	1073807372
+ 945 00d0 10000140 		.word	1073807376
+ 946 00d4 14000140 		.word	1073807380
+ 947              		.cfi_endproc
+ 948              	.LFE130:
+ 950              		.text
+ 951              	.Letext0:
+ 952              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 953              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 954              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 955              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 956              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 957              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 958              		.file 8 "../firmware/cmsis/inc/core_cm4.h"
+ 959              		.file 9 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 960              		.file 10 "../firmware/cmsis/inc/gd32f3x0.h"
+ 961              		.file 11 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 962              		.file 12 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_syscfg.c
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:16     .text.hals_syscfg_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:24     .text.hals_syscfg_deinit:00000000 hals_syscfg_deinit
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:50     .text.hals_syscfg_dma_remap_enable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:57     .text.hals_syscfg_dma_remap_enable:00000000 hals_syscfg_dma_remap_enable
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:95     .text.hals_syscfg_dma_remap_enable:00000020 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:100    .text.hals_syscfg_dma_remap_disable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:107    .text.hals_syscfg_dma_remap_disable:00000000 hals_syscfg_dma_remap_disable
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:148    .text.hals_syscfg_dma_remap_disable:00000024 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:153    .text.hals_syscfg_high_current_enable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:160    .text.hals_syscfg_high_current_enable:00000000 hals_syscfg_high_current_enable
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:190    .text.hals_syscfg_high_current_enable:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:195    .text.hals_syscfg_high_current_disable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:202    .text.hals_syscfg_high_current_disable:00000000 hals_syscfg_high_current_disable
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:232    .text.hals_syscfg_high_current_disable:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:237    .text.hals_syscfg_exti_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:244    .text.hals_syscfg_exti_config:00000000 hals_syscfg_exti_config
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:804    .text._syscfg_exti_line_config:00000000 _syscfg_exti_line_config
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:538    .text.hals_syscfg_exti_config:00000190 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:546    .text.hals_syscfg_lock_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:553    .text.hals_syscfg_lock_config:00000000 hals_syscfg_lock_config
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:591    .text.hals_syscfg_lock_config:00000020 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:596    .text.hals_syscfg_sram_pcef_flag_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:603    .text.hals_syscfg_sram_pcef_flag_get:00000000 hals_syscfg_sram_pcef_flag_get
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:642    .text.hals_syscfg_sram_pcef_flag_get:00000020 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:647    .text.hals_syscfg_sram_pcef_flag_clear:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:654    .text.hals_syscfg_sram_pcef_flag_clear:00000000 hals_syscfg_sram_pcef_flag_clear
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:684    .text.hals_syscfg_sram_pcef_flag_clear:00000018 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:689    .text.hals_syscfg_compensation_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:696    .text.hals_syscfg_compensation_config:00000000 hals_syscfg_compensation_config
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:742    .text.hals_syscfg_compensation_config:0000002c $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:747    .text.hals_syscfg_cps_rdy_flag_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:754    .text.hals_syscfg_cps_rdy_flag_get:00000000 hals_syscfg_cps_rdy_flag_get
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:793    .text.hals_syscfg_cps_rdy_flag_get:00000020 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:798    .text._syscfg_exti_line_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:852    .text._syscfg_exti_line_config:00000044 $d
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:856    .text._syscfg_exti_line_config:00000054 $t
+C:\Users\peter\AppData\Local\Temp\ccH9TpNT.s:943    .text._syscfg_exti_line_config:000000c8 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_rcu_periph_reset_enable
+hal_rcu_periph_reset_disable

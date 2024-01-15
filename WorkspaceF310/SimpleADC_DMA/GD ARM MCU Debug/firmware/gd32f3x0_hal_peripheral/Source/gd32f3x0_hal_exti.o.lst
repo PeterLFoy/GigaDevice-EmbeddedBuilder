@@ -1,0 +1,1631 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_exti.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	_exti_gpio_used
+  16              		.section	.bss._exti_gpio_used,"aw",%nobits
+  17              		.align	2
+  20              	_exti_gpio_used:
+  21 0000 00000000 		.space	4
+  22              		.section	.bss.s_gpio_irq_handle,"aw",%nobits
+  23              		.align	2
+  26              	s_gpio_irq_handle:
+  27 0000 00000000 		.space	4
+  28              		.section	.bss.s_exti_gpio_info,"aw",%nobits
+  29              		.align	2
+  32              	s_exti_gpio_info:
+  33 0000 00000000 		.space	16
+  33      00000000 
+  33      00000000 
+  33      00000000 
+  34              		.section	.text.hal_exti_gpio_deinit,"ax",%progbits
+  35              		.align	1
+  36              		.global	hal_exti_gpio_deinit
+  37              		.arch armv7e-m
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  41              		.fpu softvfp
+  43              	hal_exti_gpio_deinit:
+  44              	.LFB119:
+  45              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \file    gd32f3x0_hal_exti.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief   EXTI driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     Redistribution and use in source and binary forms, with or without modification,
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** are permitted provided that the following conditions are met:
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****        list of conditions and the following disclaimer.
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****        this list of conditions and the following disclaimer in the documentation
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****        and/or other materials provided with the distribution.
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****        may be used to endorse or promote products derived from this software without
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****        specific prior written permission.
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** OF SUCH DAMAGE.
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #include "gd32f3x0_hal.h"
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_GPIO_MAX_NUM              (16U)
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_RISING                    (0x00000001U)
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_FALLING                   (0x00000002U)
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_EVENT                     (0x00000004U)
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_INTERRUPT                 (0x00000008U)
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_GPIO_PORT_GET(x)          ((x >> 4) & (uint8_t)0x0F)
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _EXTI_GPIO_PIN_GET(x)           (x & (uint8_t)0x0F)
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _GPIO_PIN_VALUE_MASK            ((uint32_t)0xFFFF0000U)
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _GPIO_PIN_VALUE_MASK              ((uint32_t)0xFFFF0000U)
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _GPIOD_PIN_VALUE_MASK             ((uint32_t)0xFFFF0004U)
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #define _GPIOF_PIN_VALUE_MASK             ((uint32_t)0xFFFF000CU)
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** volatile uint32_t _exti_gpio_used = 0;
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /* EXTI IRQ HANDLE callback */
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static hal_gpio_irq_handle_cb s_gpio_irq_handle = NULL;
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static volatile uint8_t s_exti_gpio_info[_EXTI_GPIO_MAX_NUM];
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static void _exti_type_config(uint32_t pin, hal_exti_type_enum exti_type);
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static void _exti_gpio_info_set(uint32_t gpio_periph, uint32_t pin);
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      deinitialize the EXTI GPIO
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  pin: GPIO pin
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 one or more parameters can be selected which are shown as below:
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     error code: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** int32_t hal_exti_gpio_deinit(uint32_t gpio_periph, uint32_t pin)
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+  46              		.loc 1 69 1
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 8
+  49              		@ frame_needed = 1, uses_anonymous_args = 0
+  50 0000 80B5     		push	{r7, lr}
+  51              		.cfi_def_cfa_offset 8
+  52              		.cfi_offset 7, -8
+  53              		.cfi_offset 14, -4
+  54 0002 82B0     		sub	sp, sp, #8
+  55              		.cfi_def_cfa_offset 16
+  56 0004 00AF     		add	r7, sp, #0
+  57              		.cfi_def_cfa_register 7
+  58 0006 7860     		str	r0, [r7, #4]
+  59 0008 3960     		str	r1, [r7]
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #if (1 == HAL_PARAMETER_CHECK)
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check gpio_periph value */
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOA != gpio_periph) && (GPIOB != gpio_periph) && (GPIOC != gpio_periph) && (GPIOD != gpio
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         HAL_DEBUGE("parameter [gpio_periph] value is invalid");
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return HAL_ERR_VAL;
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PA0 ~ PA15/PB0 ~ PB15/PC0 ~ PC15 or not*/
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOA == gpio_periph) || (GPIOB == gpio_periph) || (GPIOC == gpio_periph)) {
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIO_PIN_VALUE_MASK))) {
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PD2 or not*/
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOD == gpio_periph)) {
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIOD_PIN_VALUE_MASK))) {
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PF0 ~ PF1/PF4 ~ PF7 or not*/
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOF == gpio_periph)) {
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIOF_PIN_VALUE_MASK))) {
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     hal_gpio_deinit(gpio_periph, pin);
+  60              		.loc 1 99 5
+  61 000a 3968     		ldr	r1, [r7]
+  62 000c 7868     		ldr	r0, [r7, #4]
+  63 000e FFF7FEFF 		bl	hal_gpio_deinit
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     _exti_gpio_used &= ~pin;
+  64              		.loc 1 100 24
+  65 0012 3B68     		ldr	r3, [r7]
+  66 0014 DA43     		mvns	r2, r3
+  67              		.loc 1 100 21
+  68 0016 164B     		ldr	r3, .L3
+  69 0018 1B68     		ldr	r3, [r3]
+  70 001a 1340     		ands	r3, r3, r2
+  71 001c 144A     		ldr	r2, .L3
+  72 001e 1360     		str	r3, [r2]
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* reset the EXTI gpio pin */
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_INTEN &= (uint32_t)~pin;
+  73              		.loc 1 102 16
+  74 0020 144B     		ldr	r3, .L3+4
+  75 0022 1A68     		ldr	r2, [r3]
+  76              		.loc 1 102 29
+  77 0024 3B68     		ldr	r3, [r7]
+  78 0026 DB43     		mvns	r3, r3
+  79              		.loc 1 102 16
+  80 0028 1249     		ldr	r1, .L3+4
+  81 002a 1340     		ands	r3, r3, r2
+  82 002c 0B60     		str	r3, [r1]
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_EVEN  &= (uint32_t)~pin;
+  83              		.loc 1 103 16
+  84 002e 124B     		ldr	r3, .L3+8
+  85 0030 1A68     		ldr	r2, [r3]
+  86              		.loc 1 103 29
+  87 0032 3B68     		ldr	r3, [r7]
+  88 0034 DB43     		mvns	r3, r3
+  89              		.loc 1 103 16
+  90 0036 1049     		ldr	r1, .L3+8
+  91 0038 1340     		ands	r3, r3, r2
+  92 003a 0B60     		str	r3, [r1]
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_RTEN  &= (uint32_t)~pin;
+  93              		.loc 1 104 16
+  94 003c 0F4B     		ldr	r3, .L3+12
+  95 003e 1A68     		ldr	r2, [r3]
+  96              		.loc 1 104 29
+  97 0040 3B68     		ldr	r3, [r7]
+  98 0042 DB43     		mvns	r3, r3
+  99              		.loc 1 104 16
+ 100 0044 0D49     		ldr	r1, .L3+12
+ 101 0046 1340     		ands	r3, r3, r2
+ 102 0048 0B60     		str	r3, [r1]
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_FTEN  &= (uint32_t)~pin;
+ 103              		.loc 1 105 16
+ 104 004a 0D4B     		ldr	r3, .L3+16
+ 105 004c 1A68     		ldr	r2, [r3]
+ 106              		.loc 1 105 29
+ 107 004e 3B68     		ldr	r3, [r7]
+ 108 0050 DB43     		mvns	r3, r3
+ 109              		.loc 1 105 16
+ 110 0052 0B49     		ldr	r1, .L3+16
+ 111 0054 1340     		ands	r3, r3, r2
+ 112 0056 0B60     		str	r3, [r1]
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_SWIEV &= (uint32_t)~pin;
+ 113              		.loc 1 106 16
+ 114 0058 0A4B     		ldr	r3, .L3+20
+ 115 005a 1A68     		ldr	r2, [r3]
+ 116              		.loc 1 106 29
+ 117 005c 3B68     		ldr	r3, [r7]
+ 118 005e DB43     		mvns	r3, r3
+ 119              		.loc 1 106 16
+ 120 0060 0849     		ldr	r1, .L3+20
+ 121 0062 1340     		ands	r3, r3, r2
+ 122 0064 0B60     		str	r3, [r1]
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     return HAL_ERR_NONE;
+ 123              		.loc 1 108 12
+ 124 0066 0023     		movs	r3, #0
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 125              		.loc 1 109 1
+ 126 0068 1846     		mov	r0, r3
+ 127 006a 0837     		adds	r7, r7, #8
+ 128              		.cfi_def_cfa_offset 8
+ 129 006c BD46     		mov	sp, r7
+ 130              		.cfi_def_cfa_register 13
+ 131              		@ sp needed
+ 132 006e 80BD     		pop	{r7, pc}
+ 133              	.L4:
+ 134              		.align	2
+ 135              	.L3:
+ 136 0070 00000000 		.word	_exti_gpio_used
+ 137 0074 00040140 		.word	1073808384
+ 138 0078 04040140 		.word	1073808388
+ 139 007c 08040140 		.word	1073808392
+ 140 0080 0C040140 		.word	1073808396
+ 141 0084 10040140 		.word	1073808400
+ 142              		.cfi_endproc
+ 143              	.LFE119:
+ 145              		.section	.text.hal_exti_internal_deinit,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	hal_exti_internal_deinit
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 151              		.fpu softvfp
+ 153              	hal_exti_internal_deinit:
+ 154              	.LFB120:
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      deinitialize the EXTI internal line
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  line: the argument could be selected from enumeration <hal_exti_internal_line_enum>
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hal_exti_internal_deinit(hal_exti_internal_line_enum line)
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 155              		.loc 1 118 1
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 8
+ 158              		@ frame_needed = 1, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160 0000 80B4     		push	{r7}
+ 161              		.cfi_def_cfa_offset 4
+ 162              		.cfi_offset 7, -4
+ 163 0002 83B0     		sub	sp, sp, #12
+ 164              		.cfi_def_cfa_offset 16
+ 165 0004 00AF     		add	r7, sp, #0
+ 166              		.cfi_def_cfa_register 7
+ 167 0006 7860     		str	r0, [r7, #4]
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_INTEN &= (uint32_t)~line;
+ 168              		.loc 1 119 16
+ 169 0008 134B     		ldr	r3, .L6
+ 170 000a 1A68     		ldr	r2, [r3]
+ 171              		.loc 1 119 19
+ 172 000c 7B68     		ldr	r3, [r7, #4]
+ 173 000e DB43     		mvns	r3, r3
+ 174              		.loc 1 119 16
+ 175 0010 1149     		ldr	r1, .L6
+ 176 0012 1340     		ands	r3, r3, r2
+ 177 0014 0B60     		str	r3, [r1]
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_EVEN  &= (uint32_t)~line;
+ 178              		.loc 1 120 16
+ 179 0016 114B     		ldr	r3, .L6+4
+ 180 0018 1A68     		ldr	r2, [r3]
+ 181              		.loc 1 120 19
+ 182 001a 7B68     		ldr	r3, [r7, #4]
+ 183 001c DB43     		mvns	r3, r3
+ 184              		.loc 1 120 16
+ 185 001e 0F49     		ldr	r1, .L6+4
+ 186 0020 1340     		ands	r3, r3, r2
+ 187 0022 0B60     		str	r3, [r1]
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_RTEN  &= (uint32_t)~line;
+ 188              		.loc 1 121 16
+ 189 0024 0E4B     		ldr	r3, .L6+8
+ 190 0026 1A68     		ldr	r2, [r3]
+ 191              		.loc 1 121 19
+ 192 0028 7B68     		ldr	r3, [r7, #4]
+ 193 002a DB43     		mvns	r3, r3
+ 194              		.loc 1 121 16
+ 195 002c 0C49     		ldr	r1, .L6+8
+ 196 002e 1340     		ands	r3, r3, r2
+ 197 0030 0B60     		str	r3, [r1]
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_FTEN  &= (uint32_t)~line;
+ 198              		.loc 1 122 16
+ 199 0032 0C4B     		ldr	r3, .L6+12
+ 200 0034 1A68     		ldr	r2, [r3]
+ 201              		.loc 1 122 19
+ 202 0036 7B68     		ldr	r3, [r7, #4]
+ 203 0038 DB43     		mvns	r3, r3
+ 204              		.loc 1 122 16
+ 205 003a 0A49     		ldr	r1, .L6+12
+ 206 003c 1340     		ands	r3, r3, r2
+ 207 003e 0B60     		str	r3, [r1]
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_SWIEV &= (uint32_t)~line;
+ 208              		.loc 1 123 16
+ 209 0040 094B     		ldr	r3, .L6+16
+ 210 0042 1A68     		ldr	r2, [r3]
+ 211              		.loc 1 123 19
+ 212 0044 7B68     		ldr	r3, [r7, #4]
+ 213 0046 DB43     		mvns	r3, r3
+ 214              		.loc 1 123 16
+ 215 0048 0749     		ldr	r1, .L6+16
+ 216 004a 1340     		ands	r3, r3, r2
+ 217 004c 0B60     		str	r3, [r1]
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 218              		.loc 1 124 1
+ 219 004e 00BF     		nop
+ 220 0050 0C37     		adds	r7, r7, #12
+ 221              		.cfi_def_cfa_offset 4
+ 222 0052 BD46     		mov	sp, r7
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0054 80BC     		pop	{r7}
+ 226              		.cfi_restore 7
+ 227              		.cfi_def_cfa_offset 0
+ 228 0056 7047     		bx	lr
+ 229              	.L7:
+ 230              		.align	2
+ 231              	.L6:
+ 232 0058 00040140 		.word	1073808384
+ 233 005c 04040140 		.word	1073808388
+ 234 0060 08040140 		.word	1073808392
+ 235 0064 0C040140 		.word	1073808396
+ 236 0068 10040140 		.word	1073808400
+ 237              		.cfi_endproc
+ 238              	.LFE120:
+ 240              		.section	.text.hal_exti_gpio_init,"ax",%progbits
+ 241              		.align	1
+ 242              		.global	hal_exti_gpio_init
+ 243              		.syntax unified
+ 244              		.thumb
+ 245              		.thumb_func
+ 246              		.fpu softvfp
+ 248              	hal_exti_gpio_init:
+ 249              	.LFB121:
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      initialize the configuration of EXTI gpio
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  pin: GPIO pin
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 one or more parameters can be selected which are shown as below:
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  pull: gpio pin with pull-up or pull-down resistor
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 only one parameter can be selected which is shown as below:
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        HAL_GPIO_PULL_NONE: floating mode, no pull-up and pull-down resistors
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        HAL_GPIO_PUll_PULLUP: with pull-up resistor
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        HAL_GPIO_PUll_PULLDOWN: with pull-down resistor
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  exti_type: the argument could be selected from enumeration <hal_exti_type_enum>
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     error code: HAL_ERR_VAL, HAL_ERR_ALREADY_DONE, HAL_ERR_NONE, details refer to gd32f
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** int32_t hal_exti_gpio_init(uint32_t gpio_periph, uint32_t pin, uint32_t pull, hal_exti_type_enum ex
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 250              		.loc 1 142 1
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 16
+ 253              		@ frame_needed = 1, uses_anonymous_args = 0
+ 254 0000 80B5     		push	{r7, lr}
+ 255              		.cfi_def_cfa_offset 8
+ 256              		.cfi_offset 7, -8
+ 257              		.cfi_offset 14, -4
+ 258 0002 84B0     		sub	sp, sp, #16
+ 259              		.cfi_def_cfa_offset 24
+ 260 0004 00AF     		add	r7, sp, #0
+ 261              		.cfi_def_cfa_register 7
+ 262 0006 F860     		str	r0, [r7, #12]
+ 263 0008 B960     		str	r1, [r7, #8]
+ 264 000a 7A60     		str	r2, [r7, #4]
+ 265 000c FB70     		strb	r3, [r7, #3]
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     static hal_gpio_init_struct gpio_init;
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check gpio_periph value */
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOA != gpio_periph) && (GPIOB != gpio_periph) && (GPIOC != gpio_periph) && (GPIOD != gpio
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         HAL_DEBUGE("parameter [gpio_periph] value is invalid");
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return HAL_ERR_VAL;
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PA0 ~ PA15/PB0 ~ PB15/PC0 ~ PC15 or not*/
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOA == gpio_periph) || (GPIOB == gpio_periph) || (GPIOC == gpio_periph)) {
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIO_PIN_VALUE_MASK))) {
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PD2 or not*/
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOD == gpio_periph)) {
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIOD_PIN_VALUE_MASK))) {
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check if pin is PF0 ~ PF1/PF4 ~ PF7 or not*/
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if((GPIOF == gpio_periph)) {
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((0U != (pin & _GPIOF_PIN_VALUE_MASK))) {
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             return HAL_ERR_VAL;
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check the pin is use or not */
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(0 != (_exti_gpio_used & pin)) {
+ 266              		.loc 1 175 30
+ 267 000e 194B     		ldr	r3, .L11
+ 268 0010 1A68     		ldr	r2, [r3]
+ 269 0012 BB68     		ldr	r3, [r7, #8]
+ 270 0014 1340     		ands	r3, r3, r2
+ 271              		.loc 1 175 7
+ 272 0016 002B     		cmp	r3, #0
+ 273 0018 02D0     		beq	.L9
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         HAL_DEBUGE("exti gpio init fail, this pin is already used");
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return HAL_ERR_ALREADY_DONE;
+ 274              		.loc 1 177 16
+ 275 001a 4FF0FF33 		mov	r3, #-1
+ 276 001e 24E0     		b	.L10
+ 277              	.L9:
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         _exti_gpio_used |= pin;
+ 278              		.loc 1 179 25
+ 279 0020 144B     		ldr	r3, .L11
+ 280 0022 1A68     		ldr	r2, [r3]
+ 281 0024 BB68     		ldr	r3, [r7, #8]
+ 282 0026 1343     		orrs	r3, r3, r2
+ 283 0028 124A     		ldr	r2, .L11
+ 284 002a 1360     		str	r3, [r2]
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         _exti_gpio_info_set(gpio_periph, pin);
+ 285              		.loc 1 180 9
+ 286 002c B968     		ldr	r1, [r7, #8]
+ 287 002e F868     		ldr	r0, [r7, #12]
+ 288 0030 FFF7FEFF 		bl	_exti_gpio_info_set
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     hal_gpio_struct_init(&gpio_init);
+ 289              		.loc 1 183 5
+ 290 0034 1048     		ldr	r0, .L11+4
+ 291 0036 FFF7FEFF 		bl	hal_gpio_struct_init
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     gpio_init.mode = GPIO_MODE_INPUT;
+ 292              		.loc 1 184 20
+ 293 003a 0F4B     		ldr	r3, .L11+4
+ 294 003c 0022     		movs	r2, #0
+ 295 003e 1A60     		str	r2, [r3]
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     gpio_init.ospeed = GPIO_OSPEED_50MHZ;
+ 296              		.loc 1 185 22
+ 297 0040 0D4B     		ldr	r3, .L11+4
+ 298 0042 0322     		movs	r2, #3
+ 299 0044 9A60     		str	r2, [r3, #8]
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     gpio_init.pull = pull;
+ 300              		.loc 1 186 20
+ 301 0046 0C4A     		ldr	r2, .L11+4
+ 302 0048 7B68     		ldr	r3, [r7, #4]
+ 303 004a 5360     		str	r3, [r2, #4]
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     hal_gpio_init(gpio_periph, pin, &gpio_init);
+ 304              		.loc 1 188 5
+ 305 004c 0A4A     		ldr	r2, .L11+4
+ 306 004e B968     		ldr	r1, [r7, #8]
+ 307 0050 F868     		ldr	r0, [r7, #12]
+ 308 0052 FFF7FEFF 		bl	hal_gpio_init
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     hals_syscfg_exti_config(gpio_periph, pin);
+ 309              		.loc 1 189 5
+ 310 0056 B968     		ldr	r1, [r7, #8]
+ 311 0058 F868     		ldr	r0, [r7, #12]
+ 312 005a FFF7FEFF 		bl	hals_syscfg_exti_config
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     _exti_type_config(pin, exti_type);
+ 313              		.loc 1 190 5
+ 314 005e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 315 0060 1946     		mov	r1, r3
+ 316 0062 B868     		ldr	r0, [r7, #8]
+ 317 0064 FFF7FEFF 		bl	_exti_type_config
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     return HAL_ERR_NONE;
+ 318              		.loc 1 192 12
+ 319 0068 0023     		movs	r3, #0
+ 320              	.L10:
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 321              		.loc 1 193 1
+ 322 006a 1846     		mov	r0, r3
+ 323 006c 1037     		adds	r7, r7, #16
+ 324              		.cfi_def_cfa_offset 8
+ 325 006e BD46     		mov	sp, r7
+ 326              		.cfi_def_cfa_register 13
+ 327              		@ sp needed
+ 328 0070 80BD     		pop	{r7, pc}
+ 329              	.L12:
+ 330 0072 00BF     		.align	2
+ 331              	.L11:
+ 332 0074 00000000 		.word	_exti_gpio_used
+ 333 0078 00000000 		.word	gpio_init.10929
+ 334              		.cfi_endproc
+ 335              	.LFE121:
+ 337              		.section	.text.hal_exti_internal_init,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	hal_exti_internal_init
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu softvfp
+ 345              	hal_exti_internal_init:
+ 346              	.LFB122:
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      initialize the configuration of EXTI internal
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  line: the argument could be selected from enumeration <hal_exti_internal_line_enum>
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  exti_type: the argument could be selected from enumeration <hal_exti_type_enum>
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hal_exti_internal_init(hal_exti_internal_line_enum line, hal_exti_type_enum exti_type)
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 347              		.loc 1 203 1
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 8
+ 350              		@ frame_needed = 1, uses_anonymous_args = 0
+ 351 0000 80B5     		push	{r7, lr}
+ 352              		.cfi_def_cfa_offset 8
+ 353              		.cfi_offset 7, -8
+ 354              		.cfi_offset 14, -4
+ 355 0002 82B0     		sub	sp, sp, #8
+ 356              		.cfi_def_cfa_offset 16
+ 357 0004 00AF     		add	r7, sp, #0
+ 358              		.cfi_def_cfa_register 7
+ 359 0006 7860     		str	r0, [r7, #4]
+ 360 0008 0B46     		mov	r3, r1
+ 361 000a FB70     		strb	r3, [r7, #3]
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     _exti_type_config(line, exti_type);
+ 362              		.loc 1 204 5
+ 363 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 364 000e 1946     		mov	r1, r3
+ 365 0010 7868     		ldr	r0, [r7, #4]
+ 366 0012 FFF7FEFF 		bl	_exti_type_config
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 367              		.loc 1 205 1
+ 368 0016 00BF     		nop
+ 369 0018 0837     		adds	r7, r7, #8
+ 370              		.cfi_def_cfa_offset 8
+ 371 001a BD46     		mov	sp, r7
+ 372              		.cfi_def_cfa_register 13
+ 373              		@ sp needed
+ 374 001c 80BD     		pop	{r7, pc}
+ 375              		.cfi_endproc
+ 376              	.LFE122:
+ 378              		.section	.text.hal_exti_gpio_irq_handle_set,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	hal_exti_gpio_irq_handle_set
+ 381              		.syntax unified
+ 382              		.thumb
+ 383              		.thumb_func
+ 384              		.fpu softvfp
+ 386              	hal_exti_gpio_irq_handle_set:
+ 387              	.LFB123:
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      set user-defined interrupt callback function,
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  irq_handler: configuration the EXTI callback function, implemented by the user hims
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** int32_t hal_exti_gpio_irq_handle_set(hal_gpio_irq_handle_cb irq_handler)
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 388              		.loc 1 215 1
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 8
+ 391              		@ frame_needed = 1, uses_anonymous_args = 0
+ 392              		@ link register save eliminated.
+ 393 0000 80B4     		push	{r7}
+ 394              		.cfi_def_cfa_offset 4
+ 395              		.cfi_offset 7, -4
+ 396 0002 83B0     		sub	sp, sp, #12
+ 397              		.cfi_def_cfa_offset 16
+ 398 0004 00AF     		add	r7, sp, #0
+ 399              		.cfi_def_cfa_register 7
+ 400 0006 7860     		str	r0, [r7, #4]
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* check irq_handler address */
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(NULL == irq_handler) {
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         HAL_DEBUGE("irq_handler is invalid");
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return HAL_ERR_ADDRESS;
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     s_gpio_irq_handle = irq_handler;
+ 401              		.loc 1 224 23
+ 402 0008 044A     		ldr	r2, .L16
+ 403 000a 7B68     		ldr	r3, [r7, #4]
+ 404 000c 1360     		str	r3, [r2]
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     return HAL_ERR_NONE;
+ 405              		.loc 1 226 12
+ 406 000e 0023     		movs	r3, #0
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 407              		.loc 1 227 1
+ 408 0010 1846     		mov	r0, r3
+ 409 0012 0C37     		adds	r7, r7, #12
+ 410              		.cfi_def_cfa_offset 4
+ 411 0014 BD46     		mov	sp, r7
+ 412              		.cfi_def_cfa_register 13
+ 413              		@ sp needed
+ 414 0016 80BC     		pop	{r7}
+ 415              		.cfi_restore 7
+ 416              		.cfi_def_cfa_offset 0
+ 417 0018 7047     		bx	lr
+ 418              	.L17:
+ 419 001a 00BF     		.align	2
+ 420              	.L16:
+ 421 001c 00000000 		.word	s_gpio_irq_handle
+ 422              		.cfi_endproc
+ 423              	.LFE123:
+ 425              		.section	.text.hal_exti_gpio_irq_handle_all_reset,"ax",%progbits
+ 426              		.align	1
+ 427              		.global	hal_exti_gpio_irq_handle_all_reset
+ 428              		.syntax unified
+ 429              		.thumb
+ 430              		.thumb_func
+ 431              		.fpu softvfp
+ 433              	hal_exti_gpio_irq_handle_all_reset:
+ 434              	.LFB124:
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      reset all user-defined interrupt callback function,
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  none
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hal_exti_gpio_irq_handle_all_reset(void)
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 435              		.loc 1 237 1
+ 436              		.cfi_startproc
+ 437              		@ args = 0, pretend = 0, frame = 0
+ 438              		@ frame_needed = 1, uses_anonymous_args = 0
+ 439              		@ link register save eliminated.
+ 440 0000 80B4     		push	{r7}
+ 441              		.cfi_def_cfa_offset 4
+ 442              		.cfi_offset 7, -4
+ 443 0002 00AF     		add	r7, sp, #0
+ 444              		.cfi_def_cfa_register 7
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     s_gpio_irq_handle = NULL;
+ 445              		.loc 1 238 23
+ 446 0004 034B     		ldr	r3, .L19
+ 447 0006 0022     		movs	r2, #0
+ 448 0008 1A60     		str	r2, [r3]
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 449              		.loc 1 239 1
+ 450 000a 00BF     		nop
+ 451 000c BD46     		mov	sp, r7
+ 452              		.cfi_def_cfa_register 13
+ 453              		@ sp needed
+ 454 000e 80BC     		pop	{r7}
+ 455              		.cfi_restore 7
+ 456              		.cfi_def_cfa_offset 0
+ 457 0010 7047     		bx	lr
+ 458              	.L20:
+ 459 0012 00BF     		.align	2
+ 460              	.L19:
+ 461 0014 00000000 		.word	s_gpio_irq_handle
+ 462              		.cfi_endproc
+ 463              	.LFE124:
+ 465              		.section	.text.hal_exti_gpio_irq,"ax",%progbits
+ 466              		.align	1
+ 467              		.global	hal_exti_gpio_irq
+ 468              		.syntax unified
+ 469              		.thumb
+ 470              		.thumb_func
+ 471              		.fpu softvfp
+ 473              	hal_exti_gpio_irq:
+ 474              	.LFB125:
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      EXTI_GPIO interrupt handler content function,which is merely used in EXTI_GPIO_hand
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  index: indicate this function will be called by which interrupt handler entry
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        the argument could be selected from enumeration <hal_exti_irq_index_enum>
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hal_exti_gpio_irq(hal_exti_irq_index_enum index)
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 475              		.loc 1 249 1
+ 476              		.cfi_startproc
+ 477              		@ args = 0, pretend = 0, frame = 32
+ 478              		@ frame_needed = 1, uses_anonymous_args = 0
+ 479 0000 80B5     		push	{r7, lr}
+ 480              		.cfi_def_cfa_offset 8
+ 481              		.cfi_offset 7, -8
+ 482              		.cfi_offset 14, -4
+ 483 0002 88B0     		sub	sp, sp, #32
+ 484              		.cfi_def_cfa_offset 40
+ 485 0004 00AF     		add	r7, sp, #0
+ 486              		.cfi_def_cfa_register 7
+ 487 0006 0346     		mov	r3, r0
+ 488 0008 FB71     		strb	r3, [r7, #7]
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t i;
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t gpio_port;
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t gpio_pin;
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t temp;
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint8_t start_pin, end_pin;
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     start_pin = (index & 0xF0U) >> 4;
+ 489              		.loc 1 256 15
+ 490 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 491 000c 1B09     		lsrs	r3, r3, #4
+ 492 000e FB76     		strb	r3, [r7, #27]
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     end_pin = index & 0x0FU;
+ 493              		.loc 1 257 13
+ 494 0010 FB79     		ldrb	r3, [r7, #7]
+ 495 0012 03F00F03 		and	r3, r3, #15
+ 496 0016 BB76     		strb	r3, [r7, #26]
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* get EXTI GPIO port and pin */
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     for(i = start_pin; i <= end_pin; i++) {
+ 497              		.loc 1 260 11
+ 498 0018 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 499 001a FB61     		str	r3, [r7, #28]
+ 500              		.loc 1 260 5
+ 501 001c 49E0     		b	.L22
+ 502              	.L26:
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if(0 != (_exti_gpio_used & (1 << i))) {
+ 503              		.loc 1 261 39
+ 504 001e 0122     		movs	r2, #1
+ 505 0020 FB69     		ldr	r3, [r7, #28]
+ 506 0022 02FA03F3 		lsl	r3, r2, r3
+ 507 0026 1A46     		mov	r2, r3
+ 508              		.loc 1 261 34
+ 509 0028 264B     		ldr	r3, .L28
+ 510 002a 1B68     		ldr	r3, [r3]
+ 511 002c 1340     		ands	r3, r3, r2
+ 512              		.loc 1 261 11
+ 513 002e 002B     		cmp	r3, #0
+ 514 0030 3CD0     		beq	.L23
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             temp = _EXTI_GPIO_PORT_GET(s_exti_gpio_info[i]);
+ 515              		.loc 1 262 20
+ 516 0032 254A     		ldr	r2, .L28+4
+ 517 0034 FB69     		ldr	r3, [r7, #28]
+ 518 0036 1344     		add	r3, r3, r2
+ 519 0038 1B78     		ldrb	r3, [r3]
+ 520 003a DBB2     		uxtb	r3, r3
+ 521 003c 1B09     		lsrs	r3, r3, #4
+ 522 003e DBB2     		uxtb	r3, r3
+ 523              		.loc 1 262 18
+ 524 0040 03F00F03 		and	r3, r3, #15
+ 525 0044 7B61     		str	r3, [r7, #20]
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             gpio_port = GPIO_BASE + (temp << 10);
+ 526              		.loc 1 263 43
+ 527 0046 7B69     		ldr	r3, [r7, #20]
+ 528 0048 9B02     		lsls	r3, r3, #10
+ 529              		.loc 1 263 23
+ 530 004a 03F19043 		add	r3, r3, #1207959552
+ 531 004e 3B61     		str	r3, [r7, #16]
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             temp = _EXTI_GPIO_PIN_GET(s_exti_gpio_info[i]);
+ 532              		.loc 1 264 20
+ 533 0050 1D4A     		ldr	r2, .L28+4
+ 534 0052 FB69     		ldr	r3, [r7, #28]
+ 535 0054 1344     		add	r3, r3, r2
+ 536 0056 1B78     		ldrb	r3, [r3]
+ 537 0058 DBB2     		uxtb	r3, r3
+ 538              		.loc 1 264 18
+ 539 005a 03F00F03 		and	r3, r3, #15
+ 540 005e 7B61     		str	r3, [r7, #20]
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             gpio_pin = ((uint32_t)1 << temp);
+ 541              		.loc 1 265 22
+ 542 0060 0122     		movs	r2, #1
+ 543 0062 7B69     		ldr	r3, [r7, #20]
+ 544 0064 02FA03F3 		lsl	r3, r2, r3
+ 545 0068 FB60     		str	r3, [r7, #12]
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             /* get EXTI lines flag when the interrupt flag is set */
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             if(RESET != hals_exti_interrupt_flag_get((hal_exti_line_enum)gpio_pin)) {
+ 546              		.loc 1 268 25
+ 547 006a F868     		ldr	r0, [r7, #12]
+ 548 006c FFF7FEFF 		bl	hals_exti_interrupt_flag_get
+ 549 0070 0346     		mov	r3, r0
+ 550              		.loc 1 268 15
+ 551 0072 002B     		cmp	r3, #0
+ 552 0074 1AD0     		beq	.L23
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 hals_exti_interrupt_flag_clear((hal_exti_line_enum)gpio_pin);
+ 553              		.loc 1 269 17
+ 554 0076 F868     		ldr	r0, [r7, #12]
+ 555 0078 FFF7FEFF 		bl	hals_exti_interrupt_flag_clear
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 if(NULL == s_gpio_irq_handle) {
+ 556              		.loc 1 270 25
+ 557 007c 134B     		ldr	r3, .L28+8
+ 558 007e 1B68     		ldr	r3, [r3]
+ 559              		.loc 1 270 19
+ 560 0080 002B     		cmp	r3, #0
+ 561 0082 12D0     		beq	.L27
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                     continue;
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 }
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 /* get EXTI GPIO pin iutput status */
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 if(RESET == hals_gpio_input_bit_get(gpio_port, gpio_pin)) {
+ 562              		.loc 1 275 29
+ 563 0084 F968     		ldr	r1, [r7, #12]
+ 564 0086 3869     		ldr	r0, [r7, #16]
+ 565 0088 FFF7FEFF 		bl	hals_gpio_input_bit_get
+ 566 008c 0346     		mov	r3, r0
+ 567              		.loc 1 275 19
+ 568 008e 002B     		cmp	r3, #0
+ 569 0090 05D1     		bne	.L25
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                     s_gpio_irq_handle(gpio_pin, EXTI_IRQ_EVENT_FALLING);
+ 570              		.loc 1 276 21
+ 571 0092 0E4B     		ldr	r3, .L28+8
+ 572 0094 1B68     		ldr	r3, [r3]
+ 573 0096 0021     		movs	r1, #0
+ 574 0098 F868     		ldr	r0, [r7, #12]
+ 575 009a 9847     		blx	r3
+ 576              	.LVL0:
+ 577 009c 06E0     		b	.L23
+ 578              	.L25:
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 } else {
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                     s_gpio_irq_handle(gpio_pin, EXTI_IRQ_EVENT_RISING);
+ 579              		.loc 1 278 21
+ 580 009e 0B4B     		ldr	r3, .L28+8
+ 581 00a0 1B68     		ldr	r3, [r3]
+ 582 00a2 0121     		movs	r1, #1
+ 583 00a4 F868     		ldr	r0, [r7, #12]
+ 584 00a6 9847     		blx	r3
+ 585              	.LVL1:
+ 586 00a8 00E0     		b	.L23
+ 587              	.L27:
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 }
+ 588              		.loc 1 271 21
+ 589 00aa 00BF     		nop
+ 590              	.L23:
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if(0 != (_exti_gpio_used & (1 << i))) {
+ 591              		.loc 1 260 39 discriminator 2
+ 592 00ac FB69     		ldr	r3, [r7, #28]
+ 593 00ae 0133     		adds	r3, r3, #1
+ 594 00b0 FB61     		str	r3, [r7, #28]
+ 595              	.L22:
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if(0 != (_exti_gpio_used & (1 << i))) {
+ 596              		.loc 1 260 26 discriminator 1
+ 597 00b2 BB7E     		ldrb	r3, [r7, #26]	@ zero_extendqisi2
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if(0 != (_exti_gpio_used & (1 << i))) {
+ 598              		.loc 1 260 5 discriminator 1
+ 599 00b4 FA69     		ldr	r2, [r7, #28]
+ 600 00b6 9A42     		cmp	r2, r3
+ 601 00b8 B1D9     		bls	.L26
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 }
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             }
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 602              		.loc 1 283 1
+ 603 00ba 00BF     		nop
+ 604 00bc 00BF     		nop
+ 605 00be 2037     		adds	r7, r7, #32
+ 606              		.cfi_def_cfa_offset 8
+ 607 00c0 BD46     		mov	sp, r7
+ 608              		.cfi_def_cfa_register 13
+ 609              		@ sp needed
+ 610 00c2 80BD     		pop	{r7, pc}
+ 611              	.L29:
+ 612              		.align	2
+ 613              	.L28:
+ 614 00c4 00000000 		.word	_exti_gpio_used
+ 615 00c8 00000000 		.word	s_exti_gpio_info
+ 616 00cc 00000000 		.word	s_gpio_irq_handle
+ 617              		.cfi_endproc
+ 618              	.LFE125:
+ 620              		.section	.text.hals_exti_software_interrupt_trigger,"ax",%progbits
+ 621              		.align	1
+ 622              		.global	hals_exti_software_interrupt_trigger
+ 623              		.syntax unified
+ 624              		.thumb
+ 625              		.thumb_func
+ 626              		.fpu softvfp
+ 628              	hals_exti_software_interrupt_trigger:
+ 629              	.LFB126:
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      activate the EXTI line software interrupt/event request
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  linex: EXTI line number
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 only one parameter can be selected which is shown as below:
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        the argument could be selected from enumeration <hal_exti_line_enum>
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hals_exti_software_interrupt_trigger(hal_exti_line_enum linex)
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 630              		.loc 1 294 1
+ 631              		.cfi_startproc
+ 632              		@ args = 0, pretend = 0, frame = 8
+ 633              		@ frame_needed = 1, uses_anonymous_args = 0
+ 634              		@ link register save eliminated.
+ 635 0000 80B4     		push	{r7}
+ 636              		.cfi_def_cfa_offset 4
+ 637              		.cfi_offset 7, -4
+ 638 0002 83B0     		sub	sp, sp, #12
+ 639              		.cfi_def_cfa_offset 16
+ 640 0004 00AF     		add	r7, sp, #0
+ 641              		.cfi_def_cfa_register 7
+ 642 0006 7860     		str	r0, [r7, #4]
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_SWIEV |= (uint32_t)linex;
+ 643              		.loc 1 295 16
+ 644 0008 054B     		ldr	r3, .L31
+ 645 000a 1A68     		ldr	r2, [r3]
+ 646 000c 0449     		ldr	r1, .L31
+ 647 000e 7B68     		ldr	r3, [r7, #4]
+ 648 0010 1343     		orrs	r3, r3, r2
+ 649 0012 0B60     		str	r3, [r1]
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 650              		.loc 1 296 1
+ 651 0014 00BF     		nop
+ 652 0016 0C37     		adds	r7, r7, #12
+ 653              		.cfi_def_cfa_offset 4
+ 654 0018 BD46     		mov	sp, r7
+ 655              		.cfi_def_cfa_register 13
+ 656              		@ sp needed
+ 657 001a 80BC     		pop	{r7}
+ 658              		.cfi_restore 7
+ 659              		.cfi_def_cfa_offset 0
+ 660 001c 7047     		bx	lr
+ 661              	.L32:
+ 662 001e 00BF     		.align	2
+ 663              	.L31:
+ 664 0020 10040140 		.word	1073808400
+ 665              		.cfi_endproc
+ 666              	.LFE126:
+ 668              		.section	.text.hals_exti_interrupt_flag_get,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	hals_exti_interrupt_flag_get
+ 671              		.syntax unified
+ 672              		.thumb
+ 673              		.thumb_func
+ 674              		.fpu softvfp
+ 676              	hals_exti_interrupt_flag_get:
+ 677              	.LFB127:
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      get EXTI line x interrupt pending flag
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 only one parameter can be selected which is shown as below:
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg      EXTI_PIN_x (x=0..16):          EXTI line x
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_LVD_16                    EXTI line 16
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_RTC_ALARM_17              EXTI line 17
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_USBFS_WAKEUP_18           EXTI line 18
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_RTC_TAMPER_TIMESTAMP_19   EXTI line 19
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CMP_OUTPUT_21             EXTI line 21
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CMP_OUTPUT_22             EXTI line 22
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_USART0_WAKEUP_25          EXTI line 25
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CEC_WAKEUP_27             EXTI line 27
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     FlagStatus: status of flag (RESET or SET)
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** FlagStatus hals_exti_interrupt_flag_get(hal_exti_line_enum linex)
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 678              		.loc 1 315 1
+ 679              		.cfi_startproc
+ 680              		@ args = 0, pretend = 0, frame = 8
+ 681              		@ frame_needed = 1, uses_anonymous_args = 0
+ 682              		@ link register save eliminated.
+ 683 0000 80B4     		push	{r7}
+ 684              		.cfi_def_cfa_offset 4
+ 685              		.cfi_offset 7, -4
+ 686 0002 83B0     		sub	sp, sp, #12
+ 687              		.cfi_def_cfa_offset 16
+ 688 0004 00AF     		add	r7, sp, #0
+ 689              		.cfi_def_cfa_register 7
+ 690 0006 7860     		str	r0, [r7, #4]
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(RESET != (EXTI_PD & (uint32_t)linex)) {
+ 691              		.loc 1 316 18
+ 692 0008 064B     		ldr	r3, .L36
+ 693 000a 1A68     		ldr	r2, [r3]
+ 694              		.loc 1 316 26
+ 695 000c 7B68     		ldr	r3, [r7, #4]
+ 696 000e 1340     		ands	r3, r3, r2
+ 697              		.loc 1 316 7
+ 698 0010 002B     		cmp	r3, #0
+ 699 0012 01D0     		beq	.L34
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return SET;
+ 700              		.loc 1 317 16
+ 701 0014 0123     		movs	r3, #1
+ 702 0016 00E0     		b	.L35
+ 703              	.L34:
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         return RESET;
+ 704              		.loc 1 319 16
+ 705 0018 0023     		movs	r3, #0
+ 706              	.L35:
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 707              		.loc 1 321 1
+ 708 001a 1846     		mov	r0, r3
+ 709 001c 0C37     		adds	r7, r7, #12
+ 710              		.cfi_def_cfa_offset 4
+ 711 001e BD46     		mov	sp, r7
+ 712              		.cfi_def_cfa_register 13
+ 713              		@ sp needed
+ 714 0020 80BC     		pop	{r7}
+ 715              		.cfi_restore 7
+ 716              		.cfi_def_cfa_offset 0
+ 717 0022 7047     		bx	lr
+ 718              	.L37:
+ 719              		.align	2
+ 720              	.L36:
+ 721 0024 14040140 		.word	1073808404
+ 722              		.cfi_endproc
+ 723              	.LFE127:
+ 725              		.section	.text.hals_exti_interrupt_flag_clear,"ax",%progbits
+ 726              		.align	1
+ 727              		.global	hals_exti_interrupt_flag_clear
+ 728              		.syntax unified
+ 729              		.thumb
+ 730              		.thumb_func
+ 731              		.fpu softvfp
+ 733              	hals_exti_interrupt_flag_clear:
+ 734              	.LFB128:
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      clear EXTI line x interrupt pending flag
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 only one parameter can be selected which is shown as below:
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg      EXTI_PIN_x (x=0..16):          EXTI line x
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_LVD_16                    EXTI line 16
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_RTC_ALARM_17              EXTI line 17
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_USBFS_WAKEUP_18           EXTI line 18
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_RTC_TAMPER_TIMESTAMP_19   EXTI line 19
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CMP_OUTPUT_21             EXTI line 21
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CMP_OUTPUT_22             EXTI line 22
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_USART0_WAKEUP_25          EXTI line 25
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 EXTI_CEC_WAKEUP_27             EXTI line 27
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** void hals_exti_interrupt_flag_clear(hal_exti_line_enum linex)
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 735              		.loc 1 340 1
+ 736              		.cfi_startproc
+ 737              		@ args = 0, pretend = 0, frame = 8
+ 738              		@ frame_needed = 1, uses_anonymous_args = 0
+ 739              		@ link register save eliminated.
+ 740 0000 80B4     		push	{r7}
+ 741              		.cfi_def_cfa_offset 4
+ 742              		.cfi_offset 7, -4
+ 743 0002 83B0     		sub	sp, sp, #12
+ 744              		.cfi_def_cfa_offset 16
+ 745 0004 00AF     		add	r7, sp, #0
+ 746              		.cfi_def_cfa_register 7
+ 747 0006 7860     		str	r0, [r7, #4]
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_PD = (uint32_t)linex;
+ 748              		.loc 1 341 5
+ 749 0008 034A     		ldr	r2, .L39
+ 750              		.loc 1 341 13
+ 751 000a 7B68     		ldr	r3, [r7, #4]
+ 752 000c 1360     		str	r3, [r2]
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 753              		.loc 1 342 1
+ 754 000e 00BF     		nop
+ 755 0010 0C37     		adds	r7, r7, #12
+ 756              		.cfi_def_cfa_offset 4
+ 757 0012 BD46     		mov	sp, r7
+ 758              		.cfi_def_cfa_register 13
+ 759              		@ sp needed
+ 760 0014 80BC     		pop	{r7}
+ 761              		.cfi_restore 7
+ 762              		.cfi_def_cfa_offset 0
+ 763 0016 7047     		bx	lr
+ 764              	.L40:
+ 765              		.align	2
+ 766              	.L39:
+ 767 0018 14040140 		.word	1073808404
+ 768              		.cfi_endproc
+ 769              	.LFE128:
+ 771              		.section	.text._exti_type_config,"ax",%progbits
+ 772              		.align	1
+ 773              		.syntax unified
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.fpu softvfp
+ 778              	_exti_type_config:
+ 779              	.LFB129:
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      enable the configuration of EXTI type
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  pin: GPIO pin
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 one or more parameters can be selected which are shown as below:
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        GPIO_PIN_x(x=0..19,21,22,25,27), GPIO_PIN_ALL
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  exti_type: the argument could be selected from enumeration <hal_exti_type_enum>
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static void _exti_type_config(uint32_t pin, hal_exti_type_enum exti_type)
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 780              		.loc 1 354 1
+ 781              		.cfi_startproc
+ 782              		@ args = 0, pretend = 0, frame = 16
+ 783              		@ frame_needed = 1, uses_anonymous_args = 0
+ 784              		@ link register save eliminated.
+ 785 0000 80B4     		push	{r7}
+ 786              		.cfi_def_cfa_offset 4
+ 787              		.cfi_offset 7, -4
+ 788 0002 85B0     		sub	sp, sp, #20
+ 789              		.cfi_def_cfa_offset 24
+ 790 0004 00AF     		add	r7, sp, #0
+ 791              		.cfi_def_cfa_register 7
+ 792 0006 7860     		str	r0, [r7, #4]
+ 793 0008 0B46     		mov	r3, r1
+ 794 000a FB70     		strb	r3, [r7, #3]
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t reg_temp;
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* reset the EXTI gpio pin */
+ 358:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_INTEN &= ~pin;
+ 795              		.loc 1 358 16
+ 796 000c 3B4B     		ldr	r3, .L50
+ 797 000e 1A68     		ldr	r2, [r3]
+ 798              		.loc 1 358 19
+ 799 0010 7B68     		ldr	r3, [r7, #4]
+ 800 0012 DB43     		mvns	r3, r3
+ 801              		.loc 1 358 16
+ 802 0014 3949     		ldr	r1, .L50
+ 803 0016 1340     		ands	r3, r3, r2
+ 804 0018 0B60     		str	r3, [r1]
+ 359:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_EVEN &= ~pin;
+ 805              		.loc 1 359 15
+ 806 001a 394B     		ldr	r3, .L50+4
+ 807 001c 1A68     		ldr	r2, [r3]
+ 808              		.loc 1 359 18
+ 809 001e 7B68     		ldr	r3, [r7, #4]
+ 810 0020 DB43     		mvns	r3, r3
+ 811              		.loc 1 359 15
+ 812 0022 3749     		ldr	r1, .L50+4
+ 813 0024 1340     		ands	r3, r3, r2
+ 814 0026 0B60     		str	r3, [r1]
+ 360:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_RTEN &= ~pin;
+ 815              		.loc 1 360 15
+ 816 0028 364B     		ldr	r3, .L50+8
+ 817 002a 1A68     		ldr	r2, [r3]
+ 818              		.loc 1 360 18
+ 819 002c 7B68     		ldr	r3, [r7, #4]
+ 820 002e DB43     		mvns	r3, r3
+ 821              		.loc 1 360 15
+ 822 0030 3449     		ldr	r1, .L50+8
+ 823 0032 1340     		ands	r3, r3, r2
+ 824 0034 0B60     		str	r3, [r1]
+ 361:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_FTEN &= ~pin;
+ 825              		.loc 1 361 15
+ 826 0036 344B     		ldr	r3, .L50+12
+ 827 0038 1A68     		ldr	r2, [r3]
+ 828              		.loc 1 361 18
+ 829 003a 7B68     		ldr	r3, [r7, #4]
+ 830 003c DB43     		mvns	r3, r3
+ 831              		.loc 1 361 15
+ 832 003e 3249     		ldr	r1, .L50+12
+ 833 0040 1340     		ands	r3, r3, r2
+ 834 0042 0B60     		str	r3, [r1]
+ 362:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_PD = pin;
+ 835              		.loc 1 362 5
+ 836 0044 314A     		ldr	r2, .L50+16
+ 837              		.loc 1 362 13
+ 838 0046 7B68     		ldr	r3, [r7, #4]
+ 839 0048 1360     		str	r3, [r2]
+ 363:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 364:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI trigger type */
+ 365:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 366:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI trigger type as the rising edge trigger */
+ 367:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     reg_temp = EXTI_RTEN;
+ 840              		.loc 1 367 16
+ 841 004a 2E4B     		ldr	r3, .L50+8
+ 842              		.loc 1 367 14
+ 843 004c 1B68     		ldr	r3, [r3]
+ 844 004e FB60     		str	r3, [r7, #12]
+ 368:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(0 != (exti_type & _EXTI_RISING)) {
+ 845              		.loc 1 368 24
+ 846 0050 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 847 0052 03F00103 		and	r3, r3, #1
+ 848              		.loc 1 368 7
+ 849 0056 002B     		cmp	r3, #0
+ 850 0058 04D0     		beq	.L42
+ 369:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp |= pin;
+ 851              		.loc 1 369 18
+ 852 005a FA68     		ldr	r2, [r7, #12]
+ 853 005c 7B68     		ldr	r3, [r7, #4]
+ 854 005e 1343     		orrs	r3, r3, r2
+ 855 0060 FB60     		str	r3, [r7, #12]
+ 856 0062 04E0     		b	.L43
+ 857              	.L42:
+ 370:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 371:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp &= ~pin;
+ 858              		.loc 1 371 21
+ 859 0064 7B68     		ldr	r3, [r7, #4]
+ 860 0066 DB43     		mvns	r3, r3
+ 861              		.loc 1 371 18
+ 862 0068 FA68     		ldr	r2, [r7, #12]
+ 863 006a 1340     		ands	r3, r3, r2
+ 864 006c FB60     		str	r3, [r7, #12]
+ 865              	.L43:
+ 372:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 373:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_RTEN = reg_temp;
+ 866              		.loc 1 373 5
+ 867 006e 254A     		ldr	r2, .L50+8
+ 868              		.loc 1 373 15
+ 869 0070 FB68     		ldr	r3, [r7, #12]
+ 870 0072 1360     		str	r3, [r2]
+ 374:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 375:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI trigger type as the falling edge trigger */
+ 376:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     reg_temp = EXTI_FTEN;
+ 871              		.loc 1 376 16
+ 872 0074 244B     		ldr	r3, .L50+12
+ 873              		.loc 1 376 14
+ 874 0076 1B68     		ldr	r3, [r3]
+ 875 0078 FB60     		str	r3, [r7, #12]
+ 377:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(0 != (exti_type & _EXTI_FALLING)) {
+ 876              		.loc 1 377 24
+ 877 007a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 878 007c 03F00203 		and	r3, r3, #2
+ 879              		.loc 1 377 7
+ 880 0080 002B     		cmp	r3, #0
+ 881 0082 04D0     		beq	.L44
+ 378:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp |= pin;
+ 882              		.loc 1 378 18
+ 883 0084 FA68     		ldr	r2, [r7, #12]
+ 884 0086 7B68     		ldr	r3, [r7, #4]
+ 885 0088 1343     		orrs	r3, r3, r2
+ 886 008a FB60     		str	r3, [r7, #12]
+ 887 008c 04E0     		b	.L45
+ 888              	.L44:
+ 379:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 380:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp &= ~pin;
+ 889              		.loc 1 380 21
+ 890 008e 7B68     		ldr	r3, [r7, #4]
+ 891 0090 DB43     		mvns	r3, r3
+ 892              		.loc 1 380 18
+ 893 0092 FA68     		ldr	r2, [r7, #12]
+ 894 0094 1340     		ands	r3, r3, r2
+ 895 0096 FB60     		str	r3, [r7, #12]
+ 896              	.L45:
+ 381:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 382:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_FTEN = reg_temp;
+ 897              		.loc 1 382 5
+ 898 0098 1B4A     		ldr	r2, .L50+12
+ 899              		.loc 1 382 15
+ 900 009a FB68     		ldr	r3, [r7, #12]
+ 901 009c 1360     		str	r3, [r2]
+ 383:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 384:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI trigger type as the event trigger */
+ 385:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     reg_temp = EXTI_EVEN;
+ 902              		.loc 1 385 16
+ 903 009e 184B     		ldr	r3, .L50+4
+ 904              		.loc 1 385 14
+ 905 00a0 1B68     		ldr	r3, [r3]
+ 906 00a2 FB60     		str	r3, [r7, #12]
+ 386:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(0 != (exti_type & _EXTI_EVENT)) {
+ 907              		.loc 1 386 24
+ 908 00a4 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 909 00a6 03F00403 		and	r3, r3, #4
+ 910              		.loc 1 386 7
+ 911 00aa 002B     		cmp	r3, #0
+ 912 00ac 04D0     		beq	.L46
+ 387:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp |= pin;
+ 913              		.loc 1 387 18
+ 914 00ae FA68     		ldr	r2, [r7, #12]
+ 915 00b0 7B68     		ldr	r3, [r7, #4]
+ 916 00b2 1343     		orrs	r3, r3, r2
+ 917 00b4 FB60     		str	r3, [r7, #12]
+ 918 00b6 04E0     		b	.L47
+ 919              	.L46:
+ 388:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 389:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp &= ~pin;
+ 920              		.loc 1 389 21
+ 921 00b8 7B68     		ldr	r3, [r7, #4]
+ 922 00ba DB43     		mvns	r3, r3
+ 923              		.loc 1 389 18
+ 924 00bc FA68     		ldr	r2, [r7, #12]
+ 925 00be 1340     		ands	r3, r3, r2
+ 926 00c0 FB60     		str	r3, [r7, #12]
+ 927              	.L47:
+ 390:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 391:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_EVEN = reg_temp;
+ 928              		.loc 1 391 5
+ 929 00c2 0F4A     		ldr	r2, .L50+4
+ 930              		.loc 1 391 15
+ 931 00c4 FB68     		ldr	r3, [r7, #12]
+ 932 00c6 1360     		str	r3, [r2]
+ 392:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 393:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI trigger type as the interrupt trigger */
+ 394:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     reg_temp = EXTI_INTEN;
+ 933              		.loc 1 394 16
+ 934 00c8 0C4B     		ldr	r3, .L50
+ 935              		.loc 1 394 14
+ 936 00ca 1B68     		ldr	r3, [r3]
+ 937 00cc FB60     		str	r3, [r7, #12]
+ 395:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     if(0 != (exti_type & _EXTI_INTERRUPT)) {
+ 938              		.loc 1 395 24
+ 939 00ce FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 940 00d0 03F00803 		and	r3, r3, #8
+ 941              		.loc 1 395 7
+ 942 00d4 002B     		cmp	r3, #0
+ 943 00d6 04D0     		beq	.L48
+ 396:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp |= pin;
+ 944              		.loc 1 396 18
+ 945 00d8 FA68     		ldr	r2, [r7, #12]
+ 946 00da 7B68     		ldr	r3, [r7, #4]
+ 947 00dc 1343     		orrs	r3, r3, r2
+ 948 00de FB60     		str	r3, [r7, #12]
+ 949 00e0 04E0     		b	.L49
+ 950              	.L48:
+ 397:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     } else {
+ 398:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         reg_temp &= ~pin;
+ 951              		.loc 1 398 21
+ 952 00e2 7B68     		ldr	r3, [r7, #4]
+ 953 00e4 DB43     		mvns	r3, r3
+ 954              		.loc 1 398 18
+ 955 00e6 FA68     		ldr	r2, [r7, #12]
+ 956 00e8 1340     		ands	r3, r3, r2
+ 957 00ea FB60     		str	r3, [r7, #12]
+ 958              	.L49:
+ 399:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 400:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     EXTI_INTEN = reg_temp;
+ 959              		.loc 1 400 5
+ 960 00ec 034A     		ldr	r2, .L50
+ 961              		.loc 1 400 16
+ 962 00ee FB68     		ldr	r3, [r7, #12]
+ 963 00f0 1360     		str	r3, [r2]
+ 401:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 402:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 964              		.loc 1 402 1
+ 965 00f2 00BF     		nop
+ 966 00f4 1437     		adds	r7, r7, #20
+ 967              		.cfi_def_cfa_offset 4
+ 968 00f6 BD46     		mov	sp, r7
+ 969              		.cfi_def_cfa_register 13
+ 970              		@ sp needed
+ 971 00f8 80BC     		pop	{r7}
+ 972              		.cfi_restore 7
+ 973              		.cfi_def_cfa_offset 0
+ 974 00fa 7047     		bx	lr
+ 975              	.L51:
+ 976              		.align	2
+ 977              	.L50:
+ 978 00fc 00040140 		.word	1073808384
+ 979 0100 04040140 		.word	1073808388
+ 980 0104 08040140 		.word	1073808392
+ 981 0108 0C040140 		.word	1073808396
+ 982 010c 14040140 		.word	1073808404
+ 983              		.cfi_endproc
+ 984              	.LFE129:
+ 986              		.section	.text._exti_gpio_info_set,"ax",%progbits
+ 987              		.align	1
+ 988              		.syntax unified
+ 989              		.thumb
+ 990              		.thumb_func
+ 991              		.fpu softvfp
+ 993              	_exti_gpio_info_set:
+ 994              	.LFB130:
+ 403:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 404:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** /*!
+ 405:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \brief      set the EXTI gpio port and pin
+ 406:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 407:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[in]  pin: GPIO pin
+ 408:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****                 one or more parameters can be selected which are shown as below:
+ 409:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 410:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \param[out] none
+ 411:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     \retval     none
+ 412:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** */
+ 413:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** static void _exti_gpio_info_set(uint32_t gpio_periph, uint32_t pin)
+ 414:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** {
+ 995              		.loc 1 414 1
+ 996              		.cfi_startproc
+ 997              		@ args = 0, pretend = 0, frame = 16
+ 998              		@ frame_needed = 1, uses_anonymous_args = 0
+ 999              		@ link register save eliminated.
+ 1000 0000 80B4     		push	{r7}
+ 1001              		.cfi_def_cfa_offset 4
+ 1002              		.cfi_offset 7, -4
+ 1003 0002 85B0     		sub	sp, sp, #20
+ 1004              		.cfi_def_cfa_offset 24
+ 1005 0004 00AF     		add	r7, sp, #0
+ 1006              		.cfi_def_cfa_register 7
+ 1007 0006 7860     		str	r0, [r7, #4]
+ 1008 0008 3960     		str	r1, [r7]
+ 415:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint32_t gpio_port;
+ 416:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     uint8_t gpio_pin;
+ 417:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 418:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI gpio port */
+ 419:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     gpio_port = gpio_periph - GPIO_BASE;
+ 1009              		.loc 1 419 15
+ 1010 000a 7B68     		ldr	r3, [r7, #4]
+ 1011 000c 03F13843 		add	r3, r3, #-1207959552
+ 1012 0010 BB60     		str	r3, [r7, #8]
+ 420:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     gpio_port = (gpio_port >> 10U);
+ 1013              		.loc 1 420 15
+ 1014 0012 BB68     		ldr	r3, [r7, #8]
+ 1015 0014 9B0A     		lsrs	r3, r3, #10
+ 1016 0016 BB60     		str	r3, [r7, #8]
+ 421:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** 
+ 422:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     /* set the EXTI gpio pin */
+ 423:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     for(gpio_pin = 0U; gpio_pin < 16U; gpio_pin++) {
+ 1017              		.loc 1 423 18
+ 1018 0018 0023     		movs	r3, #0
+ 1019 001a FB73     		strb	r3, [r7, #15]
+ 1020              		.loc 1 423 5
+ 1021 001c 13E0     		b	.L53
+ 1022              	.L55:
+ 424:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((1U << gpio_pin) & pin) {
+ 1023              		.loc 1 424 16
+ 1024 001e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1025 0020 0122     		movs	r2, #1
+ 1026 0022 9A40     		lsls	r2, r2, r3
+ 1027              		.loc 1 424 29
+ 1028 0024 3B68     		ldr	r3, [r7]
+ 1029 0026 1340     		ands	r3, r3, r2
+ 1030              		.loc 1 424 11
+ 1031 0028 002B     		cmp	r3, #0
+ 1032 002a 09D0     		beq	.L54
+ 425:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****             s_exti_gpio_info[gpio_pin] = (uint8_t)((gpio_port << 4) | gpio_pin);
+ 1033              		.loc 1 425 63
+ 1034 002c BB68     		ldr	r3, [r7, #8]
+ 1035 002e DBB2     		uxtb	r3, r3
+ 1036 0030 1B01     		lsls	r3, r3, #4
+ 1037 0032 D9B2     		uxtb	r1, r3
+ 1038              		.loc 1 425 29
+ 1039 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1040              		.loc 1 425 42
+ 1041 0036 FA7B     		ldrb	r2, [r7, #15]
+ 1042 0038 0A43     		orrs	r2, r2, r1
+ 1043 003a D1B2     		uxtb	r1, r2
+ 1044              		.loc 1 425 40
+ 1045 003c 064A     		ldr	r2, .L56
+ 1046 003e D154     		strb	r1, [r2, r3]
+ 1047              	.L54:
+ 423:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((1U << gpio_pin) & pin) {
+ 1048              		.loc 1 423 48 discriminator 2
+ 1049 0040 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1050 0042 0133     		adds	r3, r3, #1
+ 1051 0044 FB73     		strb	r3, [r7, #15]
+ 1052              	.L53:
+ 423:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         if((1U << gpio_pin) & pin) {
+ 1053              		.loc 1 423 5 discriminator 1
+ 1054 0046 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1055 0048 0F2B     		cmp	r3, #15
+ 1056 004a E8D9     		bls	.L55
+ 426:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****         }
+ 427:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c ****     }
+ 428:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c **** }
+ 1057              		.loc 1 428 1
+ 1058 004c 00BF     		nop
+ 1059 004e 00BF     		nop
+ 1060 0050 1437     		adds	r7, r7, #20
+ 1061              		.cfi_def_cfa_offset 4
+ 1062 0052 BD46     		mov	sp, r7
+ 1063              		.cfi_def_cfa_register 13
+ 1064              		@ sp needed
+ 1065 0054 80BC     		pop	{r7}
+ 1066              		.cfi_restore 7
+ 1067              		.cfi_def_cfa_offset 0
+ 1068 0056 7047     		bx	lr
+ 1069              	.L57:
+ 1070              		.align	2
+ 1071              	.L56:
+ 1072 0058 00000000 		.word	s_exti_gpio_info
+ 1073              		.cfi_endproc
+ 1074              	.LFE130:
+ 1076              		.section	.bss.gpio_init.10929,"aw",%nobits
+ 1077              		.align	2
+ 1080              	gpio_init.10929:
+ 1081 0000 00000000 		.space	16
+ 1081      00000000 
+ 1081      00000000 
+ 1081      00000000 
+ 1082              		.text
+ 1083              	.Letext0:
+ 1084              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1085              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1086              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1087              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1088              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1089              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1090              		.file 8 "../firmware/cmsis/inc/core_cm4.h"
+ 1091              		.file 9 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 1092              		.file 10 "../firmware/cmsis/inc/gd32f3x0.h"
+ 1093              		.file 11 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 1094              		.file 12 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_gpio.h"
+ 1095              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+ 1096              		.file 14 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_exti.h"
+ 1097              		.file 15 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_sys.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_exti.c
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:20     .bss._exti_gpio_used:00000000 _exti_gpio_used
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:17     .bss._exti_gpio_used:00000000 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:23     .bss.s_gpio_irq_handle:00000000 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:26     .bss.s_gpio_irq_handle:00000000 s_gpio_irq_handle
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:29     .bss.s_exti_gpio_info:00000000 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:32     .bss.s_exti_gpio_info:00000000 s_exti_gpio_info
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:35     .text.hal_exti_gpio_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:43     .text.hal_exti_gpio_deinit:00000000 hal_exti_gpio_deinit
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:136    .text.hal_exti_gpio_deinit:00000070 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:146    .text.hal_exti_internal_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:153    .text.hal_exti_internal_deinit:00000000 hal_exti_internal_deinit
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:232    .text.hal_exti_internal_deinit:00000058 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:241    .text.hal_exti_gpio_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:248    .text.hal_exti_gpio_init:00000000 hal_exti_gpio_init
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:993    .text._exti_gpio_info_set:00000000 _exti_gpio_info_set
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:778    .text._exti_type_config:00000000 _exti_type_config
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:332    .text.hal_exti_gpio_init:00000074 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:1080   .bss.gpio_init.10929:00000000 gpio_init.10929
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:338    .text.hal_exti_internal_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:345    .text.hal_exti_internal_init:00000000 hal_exti_internal_init
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:379    .text.hal_exti_gpio_irq_handle_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:386    .text.hal_exti_gpio_irq_handle_set:00000000 hal_exti_gpio_irq_handle_set
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:421    .text.hal_exti_gpio_irq_handle_set:0000001c $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:426    .text.hal_exti_gpio_irq_handle_all_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:433    .text.hal_exti_gpio_irq_handle_all_reset:00000000 hal_exti_gpio_irq_handle_all_reset
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:461    .text.hal_exti_gpio_irq_handle_all_reset:00000014 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:466    .text.hal_exti_gpio_irq:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:473    .text.hal_exti_gpio_irq:00000000 hal_exti_gpio_irq
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:676    .text.hals_exti_interrupt_flag_get:00000000 hals_exti_interrupt_flag_get
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:733    .text.hals_exti_interrupt_flag_clear:00000000 hals_exti_interrupt_flag_clear
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:614    .text.hal_exti_gpio_irq:000000c4 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:621    .text.hals_exti_software_interrupt_trigger:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:628    .text.hals_exti_software_interrupt_trigger:00000000 hals_exti_software_interrupt_trigger
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:664    .text.hals_exti_software_interrupt_trigger:00000020 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:669    .text.hals_exti_interrupt_flag_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:721    .text.hals_exti_interrupt_flag_get:00000024 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:726    .text.hals_exti_interrupt_flag_clear:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:767    .text.hals_exti_interrupt_flag_clear:00000018 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:772    .text._exti_type_config:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:978    .text._exti_type_config:000000fc $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:987    .text._exti_gpio_info_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:1072   .text._exti_gpio_info_set:00000058 $d
+C:\Users\peter\AppData\Local\Temp\cc3s8zDC.s:1077   .bss.gpio_init.10929:00000000 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_gpio_deinit
+hal_gpio_struct_init
+hal_gpio_init
+hals_syscfg_exti_config
+hals_gpio_input_bit_get

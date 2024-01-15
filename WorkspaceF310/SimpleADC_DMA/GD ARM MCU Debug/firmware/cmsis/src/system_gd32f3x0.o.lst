@@ -1,0 +1,454 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"system_gd32f3x0.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.SystemInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	SystemInit
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	SystemInit:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/cmsis/src/system_gd32f3x0.c"
+   1:../firmware/cmsis/src/system_gd32f3x0.c **** /*!
+   2:../firmware/cmsis/src/system_gd32f3x0.c ****     \file  system_gd32f3x0.c
+   3:../firmware/cmsis/src/system_gd32f3x0.c ****     \brief CMSIS Cortex-M4 Device Peripheral Access Layer Source File for
+   4:../firmware/cmsis/src/system_gd32f3x0.c ****            GD32F3x0 Device Series
+   5:../firmware/cmsis/src/system_gd32f3x0.c **** */
+   6:../firmware/cmsis/src/system_gd32f3x0.c **** 
+   7:../firmware/cmsis/src/system_gd32f3x0.c **** /* Copyright (c) 2012 ARM LIMITED
+   8:../firmware/cmsis/src/system_gd32f3x0.c **** 
+   9:../firmware/cmsis/src/system_gd32f3x0.c ****    All rights reserved.
+  10:../firmware/cmsis/src/system_gd32f3x0.c ****    Redistribution and use in source and binary forms, with or without
+  11:../firmware/cmsis/src/system_gd32f3x0.c ****    modification, are permitted provided that the following conditions are met:
+  12:../firmware/cmsis/src/system_gd32f3x0.c ****    - Redistributions of source code must retain the above copyright
+  13:../firmware/cmsis/src/system_gd32f3x0.c ****      notice, this list of conditions and the following disclaimer.
+  14:../firmware/cmsis/src/system_gd32f3x0.c ****    - Redistributions in binary form must reproduce the above copyright
+  15:../firmware/cmsis/src/system_gd32f3x0.c ****      notice, this list of conditions and the following disclaimer in the
+  16:../firmware/cmsis/src/system_gd32f3x0.c ****      documentation and/or other materials provided with the distribution.
+  17:../firmware/cmsis/src/system_gd32f3x0.c ****    - Neither the name of ARM nor the names of its contributors may be used
+  18:../firmware/cmsis/src/system_gd32f3x0.c ****      to endorse or promote products derived from this software without
+  19:../firmware/cmsis/src/system_gd32f3x0.c ****      specific prior written permission.
+  20:../firmware/cmsis/src/system_gd32f3x0.c ****    *
+  21:../firmware/cmsis/src/system_gd32f3x0.c ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:../firmware/cmsis/src/system_gd32f3x0.c ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:../firmware/cmsis/src/system_gd32f3x0.c ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  24:../firmware/cmsis/src/system_gd32f3x0.c ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  25:../firmware/cmsis/src/system_gd32f3x0.c ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  26:../firmware/cmsis/src/system_gd32f3x0.c ****    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  27:../firmware/cmsis/src/system_gd32f3x0.c ****    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:../firmware/cmsis/src/system_gd32f3x0.c ****    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:../firmware/cmsis/src/system_gd32f3x0.c ****    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  30:../firmware/cmsis/src/system_gd32f3x0.c ****    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  31:../firmware/cmsis/src/system_gd32f3x0.c ****    POSSIBILITY OF SUCH DAMAGE.
+  32:../firmware/cmsis/src/system_gd32f3x0.c ****    ---------------------------------------------------------------------------*/
+  33:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  34:../firmware/cmsis/src/system_gd32f3x0.c **** /* This file refers the CMSIS standard, some adjustments are made according to GigaDevice chips */
+  35:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  36:../firmware/cmsis/src/system_gd32f3x0.c **** #include "gd32f3x0.h"
+  37:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  38:../firmware/cmsis/src/system_gd32f3x0.c **** #define VECT_TAB_OFFSET  (uint32_t)0x00            /* vector table base offset */
+  39:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  40:../firmware/cmsis/src/system_gd32f3x0.c **** #define RCU_MODIFY(__delay)     do{                                     \
+  41:../firmware/cmsis/src/system_gd32f3x0.c ****                                     volatile uint32_t i;                \
+  42:../firmware/cmsis/src/system_gd32f3x0.c ****                                     if(0 != __delay){                   \
+  43:../firmware/cmsis/src/system_gd32f3x0.c ****                                         RCU_CFG0 |= RCU_AHB_CKSYS_DIV2; \
+  44:../firmware/cmsis/src/system_gd32f3x0.c ****                                         for(i=0; i<__delay; i++){       \
+  45:../firmware/cmsis/src/system_gd32f3x0.c ****                                         }                               \
+  46:../firmware/cmsis/src/system_gd32f3x0.c ****                                         RCU_CFG0 |= RCU_AHB_CKSYS_DIV4; \
+  47:../firmware/cmsis/src/system_gd32f3x0.c ****                                         for(i=0; i<__delay; i++){       \
+  48:../firmware/cmsis/src/system_gd32f3x0.c ****                                         }                               \
+  49:../firmware/cmsis/src/system_gd32f3x0.c ****                                     }                                   \
+  50:../firmware/cmsis/src/system_gd32f3x0.c ****                                 }while(0)
+  51:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  52:../firmware/cmsis/src/system_gd32f3x0.c **** /*!
+  53:../firmware/cmsis/src/system_gd32f3x0.c ****     \brief      setup the microcontroller system, initialize the system
+  54:../firmware/cmsis/src/system_gd32f3x0.c ****     \param[in]  none
+  55:../firmware/cmsis/src/system_gd32f3x0.c ****     \param[out] none
+  56:../firmware/cmsis/src/system_gd32f3x0.c ****     \retval     none
+  57:../firmware/cmsis/src/system_gd32f3x0.c **** */
+  58:../firmware/cmsis/src/system_gd32f3x0.c **** void SystemInit(void)
+  59:../firmware/cmsis/src/system_gd32f3x0.c **** {
+  27              		.loc 1 59 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  60:../firmware/cmsis/src/system_gd32f3x0.c **** #if (defined(GD32F350))
+  61:../firmware/cmsis/src/system_gd32f3x0.c ****     RCU_APB2EN |= BIT(0);
+  62:../firmware/cmsis/src/system_gd32f3x0.c ****     CMP_CS |= (CMP_CS_CMP1MSEL | CMP_CS_CMP0MSEL);
+  63:../firmware/cmsis/src/system_gd32f3x0.c **** #endif /* GD32F350 */
+  64:../firmware/cmsis/src/system_gd32f3x0.c ****     if(((FMC_OBSTAT & OB_OBSTAT_PLEVEL_HIGH) != OB_OBSTAT_PLEVEL_HIGH) &&
+  37              		.loc 1 64 10
+  38 0004 484B     		ldr	r3, .L7
+  39 0006 1B68     		ldr	r3, [r3]
+  40              		.loc 1 64 21
+  41 0008 03F00603 		and	r3, r3, #6
+  42              		.loc 1 64 7
+  43 000c 062B     		cmp	r3, #6
+  44 000e 00F08380 		beq	.L2
+  65:../firmware/cmsis/src/system_gd32f3x0.c ****             (((FMC_OBSTAT >> 13) & 0x1) == SET)) {
+  45              		.loc 1 65 16 discriminator 1
+  46 0012 454B     		ldr	r3, .L7
+  47 0014 1B68     		ldr	r3, [r3]
+  48              		.loc 1 65 27 discriminator 1
+  49 0016 5B0B     		lsrs	r3, r3, #13
+  50              		.loc 1 65 34 discriminator 1
+  51 0018 03F00103 		and	r3, r3, #1
+  64:../firmware/cmsis/src/system_gd32f3x0.c ****             (((FMC_OBSTAT >> 13) & 0x1) == SET)) {
+  52              		.loc 1 64 72 discriminator 1
+  53 001c 012B     		cmp	r3, #1
+  54 001e 7BD1     		bne	.L2
+  66:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_KEY = UNLOCK_KEY0;
+  55              		.loc 1 66 9
+  56 0020 424B     		ldr	r3, .L7+4
+  57              		.loc 1 66 17
+  58 0022 434A     		ldr	r2, .L7+8
+  59 0024 1A60     		str	r2, [r3]
+  67:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_KEY = UNLOCK_KEY1 ;
+  60              		.loc 1 67 9
+  61 0026 414B     		ldr	r3, .L7+4
+  62              		.loc 1 67 17
+  63 0028 424A     		ldr	r2, .L7+12
+  64 002a 1A60     		str	r2, [r3]
+  68:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_OBKEY = UNLOCK_KEY0;
+  65              		.loc 1 68 9
+  66 002c 424B     		ldr	r3, .L7+16
+  67              		.loc 1 68 19
+  68 002e 404A     		ldr	r2, .L7+8
+  69 0030 1A60     		str	r2, [r3]
+  69:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_OBKEY = UNLOCK_KEY1 ;
+  70              		.loc 1 69 9
+  71 0032 414B     		ldr	r3, .L7+16
+  72              		.loc 1 69 19
+  73 0034 3F4A     		ldr	r2, .L7+12
+  74 0036 1A60     		str	r2, [r3]
+  70:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL |= FMC_CTL_OBER;
+  75              		.loc 1 70 17
+  76 0038 404B     		ldr	r3, .L7+20
+  77 003a 1B68     		ldr	r3, [r3]
+  78 003c 3F4A     		ldr	r2, .L7+20
+  79 003e 43F02003 		orr	r3, r3, #32
+  80 0042 1360     		str	r3, [r2]
+  71:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL |= FMC_CTL_START;
+  81              		.loc 1 71 17
+  82 0044 3D4B     		ldr	r3, .L7+20
+  83 0046 1B68     		ldr	r3, [r3]
+  84 0048 3C4A     		ldr	r2, .L7+20
+  85 004a 43F04003 		orr	r3, r3, #64
+  86 004e 1360     		str	r3, [r2]
+  72:../firmware/cmsis/src/system_gd32f3x0.c ****         while((uint32_t)0x00U != (FMC_STAT & FMC_STAT_BUSY));
+  87              		.loc 1 72 14
+  88 0050 00BF     		nop
+  89              	.L3:
+  90              		.loc 1 72 35 discriminator 1
+  91 0052 3B4B     		ldr	r3, .L7+24
+  92 0054 1B68     		ldr	r3, [r3]
+  93              		.loc 1 72 44 discriminator 1
+  94 0056 03F00103 		and	r3, r3, #1
+  95              		.loc 1 72 14 discriminator 1
+  96 005a 002B     		cmp	r3, #0
+  97 005c F9D1     		bne	.L3
+  73:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL &= ~FMC_CTL_OBER;
+  98              		.loc 1 73 17
+  99 005e 374B     		ldr	r3, .L7+20
+ 100 0060 1B68     		ldr	r3, [r3]
+ 101 0062 364A     		ldr	r2, .L7+20
+ 102 0064 23F02003 		bic	r3, r3, #32
+ 103 0068 1360     		str	r3, [r2]
+  74:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL |= FMC_CTL_OBPG;
+ 104              		.loc 1 74 17
+ 105 006a 344B     		ldr	r3, .L7+20
+ 106 006c 1B68     		ldr	r3, [r3]
+ 107 006e 334A     		ldr	r2, .L7+20
+ 108 0070 43F01003 		orr	r3, r3, #16
+ 109 0074 1360     		str	r3, [r2]
+  75:../firmware/cmsis/src/system_gd32f3x0.c ****         if((FMC_OBSTAT & OB_OBSTAT_PLEVEL_HIGH) == OB_OBSTAT_PLEVEL_NO) {
+ 110              		.loc 1 75 13
+ 111 0076 2C4B     		ldr	r3, .L7
+ 112 0078 1B68     		ldr	r3, [r3]
+ 113              		.loc 1 75 24
+ 114 007a 03F00603 		and	r3, r3, #6
+ 115              		.loc 1 75 11
+ 116 007e 002B     		cmp	r3, #0
+ 117 0080 03D1     		bne	.L4
+  76:../firmware/cmsis/src/system_gd32f3x0.c ****             OB_SPC = FMC_NSPC;
+ 118              		.loc 1 76 13
+ 119 0082 304B     		ldr	r3, .L7+28
+ 120              		.loc 1 76 20
+ 121 0084 A522     		movs	r2, #165
+ 122 0086 1A80     		strh	r2, [r3]	@ movhi
+ 123 0088 08E0     		b	.L5
+ 124              	.L4:
+  77:../firmware/cmsis/src/system_gd32f3x0.c ****         } else if((FMC_OBSTAT & OB_OBSTAT_PLEVEL_HIGH) == OB_OBSTAT_PLEVEL_LOW) {
+ 125              		.loc 1 77 20
+ 126 008a 274B     		ldr	r3, .L7
+ 127 008c 1B68     		ldr	r3, [r3]
+ 128              		.loc 1 77 31
+ 129 008e 03F00603 		and	r3, r3, #6
+ 130              		.loc 1 77 18
+ 131 0092 022B     		cmp	r3, #2
+ 132 0094 02D1     		bne	.L5
+  78:../firmware/cmsis/src/system_gd32f3x0.c ****             OB_SPC = FMC_LSPC;
+ 133              		.loc 1 78 13
+ 134 0096 2B4B     		ldr	r3, .L7+28
+ 135              		.loc 1 78 20
+ 136 0098 BB22     		movs	r2, #187
+ 137 009a 1A80     		strh	r2, [r3]	@ movhi
+ 138              	.L5:
+  79:../firmware/cmsis/src/system_gd32f3x0.c ****         }
+  80:../firmware/cmsis/src/system_gd32f3x0.c ****         OB_USER = OB_USER_DEFAULT & ((uint8_t)(FMC_OBSTAT >> 8));
+ 139              		.loc 1 80 48
+ 140 009c 224B     		ldr	r3, .L7
+ 141 009e 1B68     		ldr	r3, [r3]
+ 142              		.loc 1 80 59
+ 143 00a0 1B0A     		lsrs	r3, r3, #8
+ 144              		.loc 1 80 38
+ 145 00a2 DBB2     		uxtb	r3, r3
+ 146              		.loc 1 80 35
+ 147 00a4 9BB2     		uxth	r3, r3
+ 148              		.loc 1 80 9
+ 149 00a6 284A     		ldr	r2, .L7+32
+ 150              		.loc 1 80 35
+ 151 00a8 03F0DF03 		and	r3, r3, #223
+ 152 00ac 9BB2     		uxth	r3, r3
+ 153              		.loc 1 80 17
+ 154 00ae 1380     		strh	r3, [r2]	@ movhi
+  81:../firmware/cmsis/src/system_gd32f3x0.c ****         OB_DATA0 = ((uint8_t)(FMC_OBSTAT >> 16));
+ 155              		.loc 1 81 31
+ 156 00b0 1D4B     		ldr	r3, .L7
+ 157 00b2 1B68     		ldr	r3, [r3]
+ 158              		.loc 1 81 42
+ 159 00b4 1B0C     		lsrs	r3, r3, #16
+ 160              		.loc 1 81 21
+ 161 00b6 DAB2     		uxtb	r2, r3
+ 162              		.loc 1 81 9
+ 163 00b8 244B     		ldr	r3, .L7+36
+ 164              		.loc 1 81 21
+ 165 00ba 92B2     		uxth	r2, r2
+ 166              		.loc 1 81 18
+ 167 00bc 1A80     		strh	r2, [r3]	@ movhi
+  82:../firmware/cmsis/src/system_gd32f3x0.c ****         OB_DATA1 = ((uint8_t)(FMC_OBSTAT >> 24));
+ 168              		.loc 1 82 31
+ 169 00be 1A4B     		ldr	r3, .L7
+ 170 00c0 1B68     		ldr	r3, [r3]
+ 171              		.loc 1 82 42
+ 172 00c2 1B0E     		lsrs	r3, r3, #24
+ 173              		.loc 1 82 21
+ 174 00c4 DAB2     		uxtb	r2, r3
+ 175              		.loc 1 82 9
+ 176 00c6 224B     		ldr	r3, .L7+40
+ 177              		.loc 1 82 21
+ 178 00c8 92B2     		uxth	r2, r2
+ 179              		.loc 1 82 18
+ 180 00ca 1A80     		strh	r2, [r3]	@ movhi
+  83:../firmware/cmsis/src/system_gd32f3x0.c ****         OB_WP0 = ((uint8_t)(FMC_WP));
+ 181              		.loc 1 83 29
+ 182 00cc 214B     		ldr	r3, .L7+44
+ 183 00ce 1B68     		ldr	r3, [r3]
+ 184              		.loc 1 83 19
+ 185 00d0 DAB2     		uxtb	r2, r3
+ 186              		.loc 1 83 9
+ 187 00d2 214B     		ldr	r3, .L7+48
+ 188              		.loc 1 83 19
+ 189 00d4 92B2     		uxth	r2, r2
+ 190              		.loc 1 83 16
+ 191 00d6 1A80     		strh	r2, [r3]	@ movhi
+  84:../firmware/cmsis/src/system_gd32f3x0.c ****         OB_WP1 = ((uint8_t)(FMC_WP >> 8));
+ 192              		.loc 1 84 29
+ 193 00d8 1E4B     		ldr	r3, .L7+44
+ 194 00da 1B68     		ldr	r3, [r3]
+ 195              		.loc 1 84 36
+ 196 00dc 1B0A     		lsrs	r3, r3, #8
+ 197              		.loc 1 84 19
+ 198 00de DAB2     		uxtb	r2, r3
+ 199              		.loc 1 84 9
+ 200 00e0 1E4B     		ldr	r3, .L7+52
+ 201              		.loc 1 84 19
+ 202 00e2 92B2     		uxth	r2, r2
+ 203              		.loc 1 84 16
+ 204 00e4 1A80     		strh	r2, [r3]	@ movhi
+  85:../firmware/cmsis/src/system_gd32f3x0.c ****         while((uint32_t)0x00U != (FMC_STAT & FMC_STAT_BUSY));
+ 205              		.loc 1 85 14
+ 206 00e6 00BF     		nop
+ 207              	.L6:
+ 208              		.loc 1 85 35 discriminator 1
+ 209 00e8 154B     		ldr	r3, .L7+24
+ 210 00ea 1B68     		ldr	r3, [r3]
+ 211              		.loc 1 85 44 discriminator 1
+ 212 00ec 03F00103 		and	r3, r3, #1
+ 213              		.loc 1 85 14 discriminator 1
+ 214 00f0 002B     		cmp	r3, #0
+ 215 00f2 F9D1     		bne	.L6
+  86:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL &= ~FMC_CTL_OBPG;
+ 216              		.loc 1 86 17
+ 217 00f4 114B     		ldr	r3, .L7+20
+ 218 00f6 1B68     		ldr	r3, [r3]
+ 219 00f8 104A     		ldr	r2, .L7+20
+ 220 00fa 23F01003 		bic	r3, r3, #16
+ 221 00fe 1360     		str	r3, [r2]
+  87:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL &= ~FMC_CTL_OBWEN;
+ 222              		.loc 1 87 17
+ 223 0100 0E4B     		ldr	r3, .L7+20
+ 224 0102 1B68     		ldr	r3, [r3]
+ 225 0104 0D4A     		ldr	r2, .L7+20
+ 226 0106 23F40073 		bic	r3, r3, #512
+ 227 010a 1360     		str	r3, [r2]
+  88:../firmware/cmsis/src/system_gd32f3x0.c ****         FMC_CTL |= FMC_CTL_LK;
+ 228              		.loc 1 88 17
+ 229 010c 0B4B     		ldr	r3, .L7+20
+ 230 010e 1B68     		ldr	r3, [r3]
+ 231 0110 0A4A     		ldr	r2, .L7+20
+ 232 0112 43F08003 		orr	r3, r3, #128
+ 233 0116 1360     		str	r3, [r2]
+ 234              	.L2:
+  89:../firmware/cmsis/src/system_gd32f3x0.c ****     }
+  90:../firmware/cmsis/src/system_gd32f3x0.c ****     /* FPU settings */
+  91:../firmware/cmsis/src/system_gd32f3x0.c **** #if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
+  92:../firmware/cmsis/src/system_gd32f3x0.c ****     SCB->CPACR |= ((3UL << 10 * 2) | (3UL << 11 * 2)); /* set CP10 and CP11 Full Access */
+  93:../firmware/cmsis/src/system_gd32f3x0.c **** #endif
+  94:../firmware/cmsis/src/system_gd32f3x0.c **** 
+  95:../firmware/cmsis/src/system_gd32f3x0.c **** #ifdef VECT_TAB_SRAM
+  96:../firmware/cmsis/src/system_gd32f3x0.c ****     hals_nvic_vector_table_set(NVIC_VECTTAB_RAM, VECT_TAB_OFFSET);
+  97:../firmware/cmsis/src/system_gd32f3x0.c **** #else
+  98:../firmware/cmsis/src/system_gd32f3x0.c ****     hals_nvic_vector_table_set(NVIC_VECTTAB_FLASH, VECT_TAB_OFFSET);
+ 235              		.loc 1 98 5
+ 236 0118 0021     		movs	r1, #0
+ 237 011a 4FF00060 		mov	r0, #134217728
+ 238 011e FFF7FEFF 		bl	hals_nvic_vector_table_set
+  99:../firmware/cmsis/src/system_gd32f3x0.c **** #endif
+ 100:../firmware/cmsis/src/system_gd32f3x0.c **** }
+ 239              		.loc 1 100 1
+ 240 0122 00BF     		nop
+ 241 0124 80BD     		pop	{r7, pc}
+ 242              	.L8:
+ 243 0126 00BF     		.align	2
+ 244              	.L7:
+ 245 0128 1C200240 		.word	1073881116
+ 246 012c 04200240 		.word	1073881092
+ 247 0130 23016745 		.word	1164378403
+ 248 0134 AB89EFCD 		.word	-839939669
+ 249 0138 08200240 		.word	1073881096
+ 250 013c 10200240 		.word	1073881104
+ 251 0140 0C200240 		.word	1073881100
+ 252 0144 00F8FF1F 		.word	536868864
+ 253 0148 02F8FF1F 		.word	536868866
+ 254 014c 04F8FF1F 		.word	536868868
+ 255 0150 06F8FF1F 		.word	536868870
+ 256 0154 20200240 		.word	1073881120
+ 257 0158 08F8FF1F 		.word	536868872
+ 258 015c 0AF8FF1F 		.word	536868874
+ 259              		.cfi_endproc
+ 260              	.LFE119:
+ 262              		.text
+ 263              	.Letext0:
+ 264              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 265              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 266              		.file 4 "../firmware/cmsis/inc/core_cm4.h"
+ 267              		.file 5 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 268              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 269              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 270              		.file 8 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 271              		.file 9 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 272              		.file 10 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 273              		.file 11 "../firmware/cmsis/inc/gd32f3x0.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_gd32f3x0.c
+C:\Users\peter\AppData\Local\Temp\ccFfWPOT.s:16     .text.SystemInit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccFfWPOT.s:24     .text.SystemInit:00000000 SystemInit
+C:\Users\peter\AppData\Local\Temp\ccFfWPOT.s:245    .text.SystemInit:00000128 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.features.h.33.318b64d71e0957639cfb30f1db1f7ec8
+                           .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4.newlib.h.8.2aecb9f3b2dc9d2e83d06d10f0c6ed3e
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+
+UNDEFINED SYMBOLS
+hals_nvic_vector_table_set

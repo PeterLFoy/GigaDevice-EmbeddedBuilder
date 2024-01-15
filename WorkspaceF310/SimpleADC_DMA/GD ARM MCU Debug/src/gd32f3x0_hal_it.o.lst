@@ -1,0 +1,347 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_it.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.NMI_Handler,"ax",%progbits
+  16              		.align	1
+  17              		.global	NMI_Handler
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	NMI_Handler:
+  25              	.LFB119:
+  26              		.file 1 "../src/gd32f3x0_hal_it.c"
+   1:../src/gd32f3x0_hal_it.c **** /*
+   2:../src/gd32f3x0_hal_it.c ****     \file  gd32f3x0_hal_it.c
+   3:../src/gd32f3x0_hal_it.c **** */
+   4:../src/gd32f3x0_hal_it.c **** /*
+   5:../src/gd32f3x0_hal_it.c ****     Copyright (c) 2024, GigaDevice Semiconductor Inc.
+   6:../src/gd32f3x0_hal_it.c **** 
+   7:../src/gd32f3x0_hal_it.c ****     All rights reserved.
+   8:../src/gd32f3x0_hal_it.c **** 
+   9:../src/gd32f3x0_hal_it.c ****     Redistribution and use in source and binary forms, with or without modification,
+  10:../src/gd32f3x0_hal_it.c **** are permitted provided that the following conditions are met:
+  11:../src/gd32f3x0_hal_it.c **** 
+  12:../src/gd32f3x0_hal_it.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  13:../src/gd32f3x0_hal_it.c ****        list of conditions and the following disclaimer.
+  14:../src/gd32f3x0_hal_it.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  15:../src/gd32f3x0_hal_it.c ****        this list of conditions and the following disclaimer in the documentation 
+  16:../src/gd32f3x0_hal_it.c ****        and/or other materials provided with the distribution.
+  17:../src/gd32f3x0_hal_it.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  18:../src/gd32f3x0_hal_it.c ****        may be used to endorse or promote products derived from this software without 
+  19:../src/gd32f3x0_hal_it.c ****        specific prior written permission.
+  20:../src/gd32f3x0_hal_it.c **** 
+  21:../src/gd32f3x0_hal_it.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  22:../src/gd32f3x0_hal_it.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  23:../src/gd32f3x0_hal_it.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  24:../src/gd32f3x0_hal_it.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  25:../src/gd32f3x0_hal_it.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  26:../src/gd32f3x0_hal_it.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  27:../src/gd32f3x0_hal_it.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  28:../src/gd32f3x0_hal_it.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  29:../src/gd32f3x0_hal_it.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  30:../src/gd32f3x0_hal_it.c **** OF SUCH DAMAGE.
+  31:../src/gd32f3x0_hal_it.c **** */
+  32:../src/gd32f3x0_hal_it.c **** #include "gd32f3x0_hal_it.h"
+  33:../src/gd32f3x0_hal_it.c **** #include "gd32f3x0_hal.h"
+  34:../src/gd32f3x0_hal_it.c **** #include "gd32f3x0_hal_init.h"
+  35:../src/gd32f3x0_hal_it.c **** 
+  36:../src/gd32f3x0_hal_it.c **** void NMI_Handler(void)
+  37:../src/gd32f3x0_hal_it.c **** {
+  27              		.loc 1 37 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  38:../src/gd32f3x0_hal_it.c ****     /* user code [NonMaskableInt_IRQn local 0] begin */
+  39:../src/gd32f3x0_hal_it.c ****     /* user code [NonMaskableInt_IRQn local 0] end */
+  40:../src/gd32f3x0_hal_it.c ****     /* user code [NonMaskableInt_IRQn local 1] begin */
+  41:../src/gd32f3x0_hal_it.c ****     /* user code [NonMaskableInt_IRQn local 1] end */
+  42:../src/gd32f3x0_hal_it.c **** }
+  37              		.loc 1 42 1
+  38 0004 00BF     		nop
+  39 0006 BD46     		mov	sp, r7
+  40              		.cfi_def_cfa_register 13
+  41              		@ sp needed
+  42 0008 80BC     		pop	{r7}
+  43              		.cfi_restore 7
+  44              		.cfi_def_cfa_offset 0
+  45 000a 7047     		bx	lr
+  46              		.cfi_endproc
+  47              	.LFE119:
+  49              		.section	.text.SVC_Handler,"ax",%progbits
+  50              		.align	1
+  51              		.global	SVC_Handler
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  55              		.fpu softvfp
+  57              	SVC_Handler:
+  58              	.LFB120:
+  43:../src/gd32f3x0_hal_it.c **** 
+  44:../src/gd32f3x0_hal_it.c **** void SVC_Handler(void)
+  45:../src/gd32f3x0_hal_it.c **** {
+  59              		.loc 1 45 1
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0000 80B4     		push	{r7}
+  65              		.cfi_def_cfa_offset 4
+  66              		.cfi_offset 7, -4
+  67 0002 00AF     		add	r7, sp, #0
+  68              		.cfi_def_cfa_register 7
+  46:../src/gd32f3x0_hal_it.c ****     /* user code [SVCall_IRQn local 0] begin */
+  47:../src/gd32f3x0_hal_it.c ****     /* user code [SVCall_IRQn local 0] end */
+  48:../src/gd32f3x0_hal_it.c ****     /* user code [SVCall_IRQn local 1] begin */
+  49:../src/gd32f3x0_hal_it.c ****     /* user code [SVCall_IRQn local 1] end */
+  50:../src/gd32f3x0_hal_it.c **** }
+  69              		.loc 1 50 1
+  70 0004 00BF     		nop
+  71 0006 BD46     		mov	sp, r7
+  72              		.cfi_def_cfa_register 13
+  73              		@ sp needed
+  74 0008 80BC     		pop	{r7}
+  75              		.cfi_restore 7
+  76              		.cfi_def_cfa_offset 0
+  77 000a 7047     		bx	lr
+  78              		.cfi_endproc
+  79              	.LFE120:
+  81              		.section	.text.PendSV_Handler,"ax",%progbits
+  82              		.align	1
+  83              		.global	PendSV_Handler
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  87              		.fpu softvfp
+  89              	PendSV_Handler:
+  90              	.LFB121:
+  51:../src/gd32f3x0_hal_it.c **** 
+  52:../src/gd32f3x0_hal_it.c **** void PendSV_Handler(void)
+  53:../src/gd32f3x0_hal_it.c **** {
+  91              		.loc 1 53 1
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96 0000 80B4     		push	{r7}
+  97              		.cfi_def_cfa_offset 4
+  98              		.cfi_offset 7, -4
+  99 0002 00AF     		add	r7, sp, #0
+ 100              		.cfi_def_cfa_register 7
+  54:../src/gd32f3x0_hal_it.c ****     /* user code [PendSV_IRQn local 0] begin */
+  55:../src/gd32f3x0_hal_it.c ****     /* user code [PendSV_IRQn local 0] end */
+  56:../src/gd32f3x0_hal_it.c ****     /* user code [PendSV_IRQn local 1] begin */
+  57:../src/gd32f3x0_hal_it.c ****     /* user code [PendSV_IRQn local 1] end */
+  58:../src/gd32f3x0_hal_it.c **** }
+ 101              		.loc 1 58 1
+ 102 0004 00BF     		nop
+ 103 0006 BD46     		mov	sp, r7
+ 104              		.cfi_def_cfa_register 13
+ 105              		@ sp needed
+ 106 0008 80BC     		pop	{r7}
+ 107              		.cfi_restore 7
+ 108              		.cfi_def_cfa_offset 0
+ 109 000a 7047     		bx	lr
+ 110              		.cfi_endproc
+ 111              	.LFE121:
+ 113              		.section	.text.SysTick_Handler,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	SysTick_Handler
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.fpu softvfp
+ 121              	SysTick_Handler:
+ 122              	.LFB122:
+  59:../src/gd32f3x0_hal_it.c **** 
+  60:../src/gd32f3x0_hal_it.c **** void SysTick_Handler(void)
+  61:../src/gd32f3x0_hal_it.c **** {
+ 123              		.loc 1 61 1
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127 0000 80B5     		push	{r7, lr}
+ 128              		.cfi_def_cfa_offset 8
+ 129              		.cfi_offset 7, -8
+ 130              		.cfi_offset 14, -4
+ 131 0002 00AF     		add	r7, sp, #0
+ 132              		.cfi_def_cfa_register 7
+  62:../src/gd32f3x0_hal_it.c ****     /* user code [SysTick_IRQn local 0] begin */
+  63:../src/gd32f3x0_hal_it.c ****     /* user code [SysTick_IRQn local 0] end */
+  64:../src/gd32f3x0_hal_it.c ****     hal_sys_basetick_irq();
+ 133              		.loc 1 64 5
+ 134 0004 FFF7FEFF 		bl	hal_sys_basetick_irq
+  65:../src/gd32f3x0_hal_it.c ****     /* user code [SysTick_IRQn local 1] begin */
+  66:../src/gd32f3x0_hal_it.c ****     /* user code [SysTick_IRQn local 1] end */
+  67:../src/gd32f3x0_hal_it.c **** }
+ 135              		.loc 1 67 1
+ 136 0008 00BF     		nop
+ 137 000a 80BD     		pop	{r7, pc}
+ 138              		.cfi_endproc
+ 139              	.LFE122:
+ 141              		.section	.text.DMA_Channel0_IRQHandler,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	DMA_Channel0_IRQHandler
+ 144              		.syntax unified
+ 145              		.thumb
+ 146              		.thumb_func
+ 147              		.fpu softvfp
+ 149              	DMA_Channel0_IRQHandler:
+ 150              	.LFB123:
+  68:../src/gd32f3x0_hal_it.c **** 
+  69:../src/gd32f3x0_hal_it.c **** void DMA_Channel0_IRQHandler(void)
+  70:../src/gd32f3x0_hal_it.c **** {
+ 151              		.loc 1 70 1
+ 152              		.cfi_startproc
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 1, uses_anonymous_args = 0
+ 155 0000 80B5     		push	{r7, lr}
+ 156              		.cfi_def_cfa_offset 8
+ 157              		.cfi_offset 7, -8
+ 158              		.cfi_offset 14, -4
+ 159 0002 00AF     		add	r7, sp, #0
+ 160              		.cfi_def_cfa_register 7
+  71:../src/gd32f3x0_hal_it.c ****     /* user code [DMA_Channel0_IRQn local 0] begin */
+  72:../src/gd32f3x0_hal_it.c ****     /* user code [DMA_Channel0_IRQn local 0] end */
+  73:../src/gd32f3x0_hal_it.c ****     hal_dma_irq(&dma_adc_info);
+ 161              		.loc 1 73 5
+ 162 0004 0248     		ldr	r0, .L6
+ 163 0006 FFF7FEFF 		bl	hal_dma_irq
+  74:../src/gd32f3x0_hal_it.c ****     /* user code [DMA_Channel0_IRQn local 1] begin */
+  75:../src/gd32f3x0_hal_it.c ****     /* user code [DMA_Channel0_IRQn local 1] end */
+  76:../src/gd32f3x0_hal_it.c **** }
+ 164              		.loc 1 76 1
+ 165 000a 00BF     		nop
+ 166 000c 80BD     		pop	{r7, pc}
+ 167              	.L7:
+ 168 000e 00BF     		.align	2
+ 169              	.L6:
+ 170 0010 00000000 		.word	dma_adc_info
+ 171              		.cfi_endproc
+ 172              	.LFE123:
+ 174              		.text
+ 175              	.Letext0:
+ 176              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 177              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 178              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 179              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 180              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 181              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 182              		.file 8 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 183              		.file 9 "../firmware/cmsis/inc/core_cm4.h"
+ 184              		.file 10 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 185              		.file 11 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_dma.h"
+ 186              		.file 12 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 187              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_adc.h"
+ 188              		.file 14 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_uart.h"
+ 189              		.file 15 "../inc/gd32f3x0_hal_init.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_it.c
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:16     .text.NMI_Handler:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:24     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:50     .text.SVC_Handler:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:57     .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:82     .text.PendSV_Handler:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:89     .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:114    .text.SysTick_Handler:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:121    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:142    .text.DMA_Channel0_IRQHandler:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:149    .text.DMA_Channel0_IRQHandler:00000000 DMA_Channel0_IRQHandler
+C:\Users\peter\AppData\Local\Temp\cct1EABN.s:170    .text.DMA_Channel0_IRQHandler:00000010 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_sys_basetick_irq
+hal_dma_irq
+dma_adc_info

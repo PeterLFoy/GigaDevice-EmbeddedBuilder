@@ -1,0 +1,191 @@
+13:41:21 **** Build of configuration GD ARM MCU Debug for project SimpleADC_DMA ****
+make all 
+Building file: ../src/gd32f3x0_hal_init.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"src/gd32f3x0_hal_init.d" -MT"src/gd32f3x0_hal_init.o" -Wa,-adhlns=src/gd32f3x0_hal_init.o.lst   -c -o "src/gd32f3x0_hal_init.o" "../src/gd32f3x0_hal_init.c"
+Finished building: ../src/gd32f3x0_hal_init.c
+ 
+Building file: ../src/gd32f3x0_hal_it.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"src/gd32f3x0_hal_it.d" -MT"src/gd32f3x0_hal_it.o" -Wa,-adhlns=src/gd32f3x0_hal_it.o.lst   -c -o "src/gd32f3x0_hal_it.o" "../src/gd32f3x0_hal_it.c"
+Finished building: ../src/gd32f3x0_hal_it.c
+ 
+Building file: ../src/main.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"src/main.d" -MT"src/main.o" -Wa,-adhlns=src/main.o.lst   -c -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.c
+ 
+Building file: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.d" -MT"firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.o" -Wa,-adhlns=firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.o.lst   -c -o "firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.o" "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c"
+Finished building: ../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c
+ 
+Building file: ../firmware/cmsis/src/syscalls.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/cmsis/src/syscalls.d" -MT"firmware/cmsis/src/syscalls.o" -Wa,-adhlns=firmware/cmsis/src/syscalls.o.lst   -c -o "firmware/cmsis/src/syscalls.o" "../firmware/cmsis/src/syscalls.c"
+Finished building: ../firmware/cmsis/src/syscalls.c
+ 
+Building file: ../firmware/cmsis/src/system_gd32f3x0.c
+Invoking: GD ARM MCU C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -std=gnu11 -DGD32F3X0 -DGD32F310 -I"../inc" -I"../firmware/cmsis/inc" -I"../firmware/GD32f3x0_hal_peripheral/Include" -MMD -MP -MF"firmware/cmsis/src/system_gd32f3x0.d" -MT"firmware/cmsis/src/system_gd32f3x0.o" -Wa,-adhlns=firmware/cmsis/src/system_gd32f3x0.o.lst   -c -o "firmware/cmsis/src/system_gd32f3x0.o" "../firmware/cmsis/src/system_gd32f3x0.c"
+Finished building: ../firmware/cmsis/src/system_gd32f3x0.c
+ 
+Building file: ../firmware/cmsis/gcc_startup/startup_gd32f3x0.S
+Invoking: GD ARM MCU Assembler
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -x assembler-with-cpp -MMD -MP -MF"firmware/cmsis/gcc_startup/startup_gd32f3x0.d" -MT"firmware/cmsis/gcc_startup/startup_gd32f3x0.o" -Wa,-adhlns=firmware/cmsis/gcc_startup/startup_gd32f3x0.o.lst   -c -o "firmware/cmsis/gcc_startup/startup_gd32f3x0.o" "../firmware/cmsis/gcc_startup/startup_gd32f3x0.S"
+Finished building: ../firmware/cmsis/gcc_startup/startup_gd32f3x0.S
+ 
+Building target: SimpleADC_DMA.elf
+Invoking: GD ARM MCU Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -Wl,-Map,"SimpleADC_DMA.map" -T gd32f3x0_flash.ld -Xlinker --gc-sections -L"../ldscripts" --specs=nano.specs --specs=nosys.specs -o "SimpleADC_DMA.elf"  ./src/gd32f3x0_hal_init.o ./src/gd32f3x0_hal_it.o ./src/main.o  ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_adc.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cec.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_cmp.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_crc.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_ctc.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dac.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_dma.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_exti.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fmc.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_fwdgt.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2c.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_i2s.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_irda.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_nvic.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_pmu.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rcu.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_rtc.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smartcard.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_smbus.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_spi.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_sys.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_syscfg.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_timer.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_tsi.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_uart.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_usrt.o ./firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.o  ./firmware/cmsis/src/syscalls.o ./firmware/cmsis/src/system_gd32f3x0.o  ./firmware/cmsis/gcc_startup/startup_gd32f3x0.o   
+Finished building target: SimpleADC_DMA.elf
+ 
+Invoking: GD ARM MCU Flash Image(Bin)
+arm-none-eabi-objcopy -O binary  "SimpleADC_DMA.elf"  "SimpleADC_DMA.bin"
+Finished building: SimpleADC_DMA.bin
+ 
+Invoking: GD ARM MCU Listing
+arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "SimpleADC_DMA.elf" > "SimpleADC_DMA.lst"
+Finished building: SimpleADC_DMA.lst
+ 
+Invoking: GD ARM MCU Print Size
+arm-none-eabi-size --format=berkeley "SimpleADC_DMA.elf"
+   text	   data	    bss	    dec	    hex	filename
+  23744	    116	   1252	  25112	   6218	SimpleADC_DMA.elf
+Finished building: SimpleADC_DMA.siz
+ 

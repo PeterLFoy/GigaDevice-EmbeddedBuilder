@@ -1,0 +1,1241 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_init.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.comm	adc_info,32,4
+  16              		.comm	dma_adc_info,28,4
+  17              		.comm	uart0_info,100,4
+  18              		.section	.text.msd_system_init,"ax",%progbits
+  19              		.align	1
+  20              		.global	msd_system_init
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu softvfp
+  27              	msd_system_init:
+  28              	.LFB119:
+  29              		.file 1 "../src/gd32f3x0_hal_init.c"
+   1:../src/gd32f3x0_hal_init.c **** /*
+   2:../src/gd32f3x0_hal_init.c ****     \file  gd32f3x0_hal_init.c
+   3:../src/gd32f3x0_hal_init.c **** */
+   4:../src/gd32f3x0_hal_init.c **** /*
+   5:../src/gd32f3x0_hal_init.c ****     Copyright (c) 2024, GigaDevice Semiconductor Inc.
+   6:../src/gd32f3x0_hal_init.c **** 
+   7:../src/gd32f3x0_hal_init.c ****     All rights reserved.
+   8:../src/gd32f3x0_hal_init.c **** 
+   9:../src/gd32f3x0_hal_init.c ****     Redistribution and use in source and binary forms, with or without modification,
+  10:../src/gd32f3x0_hal_init.c **** are permitted provided that the following conditions are met:
+  11:../src/gd32f3x0_hal_init.c **** 
+  12:../src/gd32f3x0_hal_init.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  13:../src/gd32f3x0_hal_init.c ****        list of conditions and the following disclaimer.
+  14:../src/gd32f3x0_hal_init.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  15:../src/gd32f3x0_hal_init.c ****        this list of conditions and the following disclaimer in the documentation 
+  16:../src/gd32f3x0_hal_init.c ****        and/or other materials provided with the distribution.
+  17:../src/gd32f3x0_hal_init.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  18:../src/gd32f3x0_hal_init.c ****        may be used to endorse or promote products derived from this software without 
+  19:../src/gd32f3x0_hal_init.c ****        specific prior written permission.
+  20:../src/gd32f3x0_hal_init.c **** 
+  21:../src/gd32f3x0_hal_init.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  22:../src/gd32f3x0_hal_init.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  23:../src/gd32f3x0_hal_init.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  24:../src/gd32f3x0_hal_init.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  25:../src/gd32f3x0_hal_init.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  26:../src/gd32f3x0_hal_init.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  27:../src/gd32f3x0_hal_init.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  28:../src/gd32f3x0_hal_init.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  29:../src/gd32f3x0_hal_init.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  30:../src/gd32f3x0_hal_init.c **** OF SUCH DAMAGE.
+  31:../src/gd32f3x0_hal_init.c **** */
+  32:../src/gd32f3x0_hal_init.c **** #include "gd32f3x0_hal_init.h"
+  33:../src/gd32f3x0_hal_init.c **** /* user code [global 0] begin */
+  34:../src/gd32f3x0_hal_init.c **** 
+  35:../src/gd32f3x0_hal_init.c **** /* user code [global 0] end */
+  36:../src/gd32f3x0_hal_init.c **** hal_adc_dev_struct adc_info;
+  37:../src/gd32f3x0_hal_init.c **** hal_dma_dev_struct dma_adc_info;
+  38:../src/gd32f3x0_hal_init.c **** hal_uart_dev_struct uart0_info;
+  39:../src/gd32f3x0_hal_init.c **** 
+  40:../src/gd32f3x0_hal_init.c **** void msd_system_init(void)
+  41:../src/gd32f3x0_hal_init.c **** {
+  30              		.loc 1 41 1
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 80B5     		push	{r7, lr}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  42:../src/gd32f3x0_hal_init.c ****     /* user code [system_init local 0] begin */
+  43:../src/gd32f3x0_hal_init.c ****     /* user code [system_init local 0] end */
+  44:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_CFGCMP);
+  40              		.loc 1 44 5
+  41 0004 4FF4C060 		mov	r0, #1536
+  42 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+  45:../src/gd32f3x0_hal_init.c ****     hal_nvic_irq_priority_group_set(NVIC_PRIGROUP_PRE4_SUB0);
+  43              		.loc 1 45 5
+  44 000c 4FF44070 		mov	r0, #768
+  45 0010 FFF7FEFF 		bl	hal_nvic_irq_priority_group_set
+  46:../src/gd32f3x0_hal_init.c ****     hal_sys_debug_init(SYS_DEBUG_SERIAL_WIRE);
+  46              		.loc 1 46 5
+  47 0014 0120     		movs	r0, #1
+  48 0016 FFF7FEFF 		bl	hal_sys_debug_init
+  47:../src/gd32f3x0_hal_init.c ****     hal_sys_timesource_init(SYS_TIMEBASE_SOURCE_SYSTICK);
+  49              		.loc 1 47 5
+  50 001a 0020     		movs	r0, #0
+  51 001c FFF7FEFF 		bl	hal_sys_timesource_init
+  48:../src/gd32f3x0_hal_init.c **** 
+  49:../src/gd32f3x0_hal_init.c ****     hal_nvic_set_priority(NonMaskableInt_IRQn, 0, 0);
+  52              		.loc 1 49 5
+  53 0020 0022     		movs	r2, #0
+  54 0022 0021     		movs	r1, #0
+  55 0024 6FF00D00 		mvn	r0, #13
+  56 0028 FFF7FEFF 		bl	hal_nvic_set_priority
+  50:../src/gd32f3x0_hal_init.c ****     hal_nvic_set_priority(SVCall_IRQn, 0, 0);
+  57              		.loc 1 50 5
+  58 002c 0022     		movs	r2, #0
+  59 002e 0021     		movs	r1, #0
+  60 0030 6FF00400 		mvn	r0, #4
+  61 0034 FFF7FEFF 		bl	hal_nvic_set_priority
+  51:../src/gd32f3x0_hal_init.c ****     hal_nvic_set_priority(PendSV_IRQn, 0, 0);
+  62              		.loc 1 51 5
+  63 0038 0022     		movs	r2, #0
+  64 003a 0021     		movs	r1, #0
+  65 003c 6FF00100 		mvn	r0, #1
+  66 0040 FFF7FEFF 		bl	hal_nvic_set_priority
+  52:../src/gd32f3x0_hal_init.c ****     hal_nvic_set_priority(SysTick_IRQn, 0, 0);
+  67              		.loc 1 52 5
+  68 0044 0022     		movs	r2, #0
+  69 0046 0021     		movs	r1, #0
+  70 0048 4FF0FF30 		mov	r0, #-1
+  71 004c FFF7FEFF 		bl	hal_nvic_set_priority
+  53:../src/gd32f3x0_hal_init.c ****     /* user code [system_init local 1] begin */
+  54:../src/gd32f3x0_hal_init.c ****     /* user code [system_init local 1] end */
+  55:../src/gd32f3x0_hal_init.c **** }
+  72              		.loc 1 55 1
+  73 0050 00BF     		nop
+  74 0052 80BD     		pop	{r7, pc}
+  75              		.cfi_endproc
+  76              	.LFE119:
+  78              		.section	.text.msd_clock_init,"ax",%progbits
+  79              		.align	1
+  80              		.global	msd_clock_init
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  84              		.fpu softvfp
+  86              	msd_clock_init:
+  87              	.LFB120:
+  56:../src/gd32f3x0_hal_init.c **** 
+  57:../src/gd32f3x0_hal_init.c **** void msd_clock_init(void)
+  58:../src/gd32f3x0_hal_init.c **** {
+  88              		.loc 1 58 1
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 64
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92 0000 80B5     		push	{r7, lr}
+  93              		.cfi_def_cfa_offset 8
+  94              		.cfi_offset 7, -8
+  95              		.cfi_offset 14, -4
+  96 0002 90B0     		sub	sp, sp, #64
+  97              		.cfi_def_cfa_offset 72
+  98 0004 00AF     		add	r7, sp, #0
+  99              		.cfi_def_cfa_register 7
+  59:../src/gd32f3x0_hal_init.c ****     /* user code [clock_init local 0] begin */
+  60:../src/gd32f3x0_hal_init.c ****     /* user code [clock_init local 0] end */
+  61:../src/gd32f3x0_hal_init.c ****     hal_rcu_clk_struct rcu_clk_parameter;
+  62:../src/gd32f3x0_hal_init.c ****     hal_rcu_osci_struct rcu_osci_parameter;
+  63:../src/gd32f3x0_hal_init.c ****     hal_rcu_periphclk_struct rcu_periphclk_parameter;
+  64:../src/gd32f3x0_hal_init.c **** 
+  65:../src/gd32f3x0_hal_init.c ****     hal_rcu_struct_init(HAL_RCU_CLK_STRUCT, &rcu_clk_parameter);
+ 100              		.loc 1 65 5
+ 101 0006 07F13403 		add	r3, r7, #52
+ 102 000a 1946     		mov	r1, r3
+ 103 000c 0020     		movs	r0, #0
+ 104 000e FFF7FEFF 		bl	hal_rcu_struct_init
+  66:../src/gd32f3x0_hal_init.c ****     hal_rcu_struct_init(HAL_RCU_OSCI_STRUCT, &rcu_osci_parameter);
+ 105              		.loc 1 66 5
+ 106 0012 07F11003 		add	r3, r7, #16
+ 107 0016 1946     		mov	r1, r3
+ 108 0018 0120     		movs	r0, #1
+ 109 001a FFF7FEFF 		bl	hal_rcu_struct_init
+  67:../src/gd32f3x0_hal_init.c ****     hal_rcu_struct_init(HAL_RCU_PERIPHCLK_STRUCT, &rcu_periphclk_parameter);
+ 110              		.loc 1 67 5
+ 111 001e 3B46     		mov	r3, r7
+ 112 0020 1946     		mov	r1, r3
+ 113 0022 0220     		movs	r0, #2
+ 114 0024 FFF7FEFF 		bl	hal_rcu_struct_init
+  68:../src/gd32f3x0_hal_init.c **** 
+  69:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.hxtal.need_configure = ENABLE;
+ 115              		.loc 1 69 45
+ 116 0028 0123     		movs	r3, #1
+ 117 002a 3B74     		strb	r3, [r7, #16]
+  70:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.hxtal.state = RCU_OSC_ON;
+ 118              		.loc 1 70 36
+ 119 002c 0223     		movs	r3, #2
+ 120 002e 7B74     		strb	r3, [r7, #17]
+  71:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.lxtal.need_configure = ENABLE;
+ 121              		.loc 1 71 45
+ 122 0030 0123     		movs	r3, #1
+ 123 0032 BB74     		strb	r3, [r7, #18]
+  72:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.lxtal.state = RCU_OSC_ON;
+ 124              		.loc 1 72 36
+ 125 0034 0223     		movs	r3, #2
+ 126 0036 FB74     		strb	r3, [r7, #19]
+  73:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.irc8m.need_configure = ENABLE;
+ 127              		.loc 1 73 45
+ 128 0038 0123     		movs	r3, #1
+ 129 003a 3B75     		strb	r3, [r7, #20]
+  74:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.irc8m.state = RCU_OSC_ON;
+ 130              		.loc 1 74 36
+ 131 003c 0223     		movs	r3, #2
+ 132 003e BB75     		strb	r3, [r7, #22]
+  75:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.irc8m.adjust_value = 0;
+ 133              		.loc 1 75 43
+ 134 0040 0023     		movs	r3, #0
+ 135 0042 7B75     		strb	r3, [r7, #21]
+  76:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.need_configure = ENABLE;
+ 136              		.loc 1 76 43
+ 137 0044 0123     		movs	r3, #1
+ 138 0046 87F82030 		strb	r3, [r7, #32]
+  77:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.state = RCU_OSC_ON;
+ 139              		.loc 1 77 34
+ 140 004a 0223     		movs	r3, #2
+ 141 004c 87F82130 		strb	r3, [r7, #33]
+  78:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.pll_source = RCU_PLL_SRC_HXTAL_IRC48M;
+ 142              		.loc 1 78 39
+ 143 0050 4FF48033 		mov	r3, #65536
+ 144 0054 7B62     		str	r3, [r7, #36]
+  79:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.pll_mul = RCU_PLL_MULT3;
+ 145              		.loc 1 79 36
+ 146 0056 4FF48023 		mov	r3, #262144
+ 147 005a FB62     		str	r3, [r7, #44]
+  80:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.pll_presel = RCU_PLL_PRESEL_HXTAL;
+ 148              		.loc 1 80 39
+ 149 005c 0023     		movs	r3, #0
+ 150 005e 3B63     		str	r3, [r7, #48]
+  81:../src/gd32f3x0_hal_init.c ****     rcu_osci_parameter.pll.pre_div = RCU_PLL_PREDIV1;
+ 151              		.loc 1 81 36
+ 152 0060 0023     		movs	r3, #0
+ 153 0062 87F82830 		strb	r3, [r7, #40]
+  82:../src/gd32f3x0_hal_init.c ****     if(HAL_ERR_NONE != hal_rcu_osci_config(&rcu_osci_parameter)){
+ 154              		.loc 1 82 24
+ 155 0066 07F11003 		add	r3, r7, #16
+ 156 006a 1846     		mov	r0, r3
+ 157 006c FFF7FEFF 		bl	hal_rcu_osci_config
+ 158 0070 0346     		mov	r3, r0
+ 159              		.loc 1 82 7
+ 160 0072 002B     		cmp	r3, #0
+ 161 0074 00D0     		beq	.L3
+ 162              	.L4:
+  83:../src/gd32f3x0_hal_init.c ****         while(1);
+ 163              		.loc 1 83 14 discriminator 1
+ 164 0076 FEE7     		b	.L4
+ 165              	.L3:
+  84:../src/gd32f3x0_hal_init.c ****     }
+  85:../src/gd32f3x0_hal_init.c **** 
+  86:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.clock_type = RCU_CLKTYPE_SYSCLK | RCU_CLKTYPE_AHBCLK | RCU_CLKTYPE_APB1CLK | 
+ 166              		.loc 1 86 34
+ 167 0078 1F23     		movs	r3, #31
+ 168 007a 7B63     		str	r3, [r7, #52]
+  87:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.sysclk_source = RCU_SYSCLK_SRC_PLL;
+ 169              		.loc 1 87 37
+ 170 007c 0223     		movs	r3, #2
+ 171 007e 87F83830 		strb	r3, [r7, #56]
+  88:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.ahbclk_divider = RCU_SYSCLK_AHBDIV1;
+ 172              		.loc 1 88 38
+ 173 0082 0023     		movs	r3, #0
+ 174 0084 87F83A30 		strb	r3, [r7, #58]
+  89:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.apb1clk_divider = RCU_AHBCLK_APB1DIV1;
+ 175              		.loc 1 89 39
+ 176 0088 0023     		movs	r3, #0
+ 177 008a BB87     		strh	r3, [r7, #60]	@ movhi
+  90:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.apb2clk_divider = RCU_AHBCLK_APB2DIV1;
+ 178              		.loc 1 90 39
+ 179 008c 0023     		movs	r3, #0
+ 180 008e FB87     		strh	r3, [r7, #62]	@ movhi
+  91:../src/gd32f3x0_hal_init.c ****     rcu_clk_parameter.ck48mclk_source = RCU_USB_CK48MSRC_IRC48M;
+ 181              		.loc 1 91 39
+ 182 0090 0123     		movs	r3, #1
+ 183 0092 87F83930 		strb	r3, [r7, #57]
+  92:../src/gd32f3x0_hal_init.c ****     if(HAL_ERR_NONE != hal_rcu_clock_config(&rcu_clk_parameter)){
+ 184              		.loc 1 92 24
+ 185 0096 07F13403 		add	r3, r7, #52
+ 186 009a 1846     		mov	r0, r3
+ 187 009c FFF7FEFF 		bl	hal_rcu_clock_config
+ 188 00a0 0346     		mov	r3, r0
+ 189              		.loc 1 92 7
+ 190 00a2 002B     		cmp	r3, #0
+ 191 00a4 00D0     		beq	.L5
+ 192              	.L6:
+  93:../src/gd32f3x0_hal_init.c ****         while(1);
+ 193              		.loc 1 93 14 discriminator 2
+ 194 00a6 FEE7     		b	.L6
+ 195              	.L5:
+  94:../src/gd32f3x0_hal_init.c ****     }
+  95:../src/gd32f3x0_hal_init.c **** 
+  96:../src/gd32f3x0_hal_init.c ****     rcu_periphclk_parameter.periph_clock_type = RCU_PERIPH_CLKTYPE_ADC;
+ 196              		.loc 1 96 47
+ 197 00a8 0423     		movs	r3, #4
+ 198 00aa 3B60     		str	r3, [r7]
+  97:../src/gd32f3x0_hal_init.c ****     rcu_periphclk_parameter.adc_clock_source = RCU_ADCCK_APB2_DIV2;
+ 199              		.loc 1 97 46
+ 200 00ac 0223     		movs	r3, #2
+ 201 00ae FB71     		strb	r3, [r7, #7]
+  98:../src/gd32f3x0_hal_init.c ****     if(HAL_ERR_NONE != hal_rcu_periph_clock_config(&rcu_periphclk_parameter)){
+ 202              		.loc 1 98 24
+ 203 00b0 3B46     		mov	r3, r7
+ 204 00b2 1846     		mov	r0, r3
+ 205 00b4 FFF7FEFF 		bl	hal_rcu_periph_clock_config
+ 206 00b8 0346     		mov	r3, r0
+ 207              		.loc 1 98 7
+ 208 00ba 002B     		cmp	r3, #0
+ 209 00bc 00D0     		beq	.L7
+ 210              	.L8:
+  99:../src/gd32f3x0_hal_init.c ****         while(1);
+ 211              		.loc 1 99 14 discriminator 3
+ 212 00be FEE7     		b	.L8
+ 213              	.L7:
+ 100:../src/gd32f3x0_hal_init.c ****     }
+ 101:../src/gd32f3x0_hal_init.c **** 
+ 102:../src/gd32f3x0_hal_init.c ****     rcu_periphclk_parameter.periph_clock_type = RCU_PERIPH_CLKTYPE_USART0;
+ 214              		.loc 1 102 47
+ 215 00c0 0223     		movs	r3, #2
+ 216 00c2 3B60     		str	r3, [r7]
+ 103:../src/gd32f3x0_hal_init.c ****     rcu_periphclk_parameter.usart0_clock_source = RCU_USART0_CLKSRC_APB2;
+ 217              		.loc 1 103 49
+ 218 00c4 0023     		movs	r3, #0
+ 219 00c6 BB71     		strb	r3, [r7, #6]
+ 104:../src/gd32f3x0_hal_init.c ****     if(HAL_ERR_NONE != hal_rcu_periph_clock_config(&rcu_periphclk_parameter)){
+ 220              		.loc 1 104 24
+ 221 00c8 3B46     		mov	r3, r7
+ 222 00ca 1846     		mov	r0, r3
+ 223 00cc FFF7FEFF 		bl	hal_rcu_periph_clock_config
+ 224 00d0 0346     		mov	r3, r0
+ 225              		.loc 1 104 7
+ 226 00d2 002B     		cmp	r3, #0
+ 227 00d4 00D0     		beq	.L11
+ 228              	.L10:
+ 105:../src/gd32f3x0_hal_init.c ****         while(1);
+ 229              		.loc 1 105 14 discriminator 4
+ 230 00d6 FEE7     		b	.L10
+ 231              	.L11:
+ 106:../src/gd32f3x0_hal_init.c ****     }
+ 107:../src/gd32f3x0_hal_init.c **** 
+ 108:../src/gd32f3x0_hal_init.c ****     /* user code [clock_init local 1] begin */
+ 109:../src/gd32f3x0_hal_init.c ****     /* user code [clock_init local 1] end */
+ 110:../src/gd32f3x0_hal_init.c **** }
+ 232              		.loc 1 110 1
+ 233 00d8 00BF     		nop
+ 234 00da 4037     		adds	r7, r7, #64
+ 235              		.cfi_def_cfa_offset 8
+ 236 00dc BD46     		mov	sp, r7
+ 237              		.cfi_def_cfa_register 13
+ 238              		@ sp needed
+ 239 00de 80BD     		pop	{r7, pc}
+ 240              		.cfi_endproc
+ 241              	.LFE120:
+ 243              		.section	.text.msd_dma_init,"ax",%progbits
+ 244              		.align	1
+ 245              		.global	msd_dma_init
+ 246              		.syntax unified
+ 247              		.thumb
+ 248              		.thumb_func
+ 249              		.fpu softvfp
+ 251              	msd_dma_init:
+ 252              	.LFB121:
+ 111:../src/gd32f3x0_hal_init.c **** 
+ 112:../src/gd32f3x0_hal_init.c **** void msd_dma_init(void)
+ 113:../src/gd32f3x0_hal_init.c **** {
+ 253              		.loc 1 113 1
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 1, uses_anonymous_args = 0
+ 257 0000 80B5     		push	{r7, lr}
+ 258              		.cfi_def_cfa_offset 8
+ 259              		.cfi_offset 7, -8
+ 260              		.cfi_offset 14, -4
+ 261 0002 00AF     		add	r7, sp, #0
+ 262              		.cfi_def_cfa_register 7
+ 114:../src/gd32f3x0_hal_init.c ****     /* user code [dma_init local 0] begin */
+ 115:../src/gd32f3x0_hal_init.c ****     /* user code [dma_init local 0] end */
+ 116:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_DMA);
+ 263              		.loc 1 116 5
+ 264 0004 4FF4A060 		mov	r0, #1280
+ 265 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 117:../src/gd32f3x0_hal_init.c ****     hal_nvic_irq_enable(DMA_Channel0_IRQn, 0, 0);
+ 266              		.loc 1 117 5
+ 267 000c 0022     		movs	r2, #0
+ 268 000e 0021     		movs	r1, #0
+ 269 0010 0920     		movs	r0, #9
+ 270 0012 FFF7FEFF 		bl	hal_nvic_irq_enable
+ 118:../src/gd32f3x0_hal_init.c ****     /* user code [dma_init local 1] begin */
+ 119:../src/gd32f3x0_hal_init.c ****     /* user code [dma_init local 1] end */
+ 120:../src/gd32f3x0_hal_init.c **** }
+ 271              		.loc 1 120 1
+ 272 0016 00BF     		nop
+ 273 0018 80BD     		pop	{r7, pc}
+ 274              		.cfi_endproc
+ 275              	.LFE121:
+ 277              		.section	.text.msd_dma_deinit,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	msd_dma_deinit
+ 280              		.syntax unified
+ 281              		.thumb
+ 282              		.thumb_func
+ 283              		.fpu softvfp
+ 285              	msd_dma_deinit:
+ 286              	.LFB122:
+ 121:../src/gd32f3x0_hal_init.c **** 
+ 122:../src/gd32f3x0_hal_init.c **** void msd_dma_deinit(void)
+ 123:../src/gd32f3x0_hal_init.c **** {
+ 287              		.loc 1 123 1
+ 288              		.cfi_startproc
+ 289              		@ args = 0, pretend = 0, frame = 0
+ 290              		@ frame_needed = 1, uses_anonymous_args = 0
+ 291 0000 80B5     		push	{r7, lr}
+ 292              		.cfi_def_cfa_offset 8
+ 293              		.cfi_offset 7, -8
+ 294              		.cfi_offset 14, -4
+ 295 0002 00AF     		add	r7, sp, #0
+ 296              		.cfi_def_cfa_register 7
+ 124:../src/gd32f3x0_hal_init.c ****     /* user code [dma_deinit local 0] begin */
+ 125:../src/gd32f3x0_hal_init.c ****     /* user code [dma_deinit local 0] end */
+ 126:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_DMA);
+ 297              		.loc 1 126 5
+ 298 0004 4FF4A060 		mov	r0, #1280
+ 299 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 127:../src/gd32f3x0_hal_init.c ****     /* user code [dma_deinit local 1] begin */
+ 128:../src/gd32f3x0_hal_init.c ****     /* user code [dma_deinit local 1] end */
+ 129:../src/gd32f3x0_hal_init.c **** }
+ 300              		.loc 1 129 1
+ 301 000c 00BF     		nop
+ 302 000e 80BD     		pop	{r7, pc}
+ 303              		.cfi_endproc
+ 304              	.LFE122:
+ 306              		.section	.text.msd_gpio_init,"ax",%progbits
+ 307              		.align	1
+ 308              		.global	msd_gpio_init
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.fpu softvfp
+ 314              	msd_gpio_init:
+ 315              	.LFB123:
+ 130:../src/gd32f3x0_hal_init.c **** 
+ 131:../src/gd32f3x0_hal_init.c **** void msd_gpio_init(void)
+ 132:../src/gd32f3x0_hal_init.c **** {
+ 316              		.loc 1 132 1
+ 317              		.cfi_startproc
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 1, uses_anonymous_args = 0
+ 320 0000 80B5     		push	{r7, lr}
+ 321              		.cfi_def_cfa_offset 8
+ 322              		.cfi_offset 7, -8
+ 323              		.cfi_offset 14, -4
+ 324 0002 00AF     		add	r7, sp, #0
+ 325              		.cfi_def_cfa_register 7
+ 133:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_init local 0] begin */
+ 134:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_init local 0] end */
+ 135:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_GPIOC);
+ 326              		.loc 1 135 5
+ 327 0004 40F21350 		movw	r0, #1299
+ 328 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 136:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_GPIOF);
+ 329              		.loc 1 136 5
+ 330 000c 40F21650 		movw	r0, #1302
+ 331 0010 FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 137:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_GPIOA);
+ 332              		.loc 1 137 5
+ 333 0014 40F21150 		movw	r0, #1297
+ 334 0018 FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 138:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_init local 1] begin */
+ 139:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_init local 1] end */
+ 140:../src/gd32f3x0_hal_init.c **** }
+ 335              		.loc 1 140 1
+ 336 001c 00BF     		nop
+ 337 001e 80BD     		pop	{r7, pc}
+ 338              		.cfi_endproc
+ 339              	.LFE123:
+ 341              		.section	.text.msd_gpio_deinit,"ax",%progbits
+ 342              		.align	1
+ 343              		.global	msd_gpio_deinit
+ 344              		.syntax unified
+ 345              		.thumb
+ 346              		.thumb_func
+ 347              		.fpu softvfp
+ 349              	msd_gpio_deinit:
+ 350              	.LFB124:
+ 141:../src/gd32f3x0_hal_init.c **** 
+ 142:../src/gd32f3x0_hal_init.c **** void msd_gpio_deinit(void)
+ 143:../src/gd32f3x0_hal_init.c **** {
+ 351              		.loc 1 143 1
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 0
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355 0000 80B5     		push	{r7, lr}
+ 356              		.cfi_def_cfa_offset 8
+ 357              		.cfi_offset 7, -8
+ 358              		.cfi_offset 14, -4
+ 359 0002 00AF     		add	r7, sp, #0
+ 360              		.cfi_def_cfa_register 7
+ 144:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_deinit local 0] begin */
+ 145:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_deinit local 0] end */
+ 146:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_GPIOC);
+ 361              		.loc 1 146 5
+ 362 0004 40F21350 		movw	r0, #1299
+ 363 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 147:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_GPIOF);
+ 364              		.loc 1 147 5
+ 365 000c 40F21650 		movw	r0, #1302
+ 366 0010 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 148:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_GPIOA);
+ 367              		.loc 1 148 5
+ 368 0014 40F21150 		movw	r0, #1297
+ 369 0018 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 149:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_deinit local 1] begin */
+ 150:../src/gd32f3x0_hal_init.c ****     /* user code [gpio_deinit local 1] end */
+ 151:../src/gd32f3x0_hal_init.c **** }
+ 370              		.loc 1 151 1
+ 371 001c 00BF     		nop
+ 372 001e 80BD     		pop	{r7, pc}
+ 373              		.cfi_endproc
+ 374              	.LFE124:
+ 376              		.section	.text.msd_adc_init,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	msd_adc_init
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 382              		.fpu softvfp
+ 384              	msd_adc_init:
+ 385              	.LFB125:
+ 152:../src/gd32f3x0_hal_init.c **** 
+ 153:../src/gd32f3x0_hal_init.c **** void msd_adc_init(void)
+ 154:../src/gd32f3x0_hal_init.c **** {
+ 386              		.loc 1 154 1
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 96
+ 389              		@ frame_needed = 1, uses_anonymous_args = 0
+ 390 0000 80B5     		push	{r7, lr}
+ 391              		.cfi_def_cfa_offset 8
+ 392              		.cfi_offset 7, -8
+ 393              		.cfi_offset 14, -4
+ 394 0002 98B0     		sub	sp, sp, #96
+ 395              		.cfi_def_cfa_offset 104
+ 396 0004 00AF     		add	r7, sp, #0
+ 397              		.cfi_def_cfa_register 7
+ 155:../src/gd32f3x0_hal_init.c ****     /* user code [adc_init local 0] begin */
+ 156:../src/gd32f3x0_hal_init.c ****     /* user code [adc_init local 0] end */
+ 157:../src/gd32f3x0_hal_init.c ****     hal_gpio_init_struct gpio_init_parameter;
+ 158:../src/gd32f3x0_hal_init.c ****     hal_dma_init_struct dma_adc_init_parameter;
+ 159:../src/gd32f3x0_hal_init.c **** 
+ 160:../src/gd32f3x0_hal_init.c ****     hal_adc_init_struct adc_init_parameter;
+ 161:../src/gd32f3x0_hal_init.c ****     hal_adc_routine_config_struct adc_routine_config_parameter;
+ 162:../src/gd32f3x0_hal_init.c ****     hal_adc_routine_rank_config_struct adc_routine_rank_config_parameter;
+ 163:../src/gd32f3x0_hal_init.c **** 
+ 164:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_ADC);
+ 398              		.loc 1 164 5
+ 399 0006 40F20960 		movw	r0, #1545
+ 400 000a FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 165:../src/gd32f3x0_hal_init.c ****     hal_gpio_struct_init(&gpio_init_parameter);
+ 401              		.loc 1 165 5
+ 402 000e 07F15003 		add	r3, r7, #80
+ 403 0012 1846     		mov	r0, r3
+ 404 0014 FFF7FEFF 		bl	hal_gpio_struct_init
+ 166:../src/gd32f3x0_hal_init.c **** 
+ 167:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.mode = GPIO_MODE_ANALOG;
+ 405              		.loc 1 167 30
+ 406 0018 0323     		movs	r3, #3
+ 407 001a 3B65     		str	r3, [r7, #80]
+ 168:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.pull = GPIO_PULL_NONE;
+ 408              		.loc 1 168 30
+ 409 001c 0023     		movs	r3, #0
+ 410 001e 7B65     		str	r3, [r7, #84]
+ 169:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.ospeed = GPIO_OSPEED_50MHZ;
+ 411              		.loc 1 169 32
+ 412 0020 0323     		movs	r3, #3
+ 413 0022 BB65     		str	r3, [r7, #88]
+ 170:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.af = GPIO_AF_0;
+ 414              		.loc 1 170 28
+ 415 0024 0023     		movs	r3, #0
+ 416 0026 FB65     		str	r3, [r7, #92]
+ 171:../src/gd32f3x0_hal_init.c ****     hal_gpio_init(GPIOA, GPIO_PIN_2, &gpio_init_parameter);
+ 417              		.loc 1 171 5
+ 418 0028 07F15003 		add	r3, r7, #80
+ 419 002c 1A46     		mov	r2, r3
+ 420 002e 0421     		movs	r1, #4
+ 421 0030 4FF09040 		mov	r0, #1207959552
+ 422 0034 FFF7FEFF 		bl	hal_gpio_init
+ 172:../src/gd32f3x0_hal_init.c **** 
+ 173:../src/gd32f3x0_hal_init.c ****     hal_adc_struct_init(HAL_ADC_INIT_STRUCT, &adc_init_parameter);
+ 423              		.loc 1 173 5
+ 424 0038 07F12003 		add	r3, r7, #32
+ 425 003c 1946     		mov	r1, r3
+ 426 003e 0020     		movs	r0, #0
+ 427 0040 FFF7FEFF 		bl	hal_adc_struct_init
+ 174:../src/gd32f3x0_hal_init.c ****     hal_adc_struct_init(HAL_ADC_DEV_STRUCT, &adc_info);
+ 428              		.loc 1 174 5
+ 429 0044 3B49     		ldr	r1, .L17
+ 430 0046 0820     		movs	r0, #8
+ 431 0048 FFF7FEFF 		bl	hal_adc_struct_init
+ 175:../src/gd32f3x0_hal_init.c ****     hal_adc_struct_init(HAL_ADC_ROUTINE_CONFIG_STRUCT, &adc_routine_config_parameter);
+ 432              		.loc 1 175 5
+ 433 004c 07F10C03 		add	r3, r7, #12
+ 434 0050 1946     		mov	r1, r3
+ 435 0052 0220     		movs	r0, #2
+ 436 0054 FFF7FEFF 		bl	hal_adc_struct_init
+ 176:../src/gd32f3x0_hal_init.c ****     hal_adc_struct_init(HAL_ADC_ROUTINE_RANK_CONFIG_STRUCT, &adc_routine_rank_config_parameter);
+ 437              		.loc 1 176 5
+ 438 0058 3B46     		mov	r3, r7
+ 439 005a 1946     		mov	r1, r3
+ 440 005c 0120     		movs	r0, #1
+ 441 005e FFF7FEFF 		bl	hal_adc_struct_init
+ 177:../src/gd32f3x0_hal_init.c **** 
+ 178:../src/gd32f3x0_hal_init.c ****     adc_init_parameter.data_alignment = ADC_LSB_ALIGNMENT;
+ 442              		.loc 1 178 39
+ 443 0062 0023     		movs	r3, #0
+ 444 0064 3B62     		str	r3, [r7, #32]
+ 179:../src/gd32f3x0_hal_init.c ****     adc_init_parameter.resolution = ADC_RESOLUTION_12B;
+ 445              		.loc 1 179 35
+ 446 0066 0023     		movs	r3, #0
+ 447 0068 7B62     		str	r3, [r7, #36]
+ 180:../src/gd32f3x0_hal_init.c ****     adc_init_parameter.scan_mode = DISABLE;
+ 448              		.loc 1 180 34
+ 449 006a 0023     		movs	r3, #0
+ 450 006c 87F82830 		strb	r3, [r7, #40]
+ 181:../src/gd32f3x0_hal_init.c ****     adc_init_parameter.hardware_oversampling = DISABLE;
+ 451              		.loc 1 181 46
+ 452 0070 0023     		movs	r3, #0
+ 453 0072 87F82930 		strb	r3, [r7, #41]
+ 182:../src/gd32f3x0_hal_init.c ****     hal_adc_init(&adc_info,&adc_init_parameter);
+ 454              		.loc 1 182 5
+ 455 0076 07F12003 		add	r3, r7, #32
+ 456 007a 1946     		mov	r1, r3
+ 457 007c 2D48     		ldr	r0, .L17
+ 458 007e FFF7FEFF 		bl	hal_adc_init
+ 183:../src/gd32f3x0_hal_init.c **** 
+ 184:../src/gd32f3x0_hal_init.c ****     adc_routine_config_parameter.routine_sequence_conversions = ENABLE;
+ 459              		.loc 1 184 63
+ 460 0082 0123     		movs	r3, #1
+ 461 0084 3B73     		strb	r3, [r7, #12]
+ 185:../src/gd32f3x0_hal_init.c ****     adc_routine_config_parameter.routine_sequence_length = 1;
+ 462              		.loc 1 185 58
+ 463 0086 0123     		movs	r3, #1
+ 464 0088 3B61     		str	r3, [r7, #16]
+ 186:../src/gd32f3x0_hal_init.c ****     adc_routine_config_parameter.routine_sequence_external_trigger_select = ADC_EXTTRIG_ROUTINE_NON
+ 465              		.loc 1 186 75
+ 466 008a 4FF46023 		mov	r3, #917504
+ 467 008e 7B61     		str	r3, [r7, #20]
+ 187:../src/gd32f3x0_hal_init.c ****     adc_routine_config_parameter.continuous_mode = ENABLE;
+ 468              		.loc 1 187 50
+ 469 0090 0123     		movs	r3, #1
+ 470 0092 3B76     		strb	r3, [r7, #24]
+ 188:../src/gd32f3x0_hal_init.c ****     adc_routine_config_parameter.discontinuous_mode = DISABLE;
+ 471              		.loc 1 188 53
+ 472 0094 0023     		movs	r3, #0
+ 473 0096 7B76     		strb	r3, [r7, #25]
+ 189:../src/gd32f3x0_hal_init.c ****     hal_adc_routine_channel_config(&adc_info,&adc_routine_config_parameter);
+ 474              		.loc 1 189 5
+ 475 0098 07F10C03 		add	r3, r7, #12
+ 476 009c 1946     		mov	r1, r3
+ 477 009e 2548     		ldr	r0, .L17
+ 478 00a0 FFF7FEFF 		bl	hal_adc_routine_channel_config
+ 190:../src/gd32f3x0_hal_init.c **** 
+ 191:../src/gd32f3x0_hal_init.c ****     adc_routine_rank_config_parameter.channel = ADC_CHANNEL_2;
+ 479              		.loc 1 191 47
+ 480 00a4 0223     		movs	r3, #2
+ 481 00a6 3B60     		str	r3, [r7]
+ 192:../src/gd32f3x0_hal_init.c ****     adc_routine_rank_config_parameter.sampling_time = ADC_SAMPLETIME_55POINT5;
+ 482              		.loc 1 192 53
+ 483 00a8 0523     		movs	r3, #5
+ 484 00aa 7B60     		str	r3, [r7, #4]
+ 193:../src/gd32f3x0_hal_init.c ****     adc_routine_rank_config_parameter.routine_sequence = ADC_ROUTINE_SEQUENCE_0;
+ 485              		.loc 1 193 56
+ 486 00ac 0023     		movs	r3, #0
+ 487 00ae 3B72     		strb	r3, [r7, #8]
+ 194:../src/gd32f3x0_hal_init.c ****     hal_adc_routine_rank_config(&adc_info,&adc_routine_rank_config_parameter);
+ 488              		.loc 1 194 5
+ 489 00b0 3B46     		mov	r3, r7
+ 490 00b2 1946     		mov	r1, r3
+ 491 00b4 1F48     		ldr	r0, .L17
+ 492 00b6 FFF7FEFF 		bl	hal_adc_routine_rank_config
+ 195:../src/gd32f3x0_hal_init.c **** 
+ 196:../src/gd32f3x0_hal_init.c ****     hal_dma_struct_init(HAL_DMA_INIT_STRUCT, &dma_adc_init_parameter);
+ 493              		.loc 1 196 5
+ 494 00ba 07F13403 		add	r3, r7, #52
+ 495 00be 1946     		mov	r1, r3
+ 496 00c0 0020     		movs	r0, #0
+ 497 00c2 FFF7FEFF 		bl	hal_dma_struct_init
+ 197:../src/gd32f3x0_hal_init.c ****     hal_dma_struct_init(HAL_DMA_DEV_STRUCT, &dma_adc_info);
+ 498              		.loc 1 197 5
+ 499 00c6 1C49     		ldr	r1, .L17+4
+ 500 00c8 0120     		movs	r0, #1
+ 501 00ca FFF7FEFF 		bl	hal_dma_struct_init
+ 198:../src/gd32f3x0_hal_init.c **** 
+ 199:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.direction = DMA_DIR_PERIPH_TO_MEMORY;
+ 502              		.loc 1 199 38
+ 503 00ce 0023     		movs	r3, #0
+ 504 00d0 7B63     		str	r3, [r7, #52]
+ 200:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.periph_inc = DISABLE;
+ 505              		.loc 1 200 39
+ 506 00d2 0023     		movs	r3, #0
+ 507 00d4 3B64     		str	r3, [r7, #64]
+ 201:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.memory_inc = ENABLE;
+ 508              		.loc 1 201 39
+ 509 00d6 0123     		movs	r3, #1
+ 510 00d8 7B64     		str	r3, [r7, #68]
+ 202:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.periph_width = DMA_PERIPH_SIZE_16BITS;
+ 511              		.loc 1 202 41
+ 512 00da 4FF48073 		mov	r3, #256
+ 513 00de BB64     		str	r3, [r7, #72]
+ 203:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.memory_width = DMA_MEMORY_SIZE_16BITS;
+ 514              		.loc 1 203 41
+ 515 00e0 4FF48063 		mov	r3, #1024
+ 516 00e4 FB64     		str	r3, [r7, #76]
+ 204:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.mode = DMA_CIRCULAR_MODE;
+ 517              		.loc 1 204 33
+ 518 00e6 2023     		movs	r3, #32
+ 519 00e8 FB63     		str	r3, [r7, #60]
+ 205:../src/gd32f3x0_hal_init.c ****     dma_adc_init_parameter.priority = DMA_PRIORITY_LEVEL_HIGH;
+ 520              		.loc 1 205 37
+ 521 00ea 4FF40053 		mov	r3, #8192
+ 522 00ee BB63     		str	r3, [r7, #56]
+ 206:../src/gd32f3x0_hal_init.c ****     hal_dma_init(&dma_adc_info, DMA_CH0, &dma_adc_init_parameter);
+ 523              		.loc 1 206 5
+ 524 00f0 07F13403 		add	r3, r7, #52
+ 525 00f4 1A46     		mov	r2, r3
+ 526 00f6 0021     		movs	r1, #0
+ 527 00f8 0F48     		ldr	r0, .L17+4
+ 528 00fa FFF7FEFF 		bl	hal_dma_init
+ 207:../src/gd32f3x0_hal_init.c **** 
+ 208:../src/gd32f3x0_hal_init.c ****     hal_periph_dma_info_bind(adc_info, p_dma_adc, dma_adc_info);
+ 529              		.loc 1 208 5
+ 530 00fe 0D4B     		ldr	r3, .L17
+ 531 0100 0D4A     		ldr	r2, .L17+4
+ 532 0102 DA60     		str	r2, [r3, #12]
+ 533 0104 0C4B     		ldr	r3, .L17+4
+ 534 0106 0B4A     		ldr	r2, .L17
+ 535 0108 5A61     		str	r2, [r3, #20]
+ 209:../src/gd32f3x0_hal_init.c ****     /* user code [adc_init local 1] begin */
+ 210:../src/gd32f3x0_hal_init.c ****     /* ADC trigger config */
+ 211:../src/gd32f3x0_hal_init.c ****     hals_adc_external_trigger_config(ADC_ROUTINE_CHANNEL, ENABLE);
+ 536              		.loc 1 211 5
+ 537 010a 0121     		movs	r1, #1
+ 538 010c 0120     		movs	r0, #1
+ 539 010e FFF7FEFF 		bl	hals_adc_external_trigger_config
+ 212:../src/gd32f3x0_hal_init.c ****     /* enable ADC interface */
+ 213:../src/gd32f3x0_hal_init.c ****     hals_adc_enable();
+ 540              		.loc 1 213 5
+ 541 0112 FFF7FEFF 		bl	hals_adc_enable
+ 214:../src/gd32f3x0_hal_init.c ****     /* ADC calibration and reset calibration */
+ 215:../src/gd32f3x0_hal_init.c ****     hal_sys_basetick_delay_ms(1U);
+ 542              		.loc 1 215 5
+ 543 0116 0120     		movs	r0, #1
+ 544 0118 FFF7FEFF 		bl	hal_sys_basetick_delay_ms
+ 216:../src/gd32f3x0_hal_init.c ****     hals_adc_calibration_enable();
+ 545              		.loc 1 216 5
+ 546 011c FFF7FEFF 		bl	hals_adc_calibration_enable
+ 217:../src/gd32f3x0_hal_init.c ****     /* ADC DMA function enable */
+ 218:../src/gd32f3x0_hal_init.c ****     hals_adc_dma_mode_enable();
+ 547              		.loc 1 218 5
+ 548 0120 FFF7FEFF 		bl	hals_adc_dma_mode_enable
+ 219:../src/gd32f3x0_hal_init.c ****     /* ADC software trigger enable */
+ 220:../src/gd32f3x0_hal_init.c ****     hals_adc_software_trigger_enable(ADC_ROUTINE_CHANNEL);
+ 549              		.loc 1 220 5
+ 550 0124 0120     		movs	r0, #1
+ 551 0126 FFF7FEFF 		bl	hals_adc_software_trigger_enable
+ 221:../src/gd32f3x0_hal_init.c ****     /* user code [adc_init local 1] end */
+ 222:../src/gd32f3x0_hal_init.c **** }
+ 552              		.loc 1 222 1
+ 553 012a 00BF     		nop
+ 554 012c 6037     		adds	r7, r7, #96
+ 555              		.cfi_def_cfa_offset 8
+ 556 012e BD46     		mov	sp, r7
+ 557              		.cfi_def_cfa_register 13
+ 558              		@ sp needed
+ 559 0130 80BD     		pop	{r7, pc}
+ 560              	.L18:
+ 561 0132 00BF     		.align	2
+ 562              	.L17:
+ 563 0134 00000000 		.word	adc_info
+ 564 0138 00000000 		.word	dma_adc_info
+ 565              		.cfi_endproc
+ 566              	.LFE125:
+ 568              		.section	.text.msd_adc_deinit,"ax",%progbits
+ 569              		.align	1
+ 570              		.global	msd_adc_deinit
+ 571              		.syntax unified
+ 572              		.thumb
+ 573              		.thumb_func
+ 574              		.fpu softvfp
+ 576              	msd_adc_deinit:
+ 577              	.LFB126:
+ 223:../src/gd32f3x0_hal_init.c **** 
+ 224:../src/gd32f3x0_hal_init.c **** void msd_adc_deinit(void)
+ 225:../src/gd32f3x0_hal_init.c **** {
+ 578              		.loc 1 225 1
+ 579              		.cfi_startproc
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 1, uses_anonymous_args = 0
+ 582 0000 80B5     		push	{r7, lr}
+ 583              		.cfi_def_cfa_offset 8
+ 584              		.cfi_offset 7, -8
+ 585              		.cfi_offset 14, -4
+ 586 0002 00AF     		add	r7, sp, #0
+ 587              		.cfi_def_cfa_register 7
+ 226:../src/gd32f3x0_hal_init.c ****     /* user code [adc_deinit local 0] begin */
+ 227:../src/gd32f3x0_hal_init.c ****     /* user code [adc_deinit local 0] end */
+ 228:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_ADC);
+ 588              		.loc 1 228 5
+ 589 0004 40F20960 		movw	r0, #1545
+ 590 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 229:../src/gd32f3x0_hal_init.c ****     hal_gpio_deinit(GPIOA, GPIO_PIN_2);
+ 591              		.loc 1 229 5
+ 592 000c 0421     		movs	r1, #4
+ 593 000e 4FF09040 		mov	r0, #1207959552
+ 594 0012 FFF7FEFF 		bl	hal_gpio_deinit
+ 230:../src/gd32f3x0_hal_init.c ****     hal_adc_deinit(&adc_info);
+ 595              		.loc 1 230 5
+ 596 0016 0448     		ldr	r0, .L20
+ 597 0018 FFF7FEFF 		bl	hal_adc_deinit
+ 231:../src/gd32f3x0_hal_init.c ****     hal_dma_deinit(&dma_adc_info);
+ 598              		.loc 1 231 5
+ 599 001c 0348     		ldr	r0, .L20+4
+ 600 001e FFF7FEFF 		bl	hal_dma_deinit
+ 232:../src/gd32f3x0_hal_init.c ****     /* user code [adc_deinit local 1] begin */
+ 233:../src/gd32f3x0_hal_init.c ****     /* user code [adc_deinit local 1] end */
+ 234:../src/gd32f3x0_hal_init.c **** }
+ 601              		.loc 1 234 1
+ 602 0022 00BF     		nop
+ 603 0024 80BD     		pop	{r7, pc}
+ 604              	.L21:
+ 605 0026 00BF     		.align	2
+ 606              	.L20:
+ 607 0028 00000000 		.word	adc_info
+ 608 002c 00000000 		.word	dma_adc_info
+ 609              		.cfi_endproc
+ 610              	.LFE126:
+ 612              		.section	.text.msd_usart0_init,"ax",%progbits
+ 613              		.align	1
+ 614              		.global	msd_usart0_init
+ 615              		.syntax unified
+ 616              		.thumb
+ 617              		.thumb_func
+ 618              		.fpu softvfp
+ 620              	msd_usart0_init:
+ 621              	.LFB127:
+ 235:../src/gd32f3x0_hal_init.c **** 
+ 236:../src/gd32f3x0_hal_init.c **** void msd_usart0_init(void)
+ 237:../src/gd32f3x0_hal_init.c **** {
+ 622              		.loc 1 237 1
+ 623              		.cfi_startproc
+ 624              		@ args = 0, pretend = 0, frame = 104
+ 625              		@ frame_needed = 1, uses_anonymous_args = 0
+ 626 0000 80B5     		push	{r7, lr}
+ 627              		.cfi_def_cfa_offset 8
+ 628              		.cfi_offset 7, -8
+ 629              		.cfi_offset 14, -4
+ 630 0002 9AB0     		sub	sp, sp, #104
+ 631              		.cfi_def_cfa_offset 112
+ 632 0004 00AF     		add	r7, sp, #0
+ 633              		.cfi_def_cfa_register 7
+ 238:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_init local 0] begin */
+ 239:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_init local 0] end */
+ 240:../src/gd32f3x0_hal_init.c ****     hal_gpio_init_struct gpio_init_parameter;
+ 241:../src/gd32f3x0_hal_init.c ****     hal_uart_init_struct uart0_init_parameter;
+ 242:../src/gd32f3x0_hal_init.c **** 
+ 243:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_enable(RCU_USART0);
+ 634              		.loc 1 243 5
+ 635 0006 40F20E60 		movw	r0, #1550
+ 636 000a FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 244:../src/gd32f3x0_hal_init.c ****     hal_gpio_struct_init(&gpio_init_parameter);
+ 637              		.loc 1 244 5
+ 638 000e 07F15803 		add	r3, r7, #88
+ 639 0012 1846     		mov	r0, r3
+ 640 0014 FFF7FEFF 		bl	hal_gpio_struct_init
+ 245:../src/gd32f3x0_hal_init.c **** 
+ 246:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.mode = GPIO_MODE_AF_PP;
+ 641              		.loc 1 246 30
+ 642 0018 0223     		movs	r3, #2
+ 643 001a BB65     		str	r3, [r7, #88]
+ 247:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.pull = GPIO_PULL_NONE;
+ 644              		.loc 1 247 30
+ 645 001c 0023     		movs	r3, #0
+ 646 001e FB65     		str	r3, [r7, #92]
+ 248:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.ospeed = GPIO_OSPEED_50MHZ;
+ 647              		.loc 1 248 32
+ 648 0020 0323     		movs	r3, #3
+ 649 0022 3B66     		str	r3, [r7, #96]
+ 249:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.af = GPIO_AF_1;
+ 650              		.loc 1 249 28
+ 651 0024 0123     		movs	r3, #1
+ 652 0026 7B66     		str	r3, [r7, #100]
+ 250:../src/gd32f3x0_hal_init.c ****     hal_gpio_init(GPIOA, GPIO_PIN_10, &gpio_init_parameter);
+ 653              		.loc 1 250 5
+ 654 0028 07F15803 		add	r3, r7, #88
+ 655 002c 1A46     		mov	r2, r3
+ 656 002e 4FF48061 		mov	r1, #1024
+ 657 0032 4FF09040 		mov	r0, #1207959552
+ 658 0036 FFF7FEFF 		bl	hal_gpio_init
+ 251:../src/gd32f3x0_hal_init.c **** 
+ 252:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.mode = GPIO_MODE_AF_PP;
+ 659              		.loc 1 252 30
+ 660 003a 0223     		movs	r3, #2
+ 661 003c BB65     		str	r3, [r7, #88]
+ 253:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.pull = GPIO_PULL_NONE;
+ 662              		.loc 1 253 30
+ 663 003e 0023     		movs	r3, #0
+ 664 0040 FB65     		str	r3, [r7, #92]
+ 254:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.ospeed = GPIO_OSPEED_50MHZ;
+ 665              		.loc 1 254 32
+ 666 0042 0323     		movs	r3, #3
+ 667 0044 3B66     		str	r3, [r7, #96]
+ 255:../src/gd32f3x0_hal_init.c ****     gpio_init_parameter.af = GPIO_AF_1;
+ 668              		.loc 1 255 28
+ 669 0046 0123     		movs	r3, #1
+ 670 0048 7B66     		str	r3, [r7, #100]
+ 256:../src/gd32f3x0_hal_init.c ****     hal_gpio_init(GPIOA, GPIO_PIN_9, &gpio_init_parameter);
+ 671              		.loc 1 256 5
+ 672 004a 07F15803 		add	r3, r7, #88
+ 673 004e 1A46     		mov	r2, r3
+ 674 0050 4FF40071 		mov	r1, #512
+ 675 0054 4FF09040 		mov	r0, #1207959552
+ 676 0058 FFF7FEFF 		bl	hal_gpio_init
+ 257:../src/gd32f3x0_hal_init.c **** 
+ 258:../src/gd32f3x0_hal_init.c ****     hal_uart_struct_init(HAL_UART_INIT_STRUCT, &uart0_init_parameter);
+ 677              		.loc 1 258 5
+ 678 005c 3B1D     		adds	r3, r7, #4
+ 679 005e 1946     		mov	r1, r3
+ 680 0060 0020     		movs	r0, #0
+ 681 0062 FFF7FEFF 		bl	hal_uart_struct_init
+ 259:../src/gd32f3x0_hal_init.c ****     hal_uart_struct_init(HAL_UART_DEV_STRUCT, &uart0_info);
+ 682              		.loc 1 259 5
+ 683 0066 1F49     		ldr	r1, .L23
+ 684 0068 0120     		movs	r0, #1
+ 685 006a FFF7FEFF 		bl	hal_uart_struct_init
+ 260:../src/gd32f3x0_hal_init.c **** 
+ 261:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.work_mode = UART_WORK_MODE_ASYN;
+ 686              		.loc 1 261 36
+ 687 006e 0023     		movs	r3, #0
+ 688 0070 3B71     		strb	r3, [r7, #4]
+ 262:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.baudrate = 115200;
+ 689              		.loc 1 262 35
+ 690 0072 4FF4E133 		mov	r3, #115200
+ 691 0076 BB60     		str	r3, [r7, #8]
+ 263:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.parity = UART_PARITY_NONE;
+ 692              		.loc 1 263 33
+ 693 0078 0023     		movs	r3, #0
+ 694 007a FB60     		str	r3, [r7, #12]
+ 264:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.word_length = UART_WORD_LENGTH_8BIT;
+ 695              		.loc 1 264 38
+ 696 007c 0023     		movs	r3, #0
+ 697 007e 3B61     		str	r3, [r7, #16]
+ 265:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.stop_bit = UART_STOP_BIT_1;
+ 698              		.loc 1 265 35
+ 699 0080 0023     		movs	r3, #0
+ 700 0082 7B61     		str	r3, [r7, #20]
+ 266:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.direction = UART_DIRECTION_RX_TX;
+ 701              		.loc 1 266 36
+ 702 0084 0C23     		movs	r3, #12
+ 703 0086 BB61     		str	r3, [r7, #24]
+ 267:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.over_sample = UART_OVER_SAMPLE_16;
+ 704              		.loc 1 267 38
+ 705 0088 0023     		movs	r3, #0
+ 706 008a FB61     		str	r3, [r7, #28]
+ 268:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.sample_method = UART_THREE_SAMPLE_BIT;
+ 707              		.loc 1 268 40
+ 708 008c 0023     		movs	r3, #0
+ 709 008e 3B62     		str	r3, [r7, #32]
+ 269:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.hardware_flow = UART_HARDWARE_FLOW_NONE;
+ 710              		.loc 1 269 40
+ 711 0090 0023     		movs	r3, #0
+ 712 0092 7B62     		str	r3, [r7, #36]
+ 270:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.rx_fifo_en = DISABLE;
+ 713              		.loc 1 270 37
+ 714 0094 0023     		movs	r3, #0
+ 715 0096 87F82830 		strb	r3, [r7, #40]
+ 271:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.timeout_enable = DISABLE;
+ 716              		.loc 1 271 41
+ 717 009a 0023     		movs	r3, #0
+ 718 009c 87F82930 		strb	r3, [r7, #41]
+ 272:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.first_bit_msb = DISABLE;
+ 719              		.loc 1 272 40
+ 720 00a0 0023     		movs	r3, #0
+ 721 00a2 87F83030 		strb	r3, [r7, #48]
+ 273:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.tx_rx_swap = DISABLE;
+ 722              		.loc 1 273 37
+ 723 00a6 0023     		movs	r3, #0
+ 724 00a8 87F83130 		strb	r3, [r7, #49]
+ 274:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.rx_level_invert = DISABLE;
+ 725              		.loc 1 274 42
+ 726 00ac 0023     		movs	r3, #0
+ 727 00ae 87F83230 		strb	r3, [r7, #50]
+ 275:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.tx_level_invert = DISABLE;
+ 728              		.loc 1 275 42
+ 729 00b2 0023     		movs	r3, #0
+ 730 00b4 87F83330 		strb	r3, [r7, #51]
+ 276:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.data_bit_invert = DISABLE;
+ 731              		.loc 1 276 42
+ 732 00b8 0023     		movs	r3, #0
+ 733 00ba 87F83430 		strb	r3, [r7, #52]
+ 277:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.overrun_disable = DISABLE;
+ 734              		.loc 1 277 42
+ 735 00be 0023     		movs	r3, #0
+ 736 00c0 87F83530 		strb	r3, [r7, #53]
+ 278:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.rx_error_dma_stop = DISABLE;
+ 737              		.loc 1 278 44
+ 738 00c4 0023     		movs	r3, #0
+ 739 00c6 87F83630 		strb	r3, [r7, #54]
+ 279:../src/gd32f3x0_hal_init.c ****     uart0_init_parameter.rs485_mode = DISABLE;
+ 740              		.loc 1 279 37
+ 741 00ca 0023     		movs	r3, #0
+ 742 00cc 87F83C30 		strb	r3, [r7, #60]
+ 280:../src/gd32f3x0_hal_init.c ****     hal_uart_init(&uart0_info,USART0,&uart0_init_parameter);
+ 743              		.loc 1 280 5
+ 744 00d0 3B1D     		adds	r3, r7, #4
+ 745 00d2 1A46     		mov	r2, r3
+ 746 00d4 0449     		ldr	r1, .L23+4
+ 747 00d6 0348     		ldr	r0, .L23
+ 748 00d8 FFF7FEFF 		bl	hal_uart_init
+ 281:../src/gd32f3x0_hal_init.c **** 
+ 282:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_init local 1] begin */
+ 283:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_init local 1] end */
+ 284:../src/gd32f3x0_hal_init.c **** }
+ 749              		.loc 1 284 1
+ 750 00dc 00BF     		nop
+ 751 00de 6837     		adds	r7, r7, #104
+ 752              		.cfi_def_cfa_offset 8
+ 753 00e0 BD46     		mov	sp, r7
+ 754              		.cfi_def_cfa_register 13
+ 755              		@ sp needed
+ 756 00e2 80BD     		pop	{r7, pc}
+ 757              	.L24:
+ 758              		.align	2
+ 759              	.L23:
+ 760 00e4 00000000 		.word	uart0_info
+ 761 00e8 00380140 		.word	1073821696
+ 762              		.cfi_endproc
+ 763              	.LFE127:
+ 765              		.section	.text.msd_usart0_deinit,"ax",%progbits
+ 766              		.align	1
+ 767              		.global	msd_usart0_deinit
+ 768              		.syntax unified
+ 769              		.thumb
+ 770              		.thumb_func
+ 771              		.fpu softvfp
+ 773              	msd_usart0_deinit:
+ 774              	.LFB128:
+ 285:../src/gd32f3x0_hal_init.c **** 
+ 286:../src/gd32f3x0_hal_init.c **** void msd_usart0_deinit(void)
+ 287:../src/gd32f3x0_hal_init.c **** {
+ 775              		.loc 1 287 1
+ 776              		.cfi_startproc
+ 777              		@ args = 0, pretend = 0, frame = 0
+ 778              		@ frame_needed = 1, uses_anonymous_args = 0
+ 779 0000 80B5     		push	{r7, lr}
+ 780              		.cfi_def_cfa_offset 8
+ 781              		.cfi_offset 7, -8
+ 782              		.cfi_offset 14, -4
+ 783 0002 00AF     		add	r7, sp, #0
+ 784              		.cfi_def_cfa_register 7
+ 288:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_deinit local 0] begin */
+ 289:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_deinit local 0] end */
+ 290:../src/gd32f3x0_hal_init.c ****     hal_rcu_periph_clk_disable(RCU_USART0);
+ 785              		.loc 1 290 5
+ 786 0004 40F20E60 		movw	r0, #1550
+ 787 0008 FFF7FEFF 		bl	hal_rcu_periph_clk_disable
+ 291:../src/gd32f3x0_hal_init.c ****     hal_gpio_deinit(GPIOA, GPIO_PIN_10);
+ 788              		.loc 1 291 5
+ 789 000c 4FF48061 		mov	r1, #1024
+ 790 0010 4FF09040 		mov	r0, #1207959552
+ 791 0014 FFF7FEFF 		bl	hal_gpio_deinit
+ 292:../src/gd32f3x0_hal_init.c ****     hal_gpio_deinit(GPIOA, GPIO_PIN_9);
+ 792              		.loc 1 292 5
+ 793 0018 4FF40071 		mov	r1, #512
+ 794 001c 4FF09040 		mov	r0, #1207959552
+ 795 0020 FFF7FEFF 		bl	hal_gpio_deinit
+ 293:../src/gd32f3x0_hal_init.c ****     hal_uart_deinit(&uart0_info);
+ 796              		.loc 1 293 5
+ 797 0024 0248     		ldr	r0, .L26
+ 798 0026 FFF7FEFF 		bl	hal_uart_deinit
+ 294:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_deinit local 1] begin */
+ 295:../src/gd32f3x0_hal_init.c ****     /* user code [usart0_deinit local 1] end */
+ 296:../src/gd32f3x0_hal_init.c **** }
+ 799              		.loc 1 296 1
+ 800 002a 00BF     		nop
+ 801 002c 80BD     		pop	{r7, pc}
+ 802              	.L27:
+ 803 002e 00BF     		.align	2
+ 804              	.L26:
+ 805 0030 00000000 		.word	uart0_info
+ 806              		.cfi_endproc
+ 807              	.LFE128:
+ 809              		.text
+ 810              	.Letext0:
+ 811              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 812              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 813              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 814              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 815              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 816              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 817              		.file 8 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 818              		.file 9 "../firmware/cmsis/inc/core_cm4.h"
+ 819              		.file 10 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 820              		.file 11 "../firmware/cmsis/inc/gd32f3x0.h"
+ 821              		.file 12 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_dma.h"
+ 822              		.file 13 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 823              		.file 14 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_gpio.h"
+ 824              		.file 15 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+ 825              		.file 16 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_exti.h"
+ 826              		.file 17 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_sys.h"
+ 827              		.file 18 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_adc.h"
+ 828              		.file 19 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_uart.h"
+ 829              		.file 20 "../inc/gd32f3x0_hal_init.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_init.c
+                            *COM*:00000020 adc_info
+                            *COM*:0000001c dma_adc_info
+                            *COM*:00000064 uart0_info
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:19     .text.msd_system_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:27     .text.msd_system_init:00000000 msd_system_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:79     .text.msd_clock_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:86     .text.msd_clock_init:00000000 msd_clock_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:244    .text.msd_dma_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:251    .text.msd_dma_init:00000000 msd_dma_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:278    .text.msd_dma_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:285    .text.msd_dma_deinit:00000000 msd_dma_deinit
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:307    .text.msd_gpio_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:314    .text.msd_gpio_init:00000000 msd_gpio_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:342    .text.msd_gpio_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:349    .text.msd_gpio_deinit:00000000 msd_gpio_deinit
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:377    .text.msd_adc_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:384    .text.msd_adc_init:00000000 msd_adc_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:563    .text.msd_adc_init:00000134 $d
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:569    .text.msd_adc_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:576    .text.msd_adc_deinit:00000000 msd_adc_deinit
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:607    .text.msd_adc_deinit:00000028 $d
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:613    .text.msd_usart0_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:620    .text.msd_usart0_init:00000000 msd_usart0_init
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:760    .text.msd_usart0_init:000000e4 $d
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:766    .text.msd_usart0_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:773    .text.msd_usart0_deinit:00000000 msd_usart0_deinit
+C:\Users\peter\AppData\Local\Temp\ccnAGmtx.s:805    .text.msd_usart0_deinit:00000030 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_rcu_periph_clk_enable
+hal_nvic_irq_priority_group_set
+hal_sys_debug_init
+hal_sys_timesource_init
+hal_nvic_set_priority
+hal_rcu_struct_init
+hal_rcu_osci_config
+hal_rcu_clock_config
+hal_rcu_periph_clock_config
+hal_nvic_irq_enable
+hal_rcu_periph_clk_disable
+hal_gpio_struct_init
+hal_gpio_init
+hal_adc_struct_init
+hal_adc_init
+hal_adc_routine_channel_config
+hal_adc_routine_rank_config
+hal_dma_struct_init
+hal_dma_init
+hals_adc_external_trigger_config
+hals_adc_enable
+hal_sys_basetick_delay_ms
+hals_adc_calibration_enable
+hals_adc_dma_mode_enable
+hals_adc_software_trigger_enable
+hal_gpio_deinit
+hal_adc_deinit
+hal_dma_deinit
+hal_uart_struct_init
+hal_uart_init
+hal_uart_deinit

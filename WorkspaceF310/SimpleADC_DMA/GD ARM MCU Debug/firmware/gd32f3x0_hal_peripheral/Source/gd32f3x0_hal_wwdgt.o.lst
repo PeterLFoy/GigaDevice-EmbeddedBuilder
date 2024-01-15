@@ -1,0 +1,1224 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_wwdgt.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.hal_wwdgt_struct_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	hal_wwdgt_struct_init
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	hal_wwdgt_struct_init:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \file    gd32f3x0_hal_wwdgt.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief   WWDGT driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     Redistribution and use in source and binary forms, with or without modification,
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** are permitted provided that the following conditions are met:
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****        list of conditions and the following disclaimer.
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****        this list of conditions and the following disclaimer in the documentation
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****        and/or other materials provided with the distribution.
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****        may be used to endorse or promote products derived from this software without
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****        specific prior written permission.
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** OF SUCH DAMAGE.
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #include "gd32f3x0_hal.h"
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      initialize the parameters of WWDGT struct with the default values
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  p_wwdgt_init: the initialization data needed to initialize WWDGT
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_struct_init(hal_wwdgt_struct_type_enum hal_struct_type, void *p_struct)
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+  27              		.loc 1 44 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 83B0     		sub	sp, sp, #12
+  36              		.cfi_def_cfa_offset 16
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 0346     		mov	r3, r0
+  40 0008 3960     		str	r1, [r7]
+  41 000a FB71     		strb	r3, [r7, #7]
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL == p_struct) {
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [*p_struct] value is invalid");
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     switch(hal_struct_type) {
+  42              		.loc 1 51 5
+  43 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  44 000e 002B     		cmp	r3, #0
+  45 0010 02D0     		beq	.L2
+  46 0012 022B     		cmp	r3, #2
+  47 0014 0AD0     		beq	.L3
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     case HAL_WWDGT_INIT_STRUCT:
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* initialize WWDGT initialization structure with the default values */
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_init_struct *)p_struct)->wwdgt_pre_select                        = WWDGT_PSC_DI
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_init_struct *)p_struct)->wwdgt_cnt_value                         = 0x7F;
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_init_struct *)p_struct)->wwdgt_downcnt_value                     = 0x7F;
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         break;
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     case HAL_WWDGT_DEV_STRUCT:
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* initialize WWDGT DEV structure with the default values */
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_dev_struct *)p_struct)->wwdgt_irq.early_wakeup_handle            = NULL;
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_dev_struct *)p_struct)->state                                    = HAL_WWDGT_ST
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_dev_struct *)p_struct)->mutex                                    = HAL_MUTEX_UN
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         break;
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     default:
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGW("parameter [hal_struct_type] value is undefine");
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         break;
+  48              		.loc 1 66 9
+  49 0016 13E0     		b	.L5
+  50              	.L2:
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_init_struct *)p_struct)->wwdgt_cnt_value                         = 0x7F;
+  51              		.loc 1 54 86
+  52 0018 3B68     		ldr	r3, [r7]
+  53 001a 0022     		movs	r2, #0
+  54 001c 1A60     		str	r2, [r3]
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_init_struct *)p_struct)->wwdgt_downcnt_value                     = 0x7F;
+  55              		.loc 1 55 86
+  56 001e 3B68     		ldr	r3, [r7]
+  57 0020 7F22     		movs	r2, #127
+  58 0022 5A60     		str	r2, [r3, #4]
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         break;
+  59              		.loc 1 56 86
+  60 0024 3B68     		ldr	r3, [r7]
+  61 0026 7F22     		movs	r2, #127
+  62 0028 9A60     		str	r2, [r3, #8]
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     case HAL_WWDGT_DEV_STRUCT:
+  63              		.loc 1 57 9
+  64 002a 09E0     		b	.L5
+  65              	.L3:
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_dev_struct *)p_struct)->state                                    = HAL_WWDGT_ST
+  66              		.loc 1 60 86
+  67 002c 3B68     		ldr	r3, [r7]
+  68 002e 0022     		movs	r2, #0
+  69 0030 1A60     		str	r2, [r3]
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         ((hal_wwdgt_dev_struct *)p_struct)->mutex                                    = HAL_MUTEX_UN
+  70              		.loc 1 61 86
+  71 0032 3B68     		ldr	r3, [r7]
+  72 0034 0022     		movs	r2, #0
+  73 0036 1A71     		strb	r2, [r3, #4]
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         break;
+  74              		.loc 1 62 86
+  75 0038 3B68     		ldr	r3, [r7]
+  76 003a 0022     		movs	r2, #0
+  77 003c 5A71     		strb	r2, [r3, #5]
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     default:
+  78              		.loc 1 63 9
+  79 003e 00BF     		nop
+  80              	.L5:
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+  81              		.loc 1 68 1
+  82 0040 00BF     		nop
+  83 0042 0C37     		adds	r7, r7, #12
+  84              		.cfi_def_cfa_offset 4
+  85 0044 BD46     		mov	sp, r7
+  86              		.cfi_def_cfa_register 13
+  87              		@ sp needed
+  88 0046 80BC     		pop	{r7}
+  89              		.cfi_restore 7
+  90              		.cfi_def_cfa_offset 0
+  91 0048 7047     		bx	lr
+  92              		.cfi_endproc
+  93              	.LFE119:
+  95              		.section	.text.hal_wwdgt_init,"ax",%progbits
+  96              		.align	1
+  97              		.global	hal_wwdgt_init
+  98              		.syntax unified
+  99              		.thumb
+ 100              		.thumb_func
+ 101              		.fpu softvfp
+ 103              	hal_wwdgt_init:
+ 104              	.LFB120:
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      initialize WWDGT
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  wwdgt_dev: WWDGT device information structure
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure is not necessary to be reconfigured after structrue initialization,
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure parameters altering is automatically configured by core
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  p_wwdgt_init: pointer to a hal_wwdgt_init_struct structure which contains
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 parameters for initialization of the WWDGT peripheral
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 members of the structure and the member values are shown as below:
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 wwdgt_pre_select:
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 only one parameter can be selected which is shown as below:
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV1 WWDGT prescaler set to 1
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV2 WWDGT prescaler set to 2
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV4 WWDGT prescaler set to 4
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV8 WWDGT prescaler set to 8
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                wwdgt_cnt_value: 0x0 - 0xFFF
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                wwdgt_Downcnt_value: 0x0 - 0xFFF
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_VAL, HAL_ERR_TIMEOUT, HAL_ERR_NONE,
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 details refer to gd32f3x0_hal.h
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** int32_t hal_wwdgt_init(hal_wwdgt_dev_struct *wwdgt_dev, hal_wwdgt_init_struct *p_wwdgt_init)
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 105              		.loc 1 91 1
+ 106              		.cfi_startproc
+ 107              		@ args = 0, pretend = 0, frame = 16
+ 108              		@ frame_needed = 1, uses_anonymous_args = 0
+ 109 0000 80B5     		push	{r7, lr}
+ 110              		.cfi_def_cfa_offset 8
+ 111              		.cfi_offset 7, -8
+ 112              		.cfi_offset 14, -4
+ 113 0002 84B0     		sub	sp, sp, #16
+ 114              		.cfi_def_cfa_offset 24
+ 115 0004 00AF     		add	r7, sp, #0
+ 116              		.cfi_def_cfa_register 7
+ 117 0006 7860     		str	r0, [r7, #4]
+ 118 0008 3960     		str	r1, [r7]
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     uint32_t reg_cfg = 0x0U, reg_ctl = 0x0U;
+ 119              		.loc 1 92 14
+ 120 000a 0023     		movs	r3, #0
+ 121 000c FB60     		str	r3, [r7, #12]
+ 122              		.loc 1 92 30
+ 123 000e 0023     		movs	r3, #0
+ 124 0010 BB60     		str	r3, [r7, #8]
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((NULL == wwdgt_dev) || (NULL == p_wwdgt_init)) {
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [*cec_dev] or pointer [*cec] address is invalid");
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* return function state */
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_ADDRESS;
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL == p_wwdgt_init) {
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [p_wwdgt_init] address is invalid");
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_ADDRESS;
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((p_wwdgt_init->wwdgt_cnt_value > 0x7F) || (p_wwdgt_init->wwdgt_cnt_value < 0x40)) {
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("parameter [p_wwdgt_init->counter] value is invalid");
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_VAL;
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((p_wwdgt_init->wwdgt_downcnt_value > 0x7F) || (p_wwdgt_init->wwdgt_downcnt_value < 0x40)) {
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("parameter [p_wwdgt_init->window_value] value is invalid");
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_VAL;
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1== HAL_PARAMETER_CHECK */
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     wwdgt_dev->state = HAL_WWDGT_STATE_BUSY;
+ 125              		.loc 1 117 22
+ 126 0012 7B68     		ldr	r3, [r7, #4]
+ 127 0014 0322     		movs	r2, #3
+ 128 0016 1A71     		strb	r2, [r3, #4]
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* enable WWDGT clock */
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     hal_rcu_periph_clk_enable(RCU_WWDGT);
+ 129              		.loc 1 119 5
+ 130 0018 40F20B70 		movw	r0, #1803
+ 131 001c FFF7FEFF 		bl	hal_rcu_periph_clk_enable
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* clear WIN and PSC bits, clear CNT bit */
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg_cfg = WWDGT_CFG & (~((uint32_t)WWDGT_CFG_WIN | (uint32_t)WWDGT_CFG_PSC));
+ 132              		.loc 1 122 15
+ 133 0020 144B     		ldr	r3, .L8
+ 134 0022 1B68     		ldr	r3, [r3]
+ 135              		.loc 1 122 13
+ 136 0024 23F4FF73 		bic	r3, r3, #510
+ 137 0028 23F00103 		bic	r3, r3, #1
+ 138 002c FB60     		str	r3, [r7, #12]
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg_ctl = WWDGT_CTL & (~(uint32_t)WWDGT_CTL_CNT);
+ 139              		.loc 1 123 15
+ 140 002e 124B     		ldr	r3, .L8+4
+ 141 0030 1B68     		ldr	r3, [r3]
+ 142              		.loc 1 123 13
+ 143 0032 23F07F03 		bic	r3, r3, #127
+ 144 0036 BB60     		str	r3, [r7, #8]
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* configure WIN and PSC bits, configure CNT bit */
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg_cfg |= (uint32_t)(WWDGT_CFG_WIN & p_wwdgt_init->wwdgt_downcnt_value);
+ 145              		.loc 1 126 55
+ 146 0038 3B68     		ldr	r3, [r7]
+ 147 003a 9B68     		ldr	r3, [r3, #8]
+ 148              		.loc 1 126 16
+ 149 003c 03F07F03 		and	r3, r3, #127
+ 150              		.loc 1 126 13
+ 151 0040 FA68     		ldr	r2, [r7, #12]
+ 152 0042 1343     		orrs	r3, r3, r2
+ 153 0044 FB60     		str	r3, [r7, #12]
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg_cfg |= (uint32_t)(p_wwdgt_init->wwdgt_pre_select);
+ 154              		.loc 1 127 39
+ 155 0046 3B68     		ldr	r3, [r7]
+ 156 0048 1B68     		ldr	r3, [r3]
+ 157              		.loc 1 127 13
+ 158 004a FA68     		ldr	r2, [r7, #12]
+ 159 004c 1343     		orrs	r3, r3, r2
+ 160 004e FB60     		str	r3, [r7, #12]
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg_ctl |= (uint32_t)(WWDGT_CTL_CNT & p_wwdgt_init->wwdgt_cnt_value);
+ 161              		.loc 1 128 55
+ 162 0050 3B68     		ldr	r3, [r7]
+ 163 0052 5B68     		ldr	r3, [r3, #4]
+ 164              		.loc 1 128 16
+ 165 0054 03F07F03 		and	r3, r3, #127
+ 166              		.loc 1 128 13
+ 167 0058 BA68     		ldr	r2, [r7, #8]
+ 168 005a 1343     		orrs	r3, r3, r2
+ 169 005c BB60     		str	r3, [r7, #8]
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CFG = (uint32_t)reg_cfg;
+ 170              		.loc 1 130 5
+ 171 005e 054A     		ldr	r2, .L8
+ 172              		.loc 1 130 15
+ 173 0060 FB68     		ldr	r3, [r7, #12]
+ 174 0062 1360     		str	r3, [r2]
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CTL = (uint32_t)reg_ctl;
+ 175              		.loc 1 131 5
+ 176 0064 044A     		ldr	r2, .L8+4
+ 177              		.loc 1 131 15
+ 178 0066 BB68     		ldr	r3, [r7, #8]
+ 179 0068 1360     		str	r3, [r2]
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     return HAL_ERR_NONE;
+ 180              		.loc 1 133 12
+ 181 006a 0023     		movs	r3, #0
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 182              		.loc 1 134 1
+ 183 006c 1846     		mov	r0, r3
+ 184 006e 1037     		adds	r7, r7, #16
+ 185              		.cfi_def_cfa_offset 8
+ 186 0070 BD46     		mov	sp, r7
+ 187              		.cfi_def_cfa_register 13
+ 188              		@ sp needed
+ 189 0072 80BD     		pop	{r7, pc}
+ 190              	.L9:
+ 191              		.align	2
+ 192              	.L8:
+ 193 0074 042C0040 		.word	1073753092
+ 194 0078 002C0040 		.word	1073753088
+ 195              		.cfi_endproc
+ 196              	.LFE120:
+ 198              		.section	.text.hal_wwdgt_deinit,"ax",%progbits
+ 199              		.align	1
+ 200              		.global	hal_wwdgt_deinit
+ 201              		.syntax unified
+ 202              		.thumb
+ 203              		.thumb_func
+ 204              		.fpu softvfp
+ 206              	hal_wwdgt_deinit:
+ 207              	.LFB121:
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      deinitialize WWDGT
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  wwdgt_dev: WWDGT device information structure
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure is not necessary to be reconfigured after structrue initialization,
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure parameters altering is automatically configured by core
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_deinit(hal_wwdgt_dev_struct *wwdgt_dev)
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 208              		.loc 1 145 1
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 8
+ 211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 212 0000 80B5     		push	{r7, lr}
+ 213              		.cfi_def_cfa_offset 8
+ 214              		.cfi_offset 7, -8
+ 215              		.cfi_offset 14, -4
+ 216 0002 82B0     		sub	sp, sp, #8
+ 217              		.cfi_def_cfa_offset 16
+ 218 0004 00AF     		add	r7, sp, #0
+ 219              		.cfi_def_cfa_register 7
+ 220 0006 7860     		str	r0, [r7, #4]
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     hal_rcu_periph_reset_enable(RCU_WWDGTRST);
+ 221              		.loc 1 146 5
+ 222 0008 40F20B40 		movw	r0, #1035
+ 223 000c FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     hal_rcu_periph_reset_disable(RCU_WWDGTRST);
+ 224              		.loc 1 147 5
+ 225 0010 40F20B40 		movw	r0, #1035
+ 226 0014 FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     wwdgt_dev->state = HAL_WWDGT_STATE_RESET;
+ 227              		.loc 1 148 22
+ 228 0018 7B68     		ldr	r3, [r7, #4]
+ 229 001a 0122     		movs	r2, #1
+ 230 001c 1A71     		strb	r2, [r3, #4]
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 231              		.loc 1 149 1
+ 232 001e 00BF     		nop
+ 233 0020 0837     		adds	r7, r7, #8
+ 234              		.cfi_def_cfa_offset 8
+ 235 0022 BD46     		mov	sp, r7
+ 236              		.cfi_def_cfa_register 13
+ 237              		@ sp needed
+ 238 0024 80BD     		pop	{r7, pc}
+ 239              		.cfi_endproc
+ 240              	.LFE121:
+ 242              		.section	.text.hal_wwdgt_irq,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	hal_wwdgt_irq
+ 245              		.syntax unified
+ 246              		.thumb
+ 247              		.thumb_func
+ 248              		.fpu softvfp
+ 250              	hal_wwdgt_irq:
+ 251              	.LFB122:
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      WWDGT interrupt handler content function,which is merely used in wwdgt_handler
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  dac_dev: WWDGT device information structure
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure parameters altering is automatically configured by core
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_irq(hal_wwdgt_dev_struct *wwdgt_dev)
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 252              		.loc 1 160 1
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 8
+ 255              		@ frame_needed = 1, uses_anonymous_args = 0
+ 256 0000 80B5     		push	{r7, lr}
+ 257              		.cfi_def_cfa_offset 8
+ 258              		.cfi_offset 7, -8
+ 259              		.cfi_offset 14, -4
+ 260 0002 82B0     		sub	sp, sp, #8
+ 261              		.cfi_def_cfa_offset 16
+ 262 0004 00AF     		add	r7, sp, #0
+ 263              		.cfi_def_cfa_register 7
+ 264 0006 7860     		str	r0, [r7, #4]
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL == wwdgt_dev) {
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [wwdgt_dev] address is invalid");
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check wwdgt interrupt control bit */
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check wwdgt interrupt state bit */
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(SET == hals_wwdgt_flag_get()) {
+ 265              		.loc 1 169 15
+ 266 0008 FFF7FEFF 		bl	hals_wwdgt_flag_get
+ 267 000c 0346     		mov	r3, r0
+ 268              		.loc 1 169 7
+ 269 000e 012B     		cmp	r3, #1
+ 270 0010 0CD1     		bne	.L13
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* change WWDGT state to error state */
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         wwdgt_dev->state = HAL_WWDGT_STATE_ERROR;
+ 271              		.loc 1 171 26
+ 272 0012 7B68     		ldr	r3, [r7, #4]
+ 273 0014 0422     		movs	r2, #4
+ 274 0016 1A71     		strb	r2, [r3, #4]
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* clear interrupt flag */
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         hals_wwdgt_flag_clear();
+ 275              		.loc 1 173 9
+ 276 0018 FFF7FEFF 		bl	hals_wwdgt_flag_clear
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         /* error callback */
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         if(NULL != (wwdgt_dev->wwdgt_irq.early_wakeup_handle)) {
+ 277              		.loc 1 175 41
+ 278 001c 7B68     		ldr	r3, [r7, #4]
+ 279 001e 1B68     		ldr	r3, [r3]
+ 280              		.loc 1 175 11
+ 281 0020 002B     		cmp	r3, #0
+ 282 0022 03D0     		beq	.L13
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****             wwdgt_dev->wwdgt_irq.early_wakeup_handle(wwdgt_dev);
+ 283              		.loc 1 176 33
+ 284 0024 7B68     		ldr	r3, [r7, #4]
+ 285 0026 1B68     		ldr	r3, [r3]
+ 286              		.loc 1 176 13
+ 287 0028 7868     		ldr	r0, [r7, #4]
+ 288 002a 9847     		blx	r3
+ 289              	.LVL0:
+ 290              	.L13:
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         }
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 291              		.loc 1 179 1
+ 292 002c 00BF     		nop
+ 293 002e 0837     		adds	r7, r7, #8
+ 294              		.cfi_def_cfa_offset 8
+ 295 0030 BD46     		mov	sp, r7
+ 296              		.cfi_def_cfa_register 13
+ 297              		@ sp needed
+ 298 0032 80BD     		pop	{r7, pc}
+ 299              		.cfi_endproc
+ 300              	.LFE122:
+ 302              		.section	.text.hal_wwdgt_irq_handle_set,"ax",%progbits
+ 303              		.align	1
+ 304              		.global	hal_wwdgt_irq_handle_set
+ 305              		.syntax unified
+ 306              		.thumb
+ 307              		.thumb_func
+ 308              		.fpu softvfp
+ 310              	hal_wwdgt_irq_handle_set:
+ 311              	.LFB123:
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      set user-defined interrupt callback function
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  wwdgt_dev: WWDGT device information structrue
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure parameters altering is automatically configured by core
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  p_irq: point to WWDGT interrupt callback functions structure
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   hal_irq_handle_cb: the function is user-defined,
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_irq_handle_set(hal_wwdgt_dev_struct *wwdgt_dev, hal_wwdgt_irq_struct *p_irq)
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 312              		.loc 1 193 1
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 8
+ 315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 316 0000 80B5     		push	{r7, lr}
+ 317              		.cfi_def_cfa_offset 8
+ 318              		.cfi_offset 7, -8
+ 319              		.cfi_offset 14, -4
+ 320 0002 82B0     		sub	sp, sp, #8
+ 321              		.cfi_def_cfa_offset 16
+ 322 0004 00AF     		add	r7, sp, #0
+ 323              		.cfi_def_cfa_register 7
+ 324 0006 7860     		str	r0, [r7, #4]
+ 325 0008 3960     		str	r1, [r7]
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((NULL == wwdgt_dev) || (NULL == p_irq)) {
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [dac_dev] or pointer [p_irq] address is invalid");
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* WWDGT interrupt handler set */
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL != p_irq->early_wakeup_handle) {
+ 326              		.loc 1 201 21
+ 327 000a 3B68     		ldr	r3, [r7]
+ 328 000c 1B68     		ldr	r3, [r3]
+ 329              		.loc 1 201 7
+ 330 000e 002B     		cmp	r3, #0
+ 331 0010 06D0     		beq	.L15
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         wwdgt_dev->wwdgt_irq.early_wakeup_handle = p_irq->early_wakeup_handle;
+ 332              		.loc 1 202 57
+ 333 0012 3B68     		ldr	r3, [r7]
+ 334 0014 1A68     		ldr	r2, [r3]
+ 335              		.loc 1 202 50
+ 336 0016 7B68     		ldr	r3, [r7, #4]
+ 337 0018 1A60     		str	r2, [r3]
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         hals_wwdgt_interrupt_enable();
+ 338              		.loc 1 203 9
+ 339 001a FFF7FEFF 		bl	hals_wwdgt_interrupt_enable
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     } else {
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         wwdgt_dev->wwdgt_irq.early_wakeup_handle = NULL;
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         hals_wwdgt_interrupt_disable();
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 340              		.loc 1 208 1
+ 341 001e 04E0     		b	.L17
+ 342              	.L15:
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         hals_wwdgt_interrupt_disable();
+ 343              		.loc 1 205 50
+ 344 0020 7B68     		ldr	r3, [r7, #4]
+ 345 0022 0022     		movs	r2, #0
+ 346 0024 1A60     		str	r2, [r3]
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 347              		.loc 1 206 9
+ 348 0026 FFF7FEFF 		bl	hals_wwdgt_interrupt_disable
+ 349              	.L17:
+ 350              		.loc 1 208 1
+ 351 002a 00BF     		nop
+ 352 002c 0837     		adds	r7, r7, #8
+ 353              		.cfi_def_cfa_offset 8
+ 354 002e BD46     		mov	sp, r7
+ 355              		.cfi_def_cfa_register 13
+ 356              		@ sp needed
+ 357 0030 80BD     		pop	{r7, pc}
+ 358              		.cfi_endproc
+ 359              	.LFE123:
+ 361              		.section	.text.hal_wwdgt_irq_handle_all_reset,"ax",%progbits
+ 362              		.align	1
+ 363              		.global	hal_wwdgt_irq_handle_all_reset
+ 364              		.syntax unified
+ 365              		.thumb
+ 366              		.thumb_func
+ 367              		.fpu softvfp
+ 369              	hal_wwdgt_irq_handle_all_reset:
+ 370              	.LFB124:
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      reset all user-defined interrupt callback function,
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 which will be registered and called when corresponding interrupt be triggered
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  wwdgt_dev: WWDGT device information structure
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure is not necessary to be reconfigured after structrue initialization,
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 the structure parameters altering is automatically configured by core
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_irq_handle_all_reset(hal_wwdgt_dev_struct *wwdgt_dev)
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 371              		.loc 1 220 1
+ 372              		.cfi_startproc
+ 373              		@ args = 0, pretend = 0, frame = 8
+ 374              		@ frame_needed = 1, uses_anonymous_args = 0
+ 375              		@ link register save eliminated.
+ 376 0000 80B4     		push	{r7}
+ 377              		.cfi_def_cfa_offset 4
+ 378              		.cfi_offset 7, -4
+ 379 0002 83B0     		sub	sp, sp, #12
+ 380              		.cfi_def_cfa_offset 16
+ 381 0004 00AF     		add	r7, sp, #0
+ 382              		.cfi_def_cfa_register 7
+ 383 0006 7860     		str	r0, [r7, #4]
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL == wwdgt_dev) {
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [wwdgt_dev] address is invalid");
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* WWDGT interrupt handler set */
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     wwdgt_dev->wwdgt_irq.early_wakeup_handle = NULL;
+ 384              		.loc 1 228 46
+ 385 0008 7B68     		ldr	r3, [r7, #4]
+ 386 000a 0022     		movs	r2, #0
+ 387 000c 1A60     		str	r2, [r3]
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 388              		.loc 1 229 1
+ 389 000e 00BF     		nop
+ 390 0010 0C37     		adds	r7, r7, #12
+ 391              		.cfi_def_cfa_offset 4
+ 392 0012 BD46     		mov	sp, r7
+ 393              		.cfi_def_cfa_register 13
+ 394              		@ sp needed
+ 395 0014 80BC     		pop	{r7}
+ 396              		.cfi_restore 7
+ 397              		.cfi_def_cfa_offset 0
+ 398 0016 7047     		bx	lr
+ 399              		.cfi_endproc
+ 400              	.LFE124:
+ 402              		.section	.text.hal_wwdgt_start,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	hal_wwdgt_start
+ 405              		.syntax unified
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.fpu softvfp
+ 410              	hal_wwdgt_start:
+ 411              	.LFB125:
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      start WWDGT module function
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  none
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hal_wwdgt_start(void)
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 412              		.loc 1 238 1
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 0
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416              		@ link register save eliminated.
+ 417 0000 80B4     		push	{r7}
+ 418              		.cfi_def_cfa_offset 4
+ 419              		.cfi_offset 7, -4
+ 420 0002 00AF     		add	r7, sp, #0
+ 421              		.cfi_def_cfa_register 7
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CTL |= WWDGT_CTL_WDGTEN;
+ 422              		.loc 1 239 15
+ 423 0004 044B     		ldr	r3, .L20
+ 424 0006 1B68     		ldr	r3, [r3]
+ 425 0008 034A     		ldr	r2, .L20
+ 426 000a 43F08003 		orr	r3, r3, #128
+ 427 000e 1360     		str	r3, [r2]
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 428              		.loc 1 240 1
+ 429 0010 00BF     		nop
+ 430 0012 BD46     		mov	sp, r7
+ 431              		.cfi_def_cfa_register 13
+ 432              		@ sp needed
+ 433 0014 80BC     		pop	{r7}
+ 434              		.cfi_restore 7
+ 435              		.cfi_def_cfa_offset 0
+ 436 0016 7047     		bx	lr
+ 437              	.L21:
+ 438              		.align	2
+ 439              	.L20:
+ 440 0018 002C0040 		.word	1073753088
+ 441              		.cfi_endproc
+ 442              	.LFE125:
+ 444              		.section	.text.hal_wwdgt_start_interrupt,"ax",%progbits
+ 445              		.align	1
+ 446              		.global	hal_wwdgt_start_interrupt
+ 447              		.syntax unified
+ 448              		.thumb
+ 449              		.thumb_func
+ 450              		.fpu softvfp
+ 452              	hal_wwdgt_start_interrupt:
+ 453              	.LFB126:
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      start WWDGT module function by interrupt method, the function is non-blocking
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  wwdgt_dev: WWDGT device information structrue
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure is not necessary to be reconfigured after structrue initialization,
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   the structure parameters altering is automatically configured by core
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  p_irq: point to WWDGT interrupt callback functions structure
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   hal_irq_handle_cb: the function is user-defined,the corresponding callback mechan
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                   and enable corresponding interrupt
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** int32_t hal_wwdgt_start_interrupt(hal_wwdgt_dev_struct *wwdgt_dev, hal_wwdgt_irq_struct *p_irq)
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 454              		.loc 1 254 1
+ 455              		.cfi_startproc
+ 456              		@ args = 0, pretend = 0, frame = 8
+ 457              		@ frame_needed = 1, uses_anonymous_args = 0
+ 458 0000 80B5     		push	{r7, lr}
+ 459              		.cfi_def_cfa_offset 8
+ 460              		.cfi_offset 7, -8
+ 461              		.cfi_offset 14, -4
+ 462 0002 82B0     		sub	sp, sp, #8
+ 463              		.cfi_def_cfa_offset 16
+ 464 0004 00AF     		add	r7, sp, #0
+ 465              		.cfi_def_cfa_register 7
+ 466 0006 7860     		str	r0, [r7, #4]
+ 467 0008 3960     		str	r1, [r7]
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* check the parameters */
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((NULL == wwdgt_dev) || (NULL == p_irq)) {
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [dac_dev] or pointer [p_irq] address is invalid");
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1 = HAL_PARAMETER_CHECK */
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     /* WWDGT interrupt start */
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL != p_irq->early_wakeup_handle) {
+ 468              		.loc 1 262 21
+ 469 000a 3B68     		ldr	r3, [r7]
+ 470 000c 1B68     		ldr	r3, [r3]
+ 471              		.loc 1 262 7
+ 472 000e 002B     		cmp	r3, #0
+ 473 0010 0DD0     		beq	.L23
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         wwdgt_dev->wwdgt_irq.early_wakeup_handle = p_irq->early_wakeup_handle;
+ 474              		.loc 1 263 57
+ 475 0012 3B68     		ldr	r3, [r7]
+ 476 0014 1A68     		ldr	r2, [r3]
+ 477              		.loc 1 263 50
+ 478 0016 7B68     		ldr	r3, [r7, #4]
+ 479 0018 1A60     		str	r2, [r3]
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         hals_wwdgt_interrupt_enable();
+ 480              		.loc 1 264 9
+ 481 001a FFF7FEFF 		bl	hals_wwdgt_interrupt_enable
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     } else {
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_ADDRESS;
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CTL |= WWDGT_CTL_WDGTEN;
+ 482              		.loc 1 268 15
+ 483 001e 074B     		ldr	r3, .L26
+ 484 0020 1B68     		ldr	r3, [r3]
+ 485 0022 064A     		ldr	r2, .L26
+ 486 0024 43F08003 		orr	r3, r3, #128
+ 487 0028 1360     		str	r3, [r2]
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     return HAL_ERR_NONE;
+ 488              		.loc 1 269 12
+ 489 002a 0023     		movs	r3, #0
+ 490 002c 01E0     		b	.L25
+ 491              	.L23:
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 492              		.loc 1 266 16
+ 493 002e 6FF00603 		mvn	r3, #6
+ 494              	.L25:
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 495              		.loc 1 270 1
+ 496 0032 1846     		mov	r0, r3
+ 497 0034 0837     		adds	r7, r7, #8
+ 498              		.cfi_def_cfa_offset 8
+ 499 0036 BD46     		mov	sp, r7
+ 500              		.cfi_def_cfa_register 13
+ 501              		@ sp needed
+ 502 0038 80BD     		pop	{r7, pc}
+ 503              	.L27:
+ 504 003a 00BF     		.align	2
+ 505              	.L26:
+ 506 003c 002C0040 		.word	1073753088
+ 507              		.cfi_endproc
+ 508              	.LFE126:
+ 510              		.section	.text.hal_wwdgt_reload,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	hal_wwdgt_reload
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.fpu softvfp
+ 518              	hal_wwdgt_reload:
+ 519              	.LFB127:
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      reload the counter of WWDGT
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  p_wwdgt_init: pointer to a hal_wwdgt_init_struct structure which contains
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 parameters for initialization of the WWDGT peripheral
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 members of the structure and the member values are shown as below:
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 wwdgt_pre_select:
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                 only one parameter can be selected which is shown as below:
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV1 WWDGT prescaler set to 1
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV2 WWDGT prescaler set to 2
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV4 WWDGT prescaler set to 4
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****       \arg        WWDGT_PSC_DIV8 WWDGT prescaler set to 8
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                wwdgt_cnt_value: 0x0 - 0xFFF
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****                wwdgt_Downcnt_value: 0x0 - 0xFFF
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_h
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** int32_t hal_wwdgt_reload(hal_wwdgt_init_struct *p_wwdgt)
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 520              		.loc 1 289 1
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 16
+ 523              		@ frame_needed = 1, uses_anonymous_args = 0
+ 524              		@ link register save eliminated.
+ 525 0000 80B4     		push	{r7}
+ 526              		.cfi_def_cfa_offset 4
+ 527              		.cfi_offset 7, -4
+ 528 0002 85B0     		sub	sp, sp, #20
+ 529              		.cfi_def_cfa_offset 24
+ 530 0004 00AF     		add	r7, sp, #0
+ 531              		.cfi_def_cfa_register 7
+ 532 0006 7860     		str	r0, [r7, #4]
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     uint32_t reg = 0x0U;
+ 533              		.loc 1 290 14
+ 534 0008 0023     		movs	r3, #0
+ 535 000a FB60     		str	r3, [r7, #12]
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(NULL == p_wwdgt) {
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("pointer [p_wwdgt] address is invalid");
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_ADDRESS;
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if((p_wwdgt->wwdgt_cnt_value > 0x7F) || (p_wwdgt->wwdgt_cnt_value < 0x40)) {
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         HAL_DEBUGE("parameter [p_wwdgt->counter] value is invalid");
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return HAL_ERR_VAL;
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** #endif /* 1== HAL_PARAMETER_CHECK */
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg = WWDGT_CTL & (~(uint32_t)WWDGT_CTL_CNT);
+ 536              		.loc 1 304 11
+ 537 000c 0A4B     		ldr	r3, .L30
+ 538 000e 1B68     		ldr	r3, [r3]
+ 539              		.loc 1 304 9
+ 540 0010 23F07F03 		bic	r3, r3, #127
+ 541 0014 FB60     		str	r3, [r7, #12]
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     reg |= (uint32_t)(WWDGT_CTL_CNT & p_wwdgt->wwdgt_cnt_value);
+ 542              		.loc 1 305 46
+ 543 0016 7B68     		ldr	r3, [r7, #4]
+ 544 0018 5B68     		ldr	r3, [r3, #4]
+ 545              		.loc 1 305 12
+ 546 001a 03F07F03 		and	r3, r3, #127
+ 547              		.loc 1 305 9
+ 548 001e FA68     		ldr	r2, [r7, #12]
+ 549 0020 1343     		orrs	r3, r3, r2
+ 550 0022 FB60     		str	r3, [r7, #12]
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CTL = (uint32_t)reg;
+ 551              		.loc 1 307 5
+ 552 0024 044A     		ldr	r2, .L30
+ 553              		.loc 1 307 15
+ 554 0026 FB68     		ldr	r3, [r7, #12]
+ 555 0028 1360     		str	r3, [r2]
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     return HAL_ERR_NONE;
+ 556              		.loc 1 309 12
+ 557 002a 0023     		movs	r3, #0
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 558              		.loc 1 310 1
+ 559 002c 1846     		mov	r0, r3
+ 560 002e 1437     		adds	r7, r7, #20
+ 561              		.cfi_def_cfa_offset 4
+ 562 0030 BD46     		mov	sp, r7
+ 563              		.cfi_def_cfa_register 13
+ 564              		@ sp needed
+ 565 0032 80BC     		pop	{r7}
+ 566              		.cfi_restore 7
+ 567              		.cfi_def_cfa_offset 0
+ 568 0034 7047     		bx	lr
+ 569              	.L31:
+ 570 0036 00BF     		.align	2
+ 571              	.L30:
+ 572 0038 002C0040 		.word	1073753088
+ 573              		.cfi_endproc
+ 574              	.LFE127:
+ 576              		.section	.text.hals_wwdgt_flag_get,"ax",%progbits
+ 577              		.align	1
+ 578              		.global	hals_wwdgt_flag_get
+ 579              		.syntax unified
+ 580              		.thumb
+ 581              		.thumb_func
+ 582              		.fpu softvfp
+ 584              	hals_wwdgt_flag_get:
+ 585              	.LFB128:
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      check early wakeup interrupt state of WWDGT
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  none
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     FlagStatus: SET or RESET
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** FlagStatus hals_wwdgt_flag_get(void)
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 586              		.loc 1 319 1
+ 587              		.cfi_startproc
+ 588              		@ args = 0, pretend = 0, frame = 0
+ 589              		@ frame_needed = 1, uses_anonymous_args = 0
+ 590              		@ link register save eliminated.
+ 591 0000 80B4     		push	{r7}
+ 592              		.cfi_def_cfa_offset 4
+ 593              		.cfi_offset 7, -4
+ 594 0002 00AF     		add	r7, sp, #0
+ 595              		.cfi_def_cfa_register 7
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     if(RESET != (WWDGT_STAT & WWDGT_STAT_EWIF)) {
+ 596              		.loc 1 320 18
+ 597 0004 064B     		ldr	r3, .L35
+ 598 0006 1B68     		ldr	r3, [r3]
+ 599              		.loc 1 320 29
+ 600 0008 03F00103 		and	r3, r3, #1
+ 601              		.loc 1 320 7
+ 602 000c 002B     		cmp	r3, #0
+ 603 000e 01D0     		beq	.L33
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****         return SET;
+ 604              		.loc 1 321 16
+ 605 0010 0123     		movs	r3, #1
+ 606 0012 00E0     		b	.L34
+ 607              	.L33:
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     }
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     return RESET;
+ 608              		.loc 1 323 12
+ 609 0014 0023     		movs	r3, #0
+ 610              	.L34:
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 611              		.loc 1 324 1
+ 612 0016 1846     		mov	r0, r3
+ 613 0018 BD46     		mov	sp, r7
+ 614              		.cfi_def_cfa_register 13
+ 615              		@ sp needed
+ 616 001a 80BC     		pop	{r7}
+ 617              		.cfi_restore 7
+ 618              		.cfi_def_cfa_offset 0
+ 619 001c 7047     		bx	lr
+ 620              	.L36:
+ 621 001e 00BF     		.align	2
+ 622              	.L35:
+ 623 0020 082C0040 		.word	1073753096
+ 624              		.cfi_endproc
+ 625              	.LFE128:
+ 627              		.section	.text.hals_wwdgt_flag_clear,"ax",%progbits
+ 628              		.align	1
+ 629              		.global	hals_wwdgt_flag_clear
+ 630              		.syntax unified
+ 631              		.thumb
+ 632              		.thumb_func
+ 633              		.fpu softvfp
+ 635              	hals_wwdgt_flag_clear:
+ 636              	.LFB129:
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      clear early wakeup interrupt state of WWDGT
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  none
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hals_wwdgt_flag_clear(void)
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 637              		.loc 1 333 1
+ 638              		.cfi_startproc
+ 639              		@ args = 0, pretend = 0, frame = 0
+ 640              		@ frame_needed = 1, uses_anonymous_args = 0
+ 641              		@ link register save eliminated.
+ 642 0000 80B4     		push	{r7}
+ 643              		.cfi_def_cfa_offset 4
+ 644              		.cfi_offset 7, -4
+ 645 0002 00AF     		add	r7, sp, #0
+ 646              		.cfi_def_cfa_register 7
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_STAT &= (~(uint32_t)WWDGT_STAT_EWIF);
+ 647              		.loc 1 334 16
+ 648 0004 044B     		ldr	r3, .L38
+ 649 0006 1B68     		ldr	r3, [r3]
+ 650 0008 034A     		ldr	r2, .L38
+ 651 000a 23F00103 		bic	r3, r3, #1
+ 652 000e 1360     		str	r3, [r2]
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 653              		.loc 1 335 1
+ 654 0010 00BF     		nop
+ 655 0012 BD46     		mov	sp, r7
+ 656              		.cfi_def_cfa_register 13
+ 657              		@ sp needed
+ 658 0014 80BC     		pop	{r7}
+ 659              		.cfi_restore 7
+ 660              		.cfi_def_cfa_offset 0
+ 661 0016 7047     		bx	lr
+ 662              	.L39:
+ 663              		.align	2
+ 664              	.L38:
+ 665 0018 082C0040 		.word	1073753096
+ 666              		.cfi_endproc
+ 667              	.LFE129:
+ 669              		.section	.text.hals_wwdgt_interrupt_enable,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	hals_wwdgt_interrupt_enable
+ 672              		.syntax unified
+ 673              		.thumb
+ 674              		.thumb_func
+ 675              		.fpu softvfp
+ 677              	hals_wwdgt_interrupt_enable:
+ 678              	.LFB130:
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      enable early wakeup interrupt of WWDGT
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  none
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hals_wwdgt_interrupt_enable(void)
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 679              		.loc 1 344 1
+ 680              		.cfi_startproc
+ 681              		@ args = 0, pretend = 0, frame = 0
+ 682              		@ frame_needed = 1, uses_anonymous_args = 0
+ 683              		@ link register save eliminated.
+ 684 0000 80B4     		push	{r7}
+ 685              		.cfi_def_cfa_offset 4
+ 686              		.cfi_offset 7, -4
+ 687 0002 00AF     		add	r7, sp, #0
+ 688              		.cfi_def_cfa_register 7
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CFG |= WWDGT_CFG_EWIE;
+ 689              		.loc 1 345 15
+ 690 0004 044B     		ldr	r3, .L41
+ 691 0006 1B68     		ldr	r3, [r3]
+ 692 0008 034A     		ldr	r2, .L41
+ 693 000a 43F40073 		orr	r3, r3, #512
+ 694 000e 1360     		str	r3, [r2]
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 695              		.loc 1 346 1
+ 696 0010 00BF     		nop
+ 697 0012 BD46     		mov	sp, r7
+ 698              		.cfi_def_cfa_register 13
+ 699              		@ sp needed
+ 700 0014 80BC     		pop	{r7}
+ 701              		.cfi_restore 7
+ 702              		.cfi_def_cfa_offset 0
+ 703 0016 7047     		bx	lr
+ 704              	.L42:
+ 705              		.align	2
+ 706              	.L41:
+ 707 0018 042C0040 		.word	1073753092
+ 708              		.cfi_endproc
+ 709              	.LFE130:
+ 711              		.section	.text.hals_wwdgt_interrupt_disable,"ax",%progbits
+ 712              		.align	1
+ 713              		.global	hals_wwdgt_interrupt_disable
+ 714              		.syntax unified
+ 715              		.thumb
+ 716              		.thumb_func
+ 717              		.fpu softvfp
+ 719              	hals_wwdgt_interrupt_disable:
+ 720              	.LFB131:
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** 
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** /*!
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \brief      disable early wakeup interrupt of WWDGT
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[in]  none
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \param[out] none
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     \retval     none
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** */
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** void hals_wwdgt_interrupt_disable(void)
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** {
+ 721              		.loc 1 355 1
+ 722              		.cfi_startproc
+ 723              		@ args = 0, pretend = 0, frame = 0
+ 724              		@ frame_needed = 1, uses_anonymous_args = 0
+ 725              		@ link register save eliminated.
+ 726 0000 80B4     		push	{r7}
+ 727              		.cfi_def_cfa_offset 4
+ 728              		.cfi_offset 7, -4
+ 729 0002 00AF     		add	r7, sp, #0
+ 730              		.cfi_def_cfa_register 7
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c ****     WWDGT_CFG &= ~ WWDGT_CFG_EWIE;
+ 731              		.loc 1 356 15
+ 732 0004 044B     		ldr	r3, .L44
+ 733 0006 1B68     		ldr	r3, [r3]
+ 734 0008 034A     		ldr	r2, .L44
+ 735 000a 23F40073 		bic	r3, r3, #512
+ 736 000e 1360     		str	r3, [r2]
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_wwdgt.c **** }
+ 737              		.loc 1 357 1
+ 738 0010 00BF     		nop
+ 739 0012 BD46     		mov	sp, r7
+ 740              		.cfi_def_cfa_register 13
+ 741              		@ sp needed
+ 742 0014 80BC     		pop	{r7}
+ 743              		.cfi_restore 7
+ 744              		.cfi_def_cfa_offset 0
+ 745 0016 7047     		bx	lr
+ 746              	.L45:
+ 747              		.align	2
+ 748              	.L44:
+ 749 0018 042C0040 		.word	1073753092
+ 750              		.cfi_endproc
+ 751              	.LFE131:
+ 753              		.text
+ 754              	.Letext0:
+ 755              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 756              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 757              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 758              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 759              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 760              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 761              		.file 8 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal.h"
+ 762              		.file 9 "../firmware/cmsis/inc/core_cm4.h"
+ 763              		.file 10 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 764              		.file 11 "../firmware/cmsis/inc/gd32f3x0.h"
+ 765              		.file 12 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 766              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+ 767              		.file 14 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_wwdgt.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_wwdgt.c
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:16     .text.hal_wwdgt_struct_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:24     .text.hal_wwdgt_struct_init:00000000 hal_wwdgt_struct_init
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:96     .text.hal_wwdgt_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:103    .text.hal_wwdgt_init:00000000 hal_wwdgt_init
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:193    .text.hal_wwdgt_init:00000074 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:199    .text.hal_wwdgt_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:206    .text.hal_wwdgt_deinit:00000000 hal_wwdgt_deinit
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:243    .text.hal_wwdgt_irq:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:250    .text.hal_wwdgt_irq:00000000 hal_wwdgt_irq
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:584    .text.hals_wwdgt_flag_get:00000000 hals_wwdgt_flag_get
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:635    .text.hals_wwdgt_flag_clear:00000000 hals_wwdgt_flag_clear
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:303    .text.hal_wwdgt_irq_handle_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:310    .text.hal_wwdgt_irq_handle_set:00000000 hal_wwdgt_irq_handle_set
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:677    .text.hals_wwdgt_interrupt_enable:00000000 hals_wwdgt_interrupt_enable
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:719    .text.hals_wwdgt_interrupt_disable:00000000 hals_wwdgt_interrupt_disable
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:362    .text.hal_wwdgt_irq_handle_all_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:369    .text.hal_wwdgt_irq_handle_all_reset:00000000 hal_wwdgt_irq_handle_all_reset
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:403    .text.hal_wwdgt_start:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:410    .text.hal_wwdgt_start:00000000 hal_wwdgt_start
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:440    .text.hal_wwdgt_start:00000018 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:445    .text.hal_wwdgt_start_interrupt:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:452    .text.hal_wwdgt_start_interrupt:00000000 hal_wwdgt_start_interrupt
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:506    .text.hal_wwdgt_start_interrupt:0000003c $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:511    .text.hal_wwdgt_reload:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:518    .text.hal_wwdgt_reload:00000000 hal_wwdgt_reload
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:572    .text.hal_wwdgt_reload:00000038 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:577    .text.hals_wwdgt_flag_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:623    .text.hals_wwdgt_flag_get:00000020 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:628    .text.hals_wwdgt_flag_clear:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:665    .text.hals_wwdgt_flag_clear:00000018 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:670    .text.hals_wwdgt_interrupt_enable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:707    .text.hals_wwdgt_interrupt_enable:00000018 $d
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:712    .text.hals_wwdgt_interrupt_disable:00000000 $t
+C:\Users\peter\AppData\Local\Temp\cclz1oUs.s:749    .text.hals_wwdgt_interrupt_disable:00000018 $d
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_rcu_periph_clk_enable
+hal_rcu_periph_reset_enable
+hal_rcu_periph_reset_disable

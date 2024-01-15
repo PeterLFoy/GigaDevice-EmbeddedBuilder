@@ -1,0 +1,1880 @@
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"gd32f3x0_hal_gpio.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.hal_gpio_init,"ax",%progbits
+  16              		.align	1
+  17              		.global	hal_gpio_init
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	hal_gpio_init:
+  25              	.LFB119:
+  26              		.file 1 "../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c"
+   1:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+   2:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \file    gd32f3x0_hal_gpio.c
+   3:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief   GPIO driver
+   4:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+   5:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \version 2023-08-01, V1.0.0, HAL firmware for GD32F3x0
+   6:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+   7:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+   8:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*
+   9:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     Copyright (c) 2023, GigaDevice Semiconductor Inc.
+  10:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  11:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     Redistribution and use in source and binary forms, with or without modification,
+  12:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** are permitted provided that the following conditions are met:
+  13:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  14:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     1. Redistributions of source code must retain the above copyright notice, this
+  15:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****        list of conditions and the following disclaimer.
+  16:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****        this list of conditions and the following disclaimer in the documentation
+  18:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****        and/or other materials provided with the distribution.
+  19:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     3. Neither the name of the copyright holder nor the names of its contributors
+  20:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****        may be used to endorse or promote products derived from this software without
+  21:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****        specific prior written permission.
+  22:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  23:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  25:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  26:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  27:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  28:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  29:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  30:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  31:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  32:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** OF SUCH DAMAGE.
+  33:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+  34:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #include "gd32f3x0_hal.h"
+  35:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #define _GPIO_GET_OUTPUT_MODE(mode)       ((uint32_t)((mode >> 4) & 0x00000001U))
+  36:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #define _GPIO_AF_VALUE_MASK               ((uint32_t)0xFFFFFFF8U)
+  37:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #define _GPIO_PIN_VALUE_MASK              ((uint32_t)0xFFFF0000U)
+  38:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #define _GPIOD_PIN_VALUE_MASK             ((uint32_t)0xFFFFFFFBU)
+  39:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #define _GPIOF_PIN_VALUE_MASK             ((uint32_t)0xFFFFFF0CU)
+  40:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  41:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+  42:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      initialize the GPIO
+  43:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+  44:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+  45:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+  46:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+  47:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+  48:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL(GPIO_PIN_ALL can be selected only when gpio_per
+  49:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  p_init: GPIO intialization structure
+  50:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                   mode: GPIO_MODE_ANALOG, GPIO_MODE_INPUT, GPIO_MODE_OUTPUT_PP
+  51:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                         GPIO_MODE_OUTPUT_OD, GPIO_MODE_AF_PP, GPIO_MODE_AF_OD
+  52:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                   pull: GPIO_PULL_NONE, GPIO_PULL_UP, GPIO_PULL_DOWN
+  53:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                   ospeed: GPIO_OSPEED_2MHZ, GPIO_OSPEED_10MHZ, GPIO_OSPEED_50MHZ
+  54:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                           GPIO_OSPEED_MAX
+  55:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                   af: GPIO_AF_x(x=0...7))
+  56:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+  57:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_h
+  58:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+  59:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** int32_t hal_gpio_init(uint32_t gpio_periph, \
+  60:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                       uint32_t pin, hal_gpio_init_struct *p_init)
+  61:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+  27              		.loc 1 61 1
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 87B0     		sub	sp, sp, #28
+  36              		.cfi_def_cfa_offset 32
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 F860     		str	r0, [r7, #12]
+  40 0008 B960     		str	r1, [r7, #8]
+  41 000a 7A60     		str	r2, [r7, #4]
+  62:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     uint32_t i;
+  63:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     uint32_t reg_temp;
+  64:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  65:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #if (1 == HAL_PARAMETER_CHECK)
+  66:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check pin_init address */
+  67:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if(NULL == p_init) {
+  68:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         HAL_DEBUGE("pointer [p_init] address is invalid");
+  69:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return HAL_ERR_ADDRESS;
+  70:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+  71:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  72:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check gpio_periph value */
+  73:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((GPIOA != gpio_periph) && (GPIOB != gpio_periph) && (GPIOC != gpio_periph) && \
+  74:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             (GPIOD != gpio_periph) && (GPIOF != gpio_periph)) {
+  75:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         HAL_DEBUGE("parameter [gpio_periph] value is invalid");
+  76:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return HAL_ERR_VAL;
+  77:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+  78:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  79:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check if pin is PA0 ~ PA15/PB0 ~ PB15 or not*/
+  80:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((GPIOA == gpio_periph) || (GPIOB == gpio_periph) || (GPIOC == gpio_periph)) {
+  81:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((0U != (pin & _GPIO_PIN_VALUE_MASK))) {
+  82:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  83:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             return HAL_ERR_VAL;
+  84:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+  85:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+  86:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  87:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check if pin is PD2 or not*/
+  88:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((GPIOD == gpio_periph)) {
+  89:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((0U != (pin & _GPIOD_PIN_VALUE_MASK))) {
+  90:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  91:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             return HAL_ERR_VAL;
+  92:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+  93:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+  94:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+  95:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check if pin is PF0 ~ PF1/PF4 ~ PF7 or not*/
+  96:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((GPIOF == gpio_periph)) {
+  97:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((0U != (pin & _GPIOF_PIN_VALUE_MASK))) {
+  98:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             HAL_DEBUGE("parameter [pin] value is invalid");
+  99:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             return HAL_ERR_VAL;
+ 100:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 101:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 102:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 103:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     for(i = 0U; i < 16U; i++) {
+  42              		.loc 1 104 11
+  43 000c 0023     		movs	r3, #0
+  44 000e 7B61     		str	r3, [r7, #20]
+  45              		.loc 1 104 5
+  46 0010 02E1     		b	.L2
+  47              	.L10:
+ 105:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((1U << i) & pin) {
+  48              		.loc 1 105 16
+  49 0012 0122     		movs	r2, #1
+  50 0014 7B69     		ldr	r3, [r7, #20]
+  51 0016 9A40     		lsls	r2, r2, r3
+  52              		.loc 1 105 22
+  53 0018 BB68     		ldr	r3, [r7, #8]
+  54 001a 1340     		ands	r3, r3, r2
+  55              		.loc 1 105 11
+  56 001c 002B     		cmp	r3, #0
+  57 001e 00F0F880 		beq	.L3
+ 106:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set GPIO_CTL register */
+ 107:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp = GPIO_CTL(gpio_periph);
+  58              		.loc 1 107 24
+  59 0022 FB68     		ldr	r3, [r7, #12]
+  60              		.loc 1 107 22
+  61 0024 1B68     		ldr	r3, [r3]
+  62 0026 3B61     		str	r3, [r7, #16]
+ 108:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* clear the specified pin mode bits */
+ 109:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp &= ~GPIO_MODE_MASK(i);
+  63              		.loc 1 109 26
+  64 0028 7B69     		ldr	r3, [r7, #20]
+  65 002a 5B00     		lsls	r3, r3, #1
+  66 002c 0322     		movs	r2, #3
+  67 002e 02FA03F3 		lsl	r3, r2, r3
+  68              		.loc 1 109 25
+  69 0032 DB43     		mvns	r3, r3
+  70              		.loc 1 109 22
+  71 0034 3A69     		ldr	r2, [r7, #16]
+  72 0036 1340     		ands	r3, r3, r2
+  73 0038 3B61     		str	r3, [r7, #16]
+ 110:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set the specified pin mode bits */
+ 111:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp |= GPIO_MODE_SET(i, (CTL_CLTR(3) & p_init->mode));
+  74              		.loc 1 111 25
+  75 003a 7B68     		ldr	r3, [r7, #4]
+  76 003c 1B68     		ldr	r3, [r3]
+  77 003e 03F00302 		and	r2, r3, #3
+  78 0042 7B69     		ldr	r3, [r7, #20]
+  79 0044 5B00     		lsls	r3, r3, #1
+  80 0046 02FA03F3 		lsl	r3, r2, r3
+  81              		.loc 1 111 22
+  82 004a 3A69     		ldr	r2, [r7, #16]
+  83 004c 1343     		orrs	r3, r3, r2
+  84 004e 3B61     		str	r3, [r7, #16]
+ 112:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             GPIO_CTL(gpio_periph) = reg_temp;
+  85              		.loc 1 112 13
+  86 0050 FB68     		ldr	r3, [r7, #12]
+  87              		.loc 1 112 35
+  88 0052 3A69     		ldr	r2, [r7, #16]
+  89 0054 1A60     		str	r2, [r3]
+ 113:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 114:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set GPIO_OMODE register */
+ 115:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if(GPIO_OTYPE_OD == _GPIO_GET_OUTPUT_MODE(p_init->mode)) {
+  90              		.loc 1 115 33
+  91 0056 7B68     		ldr	r3, [r7, #4]
+  92 0058 1B68     		ldr	r3, [r3]
+  93 005a 1B09     		lsrs	r3, r3, #4
+  94 005c 03F00103 		and	r3, r3, #1
+  95              		.loc 1 115 15
+  96 0060 002B     		cmp	r3, #0
+  97 0062 09D0     		beq	.L4
+ 116:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OMODE(gpio_periph) |= (uint32_t)pin;
+  98              		.loc 1 116 41
+  99 0064 FB68     		ldr	r3, [r7, #12]
+ 100 0066 0433     		adds	r3, r3, #4
+ 101 0068 1A68     		ldr	r2, [r3]
+ 102 006a FB68     		ldr	r3, [r7, #12]
+ 103 006c 0433     		adds	r3, r3, #4
+ 104 006e 1946     		mov	r1, r3
+ 105 0070 BB68     		ldr	r3, [r7, #8]
+ 106 0072 1343     		orrs	r3, r3, r2
+ 107 0074 0B60     		str	r3, [r1]
+ 108 0076 08E0     		b	.L5
+ 109              	.L4:
+ 117:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             } else {
+ 118:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OMODE(gpio_periph) &= (uint32_t)(~pin);
+ 110              		.loc 1 118 41
+ 111 0078 FB68     		ldr	r3, [r7, #12]
+ 112 007a 0433     		adds	r3, r3, #4
+ 113 007c 1A68     		ldr	r2, [r3]
+ 114              		.loc 1 118 55
+ 115 007e BB68     		ldr	r3, [r7, #8]
+ 116 0080 DB43     		mvns	r3, r3
+ 117              		.loc 1 118 41
+ 118 0082 F968     		ldr	r1, [r7, #12]
+ 119 0084 0431     		adds	r1, r1, #4
+ 120 0086 1340     		ands	r3, r3, r2
+ 121 0088 0B60     		str	r3, [r1]
+ 122              	.L5:
+ 119:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 120:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 121:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set GPIO_OSPD register */
+ 122:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if(GPIO_OSPEED_MAX == p_init->ospeed) {
+ 123              		.loc 1 122 41
+ 124 008a 7B68     		ldr	r3, [r7, #4]
+ 125 008c 9B68     		ldr	r3, [r3, #8]
+ 126              		.loc 1 122 15
+ 127 008e 4FF6FF72 		movw	r2, #65535
+ 128 0092 9342     		cmp	r3, r2
+ 129 0094 32D1     		bne	.L6
+ 123:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* set GPIO_OSPD register */
+ 124:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp = GPIO_OSPD0(gpio_periph);
+ 130              		.loc 1 124 28
+ 131 0096 FB68     		ldr	r3, [r7, #12]
+ 132 0098 0833     		adds	r3, r3, #8
+ 133              		.loc 1 124 26
+ 134 009a 1B68     		ldr	r3, [r3]
+ 135 009c 3B61     		str	r3, [r7, #16]
+ 125:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp &= ~GPIO_OSPEED0_MASK(i);
+ 136              		.loc 1 125 30
+ 137 009e 7B69     		ldr	r3, [r7, #20]
+ 138 00a0 5B00     		lsls	r3, r3, #1
+ 139 00a2 0322     		movs	r2, #3
+ 140 00a4 02FA03F3 		lsl	r3, r2, r3
+ 141              		.loc 1 125 29
+ 142 00a8 DB43     		mvns	r3, r3
+ 143              		.loc 1 125 26
+ 144 00aa 3A69     		ldr	r2, [r7, #16]
+ 145 00ac 1340     		ands	r3, r3, r2
+ 146 00ae 3B61     		str	r3, [r7, #16]
+ 126:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp |= GPIO_OSPEED0_SET(i, 0x3);
+ 147              		.loc 1 126 29
+ 148 00b0 7B69     		ldr	r3, [r7, #20]
+ 149 00b2 5B00     		lsls	r3, r3, #1
+ 150 00b4 0322     		movs	r2, #3
+ 151 00b6 02FA03F3 		lsl	r3, r2, r3
+ 152              		.loc 1 126 26
+ 153 00ba 3A69     		ldr	r2, [r7, #16]
+ 154 00bc 1343     		orrs	r3, r3, r2
+ 155 00be 3B61     		str	r3, [r7, #16]
+ 127:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD0(gpio_periph) = reg_temp;
+ 156              		.loc 1 127 17
+ 157 00c0 FB68     		ldr	r3, [r7, #12]
+ 158 00c2 0833     		adds	r3, r3, #8
+ 159 00c4 1A46     		mov	r2, r3
+ 160              		.loc 1 127 41
+ 161 00c6 3B69     		ldr	r3, [r7, #16]
+ 162 00c8 1360     		str	r3, [r2]
+ 128:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 129:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* set GPIO_OSPD1 register */
+ 130:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp = GPIO_OSPD1(gpio_periph);
+ 163              		.loc 1 130 28
+ 164 00ca FB68     		ldr	r3, [r7, #12]
+ 165 00cc 3C33     		adds	r3, r3, #60
+ 166              		.loc 1 130 26
+ 167 00ce 1B68     		ldr	r3, [r3]
+ 168 00d0 3B61     		str	r3, [r7, #16]
+ 131:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp &= ~GPIO_OSPEED1_MASK(i);
+ 169              		.loc 1 131 30
+ 170 00d2 0122     		movs	r2, #1
+ 171 00d4 7B69     		ldr	r3, [r7, #20]
+ 172 00d6 02FA03F3 		lsl	r3, r2, r3
+ 173              		.loc 1 131 29
+ 174 00da DB43     		mvns	r3, r3
+ 175              		.loc 1 131 26
+ 176 00dc 3A69     		ldr	r2, [r7, #16]
+ 177 00de 1340     		ands	r3, r3, r2
+ 178 00e0 3B61     		str	r3, [r7, #16]
+ 132:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp |= GPIO_OSPEED1_SET(i);
+ 179              		.loc 1 132 29
+ 180 00e2 0122     		movs	r2, #1
+ 181 00e4 7B69     		ldr	r3, [r7, #20]
+ 182 00e6 02FA03F3 		lsl	r3, r2, r3
+ 183              		.loc 1 132 26
+ 184 00ea 3A69     		ldr	r2, [r7, #16]
+ 185 00ec 1343     		orrs	r3, r3, r2
+ 186 00ee 3B61     		str	r3, [r7, #16]
+ 133:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD1(gpio_periph) = reg_temp;
+ 187              		.loc 1 133 17
+ 188 00f0 FB68     		ldr	r3, [r7, #12]
+ 189 00f2 3C33     		adds	r3, r3, #60
+ 190 00f4 1A46     		mov	r2, r3
+ 191              		.loc 1 133 41
+ 192 00f6 3B69     		ldr	r3, [r7, #16]
+ 193 00f8 1360     		str	r3, [r2]
+ 194 00fa 2BE0     		b	.L7
+ 195              	.L6:
+ 134:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             } else {
+ 135:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* set GPIO_OSPD register */
+ 136:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp = GPIO_OSPD0(gpio_periph);
+ 196              		.loc 1 136 28
+ 197 00fc FB68     		ldr	r3, [r7, #12]
+ 198 00fe 0833     		adds	r3, r3, #8
+ 199              		.loc 1 136 26
+ 200 0100 1B68     		ldr	r3, [r3]
+ 201 0102 3B61     		str	r3, [r7, #16]
+ 137:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp &= ~GPIO_OSPEED0_MASK(i);
+ 202              		.loc 1 137 30
+ 203 0104 7B69     		ldr	r3, [r7, #20]
+ 204 0106 5B00     		lsls	r3, r3, #1
+ 205 0108 0322     		movs	r2, #3
+ 206 010a 02FA03F3 		lsl	r3, r2, r3
+ 207              		.loc 1 137 29
+ 208 010e DB43     		mvns	r3, r3
+ 209              		.loc 1 137 26
+ 210 0110 3A69     		ldr	r2, [r7, #16]
+ 211 0112 1340     		ands	r3, r3, r2
+ 212 0114 3B61     		str	r3, [r7, #16]
+ 138:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp |= GPIO_OSPEED0_SET(i, p_init->ospeed);
+ 213              		.loc 1 138 29
+ 214 0116 7B68     		ldr	r3, [r7, #4]
+ 215 0118 9A68     		ldr	r2, [r3, #8]
+ 216 011a 7B69     		ldr	r3, [r7, #20]
+ 217 011c 5B00     		lsls	r3, r3, #1
+ 218 011e 02FA03F3 		lsl	r3, r2, r3
+ 219              		.loc 1 138 26
+ 220 0122 3A69     		ldr	r2, [r7, #16]
+ 221 0124 1343     		orrs	r3, r3, r2
+ 222 0126 3B61     		str	r3, [r7, #16]
+ 139:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD0(gpio_periph) = reg_temp;
+ 223              		.loc 1 139 17
+ 224 0128 FB68     		ldr	r3, [r7, #12]
+ 225 012a 0833     		adds	r3, r3, #8
+ 226 012c 1A46     		mov	r2, r3
+ 227              		.loc 1 139 41
+ 228 012e 3B69     		ldr	r3, [r7, #16]
+ 229 0130 1360     		str	r3, [r2]
+ 140:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 141:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* clear GPIO_OSPD1 register */
+ 142:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp = GPIO_OSPD1(gpio_periph);
+ 230              		.loc 1 142 28
+ 231 0132 FB68     		ldr	r3, [r7, #12]
+ 232 0134 3C33     		adds	r3, r3, #60
+ 233              		.loc 1 142 26
+ 234 0136 1B68     		ldr	r3, [r3]
+ 235 0138 3B61     		str	r3, [r7, #16]
+ 143:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 reg_temp &= ~GPIO_OSPEED1_MASK(i);
+ 236              		.loc 1 143 30
+ 237 013a 0122     		movs	r2, #1
+ 238 013c 7B69     		ldr	r3, [r7, #20]
+ 239 013e 02FA03F3 		lsl	r3, r2, r3
+ 240              		.loc 1 143 29
+ 241 0142 DB43     		mvns	r3, r3
+ 242              		.loc 1 143 26
+ 243 0144 3A69     		ldr	r2, [r7, #16]
+ 244 0146 1340     		ands	r3, r3, r2
+ 245 0148 3B61     		str	r3, [r7, #16]
+ 144:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD1(gpio_periph) = reg_temp;
+ 246              		.loc 1 144 17
+ 247 014a FB68     		ldr	r3, [r7, #12]
+ 248 014c 3C33     		adds	r3, r3, #60
+ 249 014e 1A46     		mov	r2, r3
+ 250              		.loc 1 144 41
+ 251 0150 3B69     		ldr	r3, [r7, #16]
+ 252 0152 1360     		str	r3, [r2]
+ 253              	.L7:
+ 145:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 146:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 147:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set GPIO_PUD register */
+ 148:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp = GPIO_PUD(gpio_periph);
+ 254              		.loc 1 148 24
+ 255 0154 FB68     		ldr	r3, [r7, #12]
+ 256 0156 0C33     		adds	r3, r3, #12
+ 257              		.loc 1 148 22
+ 258 0158 1B68     		ldr	r3, [r3]
+ 259 015a 3B61     		str	r3, [r7, #16]
+ 149:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp &= ~GPIO_PUPD_MASK(i);
+ 260              		.loc 1 149 26
+ 261 015c 7B69     		ldr	r3, [r7, #20]
+ 262 015e 5B00     		lsls	r3, r3, #1
+ 263 0160 0322     		movs	r2, #3
+ 264 0162 02FA03F3 		lsl	r3, r2, r3
+ 265              		.loc 1 149 25
+ 266 0166 DB43     		mvns	r3, r3
+ 267              		.loc 1 149 22
+ 268 0168 3A69     		ldr	r2, [r7, #16]
+ 269 016a 1340     		ands	r3, r3, r2
+ 270 016c 3B61     		str	r3, [r7, #16]
+ 150:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             reg_temp |= GPIO_PUPD_SET(i, p_init->pull);
+ 271              		.loc 1 150 25
+ 272 016e 7B68     		ldr	r3, [r7, #4]
+ 273 0170 5A68     		ldr	r2, [r3, #4]
+ 274 0172 7B69     		ldr	r3, [r7, #20]
+ 275 0174 5B00     		lsls	r3, r3, #1
+ 276 0176 02FA03F3 		lsl	r3, r2, r3
+ 277              		.loc 1 150 22
+ 278 017a 3A69     		ldr	r2, [r7, #16]
+ 279 017c 1343     		orrs	r3, r3, r2
+ 280 017e 3B61     		str	r3, [r7, #16]
+ 151:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             GPIO_PUD(gpio_periph) = reg_temp;
+ 281              		.loc 1 151 13
+ 282 0180 FB68     		ldr	r3, [r7, #12]
+ 283 0182 0C33     		adds	r3, r3, #12
+ 284 0184 1A46     		mov	r2, r3
+ 285              		.loc 1 151 35
+ 286 0186 3B69     		ldr	r3, [r7, #16]
+ 287 0188 1360     		str	r3, [r2]
+ 152:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 153:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* set GPIO_AFSELx register */
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((GPIO_MODE_AF_PP == p_init->mode) || \
+ 288              		.loc 1 154 42
+ 289 018a 7B68     		ldr	r3, [r7, #4]
+ 290 018c 1B68     		ldr	r3, [r3]
+ 291              		.loc 1 154 15
+ 292 018e 022B     		cmp	r3, #2
+ 293 0190 03D0     		beq	.L8
+ 155:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     (GPIO_MODE_AF_OD == p_init->mode)) {
+ 294              		.loc 1 155 47 discriminator 1
+ 295 0192 7B68     		ldr	r3, [r7, #4]
+ 296 0194 1B68     		ldr	r3, [r3]
+ 154:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     (GPIO_MODE_AF_OD == p_init->mode)) {
+ 297              		.loc 1 154 50 discriminator 1
+ 298 0196 122B     		cmp	r3, #18
+ 299 0198 3BD1     		bne	.L3
+ 300              	.L8:
+ 156:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 if(i < 8) {
+ 301              		.loc 1 156 19
+ 302 019a 7B69     		ldr	r3, [r7, #20]
+ 303 019c 072B     		cmp	r3, #7
+ 304 019e 1BD8     		bhi	.L9
+ 157:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     /* set pin0 to pin7 alternate function */
+ 158:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp = GPIO_AFSEL0(gpio_periph);
+ 305              		.loc 1 158 32
+ 306 01a0 FB68     		ldr	r3, [r7, #12]
+ 307 01a2 2033     		adds	r3, r3, #32
+ 308              		.loc 1 158 30
+ 309 01a4 1B68     		ldr	r3, [r3]
+ 310 01a6 3B61     		str	r3, [r7, #16]
+ 159:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp &= ~GPIO_AFR_MASK(i);
+ 311              		.loc 1 159 34
+ 312 01a8 7B69     		ldr	r3, [r7, #20]
+ 313 01aa 9B00     		lsls	r3, r3, #2
+ 314 01ac 0F22     		movs	r2, #15
+ 315 01ae 02FA03F3 		lsl	r3, r2, r3
+ 316              		.loc 1 159 33
+ 317 01b2 DB43     		mvns	r3, r3
+ 318              		.loc 1 159 30
+ 319 01b4 3A69     		ldr	r2, [r7, #16]
+ 320 01b6 1340     		ands	r3, r3, r2
+ 321 01b8 3B61     		str	r3, [r7, #16]
+ 160:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp |= GPIO_AFR_SET(i, p_init->af);
+ 322              		.loc 1 160 33
+ 323 01ba 7B68     		ldr	r3, [r7, #4]
+ 324 01bc DA68     		ldr	r2, [r3, #12]
+ 325 01be 7B69     		ldr	r3, [r7, #20]
+ 326 01c0 9B00     		lsls	r3, r3, #2
+ 327 01c2 02FA03F3 		lsl	r3, r2, r3
+ 328              		.loc 1 160 30
+ 329 01c6 3A69     		ldr	r2, [r7, #16]
+ 330 01c8 1343     		orrs	r3, r3, r2
+ 331 01ca 3B61     		str	r3, [r7, #16]
+ 161:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     GPIO_AFSEL0(gpio_periph) = reg_temp;
+ 332              		.loc 1 161 21
+ 333 01cc FB68     		ldr	r3, [r7, #12]
+ 334 01ce 2033     		adds	r3, r3, #32
+ 335 01d0 1A46     		mov	r2, r3
+ 336              		.loc 1 161 46
+ 337 01d2 3B69     		ldr	r3, [r7, #16]
+ 338 01d4 1360     		str	r3, [r2]
+ 339 01d6 1CE0     		b	.L3
+ 340              	.L9:
+ 162:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 } else {
+ 163:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     /* set pin8 to pin15 alternate function */
+ 164:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp = GPIO_AFSEL1(gpio_periph);
+ 341              		.loc 1 164 32
+ 342 01d8 FB68     		ldr	r3, [r7, #12]
+ 343 01da 2433     		adds	r3, r3, #36
+ 344              		.loc 1 164 30
+ 345 01dc 1B68     		ldr	r3, [r3]
+ 346 01de 3B61     		str	r3, [r7, #16]
+ 165:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp &= ~GPIO_AFR_MASK(i - 8U);
+ 347              		.loc 1 165 34
+ 348 01e0 7B69     		ldr	r3, [r7, #20]
+ 349 01e2 083B     		subs	r3, r3, #8
+ 350 01e4 9B00     		lsls	r3, r3, #2
+ 351 01e6 0F22     		movs	r2, #15
+ 352 01e8 02FA03F3 		lsl	r3, r2, r3
+ 353              		.loc 1 165 33
+ 354 01ec DB43     		mvns	r3, r3
+ 355              		.loc 1 165 30
+ 356 01ee 3A69     		ldr	r2, [r7, #16]
+ 357 01f0 1340     		ands	r3, r3, r2
+ 358 01f2 3B61     		str	r3, [r7, #16]
+ 166:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     reg_temp |= GPIO_AFR_SET(i - 8U, p_init->af);
+ 359              		.loc 1 166 33
+ 360 01f4 7B68     		ldr	r3, [r7, #4]
+ 361 01f6 DA68     		ldr	r2, [r3, #12]
+ 362 01f8 7B69     		ldr	r3, [r7, #20]
+ 363 01fa 083B     		subs	r3, r3, #8
+ 364 01fc 9B00     		lsls	r3, r3, #2
+ 365 01fe 02FA03F3 		lsl	r3, r2, r3
+ 366              		.loc 1 166 30
+ 367 0202 3A69     		ldr	r2, [r7, #16]
+ 368 0204 1343     		orrs	r3, r3, r2
+ 369 0206 3B61     		str	r3, [r7, #16]
+ 167:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     GPIO_AFSEL1(gpio_periph) = reg_temp;
+ 370              		.loc 1 167 21
+ 371 0208 FB68     		ldr	r3, [r7, #12]
+ 372 020a 2433     		adds	r3, r3, #36
+ 373 020c 1A46     		mov	r2, r3
+ 374              		.loc 1 167 46
+ 375 020e 3B69     		ldr	r3, [r7, #16]
+ 376 0210 1360     		str	r3, [r2]
+ 377              	.L3:
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((1U << i) & pin) {
+ 378              		.loc 1 104 27 discriminator 2
+ 379 0212 7B69     		ldr	r3, [r7, #20]
+ 380 0214 0133     		adds	r3, r3, #1
+ 381 0216 7B61     		str	r3, [r7, #20]
+ 382              	.L2:
+ 104:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((1U << i) & pin) {
+ 383              		.loc 1 104 5 discriminator 1
+ 384 0218 7B69     		ldr	r3, [r7, #20]
+ 385 021a 0F2B     		cmp	r3, #15
+ 386 021c 7FF6F9AE 		bls	.L10
+ 168:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 }
+ 169:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 170:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 171:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 172:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 173:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     return HAL_ERR_NONE;
+ 387              		.loc 1 173 12
+ 388 0220 0023     		movs	r3, #0
+ 174:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 389              		.loc 1 174 1
+ 390 0222 1846     		mov	r0, r3
+ 391 0224 1C37     		adds	r7, r7, #28
+ 392              		.cfi_def_cfa_offset 4
+ 393 0226 BD46     		mov	sp, r7
+ 394              		.cfi_def_cfa_register 13
+ 395              		@ sp needed
+ 396 0228 80BC     		pop	{r7}
+ 397              		.cfi_restore 7
+ 398              		.cfi_def_cfa_offset 0
+ 399 022a 7047     		bx	lr
+ 400              		.cfi_endproc
+ 401              	.LFE119:
+ 403              		.section	.text.hal_gpio_bit_set,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	hal_gpio_bit_set
+ 406              		.syntax unified
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.fpu softvfp
+ 411              	hal_gpio_bit_set:
+ 412              	.LFB120:
+ 175:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 176:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 177:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      set GPIO pin bit
+ 178:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 179:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 180:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 181:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 182:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 183:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 184:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 185:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 186:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 187:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hal_gpio_bit_set(uint32_t gpio_periph, uint32_t pin)
+ 188:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 413              		.loc 1 188 1
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 8
+ 416              		@ frame_needed = 1, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+ 418 0000 80B4     		push	{r7}
+ 419              		.cfi_def_cfa_offset 4
+ 420              		.cfi_offset 7, -4
+ 421 0002 83B0     		sub	sp, sp, #12
+ 422              		.cfi_def_cfa_offset 16
+ 423 0004 00AF     		add	r7, sp, #0
+ 424              		.cfi_def_cfa_register 7
+ 425 0006 7860     		str	r0, [r7, #4]
+ 426 0008 3960     		str	r1, [r7]
+ 189:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_BOP(gpio_periph) = (uint32_t)pin;
+ 427              		.loc 1 189 5
+ 428 000a 7B68     		ldr	r3, [r7, #4]
+ 429 000c 1833     		adds	r3, r3, #24
+ 430 000e 1A46     		mov	r2, r3
+ 431              		.loc 1 189 27
+ 432 0010 3B68     		ldr	r3, [r7]
+ 433 0012 1360     		str	r3, [r2]
+ 190:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 434              		.loc 1 190 1
+ 435 0014 00BF     		nop
+ 436 0016 0C37     		adds	r7, r7, #12
+ 437              		.cfi_def_cfa_offset 4
+ 438 0018 BD46     		mov	sp, r7
+ 439              		.cfi_def_cfa_register 13
+ 440              		@ sp needed
+ 441 001a 80BC     		pop	{r7}
+ 442              		.cfi_restore 7
+ 443              		.cfi_def_cfa_offset 0
+ 444 001c 7047     		bx	lr
+ 445              		.cfi_endproc
+ 446              	.LFE120:
+ 448              		.section	.text.hal_gpio_bit_reset,"ax",%progbits
+ 449              		.align	1
+ 450              		.global	hal_gpio_bit_reset
+ 451              		.syntax unified
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.fpu softvfp
+ 456              	hal_gpio_bit_reset:
+ 457              	.LFB121:
+ 191:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 192:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 193:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      reset GPIO pin bit
+ 194:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 195:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 196:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 197:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 198:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 199:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL(GPIO_PIN_ALL can be selected only when gpio_per
+ 200:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 201:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 202:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 203:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hal_gpio_bit_reset(uint32_t gpio_periph, uint32_t pin)
+ 204:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 458              		.loc 1 204 1
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 8
+ 461              		@ frame_needed = 1, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+ 463 0000 80B4     		push	{r7}
+ 464              		.cfi_def_cfa_offset 4
+ 465              		.cfi_offset 7, -4
+ 466 0002 83B0     		sub	sp, sp, #12
+ 467              		.cfi_def_cfa_offset 16
+ 468 0004 00AF     		add	r7, sp, #0
+ 469              		.cfi_def_cfa_register 7
+ 470 0006 7860     		str	r0, [r7, #4]
+ 471 0008 3960     		str	r1, [r7]
+ 205:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_BC(gpio_periph) = (uint32_t)pin;
+ 472              		.loc 1 205 5
+ 473 000a 7B68     		ldr	r3, [r7, #4]
+ 474 000c 2833     		adds	r3, r3, #40
+ 475 000e 1A46     		mov	r2, r3
+ 476              		.loc 1 205 26
+ 477 0010 3B68     		ldr	r3, [r7]
+ 478 0012 1360     		str	r3, [r2]
+ 206:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 479              		.loc 1 206 1
+ 480 0014 00BF     		nop
+ 481 0016 0C37     		adds	r7, r7, #12
+ 482              		.cfi_def_cfa_offset 4
+ 483 0018 BD46     		mov	sp, r7
+ 484              		.cfi_def_cfa_register 13
+ 485              		@ sp needed
+ 486 001a 80BC     		pop	{r7}
+ 487              		.cfi_restore 7
+ 488              		.cfi_def_cfa_offset 0
+ 489 001c 7047     		bx	lr
+ 490              		.cfi_endproc
+ 491              	.LFE121:
+ 493              		.section	.text.hal_gpio_struct_init,"ax",%progbits
+ 494              		.align	1
+ 495              		.global	hal_gpio_struct_init
+ 496              		.syntax unified
+ 497              		.thumb
+ 498              		.thumb_func
+ 499              		.fpu softvfp
+ 501              	hal_gpio_struct_init:
+ 502              	.LFB122:
+ 207:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 208:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 209:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      initialize the GPIO initialization structure with the default values
+ 210:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  p_init: GPIO intialization structure
+ 211:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 212:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     error code: HAL_ERR_ADDRESS, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 213:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 214:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** int32_t hal_gpio_struct_init(hal_gpio_init_struct *p_init)
+ 215:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 503              		.loc 1 215 1
+ 504              		.cfi_startproc
+ 505              		@ args = 0, pretend = 0, frame = 8
+ 506              		@ frame_needed = 1, uses_anonymous_args = 0
+ 507              		@ link register save eliminated.
+ 508 0000 80B4     		push	{r7}
+ 509              		.cfi_def_cfa_offset 4
+ 510              		.cfi_offset 7, -4
+ 511 0002 83B0     		sub	sp, sp, #12
+ 512              		.cfi_def_cfa_offset 16
+ 513 0004 00AF     		add	r7, sp, #0
+ 514              		.cfi_def_cfa_register 7
+ 515 0006 7860     		str	r0, [r7, #4]
+ 216:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 217:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if(NULL == p_init) {
+ 218:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         HAL_DEBUGE("pointer [p_init] address is invalid");
+ 219:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return HAL_ERR_ADDRESS;
+ 220:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 221:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 222:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 223:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* set the GPIO initialization structure with the default values */
+ 224:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     p_init->mode    = GPIO_MODE_INPUT;
+ 516              		.loc 1 224 21
+ 517 0008 7B68     		ldr	r3, [r7, #4]
+ 518 000a 0022     		movs	r2, #0
+ 519 000c 1A60     		str	r2, [r3]
+ 225:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     p_init->pull    = GPIO_PULL_NONE;
+ 520              		.loc 1 225 21
+ 521 000e 7B68     		ldr	r3, [r7, #4]
+ 522 0010 0022     		movs	r2, #0
+ 523 0012 5A60     		str	r2, [r3, #4]
+ 226:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     p_init->ospeed  = GPIO_OSPEED_2MHZ;
+ 524              		.loc 1 226 21
+ 525 0014 7B68     		ldr	r3, [r7, #4]
+ 526 0016 0022     		movs	r2, #0
+ 527 0018 9A60     		str	r2, [r3, #8]
+ 227:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     p_init->af      = GPIO_AF_0;
+ 528              		.loc 1 227 21
+ 529 001a 7B68     		ldr	r3, [r7, #4]
+ 530 001c 0022     		movs	r2, #0
+ 531 001e DA60     		str	r2, [r3, #12]
+ 228:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 229:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     return HAL_ERR_NONE;
+ 532              		.loc 1 229 12
+ 533 0020 0023     		movs	r3, #0
+ 230:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 534              		.loc 1 230 1
+ 535 0022 1846     		mov	r0, r3
+ 536 0024 0C37     		adds	r7, r7, #12
+ 537              		.cfi_def_cfa_offset 4
+ 538 0026 BD46     		mov	sp, r7
+ 539              		.cfi_def_cfa_register 13
+ 540              		@ sp needed
+ 541 0028 80BC     		pop	{r7}
+ 542              		.cfi_restore 7
+ 543              		.cfi_def_cfa_offset 0
+ 544 002a 7047     		bx	lr
+ 545              		.cfi_endproc
+ 546              	.LFE122:
+ 548              		.section	.text.hal_gpio_deinit,"ax",%progbits
+ 549              		.align	1
+ 550              		.global	hal_gpio_deinit
+ 551              		.syntax unified
+ 552              		.thumb
+ 553              		.thumb_func
+ 554              		.fpu softvfp
+ 556              	hal_gpio_deinit:
+ 557              	.LFB123:
+ 231:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 232:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 233:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      deinitialize GPIO
+ 234:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 235:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 236:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 237:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 238:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 239:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL(GPIO_PIN_ALL can be selected only when gpio_per
+ 240:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 241:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     error code: HAL_ERR_VAL, HAL_ERR_NONE, details refer to gd32f3x0_hal.h
+ 242:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 243:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** int32_t hal_gpio_deinit(uint32_t gpio_periph, uint32_t pin)
+ 244:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 558              		.loc 1 244 1
+ 559              		.cfi_startproc
+ 560              		@ args = 0, pretend = 0, frame = 16
+ 561              		@ frame_needed = 1, uses_anonymous_args = 0
+ 562 0000 80B5     		push	{r7, lr}
+ 563              		.cfi_def_cfa_offset 8
+ 564              		.cfi_offset 7, -8
+ 565              		.cfi_offset 14, -4
+ 566 0002 84B0     		sub	sp, sp, #16
+ 567              		.cfi_def_cfa_offset 24
+ 568 0004 00AF     		add	r7, sp, #0
+ 569              		.cfi_def_cfa_register 7
+ 570 0006 7860     		str	r0, [r7, #4]
+ 571 0008 3960     		str	r1, [r7]
+ 245:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     uint32_t i;
+ 246:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 247:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #if (1 == HAL_PARAMETER_CHECK)
+ 248:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* check gpio_periph value */
+ 249:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((GPIOA != gpio_periph) && (GPIOB != gpio_periph) && (GPIOC != gpio_periph) && \
+ 250:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             (GPIOD != gpio_periph) && (GPIOF != gpio_periph)) {
+ 251:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         HAL_DEBUGE("parameter [gpio_periph] value is invalid");
+ 252:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return HAL_ERR_VAL;
+ 253:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 254:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if(GPIO_PIN_ALL != pin) {
+ 255:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         /* check if pin is PA0 ~ PA15/PB0 ~ PB15/PC0 ~ PC15 or not*/
+ 256:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((GPIOA == gpio_periph) || (GPIOB == gpio_periph) || (GPIOC == gpio_periph)) {
+ 257:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((0U != (pin & _GPIO_PIN_VALUE_MASK))) {
+ 258:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 HAL_DEBUGE("parameter [pin] value is invalid");
+ 259:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 return HAL_ERR_VAL;
+ 260:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 261:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 262:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         /* check if pin is PD2 or not*/
+ 263:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((GPIOD == gpio_periph)) {
+ 264:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((0U != (pin & _GPIOD_PIN_VALUE_MASK))) {
+ 265:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 HAL_DEBUGE("parameter [pin] value is invalid");
+ 266:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 return HAL_ERR_VAL;
+ 267:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 268:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 269:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         /* check if pin is PF0 ~ PF1/PF4 ~ PF7 or not*/
+ 270:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         if((GPIOF == gpio_periph)) {
+ 271:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((0U != (pin & _GPIOF_PIN_VALUE_MASK))) {
+ 272:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 HAL_DEBUGE("parameter [pin] value is invalid");
+ 273:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 return HAL_ERR_VAL;
+ 274:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 275:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 276:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 277:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** #endif /* 1 == HAL_PARAMETER_CHECK */
+ 278:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if(GPIO_PIN_ALL == pin) {
+ 572              		.loc 1 278 7
+ 573 000a 3B68     		ldr	r3, [r7]
+ 574 000c 4FF6FF72 		movw	r2, #65535
+ 575 0010 9342     		cmp	r3, r2
+ 576 0012 50D1     		bne	.L17
+ 279:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         switch(gpio_periph) {
+ 577              		.loc 1 279 9
+ 578 0014 7B68     		ldr	r3, [r7, #4]
+ 579 0016 5B4A     		ldr	r2, .L32
+ 580 0018 9342     		cmp	r3, r2
+ 581 001a 43D0     		beq	.L18
+ 582 001c 7B68     		ldr	r3, [r7, #4]
+ 583 001e 594A     		ldr	r2, .L32
+ 584 0020 9342     		cmp	r3, r2
+ 585 0022 00F2A980 		bhi	.L31
+ 586 0026 7B68     		ldr	r3, [r7, #4]
+ 587 0028 574A     		ldr	r2, .L32+4
+ 588 002a 9342     		cmp	r3, r2
+ 589 002c 31D0     		beq	.L20
+ 590 002e 7B68     		ldr	r3, [r7, #4]
+ 591 0030 554A     		ldr	r2, .L32+4
+ 592 0032 9342     		cmp	r3, r2
+ 593 0034 00F2A080 		bhi	.L31
+ 594 0038 7B68     		ldr	r3, [r7, #4]
+ 595 003a 544A     		ldr	r2, .L32+8
+ 596 003c 9342     		cmp	r3, r2
+ 597 003e 1FD0     		beq	.L21
+ 598 0040 7B68     		ldr	r3, [r7, #4]
+ 599 0042 524A     		ldr	r2, .L32+8
+ 600 0044 9342     		cmp	r3, r2
+ 601 0046 00F29780 		bhi	.L31
+ 602 004a 7B68     		ldr	r3, [r7, #4]
+ 603 004c B3F1904F 		cmp	r3, #1207959552
+ 604 0050 04D0     		beq	.L22
+ 605 0052 7B68     		ldr	r3, [r7, #4]
+ 606 0054 4E4A     		ldr	r2, .L32+12
+ 607 0056 9342     		cmp	r3, r2
+ 608 0058 09D0     		beq	.L23
+ 280:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOA:
+ 281:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* reset GPIOA */
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_enable(RCU_GPIOARST);
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOARST);
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 285:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOB:
+ 286:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* reset GPIOB */
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_enable(RCU_GPIOBRST);
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOBRST);
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 290:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOC:
+ 291:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* reset GPIOC */
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_enable(RCU_GPIOCRST);
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOCRST);
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 295:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOD:
+ 296:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* reset GPIOD */
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_enable(RCU_GPIODRST);
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIODRST);
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 300:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOF:
+ 301:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             /* reset GPIOF */
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_enable(RCU_GPIOFRST);
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOFRST);
+ 304:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         default:
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 609              		.loc 1 305 13
+ 610 005a 8DE0     		b	.L31
+ 611              	.L22:
+ 282:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOARST);
+ 612              		.loc 1 282 13
+ 613 005c 40F61120 		movw	r0, #2577
+ 614 0060 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 283:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 615              		.loc 1 283 13
+ 616 0064 40F61120 		movw	r0, #2577
+ 617 0068 FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 284:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOB:
+ 618              		.loc 1 284 13
+ 619 006c 85E0     		b	.L25
+ 620              	.L23:
+ 287:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOBRST);
+ 621              		.loc 1 287 13
+ 622 006e 40F61220 		movw	r0, #2578
+ 623 0072 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 288:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 624              		.loc 1 288 13
+ 625 0076 40F61220 		movw	r0, #2578
+ 626 007a FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 289:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOC:
+ 627              		.loc 1 289 13
+ 628 007e 7CE0     		b	.L25
+ 629              	.L21:
+ 292:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOCRST);
+ 630              		.loc 1 292 13
+ 631 0080 40F61320 		movw	r0, #2579
+ 632 0084 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 293:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 633              		.loc 1 293 13
+ 634 0088 40F61320 		movw	r0, #2579
+ 635 008c FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 294:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOD:
+ 636              		.loc 1 294 13
+ 637 0090 73E0     		b	.L25
+ 638              	.L20:
+ 297:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIODRST);
+ 639              		.loc 1 297 13
+ 640 0092 40F61420 		movw	r0, #2580
+ 641 0096 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 298:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             break;
+ 642              		.loc 1 298 13
+ 643 009a 40F61420 		movw	r0, #2580
+ 644 009e FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 299:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         case GPIOF:
+ 645              		.loc 1 299 13
+ 646 00a2 6AE0     		b	.L25
+ 647              	.L18:
+ 302:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             hal_rcu_periph_reset_disable(RCU_GPIOFRST);
+ 648              		.loc 1 302 13
+ 649 00a4 40F61620 		movw	r0, #2582
+ 650 00a8 FFF7FEFF 		bl	hal_rcu_periph_reset_enable
+ 303:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         default:
+ 651              		.loc 1 303 13
+ 652 00ac 40F61620 		movw	r0, #2582
+ 653 00b0 FFF7FEFF 		bl	hal_rcu_periph_reset_disable
+ 654              		.loc 1 305 13
+ 655 00b4 60E0     		b	.L31
+ 656              	.L17:
+ 306:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 307:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     } else {
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         for(i = 0U; i < 16U; i++) {
+ 657              		.loc 1 308 15
+ 658 00b6 0023     		movs	r3, #0
+ 659 00b8 FB60     		str	r3, [r7, #12]
+ 660              		.loc 1 308 9
+ 661 00ba 59E0     		b	.L26
+ 662              	.L29:
+ 309:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((1U << i) & pin) {
+ 663              		.loc 1 309 20
+ 664 00bc 0122     		movs	r2, #1
+ 665 00be FB68     		ldr	r3, [r7, #12]
+ 666 00c0 9A40     		lsls	r2, r2, r3
+ 667              		.loc 1 309 26
+ 668 00c2 3B68     		ldr	r3, [r7]
+ 669 00c4 1340     		ands	r3, r3, r2
+ 670              		.loc 1 309 15
+ 671 00c6 002B     		cmp	r3, #0
+ 672 00c8 4FD0     		beq	.L27
+ 310:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* clear the specified pin mode bits */
+ 311:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_CTL(gpio_periph) &= ~GPIO_MODE_MASK(i);
+ 673              		.loc 1 311 39
+ 674 00ca 7B68     		ldr	r3, [r7, #4]
+ 675 00cc 1968     		ldr	r1, [r3]
+ 676              		.loc 1 311 43
+ 677 00ce FB68     		ldr	r3, [r7, #12]
+ 678 00d0 5B00     		lsls	r3, r3, #1
+ 679 00d2 0322     		movs	r2, #3
+ 680 00d4 02FA03F3 		lsl	r3, r2, r3
+ 681              		.loc 1 311 42
+ 682 00d8 DA43     		mvns	r2, r3
+ 683              		.loc 1 311 39
+ 684 00da 7B68     		ldr	r3, [r7, #4]
+ 685 00dc 0A40     		ands	r2, r2, r1
+ 686 00de 1A60     		str	r2, [r3]
+ 312:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* clear the specified pin pupd bits */
+ 313:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_PUD(gpio_periph) &= ~GPIO_PUPD_MASK(i);
+ 687              		.loc 1 313 39
+ 688 00e0 7B68     		ldr	r3, [r7, #4]
+ 689 00e2 0C33     		adds	r3, r3, #12
+ 690 00e4 1A68     		ldr	r2, [r3]
+ 691              		.loc 1 313 43
+ 692 00e6 FB68     		ldr	r3, [r7, #12]
+ 693 00e8 5B00     		lsls	r3, r3, #1
+ 694 00ea 0321     		movs	r1, #3
+ 695 00ec 01FA03F3 		lsl	r3, r1, r3
+ 696              		.loc 1 313 42
+ 697 00f0 DB43     		mvns	r3, r3
+ 698              		.loc 1 313 39
+ 699 00f2 7968     		ldr	r1, [r7, #4]
+ 700 00f4 0C31     		adds	r1, r1, #12
+ 701 00f6 1340     		ands	r3, r3, r2
+ 702 00f8 0B60     		str	r3, [r1]
+ 314:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 /* clear the specified pin output speed bits */
+ 315:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD0(gpio_periph) &= ~GPIO_OSPEED0_MASK(i);
+ 703              		.loc 1 315 41
+ 704 00fa 7B68     		ldr	r3, [r7, #4]
+ 705 00fc 0833     		adds	r3, r3, #8
+ 706 00fe 1A68     		ldr	r2, [r3]
+ 707              		.loc 1 315 45
+ 708 0100 FB68     		ldr	r3, [r7, #12]
+ 709 0102 5B00     		lsls	r3, r3, #1
+ 710 0104 0321     		movs	r1, #3
+ 711 0106 01FA03F3 		lsl	r3, r1, r3
+ 712              		.loc 1 315 44
+ 713 010a DB43     		mvns	r3, r3
+ 714              		.loc 1 315 41
+ 715 010c 7968     		ldr	r1, [r7, #4]
+ 716 010e 0831     		adds	r1, r1, #8
+ 717 0110 1340     		ands	r3, r3, r2
+ 718 0112 0B60     		str	r3, [r1]
+ 316:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 GPIO_OSPD1(gpio_periph) &= ~GPIO_OSPEED1_MASK(i);
+ 719              		.loc 1 316 41
+ 720 0114 7B68     		ldr	r3, [r7, #4]
+ 721 0116 3C33     		adds	r3, r3, #60
+ 722 0118 1A68     		ldr	r2, [r3]
+ 723              		.loc 1 316 45
+ 724 011a 0121     		movs	r1, #1
+ 725 011c FB68     		ldr	r3, [r7, #12]
+ 726 011e 01FA03F3 		lsl	r3, r1, r3
+ 727              		.loc 1 316 44
+ 728 0122 DB43     		mvns	r3, r3
+ 729              		.loc 1 316 41
+ 730 0124 7968     		ldr	r1, [r7, #4]
+ 731 0126 3C31     		adds	r1, r1, #60
+ 732 0128 1340     		ands	r3, r3, r2
+ 733 012a 0B60     		str	r3, [r1]
+ 317:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 318:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 if(i < 8) {
+ 734              		.loc 1 318 19
+ 735 012c FB68     		ldr	r3, [r7, #12]
+ 736 012e 072B     		cmp	r3, #7
+ 737 0130 0DD8     		bhi	.L28
+ 319:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     /* clear the specified pin alternate function bits */
+ 320:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     GPIO_AFSEL0(gpio_periph) &= ~GPIO_AFR_MASK(i);
+ 738              		.loc 1 320 46
+ 739 0132 7B68     		ldr	r3, [r7, #4]
+ 740 0134 2033     		adds	r3, r3, #32
+ 741 0136 1A68     		ldr	r2, [r3]
+ 742              		.loc 1 320 50
+ 743 0138 FB68     		ldr	r3, [r7, #12]
+ 744 013a 9B00     		lsls	r3, r3, #2
+ 745 013c 0F21     		movs	r1, #15
+ 746 013e 01FA03F3 		lsl	r3, r1, r3
+ 747              		.loc 1 320 49
+ 748 0142 DB43     		mvns	r3, r3
+ 749              		.loc 1 320 46
+ 750 0144 7968     		ldr	r1, [r7, #4]
+ 751 0146 2031     		adds	r1, r1, #32
+ 752 0148 1340     		ands	r3, r3, r2
+ 753 014a 0B60     		str	r3, [r1]
+ 754 014c 0DE0     		b	.L27
+ 755              	.L28:
+ 321:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 } else {
+ 322:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     /* clear the specified pin alternate function bits */
+ 323:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                     GPIO_AFSEL1(gpio_periph) &= ~GPIO_AFR_MASK(i - 8U);
+ 756              		.loc 1 323 46
+ 757 014e 7B68     		ldr	r3, [r7, #4]
+ 758 0150 2433     		adds	r3, r3, #36
+ 759 0152 1A68     		ldr	r2, [r3]
+ 760              		.loc 1 323 50
+ 761 0154 FB68     		ldr	r3, [r7, #12]
+ 762 0156 083B     		subs	r3, r3, #8
+ 763 0158 9B00     		lsls	r3, r3, #2
+ 764 015a 0F21     		movs	r1, #15
+ 765 015c 01FA03F3 		lsl	r3, r1, r3
+ 766              		.loc 1 323 49
+ 767 0160 DB43     		mvns	r3, r3
+ 768              		.loc 1 323 46
+ 769 0162 7968     		ldr	r1, [r7, #4]
+ 770 0164 2431     		adds	r1, r1, #36
+ 771 0166 1340     		ands	r3, r3, r2
+ 772 0168 0B60     		str	r3, [r1]
+ 773              	.L27:
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((1U << i) & pin) {
+ 774              		.loc 1 308 31 discriminator 2
+ 775 016a FB68     		ldr	r3, [r7, #12]
+ 776 016c 0133     		adds	r3, r3, #1
+ 777 016e FB60     		str	r3, [r7, #12]
+ 778              	.L26:
+ 308:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             if((1U << i) & pin) {
+ 779              		.loc 1 308 9 discriminator 1
+ 780 0170 FB68     		ldr	r3, [r7, #12]
+ 781 0172 0F2B     		cmp	r3, #15
+ 782 0174 A2D9     		bls	.L29
+ 783 0176 00E0     		b	.L25
+ 784              	.L31:
+ 305:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 785              		.loc 1 305 13
+ 786 0178 00BF     		nop
+ 787              	.L25:
+ 324:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 }
+ 325:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****             }
+ 326:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         }
+ 327:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 328:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     return HAL_ERR_NONE;
+ 788              		.loc 1 328 12
+ 789 017a 0023     		movs	r3, #0
+ 329:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 790              		.loc 1 329 1
+ 791 017c 1846     		mov	r0, r3
+ 792 017e 1037     		adds	r7, r7, #16
+ 793              		.cfi_def_cfa_offset 8
+ 794 0180 BD46     		mov	sp, r7
+ 795              		.cfi_def_cfa_register 13
+ 796              		@ sp needed
+ 797 0182 80BD     		pop	{r7, pc}
+ 798              	.L33:
+ 799              		.align	2
+ 800              	.L32:
+ 801 0184 00140048 		.word	1207964672
+ 802 0188 000C0048 		.word	1207962624
+ 803 018c 00080048 		.word	1207961600
+ 804 0190 00040048 		.word	1207960576
+ 805              		.cfi_endproc
+ 806              	.LFE123:
+ 808              		.section	.text.hals_gpio_bit_write,"ax",%progbits
+ 809              		.align	1
+ 810              		.global	hals_gpio_bit_write
+ 811              		.syntax unified
+ 812              		.thumb
+ 813              		.thumb_func
+ 814              		.fpu softvfp
+ 816              	hals_gpio_bit_write:
+ 817              	.LFB124:
+ 330:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 331:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 332:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      write data to the specified GPIO pin
+ 333:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 334:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 335:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 336:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 337:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  bit_value: SET or RESET
+ 338:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        RESET: clear the port pin
+ 339:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        SET: set the port pin
+ 340:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 341:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 342:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 343:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hals_gpio_bit_write(uint32_t gpio_periph, uint32_t pin, bit_status bit_value)
+ 344:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 818              		.loc 1 344 1
+ 819              		.cfi_startproc
+ 820              		@ args = 0, pretend = 0, frame = 16
+ 821              		@ frame_needed = 1, uses_anonymous_args = 0
+ 822              		@ link register save eliminated.
+ 823 0000 80B4     		push	{r7}
+ 824              		.cfi_def_cfa_offset 4
+ 825              		.cfi_offset 7, -4
+ 826 0002 85B0     		sub	sp, sp, #20
+ 827              		.cfi_def_cfa_offset 24
+ 828 0004 00AF     		add	r7, sp, #0
+ 829              		.cfi_def_cfa_register 7
+ 830 0006 F860     		str	r0, [r7, #12]
+ 831 0008 B960     		str	r1, [r7, #8]
+ 832 000a 1346     		mov	r3, r2
+ 833 000c FB71     		strb	r3, [r7, #7]
+ 345:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if(RESET != bit_value) {
+ 834              		.loc 1 345 7
+ 835 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 836 0010 002B     		cmp	r3, #0
+ 837 0012 05D0     		beq	.L35
+ 346:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         GPIO_BOP(gpio_periph) = (uint32_t)pin;
+ 838              		.loc 1 346 9
+ 839 0014 FB68     		ldr	r3, [r7, #12]
+ 840 0016 1833     		adds	r3, r3, #24
+ 841 0018 1A46     		mov	r2, r3
+ 842              		.loc 1 346 31
+ 843 001a BB68     		ldr	r3, [r7, #8]
+ 844 001c 1360     		str	r3, [r2]
+ 347:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     } else {
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         GPIO_BC(gpio_periph) = (uint32_t)pin;
+ 349:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 350:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 845              		.loc 1 350 1
+ 846 001e 04E0     		b	.L37
+ 847              	.L35:
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 848              		.loc 1 348 9
+ 849 0020 FB68     		ldr	r3, [r7, #12]
+ 850 0022 2833     		adds	r3, r3, #40
+ 851 0024 1A46     		mov	r2, r3
+ 348:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 852              		.loc 1 348 30
+ 853 0026 BB68     		ldr	r3, [r7, #8]
+ 854 0028 1360     		str	r3, [r2]
+ 855              	.L37:
+ 856              		.loc 1 350 1
+ 857 002a 00BF     		nop
+ 858 002c 1437     		adds	r7, r7, #20
+ 859              		.cfi_def_cfa_offset 4
+ 860 002e BD46     		mov	sp, r7
+ 861              		.cfi_def_cfa_register 13
+ 862              		@ sp needed
+ 863 0030 80BC     		pop	{r7}
+ 864              		.cfi_restore 7
+ 865              		.cfi_def_cfa_offset 0
+ 866 0032 7047     		bx	lr
+ 867              		.cfi_endproc
+ 868              	.LFE124:
+ 870              		.section	.text.hals_gpio_port_write,"ax",%progbits
+ 871              		.align	1
+ 872              		.global	hals_gpio_port_write
+ 873              		.syntax unified
+ 874              		.thumb
+ 875              		.thumb_func
+ 876              		.fpu softvfp
+ 878              	hals_gpio_port_write:
+ 879              	.LFB125:
+ 351:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 352:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 353:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      write data to the specified GPIO port
+ 354:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 355:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 356:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 357:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  data: specify the value to be written to the port output control register
+ 358:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 359:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 360:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 361:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hals_gpio_port_write(uint32_t gpio_periph, uint16_t data)
+ 362:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 880              		.loc 1 362 1
+ 881              		.cfi_startproc
+ 882              		@ args = 0, pretend = 0, frame = 8
+ 883              		@ frame_needed = 1, uses_anonymous_args = 0
+ 884              		@ link register save eliminated.
+ 885 0000 80B4     		push	{r7}
+ 886              		.cfi_def_cfa_offset 4
+ 887              		.cfi_offset 7, -4
+ 888 0002 83B0     		sub	sp, sp, #12
+ 889              		.cfi_def_cfa_offset 16
+ 890 0004 00AF     		add	r7, sp, #0
+ 891              		.cfi_def_cfa_register 7
+ 892 0006 7860     		str	r0, [r7, #4]
+ 893 0008 0B46     		mov	r3, r1
+ 894 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 363:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_OCTL(gpio_periph) = (uint32_t)data;
+ 895              		.loc 1 363 5
+ 896 000c 7B68     		ldr	r3, [r7, #4]
+ 897 000e 1433     		adds	r3, r3, #20
+ 898 0010 1A46     		mov	r2, r3
+ 899              		.loc 1 363 30
+ 900 0012 7B88     		ldrh	r3, [r7, #2]
+ 901              		.loc 1 363 28
+ 902 0014 1360     		str	r3, [r2]
+ 364:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 903              		.loc 1 364 1
+ 904 0016 00BF     		nop
+ 905 0018 0C37     		adds	r7, r7, #12
+ 906              		.cfi_def_cfa_offset 4
+ 907 001a BD46     		mov	sp, r7
+ 908              		.cfi_def_cfa_register 13
+ 909              		@ sp needed
+ 910 001c 80BC     		pop	{r7}
+ 911              		.cfi_restore 7
+ 912              		.cfi_def_cfa_offset 0
+ 913 001e 7047     		bx	lr
+ 914              		.cfi_endproc
+ 915              	.LFE125:
+ 917              		.section	.text.hals_gpio_input_bit_get,"ax",%progbits
+ 918              		.align	1
+ 919              		.global	hals_gpio_input_bit_get
+ 920              		.syntax unified
+ 921              		.thumb
+ 922              		.thumb_func
+ 923              		.fpu softvfp
+ 925              	hals_gpio_input_bit_get:
+ 926              	.LFB126:
+ 365:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 366:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 367:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      get GPIO pin input status
+ 368:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 369:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 370:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 371:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 372:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 373:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 374:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 375:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     SET or RESET
+ 376:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 377:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** FlagStatus hals_gpio_input_bit_get(uint32_t gpio_periph, uint32_t pin)
+ 378:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 927              		.loc 1 378 1
+ 928              		.cfi_startproc
+ 929              		@ args = 0, pretend = 0, frame = 8
+ 930              		@ frame_needed = 1, uses_anonymous_args = 0
+ 931              		@ link register save eliminated.
+ 932 0000 80B4     		push	{r7}
+ 933              		.cfi_def_cfa_offset 4
+ 934              		.cfi_offset 7, -4
+ 935 0002 83B0     		sub	sp, sp, #12
+ 936              		.cfi_def_cfa_offset 16
+ 937 0004 00AF     		add	r7, sp, #0
+ 938              		.cfi_def_cfa_register 7
+ 939 0006 7860     		str	r0, [r7, #4]
+ 940 0008 3960     		str	r1, [r7]
+ 379:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((uint32_t)RESET != (GPIO_ISTAT(gpio_periph) & (pin))) {
+ 941              		.loc 1 379 28
+ 942 000a 7B68     		ldr	r3, [r7, #4]
+ 943 000c 1033     		adds	r3, r3, #16
+ 944 000e 1A68     		ldr	r2, [r3]
+ 945              		.loc 1 379 52
+ 946 0010 3B68     		ldr	r3, [r7]
+ 947 0012 1340     		ands	r3, r3, r2
+ 948              		.loc 1 379 7
+ 949 0014 002B     		cmp	r3, #0
+ 950 0016 01D0     		beq	.L40
+ 380:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return SET;
+ 951              		.loc 1 380 16
+ 952 0018 0123     		movs	r3, #1
+ 953 001a 00E0     		b	.L41
+ 954              	.L40:
+ 381:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     } else {
+ 382:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return RESET;
+ 955              		.loc 1 382 16
+ 956 001c 0023     		movs	r3, #0
+ 957              	.L41:
+ 383:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 384:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 958              		.loc 1 384 1
+ 959 001e 1846     		mov	r0, r3
+ 960 0020 0C37     		adds	r7, r7, #12
+ 961              		.cfi_def_cfa_offset 4
+ 962 0022 BD46     		mov	sp, r7
+ 963              		.cfi_def_cfa_register 13
+ 964              		@ sp needed
+ 965 0024 80BC     		pop	{r7}
+ 966              		.cfi_restore 7
+ 967              		.cfi_def_cfa_offset 0
+ 968 0026 7047     		bx	lr
+ 969              		.cfi_endproc
+ 970              	.LFE126:
+ 972              		.section	.text.hals_gpio_input_port_get,"ax",%progbits
+ 973              		.align	1
+ 974              		.global	hals_gpio_input_port_get
+ 975              		.syntax unified
+ 976              		.thumb
+ 977              		.thumb_func
+ 978              		.fpu softvfp
+ 980              	hals_gpio_input_port_get:
+ 981              	.LFB127:
+ 385:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 386:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 387:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      get GPIO port input status
+ 388:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 389:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 390:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 391:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 392:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     state of GPIO all pins
+ 393:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 394:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** uint16_t hals_gpio_input_port_get(uint32_t gpio_periph)
+ 395:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 982              		.loc 1 395 1
+ 983              		.cfi_startproc
+ 984              		@ args = 0, pretend = 0, frame = 8
+ 985              		@ frame_needed = 1, uses_anonymous_args = 0
+ 986              		@ link register save eliminated.
+ 987 0000 80B4     		push	{r7}
+ 988              		.cfi_def_cfa_offset 4
+ 989              		.cfi_offset 7, -4
+ 990 0002 83B0     		sub	sp, sp, #12
+ 991              		.cfi_def_cfa_offset 16
+ 992 0004 00AF     		add	r7, sp, #0
+ 993              		.cfi_def_cfa_register 7
+ 994 0006 7860     		str	r0, [r7, #4]
+ 396:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     return (uint16_t)GPIO_ISTAT(gpio_periph);
+ 995              		.loc 1 396 22
+ 996 0008 7B68     		ldr	r3, [r7, #4]
+ 997 000a 1033     		adds	r3, r3, #16
+ 998 000c 1B68     		ldr	r3, [r3]
+ 999              		.loc 1 396 12
+ 1000 000e 9BB2     		uxth	r3, r3
+ 397:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1001              		.loc 1 397 1
+ 1002 0010 1846     		mov	r0, r3
+ 1003 0012 0C37     		adds	r7, r7, #12
+ 1004              		.cfi_def_cfa_offset 4
+ 1005 0014 BD46     		mov	sp, r7
+ 1006              		.cfi_def_cfa_register 13
+ 1007              		@ sp needed
+ 1008 0016 80BC     		pop	{r7}
+ 1009              		.cfi_restore 7
+ 1010              		.cfi_def_cfa_offset 0
+ 1011 0018 7047     		bx	lr
+ 1012              		.cfi_endproc
+ 1013              	.LFE127:
+ 1015              		.section	.text.hals_gpio_output_bit_get,"ax",%progbits
+ 1016              		.align	1
+ 1017              		.global	hals_gpio_output_bit_get
+ 1018              		.syntax unified
+ 1019              		.thumb
+ 1020              		.thumb_func
+ 1021              		.fpu softvfp
+ 1023              	hals_gpio_output_bit_get:
+ 1024              	.LFB128:
+ 398:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 399:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 400:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      get GPIO pin output status
+ 401:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 402:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 403:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 404:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 405:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 406:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 407:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 408:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     SET or RESET
+ 409:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 410:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** FlagStatus hals_gpio_output_bit_get(uint32_t gpio_periph, uint32_t pin)
+ 411:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 1025              		.loc 1 411 1
+ 1026              		.cfi_startproc
+ 1027              		@ args = 0, pretend = 0, frame = 8
+ 1028              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1029              		@ link register save eliminated.
+ 1030 0000 80B4     		push	{r7}
+ 1031              		.cfi_def_cfa_offset 4
+ 1032              		.cfi_offset 7, -4
+ 1033 0002 83B0     		sub	sp, sp, #12
+ 1034              		.cfi_def_cfa_offset 16
+ 1035 0004 00AF     		add	r7, sp, #0
+ 1036              		.cfi_def_cfa_register 7
+ 1037 0006 7860     		str	r0, [r7, #4]
+ 1038 0008 3960     		str	r1, [r7]
+ 412:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     if((uint32_t)RESET != (GPIO_OCTL(gpio_periph) & (pin))) {
+ 1039              		.loc 1 412 28
+ 1040 000a 7B68     		ldr	r3, [r7, #4]
+ 1041 000c 1433     		adds	r3, r3, #20
+ 1042 000e 1A68     		ldr	r2, [r3]
+ 1043              		.loc 1 412 51
+ 1044 0010 3B68     		ldr	r3, [r7]
+ 1045 0012 1340     		ands	r3, r3, r2
+ 1046              		.loc 1 412 7
+ 1047 0014 002B     		cmp	r3, #0
+ 1048 0016 01D0     		beq	.L45
+ 413:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return SET;
+ 1049              		.loc 1 413 16
+ 1050 0018 0123     		movs	r3, #1
+ 1051 001a 00E0     		b	.L46
+ 1052              	.L45:
+ 414:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     } else {
+ 415:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****         return RESET;
+ 1053              		.loc 1 415 16
+ 1054 001c 0023     		movs	r3, #0
+ 1055              	.L46:
+ 416:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     }
+ 417:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1056              		.loc 1 417 1
+ 1057 001e 1846     		mov	r0, r3
+ 1058 0020 0C37     		adds	r7, r7, #12
+ 1059              		.cfi_def_cfa_offset 4
+ 1060 0022 BD46     		mov	sp, r7
+ 1061              		.cfi_def_cfa_register 13
+ 1062              		@ sp needed
+ 1063 0024 80BC     		pop	{r7}
+ 1064              		.cfi_restore 7
+ 1065              		.cfi_def_cfa_offset 0
+ 1066 0026 7047     		bx	lr
+ 1067              		.cfi_endproc
+ 1068              	.LFE128:
+ 1070              		.section	.text.hals_gpio_output_port_get,"ax",%progbits
+ 1071              		.align	1
+ 1072              		.global	hals_gpio_output_port_get
+ 1073              		.syntax unified
+ 1074              		.thumb
+ 1075              		.thumb_func
+ 1076              		.fpu softvfp
+ 1078              	hals_gpio_output_port_get:
+ 1079              	.LFB129:
+ 418:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 419:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 420:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      get GPIO port output status
+ 421:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)
+ 422:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 423:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 424:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 425:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     state of GPIO all pins
+ 426:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 427:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** uint16_t hals_gpio_output_port_get(uint32_t gpio_periph)
+ 428:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 1080              		.loc 1 428 1
+ 1081              		.cfi_startproc
+ 1082              		@ args = 0, pretend = 0, frame = 8
+ 1083              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1084              		@ link register save eliminated.
+ 1085 0000 80B4     		push	{r7}
+ 1086              		.cfi_def_cfa_offset 4
+ 1087              		.cfi_offset 7, -4
+ 1088 0002 83B0     		sub	sp, sp, #12
+ 1089              		.cfi_def_cfa_offset 16
+ 1090 0004 00AF     		add	r7, sp, #0
+ 1091              		.cfi_def_cfa_register 7
+ 1092 0006 7860     		str	r0, [r7, #4]
+ 429:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     return (uint16_t)GPIO_OCTL(gpio_periph);
+ 1093              		.loc 1 429 22
+ 1094 0008 7B68     		ldr	r3, [r7, #4]
+ 1095 000a 1433     		adds	r3, r3, #20
+ 1096 000c 1B68     		ldr	r3, [r3]
+ 1097              		.loc 1 429 12
+ 1098 000e 9BB2     		uxth	r3, r3
+ 430:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1099              		.loc 1 430 1
+ 1100 0010 1846     		mov	r0, r3
+ 1101 0012 0C37     		adds	r7, r7, #12
+ 1102              		.cfi_def_cfa_offset 4
+ 1103 0014 BD46     		mov	sp, r7
+ 1104              		.cfi_def_cfa_register 13
+ 1105              		@ sp needed
+ 1106 0016 80BC     		pop	{r7}
+ 1107              		.cfi_restore 7
+ 1108              		.cfi_def_cfa_offset 0
+ 1109 0018 7047     		bx	lr
+ 1110              		.cfi_endproc
+ 1111              	.LFE129:
+ 1113              		.section	.text.hals_gpio_pin_lock,"ax",%progbits
+ 1114              		.align	1
+ 1115              		.global	hals_gpio_pin_lock
+ 1116              		.syntax unified
+ 1117              		.thumb
+ 1118              		.thumb_func
+ 1119              		.fpu softvfp
+ 1121              	hals_gpio_pin_lock:
+ 1122              	.LFB130:
+ 431:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 432:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 433:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      lock GPIO pin bit
+ 434:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B)
+ 435:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 436:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B)
+ 437:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 438:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 439:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 440:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 441:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 442:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 443:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hals_gpio_pin_lock(uint32_t gpio_periph, uint32_t pin)
+ 444:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 1123              		.loc 1 444 1
+ 1124              		.cfi_startproc
+ 1125              		@ args = 0, pretend = 0, frame = 16
+ 1126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1127              		@ link register save eliminated.
+ 1128 0000 80B4     		push	{r7}
+ 1129              		.cfi_def_cfa_offset 4
+ 1130              		.cfi_offset 7, -4
+ 1131 0002 85B0     		sub	sp, sp, #20
+ 1132              		.cfi_def_cfa_offset 24
+ 1133 0004 00AF     		add	r7, sp, #0
+ 1134              		.cfi_def_cfa_register 7
+ 1135 0006 7860     		str	r0, [r7, #4]
+ 1136 0008 3960     		str	r1, [r7]
+ 445:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     uint32_t lock = 0x00010000U;
+ 1137              		.loc 1 445 14
+ 1138 000a 4FF48033 		mov	r3, #65536
+ 1139 000e FB60     		str	r3, [r7, #12]
+ 446:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     lock |= pin;
+ 1140              		.loc 1 446 10
+ 1141 0010 FA68     		ldr	r2, [r7, #12]
+ 1142 0012 3B68     		ldr	r3, [r7]
+ 1143 0014 1343     		orrs	r3, r3, r2
+ 1144 0016 FB60     		str	r3, [r7, #12]
+ 447:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 448:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     /* lock key writing sequence: write 1->write 0->write 1->read 0->read 1 */
+ 449:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)lock;
+ 1145              		.loc 1 449 5
+ 1146 0018 7B68     		ldr	r3, [r7, #4]
+ 1147 001a 1C33     		adds	r3, r3, #28
+ 1148 001c 1A46     		mov	r2, r3
+ 1149              		.loc 1 449 28
+ 1150 001e FB68     		ldr	r3, [r7, #12]
+ 1151 0020 1360     		str	r3, [r2]
+ 450:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)pin;
+ 1152              		.loc 1 450 5
+ 1153 0022 7B68     		ldr	r3, [r7, #4]
+ 1154 0024 1C33     		adds	r3, r3, #28
+ 1155 0026 1A46     		mov	r2, r3
+ 1156              		.loc 1 450 28
+ 1157 0028 3B68     		ldr	r3, [r7]
+ 1158 002a 1360     		str	r3, [r2]
+ 451:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)lock;
+ 1159              		.loc 1 451 5
+ 1160 002c 7B68     		ldr	r3, [r7, #4]
+ 1161 002e 1C33     		adds	r3, r3, #28
+ 1162 0030 1A46     		mov	r2, r3
+ 1163              		.loc 1 451 28
+ 1164 0032 FB68     		ldr	r3, [r7, #12]
+ 1165 0034 1360     		str	r3, [r2]
+ 452:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     lock = GPIO_LOCK(gpio_periph);
+ 1166              		.loc 1 452 12
+ 1167 0036 7B68     		ldr	r3, [r7, #4]
+ 1168 0038 1C33     		adds	r3, r3, #28
+ 1169              		.loc 1 452 10
+ 1170 003a 1B68     		ldr	r3, [r3]
+ 1171 003c FB60     		str	r3, [r7, #12]
+ 453:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     lock = GPIO_LOCK(gpio_periph);
+ 1172              		.loc 1 453 12
+ 1173 003e 7B68     		ldr	r3, [r7, #4]
+ 1174 0040 1C33     		adds	r3, r3, #28
+ 1175              		.loc 1 453 10
+ 1176 0042 1B68     		ldr	r3, [r3]
+ 1177 0044 FB60     		str	r3, [r7, #12]
+ 454:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1178              		.loc 1 454 1
+ 1179 0046 00BF     		nop
+ 1180 0048 1437     		adds	r7, r7, #20
+ 1181              		.cfi_def_cfa_offset 4
+ 1182 004a BD46     		mov	sp, r7
+ 1183              		.cfi_def_cfa_register 13
+ 1184              		@ sp needed
+ 1185 004c 80BC     		pop	{r7}
+ 1186              		.cfi_restore 7
+ 1187              		.cfi_def_cfa_offset 0
+ 1188 004e 7047     		bx	lr
+ 1189              		.cfi_endproc
+ 1190              	.LFE130:
+ 1192              		.section	.text.hals_gpio_bit_toggle,"ax",%progbits
+ 1193              		.align	1
+ 1194              		.global	hals_gpio_bit_toggle
+ 1195              		.syntax unified
+ 1196              		.thumb
+ 1197              		.thumb_func
+ 1198              		.fpu softvfp
+ 1200              	hals_gpio_bit_toggle:
+ 1201              	.LFB131:
+ 455:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 456:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 457:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      toggle GPIO pin status
+ 458:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,F)
+ 459:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 460:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,F)
+ 461:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  pin: GPIO pin
+ 462:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 463:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 464:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 465:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 466:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 467:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hals_gpio_bit_toggle(uint32_t gpio_periph, uint32_t pin)
+ 468:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 1202              		.loc 1 468 1
+ 1203              		.cfi_startproc
+ 1204              		@ args = 0, pretend = 0, frame = 8
+ 1205              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1206              		@ link register save eliminated.
+ 1207 0000 80B4     		push	{r7}
+ 1208              		.cfi_def_cfa_offset 4
+ 1209              		.cfi_offset 7, -4
+ 1210 0002 83B0     		sub	sp, sp, #12
+ 1211              		.cfi_def_cfa_offset 16
+ 1212 0004 00AF     		add	r7, sp, #0
+ 1213              		.cfi_def_cfa_register 7
+ 1214 0006 7860     		str	r0, [r7, #4]
+ 1215 0008 3960     		str	r1, [r7]
+ 469:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_TG(gpio_periph) = (uint32_t)pin;
+ 1216              		.loc 1 469 5
+ 1217 000a 7B68     		ldr	r3, [r7, #4]
+ 1218 000c 2C33     		adds	r3, r3, #44
+ 1219 000e 1A46     		mov	r2, r3
+ 1220              		.loc 1 469 26
+ 1221 0010 3B68     		ldr	r3, [r7]
+ 1222 0012 1360     		str	r3, [r2]
+ 470:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1223              		.loc 1 470 1
+ 1224 0014 00BF     		nop
+ 1225 0016 0C37     		adds	r7, r7, #12
+ 1226              		.cfi_def_cfa_offset 4
+ 1227 0018 BD46     		mov	sp, r7
+ 1228              		.cfi_def_cfa_register 13
+ 1229              		@ sp needed
+ 1230 001a 80BC     		pop	{r7}
+ 1231              		.cfi_restore 7
+ 1232              		.cfi_def_cfa_offset 0
+ 1233 001c 7047     		bx	lr
+ 1234              		.cfi_endproc
+ 1235              	.LFE131:
+ 1237              		.section	.text.hals_gpio_port_toggle,"ax",%progbits
+ 1238              		.align	1
+ 1239              		.global	hals_gpio_port_toggle
+ 1240              		.syntax unified
+ 1241              		.thumb
+ 1242              		.thumb_func
+ 1243              		.fpu softvfp
+ 1245              	hals_gpio_port_toggle:
+ 1246              	.LFB132:
+ 471:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** 
+ 472:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** /*!
+ 473:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \brief      toggle GPIO port status
+ 474:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,F)
+ 475:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 476:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****       \arg        GPIOx(x = A,B,C,D,F)
+ 477:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \param[out] none
+ 478:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     \retval     none
+ 479:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** */
+ 480:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** void hals_gpio_port_toggle(uint32_t gpio_periph)
+ 481:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** {
+ 1247              		.loc 1 481 1
+ 1248              		.cfi_startproc
+ 1249              		@ args = 0, pretend = 0, frame = 8
+ 1250              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1251              		@ link register save eliminated.
+ 1252 0000 80B4     		push	{r7}
+ 1253              		.cfi_def_cfa_offset 4
+ 1254              		.cfi_offset 7, -4
+ 1255 0002 83B0     		sub	sp, sp, #12
+ 1256              		.cfi_def_cfa_offset 16
+ 1257 0004 00AF     		add	r7, sp, #0
+ 1258              		.cfi_def_cfa_register 7
+ 1259 0006 7860     		str	r0, [r7, #4]
+ 482:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c ****     GPIO_TG(gpio_periph) = 0x0000FFFFU;
+ 1260              		.loc 1 482 5
+ 1261 0008 7B68     		ldr	r3, [r7, #4]
+ 1262 000a 2C33     		adds	r3, r3, #44
+ 1263 000c 1A46     		mov	r2, r3
+ 1264              		.loc 1 482 26
+ 1265 000e 4FF6FF73 		movw	r3, #65535
+ 1266 0012 1360     		str	r3, [r2]
+ 483:../firmware/gd32f3x0_hal_peripheral/Source/gd32f3x0_hal_gpio.c **** }
+ 1267              		.loc 1 483 1
+ 1268 0014 00BF     		nop
+ 1269 0016 0C37     		adds	r7, r7, #12
+ 1270              		.cfi_def_cfa_offset 4
+ 1271 0018 BD46     		mov	sp, r7
+ 1272              		.cfi_def_cfa_register 13
+ 1273              		@ sp needed
+ 1274 001a 80BC     		pop	{r7}
+ 1275              		.cfi_restore 7
+ 1276              		.cfi_def_cfa_offset 0
+ 1277 001c 7047     		bx	lr
+ 1278              		.cfi_endproc
+ 1279              	.LFE132:
+ 1281              		.text
+ 1282              	.Letext0:
+ 1283              		.file 2 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1284              		.file 3 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1285              		.file 4 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1286              		.file 5 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1287              		.file 6 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1288              		.file 7 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-arm
+ 1289              		.file 8 "../firmware/cmsis/inc/core_cm4.h"
+ 1290              		.file 9 "../firmware/cmsis/inc/system_gd32f3x0.h"
+ 1291              		.file 10 "../firmware/cmsis/inc/gd32f3x0.h"
+ 1292              		.file 11 "c:\\program files\\embeddedbuilder_v1.1.0.18805\\tools\\gnu tools arm embedded\\xpack-ar
+ 1293              		.file 12 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_gpio.h"
+ 1294              		.file 13 "../firmware/GD32f3x0_hal_peripheral/Include/gd32f3x0_hal_rcu.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 gd32f3x0_hal_gpio.c
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:16     .text.hal_gpio_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:24     .text.hal_gpio_init:00000000 hal_gpio_init
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:404    .text.hal_gpio_bit_set:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:411    .text.hal_gpio_bit_set:00000000 hal_gpio_bit_set
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:449    .text.hal_gpio_bit_reset:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:456    .text.hal_gpio_bit_reset:00000000 hal_gpio_bit_reset
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:494    .text.hal_gpio_struct_init:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:501    .text.hal_gpio_struct_init:00000000 hal_gpio_struct_init
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:549    .text.hal_gpio_deinit:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:556    .text.hal_gpio_deinit:00000000 hal_gpio_deinit
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:801    .text.hal_gpio_deinit:00000184 $d
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:809    .text.hals_gpio_bit_write:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:816    .text.hals_gpio_bit_write:00000000 hals_gpio_bit_write
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:871    .text.hals_gpio_port_write:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:878    .text.hals_gpio_port_write:00000000 hals_gpio_port_write
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:918    .text.hals_gpio_input_bit_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:925    .text.hals_gpio_input_bit_get:00000000 hals_gpio_input_bit_get
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:973    .text.hals_gpio_input_port_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:980    .text.hals_gpio_input_port_get:00000000 hals_gpio_input_port_get
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1016   .text.hals_gpio_output_bit_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1023   .text.hals_gpio_output_bit_get:00000000 hals_gpio_output_bit_get
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1071   .text.hals_gpio_output_port_get:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1078   .text.hals_gpio_output_port_get:00000000 hals_gpio_output_port_get
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1114   .text.hals_gpio_pin_lock:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1121   .text.hals_gpio_pin_lock:00000000 hals_gpio_pin_lock
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1193   .text.hals_gpio_bit_toggle:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1200   .text.hals_gpio_bit_toggle:00000000 hals_gpio_bit_toggle
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1238   .text.hals_gpio_port_toggle:00000000 $t
+C:\Users\peter\AppData\Local\Temp\ccOqAqxj.s:1245   .text.hals_gpio_port_toggle:00000000 hals_gpio_port_toggle
+                           .group:00000000 wm4.0.b316ac8f61e0e6e0285f1e03e5bd3513
+                           .group:00000000 wm4.stdarg.h.31.b55da1089056868966f25de5dbfc7d3c
+                           .group:00000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:00000000 wm4.newlib.h.18.ac66930cc5dc086504ebba5cc05ab7f1
+                           .group:00000000 wm4.ieeefp.h.77.d5685ba212d3ed6e914898d045f873e3
+                           .group:00000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:00000000 wm4.config.h.220.6cac6a9685cfce5e83c17784171638d9
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:00000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
+                           .group:00000000 wm4.stddef.h.181.c3f52a3b0f4c288bddb5dda1562858e2
+                           .group:00000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:00000000 wm4.stddef.h.39.b727a6c3269d9d6ef9fc646b721a8287
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4._types.h.125.5cf8a495f1f7ef36777ad868a1e32068
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.184.03611d4f6b5bec9997bcf4279eceba07
+                           .group:00000000 wm4.reent.h.17.90c2574d4acdcfce933db5cb09ff35fe
+                           .group:00000000 wm4.types.h.40.e8c16e7ec36ba55f133d0616070e25fc
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:00000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:00000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:00000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:00000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:00000000 wm4.types.h.69.ed3eae3cf73030a737515151ebcab7a1
+                           .group:00000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:00000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+                           .group:00000000 wm4.gd32f3x0_hal.h.52.43337a488df56bad1a66550eb74593ea
+                           .group:00000000 wm4.gd32f3x0.h.36.5dfcb46b6e5e152feffb6039fee007e2
+                           .group:00000000 wm4.core_cm4.h.47.434d5634a5df7142236685d6945e71d7
+                           .group:00000000 wm4._intsup.h.10.cce27fed8484c08a33f522034c30d2b5
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.core_cmInstr.h.25.d8165482ef3061013a2fc83e2d85f3d9
+                           .group:00000000 wm4.core_cm4_simd.h.43.bf657009d9c246d6ac6e7b120cdd899a
+                           .group:00000000 wm4.core_cm4.h.196.7d82f39a4c9e2de723b837137e6ae289
+                           .group:00000000 wm4.gd32f3x0.h.180.82f67477079136206c5871e7542ee564
+                           .group:00000000 wm4.gd32f3x0_libopt.h.36.45b869ab1209cc1a50f3dfc76a311cb9
+                           .group:00000000 wm4.gd32f3x0_hal_dma.h.41.ca879783be1737b965b3ae4e7f93f872
+                           .group:00000000 wm4.string.h.8.c4b8571ce60dff2817f43fec8b86aecd
+                           .group:00000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.d4493cd3736e51e9d56335045f26df45
+                           .group:00000000 wm4.gd32f3x0_hal_fmc.h.43.2987de260e370bf3f5b8a24cb7cf3bf8
+                           .group:00000000 wm4.gd32f3x0_hal_pmu.h.36.5635520c461bb7aaf91bffd9cbfc72ad
+                           .group:00000000 wm4.gd32f3x0_hal_gpio.h.36.a12be1408d39f193128846456cde3d37
+                           .group:00000000 wm4.gd32f3x0_hal_rcu.h.38.87d0c22ec8715f857cfeeefdccb19c2d
+                           .group:00000000 wm4.gd32f3x0_hal_exti.h.36.1ea5944bb2717abba6eb4f5f2b24bf84
+                           .group:00000000 wm4.gd32f3x0_hal_sys.h.35.2ceb07a2f85f308445b52768bbccb36f
+                           .group:00000000 wm4.gd32f3x0_hal_syscfg.h.36.72a727ef72a22345530b3ff53cbe3ce3
+                           .group:00000000 wm4.gd32f3x0_hal_nvic.h.36.4aa8cd20672a0a2c198d8567b1de409e
+                           .group:00000000 wm4.gd32f3x0_hal_cmp.h.36.f85d9d5e9ce0d5ec5a6c328e83b87368
+                           .group:00000000 wm4.gd32f3x0_hal_crc.h.36.1900d76e2c07c18b1ef1c9b856f287b8
+                           .group:00000000 wm4.gd32f3x0_hal_adc.h.36.8c3322d47f1ee3cab423f686efb96e34
+                           .group:00000000 wm4.gd32f3x0_hal_ctc.h.36.847bc0cba62101d5ce7e8bf46a1d8bff
+                           .group:00000000 wm4.gd32f3x0_hal_fwdgt.h.37.9a77d48f0ebb1bea9efac8306d3abfa3
+                           .group:00000000 wm4.gd32f3x0_hal_wwdgt.h.36.19843a8487f7f073536e58bdf0d3f2d3
+                           .group:00000000 wm4.gd32f3x0_hal_spi_com.h.36.6baebef46bf9bda5babad635e2a47342
+                           .group:00000000 wm4.gd32f3x0_hal_spi.h.36.c5af6148e40a30fadbbdd1f06ceea13d
+                           .group:00000000 wm4.gd32f3x0_hal_i2s.h.36.e903082eeeee8f5fb4aff85df922f163
+                           .group:00000000 wm4.gd32f3x0_hal_usart_com.h.36.69752e97184d87492213ad2f277017fc
+                           .group:00000000 wm4.gd32f3x0_hal_uart.h.36.cbee0c6c192eff6011d6338977fcd04b
+                           .group:00000000 wm4.gd32f3x0_hal_usrt.h.36.ffd63cfab4e0501d677bc717158e43a6
+                           .group:00000000 wm4.gd32f3x0_hal_irda.h.36.3910de0ccf8d5623643304fed3f81eb2
+                           .group:00000000 wm4.gd32f3x0_hal_smartcard.h.36.ab9bc113f17ef2e0fb1ebed69f0678d8
+                           .group:00000000 wm4.gd32f3x0_hal_rtc.h.36.5e01e9f7c643662797b76c8fb127db6a
+                           .group:00000000 wm4.gd32f3x0_hal_i2c_com.h.36.93c032b15c0ba33e15ba767e036a725b
+                           .group:00000000 wm4.gd32f3x0_hal_i2c.h.36.5070b63e35481aadf06d643445a9b538
+                           .group:00000000 wm4.gd32f3x0_hal_smbus.h.36.ff84c1a5256828a88dd698d2f412ded9
+                           .group:00000000 wm4.gd32f3x0_hal_timer.h.36.1cc370b1b382cdb697c16ab5f59079f9
+                           .group:00000000 wm4.gd32f3x0_hal.h.138.6420920baed40fecd6e3a38f9485824a
+
+UNDEFINED SYMBOLS
+hal_rcu_periph_reset_enable
+hal_rcu_periph_reset_disable

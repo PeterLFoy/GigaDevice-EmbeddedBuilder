@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.gigadevice.debug.gdlink.launchConfigurationType">
+<stringAttribute key="com.gigadevice.debug.gdlink.server" value="GDLinkGDBServer"/>
+<stringAttribute key="com.gigadevice.debug.launch.codeinRAM" value=""/>
+<stringAttribute key="com.gigadevice.debug.launch.device" value="GD32F310C8T6"/>
+<stringAttribute key="com.gigadevice.debug.launch.initCommands" value="set mem inaccessible-by-default off"/>
+<stringAttribute key="com.gigadevice.debug.launch.interface" value="swd"/>
+<stringAttribute key="com.gigadevice.debug.launch.ipAddress" value="localhost"/>
+<stringAttribute key="com.gigadevice.debug.launch.jtagDevice" value="GD-Link"/>
+<intAttribute key="com.gigadevice.debug.launch.portNumber" value="5099"/>
+<stringAttribute key="com.gigadevice.debug.launch.remoteCommand" value="target remote"/>
+<stringAttribute key="com.gigadevice.debug.launch.resetCommands.indebug" value="monitor reset init&#10;monitor halt&#10;load&#10;"/>
+<stringAttribute key="com.gigadevice.debug.launch.resetCommands.inrun" value="monitor reset init&#10;load&#10;"/>
+<stringAttribute key="com.gigadevice.debug.launch.runCommands.indebug" value=""/>
+<stringAttribute key="com.gigadevice.debug.launch.runCommands.inrun" value="monitor reset halt&#10;continue&#10;continue&#10;"/>
+<stringAttribute key="com.gigadevice.debug.launch.serverParam" value="-device GD32F310C8T6 -speed 2000 -if swd"/>
+<stringAttribute key="com.gigadevice.debug.launch.svdpath" value="\C:\Program Files\EmbeddedBuilder_v1.1.0.18805\EmbeddedBuilder\plugins\com.gigadevice.resources_1.0.0.202309051145\svd\gd32f3x0.svd"/>
+<booleanAttribute key="com.gigadevice.debug.launch.useRemoteTarget" value="true"/>
+<stringAttribute key="com.gigadevice.debug.openocd.location" value="C:\Program Files\EmbeddedBuilder_v1.1.0.18805\Tools\GDLinkGDBServer\GDLinkGDBServer.exe"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_NAME" value="C:/Program Files/EmbeddedBuilder_v1.1.0.18805\\Tools\\GNU Tools ARM Embedded\\xpack-arm-none-eabi-gcc\\9.2.1-1.1\\bin\arm-none-eabi-gdb.exe"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
+<intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
+<stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="GD ARM MCU Debug\SimpleADC_DMA.elf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="SimpleADC_DMA"/>
+<booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.gigadevice.mbs.arm.configuration.debug.1011300137"/>
+<booleanAttribute key="org.eclipse.cdt.launch.use_terminal" value="true"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/SimpleADC_DMA"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_APPEND_TO_FILE" value="true"/>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="C:\GigaDevelopment\WorkspaceF310\SimpleADC_DMA\debug_log.txt"/>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;&#13;&#10;"/>
+<stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
+</launchConfiguration>
